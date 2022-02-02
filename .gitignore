@@ -1,0 +1,5 @@
+.htaccess
+favicon.ico
+images/logo.png
+/images/logo.png
+./images/logo.png

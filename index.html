@@ -1,0 +1,243 @@
+<html>
+	<head>
+		<title>Rad van patat</title>
+		<script src='./js/Winwheel.js'></script>
+		<script src="./js/TweenMax.min.js"></script>
+		<link rel="stylesheet" href="./fonts/ostrich/ostrich-sans.css">
+		<style>
+			html {
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+			}
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+			}
+			#logo-header{
+				text-align:center;
+				width: 100%;
+			}
+			#wheel{
+				display: inline-block;
+				float: left;
+				text-align: center;
+				align-content: center;
+				width: 100%;
+				margin-top: 25px;
+			}
+			#wheellink {
+				display: inline-block;
+				float: left;
+				text-align: center;
+				align-content: center;
+				width: 100%;
+			}
+			#wheellink a {
+				font-family: 'Ostrich Sans';
+				display: inline-block;
+				margin-top: 25px;
+				text-decoration: none;
+				border: 5px solid #262261;
+				background-color: #00ac4f;
+				width: auto;
+				padding: 5px;
+				color: white;
+				border-radius: 10px;
+				font-weight: bold;
+				font-size: 25px;
+			}
+			#resultaat-afbeelding {
+				display: inline-block;
+				border-radius: 50%;
+			}
+			#resultaat {
+				display: none;
+				width: 100%;
+				text-align: center;
+				align-content: center;
+				margin-top: 25px;
+			}
+			#resultaat-benaming{
+				font-family: 'Ostrich Sans';
+				font-weight: bold;
+				font-size: 25px;
+			}
+			h1{
+				text-align:center;
+				font-family: 'Ostrich Sans';
+				font-weight: 900;
+				font-style: normal;
+				font-size: 36px;
+			}
+			h2 {
+				display: inline-block;
+				width: 100%;
+				margin: 0px;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="logo-header">
+			<img src="./images/logo.png"/>
+		</div>
+		<h1>Rad van PATAT</h1>
+		<div id="wheel">
+			<canvas id='canvas' width='800' height='425'>
+				Canvas not supported, use another browser.
+			</canvas>
+			<script>
+				let theWheel = new Winwheel({
+                'numSegments'   : 13,   // Specify number of segments.
+                'outerRadius'   : 212,  // Set radius to so wheel fits the background.
+                'innerRadius'   : 120,  // Set inner radius to make wheel hollow.
+                'textFontSize'  : 16,   // Set font size accordingly.
+                'textMargin'    : 0,    // Take out default margin.
+                'segments'      :       // Define segments including colour and text.
+                [
+                   {'fillStyle' : '#eae56f', 'text' : 'Bitterbal'},
+                   {'fillStyle' : '#89f26e', 'text' : 'Kaassouffle'},
+                   {'fillStyle' : '#7de6ef', 'text' : 'Loempidel'},
+                   {'fillStyle' : '#e7706f', 'text' : 'Kroket'},
+                   {'fillStyle' : '#eae56f', 'text' : 'Nasischijf'},
+                   {'fillStyle' : '#89f26e', 'text' : 'Kipcorn'},
+                   {'fillStyle' : '#7de6ef', 'text' : 'Frikandel'},
+                   {'fillStyle' : '#e7706f', 'text' : 'Bamischijf'},
+                   {'fillStyle' : '#eae56f', 'text' : 'Kipnuggets'},
+                   {'fillStyle' : '#89f26e', 'text' : 'Viandel'},
+                   {'fillStyle' : '#7de6ef', 'text' : 'Satekroket'},
+                   {'fillStyle' : '#e7706f', 'text' : 'Berenklauw'},
+                   {'fillStyle' : '#eae56f', 'text' : 'Mexicano'}
+                ],
+                'animation' :           // Define spin to stop animation.
+                {
+                    'type'     : 'spinToStop',
+                    'duration' : 5,
+                    'spins'    : 8,
+                    'callbackFinished' : afterSpin
+                }
+            });
+				
+				// Vars used by the code in this page to do power controls.
+            var wheelPower    = 0;
+            var wheelSpinning = false;
+			var spinned = false;
+	 
+				// Called when the animation as finished.
+				function afterSpin(indicatedSegment)
+				{
+					showResult(indicatedSegment.text);
+					showElement("wheellink");
+					showElement("resultaat");
+				}
+				
+			function showResult (text) {
+				document.getElementById("resultaat-benaming").innerHTML = text;
+				document.getElementById("resultaat-afbeelding").src = './images/' + text.toLowerCase() + '.jpg';
+				showElement("resultaat");
+				playSound('sounds/winnaar.mp3');
+			}
+			
+			function showElement (identifier) {
+				var x = document.getElementById(identifier);
+				
+				if (x.style.display === "none" || x.style.display === "") {
+					x.style.display = "inline-block";
+				}
+			}
+			
+			function hideElement (identifier) {
+				var x = document.getElementById(identifier);
+				
+				if (x.style.display === "none" || x.style.display === "") {
+					//x.style.display = "inline-block";
+				} else {
+					x.style.display = "none";
+				}
+			}
+				
+				// -------------------------------------------------------
+            // Function for reset button.
+            // -------------------------------------------------------
+            function resetWheel()
+            {
+                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
+                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+                theWheel.draw();                // Call draw to render changes to the wheel.
+
+                //document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
+                //document.getElementById('pw2').className = "";
+                //document.getElementById('pw3').className = "";
+
+                wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+            }
+			
+			// -------------------------------------------------------
+            // Click handler for spin button.
+            // -------------------------------------------------------
+            function startSpin()
+            {
+                // Ensure that spinning can't be clicked again while already running.
+                if (wheelSpinning == false)
+                {
+					spinned = true;
+					
+                    // Based on the power level selected adjust the number of spins for the wheel, the more times is has
+                    // to rotate with the duration of the animation the quicker the wheel spins.
+                    if (wheelPower == 1)
+                    {
+                        theWheel.animation.spins = 3;
+                    }
+                    else if (wheelPower == 2)
+                    {
+                        theWheel.animation.spins = 8;
+                    }
+                    else if (wheelPower == 3)
+                    {
+                        theWheel.animation.spins = 15;
+                    }
+
+                    // Disable the spin button so can't click again while wheel is spinning.
+                    //document.getElementById('spin_button').src       = "spin_off.png";
+                    //document.getElementById('spin_button').className = "";
+
+                    // Begin the spin animation by calling startAnimation on the wheel object.
+                    theWheel.startAnimation();
+					
+					hideElement("wheellink");
+					hideElement("resultaat");
+					
+					//resetWheel();
+
+                    // Set to true so that power can't be changed and spin button re-enabled during
+                    // the current animation. The user will have to reset before spinning again.
+                    wheelSpinning = true;
+                }
+            }
+			
+			function resetAndStart () {
+				if (spinned) {
+					resetWheel();
+				}
+				startSpin();
+			}
+			
+			function playSound (filename) {
+				var audio = new Audio(filename);
+				audio.play();
+			}
+			</script>
+		</div>
+		<div id="wheellink" style="display:inline-block;">
+			<a href="#" onClick="resetAndStart(); return false;">Geef een slinger</a>
+		</div>
+		<div id="resultaat">
+			<img id="resultaat-afbeelding" src="./images/bitterbal.jpg"/>
+			<h2 id="resultaat-benaming">Bitterbal</h2>
+		</div>
+	</body>
+</html>
