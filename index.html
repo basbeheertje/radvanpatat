@@ -8,14 +8,14 @@
 			html {
 				width: 100%;
 				height: 100%;
-				margin: 0px;
-				padding: 0px;
+				margin: 0;
+				padding: 0;
 			}
 			body {
 				width: 100%;
 				height: 100%;
-				margin: 0px;
-				padding: 0px;
+				margin: 0;
+				padding: 0;
 			}
 			#logo-header{
 				text-align:center;
@@ -37,7 +37,7 @@
 				width: 100%;
 			}
 			#wheellink a {
-				font-family: 'Ostrich Sans';
+				font-family: 'Ostrich Sans',serif;
 				display: inline-block;
 				margin-top: 25px;
 				text-decoration: none;
@@ -62,13 +62,13 @@
 				margin-top: 25px;
 			}
 			#resultaat-benaming{
-				font-family: 'Ostrich Sans';
+				font-family: 'Ostrich Sans',serif;
 				font-weight: bold;
 				font-size: 25px;
 			}
 			h1{
 				text-align:center;
-				font-family: 'Ostrich Sans';
+				font-family: 'Ostrich Sans',serif;
 				font-weight: 900;
 				font-style: normal;
 				font-size: 36px;
@@ -76,7 +76,7 @@
 			h2 {
 				display: inline-block;
 				width: 100%;
-				margin: 0px;
+				margin: 0;
 				margin-top: 10px;
 			}
 		</style>
@@ -188,15 +188,15 @@
 					
                     // Based on the power level selected adjust the number of spins for the wheel, the more times is has
                     // to rotate with the duration of the animation the quicker the wheel spins.
-                    if (wheelPower == 1)
+                    if (wheelPower === 1)
                     {
                         theWheel.animation.spins = 3;
                     }
-                    else if (wheelPower == 2)
+                    else if (wheelPower === 2)
                     {
                         theWheel.animation.spins = 8;
                     }
-                    else if (wheelPower == 3)
+                    else if (wheelPower === 3)
                     {
                         theWheel.animation.spins = 15;
                     }
