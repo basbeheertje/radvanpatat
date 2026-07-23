@@ -40,6 +40,12 @@
 
 	function openSnackFormulier() {
 		openOverlay("snack-formulier-overlay");
+		window.requestAnimationFrame(function () {
+			const naamVeld = document.getElementById("snack-naam");
+			if (naamVeld) {
+				naamVeld.focus();
+			}
+		});
 	}
 
 	function closeSnackFormulier() {

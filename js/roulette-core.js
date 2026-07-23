@@ -107,6 +107,24 @@
 		};
 	}
 
+	function normaliseerSnackNaam(naam) {
+		return naam.trim().replace(/\s+/g, " ").toLowerCase();
+	}
+
+	function dedupliceerSnacks(snacks) {
+		const gezieneNamen = new Set();
+
+		return snacks.filter(function (snack) {
+			const sleutel = normaliseerSnackNaam(snack.name);
+			if (gezieneNamen.has(sleutel)) {
+				return false;
+			}
+
+			gezieneNamen.add(sleutel);
+			return true;
+		});
+	}
+
 	function encodeBase64Url(waarde) {
 		return btoa(unescape(encodeURIComponent(waarde))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
 	}
@@ -170,7 +188,7 @@
 			});
 		}
 
-		snacks = snacks.map(normaliseerSnack).filter(Boolean);
+		snacks = dedupliceerSnacks(snacks.map(normaliseerSnack).filter(Boolean));
 		if (snacks.length === 0) {
 			snacks = app.config.basisSnacks.map(function (snack) {
 				return { ...snack };
@@ -193,15 +211,12 @@
 	}
 
 	function persistSnacks() {
+		app.state.alleSnacks = dedupliceerSnacks(app.state.alleSnacks);
 		localStorage.setItem(app.config.snackOpslagSleutel, JSON.stringify(app.state.alleSnacks));
 		updateTellers();
 		if (app.ui && typeof app.ui.updateShareData === "function") {
 			app.ui.updateShareData();
 		}
-	}
-
-	function normaliseerSnackNaam(naam) {
-		return naam.trim().replace(/\s+/g, " ").toLowerCase();
 	}
 
 	function bestaatSnackAl(naam) {
@@ -233,6 +248,7 @@
 		loadInitialSnacks: loadInitialSnacks,
 		updateTellers: updateTellers,
 		persistSnacks: persistSnacks,
+		dedupliceerSnacks: dedupliceerSnacks,
 		normaliseerSnackNaam: normaliseerSnackNaam,
 		bestaatSnackAl: bestaatSnackAl,
 		playSound: playSound,

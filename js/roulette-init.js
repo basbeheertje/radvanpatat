@@ -34,6 +34,11 @@
 			return;
 		}
 
+		if (core.bestaatSnackAl(snack.name)) {
+			ui.toonToast("Snack bestaat al");
+			return;
+		}
+
 		if (foto && !snack.image) {
 			ui.toonToast("Gebruik een geldige http(s)-foto-URL");
 			return;
