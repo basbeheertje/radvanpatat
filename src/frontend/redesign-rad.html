@@ -130,6 +130,53 @@
 				cursor: grab;
 			}
 
+			.redesign-wheel-bulb,
+			.redesign-wheel-bulb-glow {
+				animation-duration: 1250ms;
+				animation-iteration-count: infinite;
+				animation-timing-function: steps(1, end);
+			}
+
+			.redesign-wheel-bulb {
+				animation-name: redesign-wheel-bulb-blink;
+			}
+
+			.redesign-wheel-bulb-glow {
+				animation-name: redesign-wheel-bulb-glow;
+			}
+
+			@keyframes redesign-wheel-bulb-blink {
+				0%,
+				42%,
+				69%,
+				100% {
+					fill: #ffffff;
+					stroke: #ffc928;
+					filter: drop-shadow(0 0 1px rgba(255, 201, 40, 0.3));
+				}
+
+				43%,
+				68% {
+					fill: #ffc928;
+					stroke: #fff0b8;
+					filter: drop-shadow(0 0 10px rgba(255, 201, 40, 0.95));
+				}
+			}
+
+			@keyframes redesign-wheel-bulb-glow {
+				0%,
+				42%,
+				69%,
+				100% {
+					opacity: 0.2;
+				}
+
+				43%,
+				68% {
+					opacity: 0.95;
+				}
+			}
+
 			.is-dragging-custom-snack #wheel-hit-area,
 			.is-dragging-custom-snack {
 				cursor: grabbing;
@@ -139,7 +186,6 @@
 				position: fixed;
 				z-index: 120;
 				pointer-events: none;
-				transform: translate(-50%, -50%);
 				transition: opacity 120ms ease;
 			}
 
@@ -149,13 +195,9 @@
 
 			.redesign-drag-segment {
 				display: block;
-				width: min(18rem, 38vw);
-				height: auto;
+				width: 100%;
+				height: 100%;
 				filter: drop-shadow(0 16px 24px rgba(33, 23, 15, 0.28));
-			}
-
-			.redesign-drag-segment [data-segment-index] {
-				opacity: 1 !important;
 			}
 
 			.redesign-drag-segment image,
@@ -178,6 +220,11 @@
 			@media (prefers-reduced-motion: reduce) {
 				#wheel-rotor {
 					transition-duration: 120ms;
+				}
+
+				.redesign-wheel-bulb,
+				.redesign-wheel-bulb-glow {
+					animation: none;
 				}
 			}
 		</style>
@@ -267,6 +314,20 @@
 								<g id="wheel-rotor"></g>
 								<circle id="wheel-hit-area" cx="320" cy="320" r="260" fill="transparent"></circle>
 							</svg>
+						</div>
+					</div>
+
+					<div class="absolute -right-4 md:-right-8 top-8 md:top-12 z-10 animate-snack-float bg-white p-2 rounded-xl shadow-lg border-2 border-primary-container w-24 h-24 md:w-28 md:h-28 hidden xl:block">
+						<div class="w-full h-full rounded-lg overflow-hidden relative">
+							<img alt="Frikandel" class="w-full h-full object-cover" src="./assets/images/frikandel.jpg"/>
+							<div class="absolute -top-1 -right-1 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-label-sm text-label-sm border-2 border-white shadow-sm">Top</div>
+						</div>
+					</div>
+
+					<div class="absolute -left-8 md:-left-12 bottom-12 md:bottom-20 z-10 animate-snack-float bg-white p-2 rounded-xl shadow-lg border-2 border-primary-container w-28 h-28 md:w-32 md:h-32 hidden xl:block" style="animation-delay: 1.5s">
+						<div class="w-full h-full rounded-lg overflow-hidden relative">
+							<img alt="Kroket" class="w-full h-full object-cover" src="./assets/images/kroket.jpg"/>
+							<div class="absolute -top-1 -right-1 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-label-sm text-label-sm border-2 border-white shadow-sm">Nu</div>
 						</div>
 					</div>
 				</div>

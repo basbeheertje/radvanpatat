@@ -147,13 +147,21 @@
 		}
 
 		const clone = segment.cloneNode(true);
+		const labelPath = clone.querySelector("defs path[id]");
+		const labelReference = clone.querySelector("textPath[href]");
 		clone.removeAttribute("data-segment-index");
 		clone.removeAttribute("style");
-		const actueleRotatie = normaliseerRotatie(state.redesignRotation || 0);
 
+		if (labelPath && labelReference) {
+			const dragLabelPathId = `${labelPath.id}-drag`;
+			labelPath.id = dragLabelPathId;
+			labelReference.setAttribute("href", `#${dragLabelPathId}`);
+		}
+
+		const rotation = normaliseerRotatie(state.redesignRotation || 0);
 		return [
 			'<svg class="redesign-drag-segment" viewBox="0 0 640 640" aria-hidden="true">',
-			`<g transform="translate(16 16) scale(0.95) rotate(${actueleRotatie} ${design.center} ${design.center})">`,
+			`<g transform="rotate(${rotation} ${design.center} ${design.center})">`,
 			clone.outerHTML,
 			"</g>",
 			"</svg>"
@@ -166,8 +174,10 @@
 		}
 
 		const ghost = getGhost();
-		ghost.style.left = `${clientX}px`;
-		ghost.style.top = `${clientY}px`;
+		const offsetX = clientX - state.actieveDrag.startClientX;
+		const offsetY = clientY - state.actieveDrag.startClientY;
+		ghost.style.left = `${state.actieveDrag.ghostLeft + offsetX}px`;
+		ghost.style.top = `${state.actieveDrag.ghostTop + offsetY}px`;
 	}
 
 	function hideGhost() {
@@ -199,12 +209,15 @@
 		for (let bulbIndex = 0; bulbIndex < design.bulbCount; bulbIndex += 1) {
 			const angle = -90 + ((360 / design.bulbCount) * bulbIndex);
 			const point = polarToCartesian(design.rimRadius, angle);
+			const animationDelay = -(bulbIndex * (1250 / design.bulbCount));
 			group.append(
 				getSvgNode("circle", {
 					cx: point.x,
 					cy: point.y,
 					r: design.bulbRadius + 6,
-					fill: "rgba(255, 201, 40, 0.15)"
+					fill: "rgba(255, 201, 40, 0.15)",
+					class: "redesign-wheel-bulb-glow",
+					style: `animation-delay: ${animationDelay}ms`
 				}),
 				getSvgNode("circle", {
 					cx: point.x,
@@ -212,7 +225,9 @@
 					r: design.bulbRadius,
 					fill: "#FFFFFF",
 					stroke: "#FFC928",
-					"stroke-width": 6
+					"stroke-width": 6,
+					class: "redesign-wheel-bulb",
+					style: `animation-delay: ${animationDelay}ms`
 				})
 			);
 		}
@@ -321,8 +336,10 @@
 		const stroke = config.randKleuren[index % config.randKleuren.length];
 		const segmentAngle = getSegmentAngle();
 		const fontSize = clamp(22 - (Math.max(snack.name.length - 9, 0) * 0.55), 10.5, 17);
-		const textRadius = clamp(design.outerRadius - 66, 176, 206);
-		const textInset = clamp(segmentAngle * 0.16, 5, 9);
+		const textRadius = clamp(design.outerRadius - 48, 188, 214);
+		const textInset = clamp(segmentAngle * 0.14, 3, 8);
+		const textArcAngle = Math.max(segmentAngle - (textInset * 2), segmentAngle * 0.5);
+		const availableTextLength = Math.max(12, ((2 * Math.PI * textRadius) * (textArcAngle / 360)) - 12);
 		const textPathId = `wheel-segment-label-${index}`;
 
 		const segmentGroup = getSvgNode("g", {
@@ -361,7 +378,7 @@
 			"text-anchor": "middle",
 			method: "align",
 			spacing: "auto",
-			textLength: Math.max(92, ((2 * Math.PI * textRadius) * ((segmentAngle - (textInset * 2)) / 360)) - 8),
+			textLength: availableTextLength,
 			lengthAdjust: "spacingAndGlyphs"
 		});
 		labelPath.textContent = snack.name;
@@ -458,16 +475,22 @@
 			return;
 		}
 
+		const info = getWheelInfo();
 		state.actieveDrag = {
 			segmentIndex: segmentIndex,
 			startClientX: clientX,
-			startClientY: clientY
+			startClientY: clientY,
+			ghostLeft: info.rect.left,
+			ghostTop: info.rect.top,
+			ghostSize: info.rect.width
 		};
 		document.body.classList.add("is-dragging-custom-snack");
 		verbergSegmentInWiel(segmentIndex);
 
 		const ghost = getGhost();
 		ghost.innerHTML = getDragSegmentMarkup(segmentIndex);
+		ghost.style.width = `${state.actieveDrag.ghostSize}px`;
+		ghost.style.height = `${state.actieveDrag.ghostSize}px`;
 		ghost.classList.remove("hidden");
 		updateGhostPosition(clientX, clientY);
 	}
