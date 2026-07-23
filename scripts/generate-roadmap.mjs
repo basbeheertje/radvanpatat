@@ -9,6 +9,7 @@ const repoRoot = path.resolve(__dirname, "..");
 const outputPath = path.join(repoRoot, "src", "frontend", "assets", "js", "roadmap-data.js");
 
 const CATEGORY_ORDER = ["nu", "binnenkort", "later"];
+const ROADMAP_EXCLUDE_MARKER = "*** EXCLUDE FROM ROADMAP ***";
 
 const ICON_KEYWORDS = [
 	{ pattern: /(account|profiel|user|login)/i, icon: "account_circle" },
@@ -36,6 +37,25 @@ function normalizeWhitespace(value) {
  */
 function serializeModuleValue(value) {
 	return JSON.stringify(value, null, "\t");
+}
+
+/**
+ * Milestone descriptions may contain private maintainer notes after a hard
+ * marker. Strip that tail before any metadata parsing so those notes never leak
+ * into public card copy or into the category/status/icon metadata contract.
+ *
+ * @param {string} description
+ * @returns {string}
+ */
+function stripRoadmapExcludedContent(description) {
+	const normalizedDescription = String(description || "").replaceAll("\r\n", "\n");
+	const markerIndex = normalizedDescription.indexOf(ROADMAP_EXCLUDE_MARKER);
+
+	if (markerIndex === -1) {
+		return normalizedDescription;
+	}
+
+	return normalizedDescription.slice(0, markerIndex).trimEnd();
 }
 
 async function fetchMilestones(repository, token) {
@@ -82,7 +102,7 @@ async function fetchMilestones(repository, token) {
  * @returns {{ category: string, status: string, icon: string, description: string }}
  */
 function parseDescriptionMetadata(description) {
-	const lines = String(description || "").replaceAll("\r\n", "\n").split("\n");
+	const lines = stripRoadmapExcludedContent(description).split("\n");
 	const metadata = {
 		category: "",
 		status: "",
