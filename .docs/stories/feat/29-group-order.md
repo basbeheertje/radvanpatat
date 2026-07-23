@@ -10,11 +10,11 @@
 Dit bestand documenteert waar we zijn gebleven met de implementatie van de groepsbestelling.
 
 ## 🔍 Huidige Status
-`src/frontend/group.html` configureert een groep, ondersteunt optionele namen en individuele snackaantallen en draait het bestaande SVG-rad automatisch totdat iedere deelnemer zijn of haar doel heeft bereikt. De wielanimatie valt terug op een CSS-transitie wanneer een browser SVG Web Animations weigert. De voltooide bestelling wordt op dezelfde pagina getoond en indien beschikbaar gevalideerd in localStorage opgeslagen, waarna `src/frontend/order.html` de laatste order kan herstellen. Externe en directe bezoekers van `index.html` krijgen maximaal eens per 24 uur eerst de keuze tussen het groepsrad en het persoonlijke rad.
+`src/frontend/group.html` configureert een groep, ondersteunt optionele namen en individuele snackaantallen en draait het bestaande SVG-rad automatisch totdat iedere deelnemer zijn of haar doel heeft bereikt. De wielanimatie valt terug op een CSS-transitie wanneer een browser SVG Web Animations weigert. De voltooide bestelling wordt op dezelfde pagina getoond en indien beschikbaar gevalideerd in localStorage opgeslagen, waarna `src/frontend/order.html` de laatste order kan herstellen. Externe en directe bezoekers van `index.html` krijgen maximaal eens per 24 uur eerst de keuze tussen het groepsrad en het persoonlijke rad. Alle frontendpagina's tonen daarnaast maximaal eens per uur een gedeelde openingsintro waarin het Rad van Patat het logo van De Code Kas uit beeld tikt. Op exact hostname `localhost` wordt de intro altijd uitgevoerd en wordt bewust geen intro-cookie opgeslagen.
 
 ### ⚠️ Bekende Problemen / Waar loop je nu tegenaan?
-- **Geen visuele browsertest in deze sessie:** De ingebouwde browserruntime rapporteerde dat geen browser beschikbaar was.
-  - *Oplossing/Workaround:* Start de lokale server en controleer `group.html` handmatig op desktop en mobiel; de JavaScript-syntax, HTTP-resources en pure businessregels zijn wel geautomatiseerd gecontroleerd.
+- **Geen bekend probleem met het intrologo:** Het officiële De Code Kas-woordmerk staat lokaal in de gepubliceerde frontend-assets.
+  - *Oplossing/Workaround:* Houd `images/brand/logo-de-code-kas.png` en `src/frontend/assets/images/brand/logo-de-code-kas.png` gelijk wanneer het bronlogo wordt vernieuwd.
 - **Browseropslag kan uitgeschakeld zijn:** Privacy-instellingen kunnen toegang tot localStorage blokkeren.
   - *Oplossing/Workaround:* De groepsbestelling wordt wel voltooid en op `group.html` getoond; alleen het later herstellen via `order.html` is dan niet beschikbaar.
 
@@ -34,11 +34,16 @@ Dit bestand documenteert waar we zijn gebleven met de implementatie van de groep
 - `src/frontend/assets/js/order-page.js`: Herstelt de laatste gevalideerde bestelling voor `order.html`.
 - `src/frontend/assets/js/roulette-visit-choice.js`: Isoleert de referrercontrole en de 24-uursregistratie via cookie met localStorage-fallback.
 - `src/frontend/assets/js/roulette-ui.js` en `roulette-init.js`: Tonen de dagelijkse keuze vóór de bestaande friet/patat-vraag en sturen groepsbezoekers door naar `group.html`.
+- `src/frontend/components/welcome-intro.js`: Zelfstandig openingscomponent met het officiële lokale De Code Kas-woordmerk op de oorspronkelijke vaste hoogte van 120px en de exacte rechts-naar-midden rembeweging uit `designs/welcome/welcome.html`. Pas nadat dit logo stilstaat begint de botsingsanimatie met het transparante Rad van Patat-logo. Bevat daarnaast een reduced-motion-variant en een sitebrede cookie van één uur.
+- `src/frontend/assets/images/brand/logo-de-code-kas.png`: Publiceerbare kopie van het officiële woordmerk uit `images/brand/logo-de-code-kas.png`.
+- `src/frontend/assets/images/brand/rad-van-patat-logo-transparent.png`: Publiceerbare transparante logovariant voor de openingsintro.
+- `src/frontend/components/register-components.js`: Registreert de openingsintro centraal voor alle pagina's die `app.js` laden.
 - `src/frontend/components/site-header.js`: Herbruikbare navigatie uitgebreid met `Groepsrad`.
 - `src/frontend/assets/css/default.css`: Responsive groeps-, bestellijst- en bezoekkeuzestyling toegevoegd.
 - `tests/group-order.test.mjs`: Tests voor selectie, limieten, voltooiing en veilige of geblokkeerde opslag toegevoegd.
 - `tests/roulette-wheel.test.mjs`: Regressietest toegevoegd voor browsers die `SVGElement.animate()` aanbieden maar SVG-transform-keyframes weigeren en voor hergebruik zonder `#snack-drag-ghost`.
 - `tests/visit-choice.test.mjs`: Dekt interne en externe referrers, de rollende 24-uursperiode en beide opslagvormen af.
+- `tests/welcome-intro.test.mjs`: Dekt de uurlijkse zichtbaarheid, cookie-attributen en de cookieloze `localhost`-ontwikkelmodus van de openingsintro af.
 
 ### Backend (Yii Applicatie / PHP)
 - Geen backendwijzigingen; de volledige flow blijft statisch en browser-lokaal.
@@ -54,6 +59,13 @@ Dit bestand documenteert waar we zijn gebleven met de implementatie van de groep
 - [2026-07-23] (AI): fix(group-order): SVG-animatiefallback en fouttolerante browseropslag toegevoegd
 - [2026-07-23] (AI): fix(group-order): optionele drag-ghost blokkeert groepsspins niet langer
 - [2026-07-23] (AI): feat(index): dagelijkse keuze tussen groepsrad en persoonlijk rad toegevoegd
+- [2026-07-23] (AI): feat(frontend): herbruikbare openingsintro voor De Code Kas en Rad van Patat toegevoegd
+- [2026-07-23] (AI): style(frontend): openingsintro aangepast naar de witte randloze De Code Kas-huisstijl
+- [2026-07-23] (AI): fix(frontend): officieel lokaal De Code Kas-woordmerk in de openingsintro toegepast
+- [2026-07-23] (AI): feat(frontend): intro op localhost altijd tonen zonder cookieopslag
+- [2026-07-23] (AI): fix(frontend): oorspronkelijke invliegrichting, logogrootte en sequentie uit welcome.html hersteld
+- [2026-07-23] (AI): style(frontend): transparant Rad van Patat-logo in de openingsintro toegepast
+- [2026-07-23] (AI): style(frontend): afsluitende De Code Kas-creditregel uit de intro verwijderd
 
 ---
 
