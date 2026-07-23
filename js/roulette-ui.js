@@ -61,6 +61,9 @@
 
 	function renderShareQrCode(url) {
 		const qrContainer = document.getElementById("share-qrcode");
+		if (!qrContainer) {
+			return;
+		}
 		qrContainer.innerHTML = "";
 
 		if (typeof QRCode !== "function") {
@@ -81,15 +84,30 @@
 	function updateShareButtons(url) {
 		const encodedUrl = encodeURIComponent(url);
 		const bericht = encodeURIComponent("Draai aan dit Rad van Patat!");
-		document.getElementById("share-facebook-knop").href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-		document.getElementById("share-whatsapp-knop").href = `https://wa.me/?text=${encodeURIComponent(`Draai aan dit Rad van Patat! ${url}`)}`;
-		document.getElementById("share-x-knop").href = `https://x.com/intent/post?text=${bericht}&url=${encodedUrl}`;
-		document.getElementById("share-email-knop").href = `mailto:?subject=${encodeURIComponent("Mijn Rad van Patat")}&body=${encodeURIComponent(`Open dit Rad van Patat: ${url}`)}`;
+		const facebookKnop = document.getElementById("share-facebook-knop");
+		const whatsappKnop = document.getElementById("share-whatsapp-knop");
+		const xKnop = document.getElementById("share-x-knop");
+		const emailKnop = document.getElementById("share-email-knop");
+		if (facebookKnop) {
+			facebookKnop.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+		}
+		if (whatsappKnop) {
+			whatsappKnop.href = `https://wa.me/?text=${encodeURIComponent(`Draai aan dit Rad van Patat! ${url}`)}`;
+		}
+		if (xKnop) {
+			xKnop.href = `https://x.com/intent/post?text=${bericht}&url=${encodedUrl}`;
+		}
+		if (emailKnop) {
+			emailKnop.href = `mailto:?subject=${encodeURIComponent("Mijn Rad van Patat")}&body=${encodeURIComponent(`Open dit Rad van Patat: ${url}`)}`;
+		}
 	}
 
 	function updateShareData() {
 		state.gedeeldeLink = buildShareUrl();
-		document.getElementById("share-link-veld").value = state.gedeeldeLink;
+		const shareLinkVeld = document.getElementById("share-link-veld");
+		if (shareLinkVeld) {
+			shareLinkVeld.value = state.gedeeldeLink;
+		}
 		renderShareQrCode(state.gedeeldeLink);
 		updateShareButtons(state.gedeeldeLink);
 	}
@@ -105,6 +123,9 @@
 
 	function toonToast(tekst, variant) {
 		const toast = document.getElementById("eggs-toast");
+		if (!toast) {
+			return;
+		}
 		const gekozenVariant = variant || "positive";
 		toast.textContent = tekst;
 		toast.classList.remove("is-hidden", "toast-positive", "toast-negative");
@@ -128,7 +149,10 @@
 		}
 
 		if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
-			document.getElementById("share-link-veld").select();
+			const shareLinkVeld = document.getElementById("share-link-veld");
+			if (shareLinkVeld) {
+				shareLinkVeld.select();
+			}
 			toonToast("Selecteer en kopieer de link handmatig");
 			return;
 		}
@@ -138,7 +162,10 @@
 				toonToast("Link gekopieerd");
 			})
 			.catch(function () {
-				document.getElementById("share-link-veld").select();
+				const shareLinkVeld = document.getElementById("share-link-veld");
+				if (shareLinkVeld) {
+					shareLinkVeld.select();
+				}
 				toonToast("Selecteer en kopieer de link handmatig");
 			});
 	}
@@ -146,9 +173,15 @@
 	function showResult(snack) {
 		const afbeelding = document.getElementById("resultaat-afbeelding");
 		const letter = document.getElementById("resultaat-letter");
-		document.getElementById("resultaat-titel").textContent = "Gewonnen!";
-		document.getElementById("resultaat-subtitel").textContent = "Jouw avondeten is bepaald:";
-		document.getElementById("resultaat-benaming").textContent = snack.name;
+		const titel = document.getElementById("resultaat-titel");
+		const subtitel = document.getElementById("resultaat-subtitel");
+		const benaming = document.getElementById("resultaat-benaming");
+		if (!afbeelding || !letter || !titel || !subtitel || !benaming) {
+			return;
+		}
+		titel.textContent = "Gewonnen!";
+		subtitel.textContent = "Jouw avondeten is bepaald:";
+		benaming.textContent = snack.name;
 
 		if (snack.image) {
 			afbeelding.src = snack.image;
@@ -172,9 +205,15 @@
 	function showEasterEggResult(bericht) {
 		const afbeelding = document.getElementById("resultaat-afbeelding");
 		const letter = document.getElementById("resultaat-letter");
-		document.getElementById("resultaat-titel").textContent = bericht.titel;
-		document.getElementById("resultaat-subtitel").textContent = bericht.subtitel;
-		document.getElementById("resultaat-benaming").textContent = bericht.tekst;
+		const titel = document.getElementById("resultaat-titel");
+		const subtitel = document.getElementById("resultaat-subtitel");
+		const benaming = document.getElementById("resultaat-benaming");
+		if (!afbeelding || !letter || !titel || !subtitel || !benaming) {
+			return;
+		}
+		titel.textContent = bericht.titel;
+		subtitel.textContent = bericht.subtitel;
+		benaming.textContent = bericht.tekst;
 		afbeelding.style.display = "none";
 		letter.textContent = "!";
 		letter.style.display = "flex";
@@ -206,6 +245,9 @@
 
 	function updatePatatBanner() {
 		const banner = document.getElementById("patat-banner");
+		if (!banner) {
+			return;
+		}
 		if (state.opgeslagenMening !== "patat") {
 			banner.classList.add("bottom-opinion-banner-hidden");
 			banner.textContent = "";
@@ -244,13 +286,19 @@
 	}
 
 	function updateEggsKansWeergave() {
-		document.getElementById("eggs-kans-waarde").textContent = `${state.eggsKansPercentage.toFixed(1)}%`;
+		const kansWaarde = document.getElementById("eggs-kans-waarde");
+		if (kansWaarde) {
+			kansWaarde.textContent = `${state.eggsKansPercentage.toFixed(1)}%`;
+		}
 	}
 
 	function updateEggsKansBeschikbaarheid() {
 		const slider = document.getElementById("eggs-kans-slider");
 		const paneel = document.getElementById("eggs-kans-paneel");
 		const hint = document.getElementById("eggs-kans-hint");
+		if (!slider || !paneel || !hint) {
+			return;
+		}
 		slider.disabled = !state.easterEggsActief;
 		paneel.classList.toggle("eggs-kans-verborgen", !state.easterEggsActief);
 		hint.textContent = state.easterEggsActief

@@ -206,8 +206,14 @@
 			return snack.isCustom;
 		}).length;
 
-		document.getElementById("standaard-teller").textContent = `${standaardAantal} keuzes`;
-		document.getElementById("eigen-teller").textContent = `${eigenAantal} toegevoegd`;
+		const standaardTeller = document.getElementById("standaard-teller");
+		const eigenTeller = document.getElementById("eigen-teller");
+		if (standaardTeller) {
+			standaardTeller.textContent = `${standaardAantal} keuzes`;
+		}
+		if (eigenTeller) {
+			eigenTeller.textContent = `${eigenAantal} toegevoegd`;
+		}
 	}
 
 	function persistSnacks() {

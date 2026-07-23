@@ -6,11 +6,23 @@
 	const state = app.state;
 
 	function bindOverlayClose(overlayId, onClose) {
-		document.getElementById(overlayId).addEventListener("click", function (event) {
+		const overlay = document.getElementById(overlayId);
+		if (!overlay) {
+			return;
+		}
+
+		overlay.addEventListener("click", function (event) {
 			if (event.target === this) {
 				onClose();
 			}
 		});
+	}
+
+	function bindClick(elementId, handler) {
+		const element = document.getElementById(elementId);
+		if (element) {
+			element.addEventListener("click", handler);
+		}
 	}
 
 	function handleSnackSubmit(event) {
@@ -67,7 +79,7 @@
 	}
 
 	function handleKeyDown(event) {
-		if (event.key === "F5") {
+		if (event.key === "F5" && state.theWheel) {
 			event.preventDefault();
 			wheel.resetAndStart();
 		}
@@ -110,21 +122,33 @@
 			["snack-toevoegen-knop-mobiel", ui.openSnackFormulier],
 			["snack-formulier-sluiten", ui.closeSnackFormulier]
 		].forEach(function ([elementId, handler]) {
-			document.getElementById(elementId).addEventListener("click", handler);
+			bindClick(elementId, handler);
 		});
 
-		document.getElementById("btn-friet").addEventListener("click", function () {
+		bindClick("btn-friet", function () {
 			ui.verwerkMening("friet");
 		});
-		document.getElementById("btn-patat").addEventListener("click", function () {
+		bindClick("btn-patat", function () {
 			ui.verwerkMening("patat");
 		});
-		document.getElementById("eggs-kans-slider").addEventListener("input", function () {
-			state.eggsKansPercentage = parseFloat(this.value);
-			ui.updateEggsKansWeergave();
-		});
-		document.getElementById("snack-formulier").addEventListener("submit", handleSnackSubmit);
-		document.getElementById("canvas").addEventListener("pointerdown", handleCanvasPointerDown);
+
+		const eggsKansSlider = document.getElementById("eggs-kans-slider");
+		if (eggsKansSlider) {
+			eggsKansSlider.addEventListener("input", function () {
+				state.eggsKansPercentage = parseFloat(this.value);
+				ui.updateEggsKansWeergave();
+			});
+		}
+
+		const snackFormulier = document.getElementById("snack-formulier");
+		if (snackFormulier) {
+			snackFormulier.addEventListener("submit", handleSnackSubmit);
+		}
+
+		const canvas = document.getElementById("canvas");
+		if (canvas) {
+			canvas.addEventListener("pointerdown", handleCanvasPointerDown);
+		}
 
 		bindOverlayClose("snack-formulier-overlay", ui.closeSnackFormulier);
 		bindOverlayClose("share-overlay", ui.closeShareOverlay);
@@ -141,15 +165,19 @@
 		window.addEventListener("scroll", wheel.stopDrag, { passive: true });
 		window.addEventListener("resize", function () {
 			wheel.stopDrag();
-			state.theWheel.draw();
+			if (state.theWheel) {
+				state.theWheel.draw();
+			}
 		});
 		document.addEventListener("keydown", handleKeyDown);
 	}
 
 	function init() {
 		core.loadInitialSnacks();
-		wheel.createWheel();
-		core.updateTellers();
+		if (document.getElementById("canvas")) {
+			wheel.createWheel();
+			core.updateTellers();
+		}
 		ui.updateEggsKansWeergave();
 		ui.updateEggsKansBeschikbaarheid();
 		ui.updateShareData();
