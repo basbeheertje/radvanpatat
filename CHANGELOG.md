@@ -2,6 +2,13 @@
 
 Alle belangrijke wijzigingen per gepubliceerde versie.
 
+## [1.0.4] - 2026-07-23
+
+Geen wijzigingen beschreven.
+
+### Gewijzigd
+- Added: 404 page
+
 ## [1.0.3] - 2026-07-23
 
 Geen wijzigingen beschreven.
