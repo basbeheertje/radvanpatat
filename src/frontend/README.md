@@ -5,12 +5,16 @@ Deze map bevat een statische frontend zonder build tooling.
 ## Structuur
 
 - `index.html`: interactieve Rad van Patat-pagina
+- `group.html`: configureert deelnemers en laat het gedeelde rad automatisch een groepsbestelling samenstellen
+- `order.html`: toont de laatst voltooide groepsbestelling uit de localStorage van de huidige browser
 - `help.html`: help-pagina
 - `changelog.html`: gegenereerde changelogpagina op basis van `../../CHANGELOG.md`
 - `roadmap.html`: roadmappagina die cards uit een configureerbare JavaScript-array rendert
 - `404.html`: statische foutpagina met gedeelde layoutcomponenten
 - `.nojekyll`: zorgt dat GitHub Pages de statische frontendbestanden direct serveert, inclusief `404.html`
 - `components/`: herbruikbare web components voor layout
+- `components/roulette-wheel-view.js`: gedeelde wielmarkup voor het gewone rad en het groepsrad
+- `components/order-summary.js`: gedeelde bestellijstweergave voor `group.html` en `order.html`
 - `assets/css/default.css`: gedeelde en rad-specifieke styling
 - `assets/js/`: roulettefunctionaliteit en componentregistratie
 - `assets/images/` en `assets/sounds/`: statische media
@@ -22,6 +26,14 @@ Deze map bevat een statische frontend zonder build tooling.
 Serveer `src/frontend` direct via Apache of Nginx als document root, of als submap.
 
 Er is geen `npm install` of buildstap nodig.
+
+De groepsbestelling gebruikt dezelfde opgeslagen snackselectie als `index.html`. Na de laatste automatische spin wordt uitsluitend de voltooide bestelling lokaal bewaard onder `rad-van-patat-last-group-order`. Namen en bestellingen verlaten de browser niet. Open `order.html` op hetzelfde apparaat en in dezelfde browser om die bestelling opnieuw te bekijken.
+
+De businessregels voor de groepsverdeling en localStorage-validatie kunnen worden gecontroleerd met:
+
+```bash
+npm test
+```
 
 Werk na een wijziging aan `CHANGELOG.md` de frontendpagina handmatig bij met:
 

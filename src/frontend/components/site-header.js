@@ -27,6 +27,7 @@ class SiteHeader extends HTMLElement {
 		return {
 			logoHref: this.getAttribute("logo-href") || "./index.html",
 			radHref: this.getAttribute("rad-href") || "./index.html",
+			groupHref: this.getAttribute("group-href") || "./group.html",
 			helpHref: this.getAttribute("help-href") || "./help.html",
 			activeNav: this.getAttribute("active-nav") || "",
 			shareMode: this.getAttribute("share-mode") || "button",
@@ -111,6 +112,7 @@ class SiteHeader extends HTMLElement {
 		const {
 			logoHref,
 			radHref,
+			groupHref,
 			helpHref,
 			activeNav,
 			shareMode,
@@ -126,7 +128,13 @@ class SiteHeader extends HTMLElement {
 		const helpClasses = activeNav === "help"
 			? "text-primary border-b-2 border-primary font-bold pb-2"
 			: "text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200";
+		const groupClasses = activeNav === "group"
+			? "text-primary border-b-2 border-primary font-bold pb-2"
+			: "text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200";
 		const mobileMenuStateLabel = this.mobileMenuOpen ? "Sluit menu" : "Open menu";
+		const radCurrent = activeNav === "rad" ? ' aria-current="page"' : "";
+		const groupCurrent = activeNav === "group" ? ' aria-current="page"' : "";
+		const helpCurrent = activeNav === "help" ? ' aria-current="page"' : "";
 
 		const desktopShareMarkup = shareMode === "hidden"
 			? ""
@@ -158,20 +166,21 @@ class SiteHeader extends HTMLElement {
 					<a class="header-logo-link font-headline-md text-headline-md font-extrabold text-primary flex items-center gap-2" href="${logoHref}">
 						<img alt="Rad van Patat Logo" class="h-12 w-auto object-contain" src="./assets/images/brand/rad-van-patat-logo.png"/>
 					</a>
-					<nav class="hidden md:flex gap-md items-center h-full">
-						<a class="${radClasses}" href="${radHref}">Rad</a>
+					<nav class="hidden lg:flex gap-md items-center h-full">
+						<a class="${radClasses}" href="${radHref}"${radCurrent}>Rad</a>
+						<a class="${groupClasses}" href="${groupHref}"${groupCurrent}>Groepsrad</a>
 						${desktopShareMarkup}
-						<a class="${helpClasses}" href="${helpHref}">Help</a>
+						<a class="${helpClasses}" href="${helpHref}"${helpCurrent}>Help</a>
 					</nav>
-					<div class="site-header__actions flex items-center gap-md">
+					<div class="site-header__actions hidden lg:flex items-center gap-md">
 						${desktopCtaMarkup}
 					</div>
-					<button aria-expanded="${this.mobileMenuOpen ? "true" : "false"}" aria-label="${mobileMenuStateLabel}" class="site-header__menu-toggle md:hidden w-12 h-12 rounded-full border-2 border-outline-variant bg-surface-container text-primary flex items-center justify-center" data-site-header-menu-toggle type="button">
+					<button aria-expanded="${this.mobileMenuOpen ? "true" : "false"}" aria-label="${mobileMenuStateLabel}" class="site-header__menu-toggle lg:hidden w-12 h-12 rounded-full border-2 border-outline-variant bg-surface-container text-primary flex items-center justify-center" data-site-header-menu-toggle type="button">
 						<span class="material-symbols-outlined" aria-hidden="true">${this.mobileMenuOpen ? "close" : "menu"}</span>
 					</button>
 				</div>
 			</header>
-			<div class="site-header__mobile-overlay ${this.mobileMenuOpen ? "flex" : "hidden"} md:hidden" data-site-header-menu-overlay>
+			<div class="site-header__mobile-overlay ${this.mobileMenuOpen ? "flex" : "hidden"} lg:hidden" data-site-header-menu-overlay>
 				<div aria-labelledby="site-header-mobile-title" aria-modal="true" class="site-header__mobile-panel" role="dialog">
 					<div class="site-header__mobile-brand">
 						<a class="header-logo-link" data-site-header-mobile-link href="${logoHref}">
@@ -180,9 +189,10 @@ class SiteHeader extends HTMLElement {
 						<p class="site-header__mobile-eyebrow" id="site-header-mobile-title">Menu</p>
 					</div>
 					<nav class="site-header__mobile-nav" aria-label="Mobiele navigatie">
-						<a class="site-header__mobile-link ${activeNav === "rad" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${radHref}">Rad</a>
+						<a class="site-header__mobile-link ${activeNav === "rad" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${radHref}"${radCurrent}>Rad</a>
+						<a class="site-header__mobile-link ${activeNav === "group" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${groupHref}"${groupCurrent}>Groepsrad</a>
 						${mobileShareMarkup}
-						<a class="site-header__mobile-link ${activeNav === "help" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${helpHref}">Help</a>
+						<a class="site-header__mobile-link ${activeNav === "help" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${helpHref}"${helpCurrent}>Help</a>
 						${mobileCtaMarkup}
 					</nav>
 					<div class="site-header__mobile-footer">

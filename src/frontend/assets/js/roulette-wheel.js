@@ -185,6 +185,11 @@
 		}
 
 		const ghost = getGhost();
+		if (!ghost) {
+			// Group pages reuse the wheel without enabling segment dragging and
+			// therefore intentionally omit the drag-ghost element.
+			return;
+		}
 		const offsetX = clientX - state.actieveDrag.startClientX;
 		const offsetY = clientY - state.actieveDrag.startClientY;
 		ghost.style.left = `${state.actieveDrag.ghostLeft + offsetX}px`;
@@ -193,6 +198,11 @@
 
 	function hideGhost() {
 		const ghost = getGhost();
+		if (!ghost) {
+			// The drag preview is optional; spinning must remain available on
+			// pages that only reuse the wheel renderer.
+			return;
+		}
 		ghost.classList.add("hidden");
 		ghost.innerHTML = "";
 	}
@@ -434,6 +444,13 @@
 			return;
 		}
 
+		const ghost = getGhost();
+		if (!ghost) {
+			// Do not create drag state when the host page did not opt into the
+			// removable-segment interaction.
+			return;
+		}
+
 		const info = getWheelInfo();
 		state.actieveDrag = {
 			segmentIndex: segmentIndex,
@@ -446,7 +463,6 @@
 		document.body.classList.add("is-dragging-custom-snack");
 		verbergSegmentInWiel(segmentIndex);
 
-		const ghost = getGhost();
 		ghost.innerHTML = getDragSegmentMarkup(segmentIndex);
 		ghost.style.width = `${state.actieveDrag.ghostSize}px`;
 		ghost.style.height = `${state.actieveDrag.ghostSize}px`;
@@ -461,6 +477,9 @@
 
 		updateGhostPosition(clientX, clientY);
 		const ghost = getGhost();
+		if (!ghost) {
+			return;
+		}
 		ghost.style.opacity = isBuitenHetWiel(clientX, clientY) ? "0.78" : "1";
 	}
 
@@ -504,8 +523,25 @@
 		ui.showResult(snack);
 	}
 
-	function animeerNaarSegment(doelIndex) {
+	/**
+	 * Animates the shared wheel to an exact segment and resolves only after the
+	 * pointer is visually settled. Group orders use the same renderer without
+	 * opening the single-spin result modal after every automatic round.
+	 *
+	 * @param {number} doelIndex One-based segment index.
+	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function}} opties
+	 * @returns {Promise<{snack: object, index: number}>}
+	 */
+	function animeerNaarSegment(doelIndex, opties) {
+		const instellingen = opties || {};
 		const rotor = getWheelRoot();
+		if (!rotor) {
+			// A missing light-DOM rotor means the wheel component did not finish
+			// mounting; release the lock so the caller can report and retry.
+			state.wheelSpinning = false;
+			return Promise.reject(new Error("Het roulettewiel is niet beschikbaar."));
+		}
+
 		const segmentAngle = getSegmentAngle();
 		const targetNormalized = normaliseerRotatie(360 - ((doelIndex - 1) * segmentAngle));
 		const huidigeRotatie = state.wheelRotation || 0;
@@ -515,7 +551,12 @@
 		const deltaCounterClockwise = deltaClockwise === 0 ? 0 : deltaClockwise - 360;
 		const deltaToTarget = draaiRichting === 1 ? deltaClockwise : deltaCounterClockwise;
 		const extraRounds = 5 + Math.floor(Math.random() * 4);
-		const motionDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 120 : 4800;
+		const gevraagdeDuur = Number.isFinite(instellingen.duration)
+			? clamp(instellingen.duration, 120, 10000)
+			: 4800;
+		const reducedMotion = typeof window.matchMedia === "function" &&
+			window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const motionDuration = reducedMotion ? 120 : gevraagdeDuur;
 		const totalSpin = (draaiRichting * extraRounds * 360) + deltaToTarget;
 		const nieuweRotatie = huidigeRotatie + totalSpin;
 
@@ -524,38 +565,103 @@
 			state.wheelAnimation.cancel();
 		}
 
+		rotor.style.transitionDuration = `${motionDuration}ms`;
 		rotor.style.transform = `rotate(${huidigeRotatie}deg)`;
 
 		if (typeof rotor.animate === "function") {
-			state.wheelAnimation = rotor.animate(
-				[
-					{ transform: `rotate(${huidigeRotatie}deg)` },
-					{ transform: `rotate(${nieuweRotatie}deg)` }
-				],
-				{
-					duration: motionDuration,
-					easing: "cubic-bezier(0.12, 0.82, 0.16, 1)",
-					fill: "forwards"
-				}
-			);
+			try {
+				state.wheelAnimation = rotor.animate(
+					[
+						{ transform: `rotate(${huidigeRotatie}deg)` },
+						{ transform: `rotate(${nieuweRotatie}deg)` }
+					],
+					{
+						duration: motionDuration,
+						easing: "cubic-bezier(0.12, 0.82, 0.16, 1)",
+						fill: "forwards"
+					}
+				);
+			} catch (error) {
+				// Some browsers expose Web Animations on SVG nodes but reject
+				// transform keyframes. The CSS transition below provides the
+				// same exact end rotation without aborting the group order.
+				state.wheelAnimation = null;
+			}
 		}
 
+		// Flushing the initial transform makes the CSS fallback animate instead
+		// of collapsing both transform assignments into one paint.
+		if (!state.wheelAnimation && typeof rotor.getBoundingClientRect === "function") {
+			rotor.getBoundingClientRect();
+		}
 		rotor.style.transform = `rotate(${nieuweRotatie}deg)`;
 
-		window.setTimeout(function () {
-			toonUitslag(state.alleSnacks[doelIndex - 1]);
-		}, motionDuration + 24);
+		return new Promise(function (resolve) {
+			window.setTimeout(function () {
+				const snack = state.alleSnacks[doelIndex - 1];
+				if (state.wheelAnimation && typeof state.wheelAnimation.cancel === "function") {
+					state.wheelAnimation.cancel();
+				}
+				// The inline transform retains the final angle after cancelling
+				// the fill-forwards animation and avoids stacking old animations.
+				rotor.style.transform = `rotate(${nieuweRotatie}deg)`;
+				state.wheelSpinning = false;
+				state.wheelAnimation = null;
+
+				if (instellingen.showResult !== false) {
+					toonUitslag(snack);
+				}
+				if (typeof instellingen.onComplete === "function") {
+					instellingen.onComplete(snack, doelIndex);
+				}
+
+				resolve({ snack: snack, index: doelIndex });
+			}, motionDuration + 24);
+		});
 	}
 
-	function resetAndStart() {
-		if (state.wheelSpinning || !state.alleSnacks.length) {
-			return;
+	/**
+	 * Starts one deterministic segment spin while guarding the single shared
+	 * rotor against concurrent animations.
+	 *
+	 * @param {number} doelIndex One-based segment index.
+	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function}} opties
+	 * @returns {Promise<{snack: object, index: number}|null>}
+	 */
+	function spinToSegment(doelIndex, opties) {
+		const geldigeIndex = Number.isInteger(doelIndex) &&
+			doelIndex >= 1 &&
+			doelIndex <= state.alleSnacks.length;
+		if (state.wheelSpinning || !geldigeIndex) {
+			return Promise.resolve(null);
 		}
 
 		state.wheelSpinning = true;
 		stopDrag();
-		ui.closeModal();
-		animeerNaarSegment(Math.floor(Math.random() * state.alleSnacks.length) + 1);
+		if (!opties || opties.showResult !== false) {
+			ui.closeModal();
+		}
+		return animeerNaarSegment(doelIndex, opties);
+	}
+
+	/**
+	 * Selects a fresh segment for every invocation. Callers may suppress the
+	 * normal result modal while still receiving the selected snack.
+	 *
+	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function}} opties
+	 * @returns {Promise<{snack: object, index: number}|null>}
+	 */
+	function spinRandom(opties) {
+		if (!state.alleSnacks.length) {
+			return Promise.resolve(null);
+		}
+
+		const doelIndex = Math.floor(Math.random() * state.alleSnacks.length) + 1;
+		return spinToSegment(doelIndex, opties);
+	}
+
+	function resetAndStart() {
+		return spinRandom({ showResult: true });
 	}
 
 	function addSnackSegment() {
@@ -572,6 +678,8 @@
 		updateDrag: updateDrag,
 		eindigDrag: eindigDrag,
 		stopDrag: stopDrag,
+		spinToSegment: spinToSegment,
+		spinRandom: spinRandom,
 		resetAndStart: resetAndStart,
 		addSnackSegment: addSnackSegment
 	};

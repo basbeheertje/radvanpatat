@@ -108,6 +108,7 @@
 		}
 
 		if (event.key === "Escape") {
+			ui.sluitBezoekKeuzeAlsEigenRad();
 			ui.closeModal();
 			ui.closeSnackFormulier();
 			ui.closeShareOverlay();
@@ -138,6 +139,12 @@
 		});
 		bindClick("btn-patat", function () {
 			ui.verwerkMening("patat");
+		});
+		bindClick("bezoek-keuze-groep", function () {
+			ui.verwerkBezoekKeuze("groep");
+		});
+		bindClick("bezoek-keuze-eigen", function () {
+			ui.verwerkBezoekKeuze("eigen");
 		});
 
 		const eggsKansSlider = document.getElementById("eggs-kans-slider");
@@ -190,7 +197,7 @@
 		ui.updateEggsKansWeergave();
 		ui.updateEggsKansBeschikbaarheid();
 		ui.updateShareData();
-		ui.initialiseerMeningFlow();
+		ui.initialiseerEersteBezoekFlows();
 		bindEvents();
 	}
 

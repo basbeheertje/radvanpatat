@@ -285,6 +285,79 @@
 		}
 	}
 
+	function isBezoekKeuzeOpen() {
+		const overlay = document.getElementById("bezoek-keuze-overlay");
+		return Boolean(overlay && !overlay.classList.contains("hidden"));
+	}
+
+	/**
+	 * Opens the visit choice only for eligible external arrivals. The timestamp
+	 * is stored on display so refreshing an unanswered modal cannot bypass the
+	 * once-per-24-hours rule.
+	 *
+	 * @returns {boolean} Whether the visit choice was opened.
+	 */
+	function initialiseerBezoekKeuzeFlow() {
+		if (!app.visitChoice || !app.visitChoice.moetKeuzeTonen()) {
+			return false;
+		}
+
+		app.visitChoice.markeerKeuzeGetoond();
+		openOverlay("bezoek-keuze-overlay");
+		window.requestAnimationFrame(function () {
+			const groepKnop = document.getElementById("bezoek-keuze-groep");
+			if (groepKnop) {
+				groepKnop.focus();
+			}
+		});
+		return true;
+	}
+
+	/**
+	 * Keeps the daily mode question and the one-time friet/patat question
+	 * sequential, preventing two blocking overlays from opening together.
+	 *
+	 * @returns {void}
+	 */
+	function initialiseerEersteBezoekFlows() {
+		if (!initialiseerBezoekKeuzeFlow()) {
+			initialiseerMeningFlow();
+		}
+	}
+
+	/**
+	 * Continues on the current page for a personal spin or redirects to the
+	 * dedicated group flow.
+	 *
+	 * @param {"groep"|"eigen"} keuze
+	 * @returns {void}
+	 */
+	function verwerkBezoekKeuze(keuze) {
+		if (keuze !== "groep" && keuze !== "eigen") {
+			return;
+		}
+
+		closeOverlay("bezoek-keuze-overlay");
+		if (keuze === "groep") {
+			window.location.assign("./group.html");
+			return;
+		}
+
+		initialiseerMeningFlow();
+	}
+
+	/**
+	 * Treats Escape as the non-navigating personal choice, but only while the
+	 * daily mode modal is active.
+	 *
+	 * @returns {void}
+	 */
+	function sluitBezoekKeuzeAlsEigenRad() {
+		if (isBezoekKeuzeOpen()) {
+			verwerkBezoekKeuze("eigen");
+		}
+	}
+
 	function updateEggsKansWeergave() {
 		const kansWaarde = document.getElementById("eggs-kans-waarde");
 		if (kansWaarde) {
@@ -321,6 +394,9 @@
 		toonEggsToast: toonEggsToast,
 		verwerkMening: verwerkMening,
 		initialiseerMeningFlow: initialiseerMeningFlow,
+		initialiseerEersteBezoekFlows: initialiseerEersteBezoekFlows,
+		verwerkBezoekKeuze: verwerkBezoekKeuze,
+		sluitBezoekKeuzeAlsEigenRad: sluitBezoekKeuzeAlsEigenRad,
 		updateEggsKansWeergave: updateEggsKansWeergave,
 		updateEggsKansBeschikbaarheid: updateEggsKansBeschikbaarheid,
 		closeModal: closeModal

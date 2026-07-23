@@ -35,7 +35,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
 		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=Space+Grotesk:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 		<link href="./assets/css/default.css" rel="stylesheet"/>
 		<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 		<script src="./assets/js/tailwind-theme.js"></script>
@@ -126,40 +126,7 @@
 			</div>
 
 			<div class="col-span-12 lg:col-span-7 flex justify-center items-center relative order-1 lg:order-2" id="rad">
-				<div class="roulette-wheel-spotlight"></div>
-				<div class="roulette-wheel-shell">
-					<div class="roulette-wheel-pointer" aria-hidden="true">
-						<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-							<path d="M50 6 C71 6 86 21 86 40 C86 51 82 60 75 70 L56 112 C54 116 50 118 46 112 L25 70 C18 60 14 51 14 40 C14 21 29 6 50 6 Z" fill="#EF3E2F" stroke="#21170F" stroke-width="6" stroke-linejoin="round"/>
-							<circle cx="50" cy="34" r="14" fill="#FFFFFF" stroke="#21170F" stroke-width="5"/>
-						</svg>
-					</div>
-
-					<div class="roulette-wheel-stage">
-						<div id="wheel-shell">
-							<svg id="wheel-svg" viewBox="0 0 640 640" role="img" aria-labelledby="wheel-svg-title wheel-svg-desc">
-								<title id="wheel-svg-title">Rad van Patat snackrad</title>
-								<desc id="wheel-svg-desc">Een interactief roulettewiel in de stijl van het Rad van Patat-logo.</desc>
-								<g id="wheel-rotor"></g>
-								<circle id="wheel-hit-area" cx="320" cy="320" r="260" fill="transparent"></circle>
-							</svg>
-						</div>
-					</div>
-
-					<div class="absolute -right-4 md:-right-8 top-8 md:top-12 z-10 animate-snack-float bg-white p-2 rounded-xl shadow-lg border-2 border-primary-container w-24 h-24 md:w-28 md:h-28 hidden xl:block">
-						<div class="w-full h-full rounded-lg overflow-hidden relative">
-							<img alt="Frikandel" class="w-full h-full object-cover" src="./assets/images/snacks/frikandel.png"/>
-							<div class="absolute -top-1 -right-1 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-label-sm text-label-sm border-2 border-white shadow-sm">Top</div>
-						</div>
-					</div>
-
-					<div class="snack-float-delayed absolute -left-8 md:-left-12 bottom-12 md:bottom-20 z-10 animate-snack-float bg-white p-2 rounded-xl shadow-lg border-2 border-primary-container w-28 h-28 md:w-32 md:h-32 hidden xl:block">
-						<div class="w-full h-full rounded-lg overflow-hidden relative">
-							<img alt="Kaassoufle" class="w-full h-full object-contain bg-white" src="./assets/images/snacks/kaassoufle.png"/>
-							<div class="absolute -top-1 -right-1 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-label-sm text-label-sm border-2 border-white shadow-sm">Nu</div>
-						</div>
-					</div>
-				</div>
+				<roulette-wheel-view show-floating-snacks></roulette-wheel-view>
 			</div>
 		</main>
 
@@ -306,10 +273,37 @@
 			</div>
 		</div>
 
+		<div class="viewport-modal-overlay fixed inset-0 z-[240] hidden items-center justify-center p-6 bg-black/60 backdrop-blur-sm" id="bezoek-keuze-overlay">
+			<div aria-describedby="bezoek-keuze-beschrijving" aria-labelledby="bezoek-keuze-titel" aria-modal="true" class="viewport-modal-panel bg-surface max-w-lg w-full rounded-3xl p-6 md:p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300" role="dialog">
+				<div class="w-20 h-20 bg-primary-container rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-primary">
+					<span class="material-symbols-outlined text-on-primary-container text-[40px]" aria-hidden="true">restaurant_menu</span>
+				</div>
+				<h2 class="font-headline-lg text-headline-lg mb-3" id="bezoek-keuze-titel">Voor wie draait het Rad vandaag?</h2>
+				<p class="font-body-md text-body-md text-on-surface-variant mb-7" id="bezoek-keuze-beschrijving">Maak een complete groepsbestelling of laat het Rad één snack voor jezelf kiezen.</p>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<button class="group-mode-choice group-mode-choice--group" id="bezoek-keuze-groep" type="button">
+						<span class="material-symbols-outlined" aria-hidden="true">groups</span>
+						<span>
+							<strong>Voor een groep</strong>
+							<small>Verdeel snacks voor iedereen</small>
+						</span>
+					</button>
+					<button class="group-mode-choice group-mode-choice--single" id="bezoek-keuze-eigen" type="button">
+						<span class="material-symbols-outlined" aria-hidden="true">person</span>
+						<span>
+							<strong>Voor mezelf</strong>
+							<small>Laat het Rad één keuze maken</small>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
 		<div class="is-hidden toast-positive" id="eggs-toast" role="status" aria-live="polite"></div>
 		<div class="bottom-opinion-banner-hidden fixed bottom-0 left-0 z-[205] w-full bg-secondary text-white py-3 px-4 text-center font-label-sm text-label-sm shadow-[0_-8px_24px_rgba(188,0,0,0.22)]" id="patat-banner" role="note"></div>
 
 		<script src="./assets/js/roulette-core.js"></script>
+		<script src="./assets/js/roulette-visit-choice.js"></script>
 		<script src="./assets/js/roulette-ui.js"></script>
 		<script src="./assets/js/roulette-wheel.js"></script>
 		<script src="./assets/js/roulette-init.js"></script>
