@@ -26,12 +26,12 @@ class SiteHeader extends HTMLElement {
 		const ctaMarkup = ctaMode === "hidden"
 			? ""
 			: ctaMode === "link"
-				? `<a class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-[0_4px_0_0_#5e4200] hover:bg-primary hover:text-white transition-all active:translate-y-1 active:shadow-none inline-flex items-center justify-center" href="${ctaHref}">${ctaLabel}</a>`
-				: `<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-[0_4px_0_0_#5e4200] hover:bg-primary hover:text-white transition-all active:translate-y-1 active:shadow-none" id="header-snack-toevoegen-knop" type="button">${ctaLabel}</button>`;
+				? `<a class="site-header__cta bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-[0_4px_0_0_#5e4200] hover:bg-primary hover:text-white transition-all active:translate-y-1 active:shadow-none inline-flex items-center justify-center" href="${ctaHref}">${ctaLabel}</a>`
+				: `<button class="site-header__cta bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-[0_4px_0_0_#5e4200] hover:bg-primary hover:text-white transition-all active:translate-y-1 active:shadow-none" id="header-snack-toevoegen-knop" type="button">${ctaLabel}</button>`;
 
 		this.innerHTML = `
 			<header class="w-full h-20 bg-surface border-b-2 border-outline-variant shadow-sm sticky top-0 z-[100]">
-				<div class="flex justify-between items-center px-6 md:px-12 max-w-screen-2xl mx-auto h-full">
+				<div class="site-header__inner flex justify-between items-center px-6 md:px-12 max-w-screen-2xl mx-auto h-full">
 					<a class="header-logo-link font-headline-md text-headline-md font-extrabold text-primary flex items-center gap-2" href="${logoHref}">
 						<img alt="Rad van Patat Logo" class="h-12 w-auto object-contain" src="./assets/images/brand/rad-van-patat-logo.png"/>
 					</a>
@@ -40,7 +40,7 @@ class SiteHeader extends HTMLElement {
 						${shareMarkup}
 						<a class="${helpClasses}" href="${helpHref}">Help</a>
 					</nav>
-					<div class="flex items-center gap-md">
+					<div class="site-header__actions flex items-center gap-md">
 						${ctaMarkup}
 					</div>
 				</div>
