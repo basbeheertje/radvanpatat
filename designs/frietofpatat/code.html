@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="nl">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Snack-Rad | Geen keuzestress meer!</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=Space+Grotesk:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap"
+        rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed-variant": "#930000",
+                        "background": "#fcf9f8",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-fixed": "#ffdad4",
+                        "surface-container-high": "#eae7e7",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#bc0000",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#6b4c00",
+                        "primary-fixed-dim": "#ffba20",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-background": "#1c1b1b",
+                        "on-primary-fixed": "#271900",
+                        "surface-tint": "#7c5800",
+                        "outline-variant": "#d5c4ab",
+                        "on-primary-fixed-variant": "#5e4200",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#e41f13",
+                        "tertiary": "#5d5f5f",
+                        "primary-container": "#ffb800",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#313030",
+                        "surface": "#fcf9f8",
+                        "primary-fixed": "#ffdea8",
+                        "tertiary-container": "#c4c5c5",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "on-surface-variant": "#514532",
+                        "on-tertiary-container": "#505252",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f6f3f2",
+                        "outline": "#837560",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-on-surface": "#f3f0ef",
+                        "inverse-primary": "#ffba20",
+                        "primary": "#7c5800",
+                        "on-secondary-fixed": "#410000",
+                        "tertiary-fixed": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-desktop": "120px",
+                        "xl": "64px",
+                        "margin-mobile": "20px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "md": "24px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-md": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Space Grotesk"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {
+                            "lineHeight": "56px",
+                            "letterSpacing": "-0.02em",
+                            "fontWeight": "800"
+                        }],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {
+                            "lineHeight": "40px",
+                            "letterSpacing": "-0.01em",
+                            "fontWeight": "800"
+                        }],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Interactive Snack Wheel Animation */
+        #snack-wheel {
+            transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1);
+        }
+
+        .wheel-segment {
+            clip-path: polygon(50% 50%, 0% 0%, 100% 0%);
+            transform-origin: 50% 50%;
+        }
+
+        /* Subtle floating animation for cards */
+        @keyframes snack-float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-snack-float {
+            animation: snack-float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen selection:bg-primary-container">
+<!-- Bottom Action Bar (Contextual FAB for Mobile) -->
+<div class="fixed bottom-6 right-6 md:hidden z-50">
+    <button
+        class="w-16 h-16 bg-primary-container rounded-full shadow-lg border-2 border-primary text-on-primary-container flex items-center justify-center active:scale-90 transition-transform"
+        onclick="spinWheel()">
+        <span class="material-symbols-outlined text-[32px]" data-icon="refresh">refresh</span>
+    </button>
+</div>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-6"
+     id="result-modal">
+    <div
+        class="bg-surface max-w-sm w-full rounded-3xl p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300">
+        <div
+            class="w-24 h-24 bg-primary-container rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-primary">
+            <span class="material-symbols-outlined text-on-primary-container text-[48px]">celebration</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg mb-2">Gewonnen!</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-6">Jouw avondeten is bepaald:</p>
+        <div class="bg-surface-container p-6 rounded-2xl border-2 border-primary mb-8 animate-snack-float">
+            <h3 class="font-headline-md text-headline-md text-secondary uppercase tracking-tight" id="winner-text">
+                Kroket</h3>
+        </div>
+        <button
+            class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-xl hover:opacity-90 transition-opacity"
+            onclick="closeModal()">
+            Lekker hoor!
+        </button>
+    </div>
+</div>
+<script>
+    let currentRotation = 0;
+    const wheel = document.getElementById('snack-wheel');
+    const modal = document.getElementById('result-modal');
+    const winnerText = document.getElementById('winner-text');
+
+    const snacks = [
+        "Frikandel",
+        "Kroket",
+        "Kaassoufflé",
+        "Bamischijf",
+        "Nasischijf",
+        "Kipcorn",
+        "Mexicano",
+        "Bereklauw"
+    ];
+
+    function spinWheel() {
+        // Add extra spins
+        const extraSpins = Math.floor(Math.random() * 5) + 5;
+        const randomDegree = Math.floor(Math.random() * 360);
+        currentRotation += (extraSpins * 360) + randomDegree;
+
+        wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+        // Calculate winner after transition (4s)
+        setTimeout(() => {
+            const normalizedRotation = (currentRotation % 360);
+            const segmentSize = 360 / snacks.length;
+            // Calculate which segment is at the top (0 degrees)
+            // Offset by 90 because we rotated the SVG originally
+            const winnerIndex = Math.floor(((360 - normalizedRotation + 90) % 360) / segmentSize);
+
+            showResult(snacks[winnerIndex]);
+        }, 4000);
+    }
+
+    function showResult(snack) {
+        winnerText.innerText = snack;
+        modal.classList.remove('hidden');
+        modal.querySelector('div').classList.remove('scale-90');
+        modal.querySelector('div').classList.add('scale-100');
+    }
+
+    function closeModal() {
+        modal.classList.add('hidden');
+        modal.querySelector('div').classList.remove('scale-100');
+        modal.querySelector('div').classList.add('scale-90');
+    }
+
+    // Close modal on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+</script>
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-6"
+     id="joke-modal-overlay">
+    <div
+        class="bg-surface max-w-sm w-full rounded-3xl p-8 border-4 border-primary-container text-center shadow-2xl transform transition-all duration-300">
+        <div
+            class="w-20 h-20 bg-primary-container rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-primary">
+            <span class="material-symbols-outlined text-on-primary-container text-[40px]">question_mark</span>
+        </div>
+        <h2 class="font-headline-md text-headline-md mb-4">De belangrijkste vraag van vandaag...</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-8">Is het friet of patat?</p>
+        <div class="flex flex-col gap-3">
+            <button
+                class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-xl hover:opacity-90 transition-opacity shadow-sm"
+                id="btn-friet">Friet
+            </button>
+            <button
+                class="w-full bg-secondary-container text-on-secondary-container font-label-md text-label-md py-4 rounded-xl border-2 border-secondary hover:scale-[1.02] transition-transform shadow-sm"
+                id="btn-patat">Patat
+            </button>
+        </div>
+    </div>
+</div>
+<div class="fixed top-24 left-1/2 -translate-x-1/2 z-[400] flex flex-col gap-4 pointer-events-none"
+     id="toast-container"></div>
+<script>
+    (function () {
+        const modal = document.getElementById('joke-modal-overlay');
+        const toastContainer = document.getElementById('toast-container');
+
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.className = `px-6 py-4 rounded-full shadow-lg border-2 flex items-center gap-3 transition-all duration-500 transform translate-y-[-20px] opacity-0 ${isError ? 'bg-error-container border-error text-on-error-container' : 'bg-primary-container border-primary text-on-primary-container'}`;
+            toast.innerHTML = `<span class="material-symbols-outlined">${isError ? 'sentiment_very_dissatisfied' : 'thumb_up'}</span><span class="font-label-md">${message}</span>`;
+            toastContainer.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-[-20px]', 'opacity-0');
+            }, 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-[-20px]', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        document.getElementById('btn-friet').onclick = () => {
+            modal.remove();
+            showToast('Een echte kenner!');
+        };
+
+        document.getElementById('btn-patat').onclick = () => {
+            modal.remove();
+            showToast('Tuurlijk is het friet', true);
+            const banner = document.createElement('div');
+            banner.className = 'fixed bottom-0 left-0 w-full bg-secondary text-white py-2 text-center font-label-sm z-[200] animate-pulse';
+            banner.innerText = 'Deze persoon denkt dat het patat is.... huil huil huil';
+            document.body.appendChild(banner);
+        };
+    })();
+</script>
+</body>
+</html>
