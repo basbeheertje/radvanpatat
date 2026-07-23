@@ -1,13 +1,13 @@
 Maak in de repository het bestand:
 
-~/workdir/basbeheertje/radvanpatat/designs/roulette/edited.html
+~/workdir/basbeheertje/radvanpatat/designs/roulette/created-by-codex.html
 
 Doel:
 Bouw een volledig werkend, zelfstandig HTML-bestand met een interactief “Rad van Patat”-roulettewiel, geïnspireerd op het ronde rad uit het logo van het Rad van Patat te vinden in ~/workdir/basbeheertje/radvanpatat/images/brand/.
 
 Belangrijke technische eisen:
 
-* Maak uitsluitend één bestand: edited.html.
+* Maak uitsluitend één bestand: created-by-codex.html.
 * Gebruik alleen HTML, CSS en vanilla JavaScript.
 * Gebruik geen externe frameworks, libraries, CDN’s, afbeeldingen of fonts.
 * Het bestand moet direct geopend kunnen worden in een browser.
@@ -87,7 +87,7 @@ Implementatiedetails:
 
 Controleer na het maken:
 
-* Dat edited.html bestaat op het gevraagde pad.
+* Dat created-by-codex.html bestaat op het gevraagde pad.
 * Dat het bestand zonder buildstap geopend kan worden.
 * Dat het rad correct draait en stopt.
 * Dat elke uitkomst daadwerkelijk geselecteerd kan worden.

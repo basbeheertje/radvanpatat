@@ -3,10 +3,19 @@
 
 	app.config = {
 		basisSnacks: [
-			["Bitterbal", "bitterbal.jpg"], ["Kaassouffle", "kaassouffle.jpg"], ["Loempidel", "loempidel.jpg"],
-			["Kroket", "kroket.jpg"], ["Nasischijf", "nasischijf.jpg"], ["Kipcorn", "kipcorn.jpg"],
-			["Frikandel", "frikandel.jpg"], ["Bamischijf", "bamischijf.jpg"], ["Kipnuggets", "kipnuggets.jpg"],
-			["Viandel", "viandel.jpg"], ["Satekroket", "satekroket.jpg"], ["Berenklauw", "berenklauw.jpg"], ["Mexicano", "mexicano.jpg"]
+			["Bitterbal", "bitterbal.jpg"],
+            ["Kaassouffle", "kaassouffle.jpg"],
+            ["Loempidel", "loempidel.jpg"],
+			["Kroket", "kroket.jpg"],
+            ["Nasischijf", "nasischijf.jpg"],
+            ["Kipcorn", "kipcorn.jpg"],
+			["Frikandel", "frikandel.jpg"],
+            ["Bamischijf", "bamischijf.jpg"],
+            ["Kipnuggets", "kipnuggets.jpg"],
+			["Viandel", "viandel.jpg"],
+            ["Satekroket", "satekroket.jpg"],
+            ["Berenklauw", "berenklauw.jpg"],
+            ["Mexicano", "mexicano.jpg"]
 		].map(function ([name, image]) {
 			return { name: name, image: `./assets/images/${image}`, isCustom: false };
 		}),
