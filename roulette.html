@@ -6,6 +6,7 @@
 		<title>Snack-Rad | Geen keuzestress meer!</title>
 		<script src="./js/Winwheel.js"></script>
 		<script src="./js/TweenMax.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
 		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -201,6 +202,38 @@
 			.eggs-kans-verborgen {
 				display: none;
 			}
+
+			.bg-blur-backdrop {
+				backdrop-filter: blur(8px);
+				background-color: rgba(28, 27, 27, 0.4);
+			}
+
+			.snack-card-shadow {
+				box-shadow: 0 4px 20px -4px rgba(255, 184, 0, 0.15);
+			}
+
+			@keyframes pop-in {
+				0% {
+					transform: scale(0.9) translateY(20px);
+					opacity: 0;
+				}
+				100% {
+					transform: scale(1) translateY(0);
+					opacity: 1;
+				}
+			}
+
+			.animate-pop-in {
+				animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+			}
+
+			#share-qrcode canvas,
+			#share-qrcode img {
+				width: 192px;
+				height: 192px;
+				border-radius: 16px;
+				display: block;
+			}
 		</style>
 	</head>
 	<body class="bg-background text-on-background min-h-screen selection:bg-primary-container">
@@ -237,6 +270,10 @@
 						<span class="relative z-10">Spin het Rad!</span>
 						<span class="material-symbols-outlined relative z-10 text-[32px] group-hover:rotate-180 transition-transform duration-500">refresh</span>
 						<span class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 skew-x-12"></span>
+					</button>
+					<button class="bg-surface text-primary font-label-md text-label-md px-6 py-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/20 transition-colors flex items-center justify-center gap-3" id="share-open-knop" type="button">
+						<span class="material-symbols-outlined text-[22px]">share</span>
+						<span>Deel dit rad</span>
 					</button>
 					<p class="font-label-md text-label-md text-on-surface-variant italic px-2">
 						Eigen snacks kun je uit het rad trekken om ze te verwijderen.
@@ -310,6 +347,9 @@
 			<span class="material-symbols-outlined text-[32px]">add</span>
 		</button>
 		<div class="fixed bottom-6 right-6 md:hidden z-50 flex gap-3">
+			<button class="w-16 h-16 bg-surface rounded-full shadow-lg border-2 border-primary text-primary flex items-center justify-center active:scale-90 transition-transform" id="share-open-knop-mobiel" type="button">
+				<span class="material-symbols-outlined text-[28px]">share</span>
+			</button>
 			<button class="w-16 h-16 bg-primary-container rounded-full shadow-lg border-2 border-primary text-on-primary-container flex items-center justify-center active:scale-90 transition-transform" id="snack-toevoegen-knop-mobiel" type="button">
 				<span class="material-symbols-outlined text-[32px]">add</span>
 			</button>
@@ -362,6 +402,66 @@
 			</div>
 		</div>
 
+		<div class="fixed inset-0 z-[210] hidden items-center justify-center p-margin-mobile bg-blur-backdrop" id="share-overlay">
+			<div class="bg-surface-container-lowest w-full max-w-lg rounded-[32px] overflow-hidden snack-card-shadow border-2 border-primary-container animate-pop-in relative">
+				<button aria-label="Sluiten" class="absolute top-md right-md p-sm text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-90" id="share-sluiten-knop" type="button">
+					<span class="material-symbols-outlined text-[28px]">close</span>
+				</button>
+				<div class="h-2 w-full bg-gradient-to-r from-primary to-secondary"></div>
+				<div class="p-md md:p-xl flex flex-col items-center text-center">
+					<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">Deel je Snack-Rad!</h2>
+					<p class="font-body-md text-on-surface-variant max-w-xs mb-md">Nodig iemand uit met precies dit rad. De QR-code opent exact dezelfde lijst.</p>
+					<div class="relative p-md mb-md">
+						<div class="absolute inset-0 border-4 border-dashed border-primary-container rounded-[40px] rotate-3 opacity-30"></div>
+						<div class="absolute inset-0 border-4 border-dashed border-secondary-container rounded-[40px] -rotate-3 opacity-20"></div>
+						<div class="relative bg-white p-sm rounded-3xl shadow-md">
+							<div aria-label="QR-code voor het gedeelde rad" class="w-48 h-48 rounded-xl overflow-hidden" id="share-qrcode" role="img"></div>
+						</div>
+					</div>
+					<div class="w-full flex flex-col gap-sm mb-md">
+						<label class="font-label-md text-on-surface-variant text-left ml-xs" for="share-link-veld">Kopieer de link</label>
+						<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-xs p-xs bg-surface-container-low rounded-2xl border-2 border-outline-variant focus-within:border-primary-container transition-all">
+							<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md px-sm text-on-surface" id="share-link-veld" readonly type="text" value=""/>
+							<button class="bg-primary text-on-primary px-md py-sm rounded-xl font-label-md flex items-center justify-center gap-xs hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap shadow-sm border-b-4 border-primary-container" id="share-kopieer-knop" type="button">
+								<span class="material-symbols-outlined text-[18px]">content_copy</span>
+								<span>Kopieer link</span>
+							</button>
+						</div>
+					</div>
+					<div class="w-full flex items-center gap-md py-sm">
+						<div class="flex-1 h-px bg-outline-variant"></div>
+						<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Deel direct via</span>
+						<div class="flex-1 h-px bg-outline-variant"></div>
+					</div>
+					<div class="grid grid-cols-3 sm:grid-cols-5 gap-md mt-sm w-full">
+						<a class="w-14 h-14 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-facebook-knop" rel="noopener noreferrer" target="_blank">
+							<span class="material-symbols-outlined text-[24px]">thumb_up</span>
+							<span class="sr-only">Facebook</span>
+						</a>
+						<a class="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-whatsapp-knop" rel="noopener noreferrer" target="_blank">
+							<span class="material-symbols-outlined text-[24px]">chat</span>
+							<span class="sr-only">WhatsApp</span>
+						</a>
+						<a class="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-x-knop" rel="noopener noreferrer" target="_blank">
+							<span class="material-symbols-outlined text-[24px]">alternate_email</span>
+							<span class="sr-only">X</span>
+						</a>
+						<a class="w-14 h-14 rounded-full bg-[#0A66C2] text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-linkedin-knop" rel="noopener noreferrer" target="_blank">
+							<span class="material-symbols-outlined text-[24px]">business_center</span>
+							<span class="sr-only">LinkedIn</span>
+						</a>
+						<a class="w-14 h-14 rounded-full bg-secondary text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-email-knop">
+							<span class="material-symbols-outlined text-[24px]">mail</span>
+							<span class="sr-only">E-mail</span>
+						</a>
+					</div>
+					<button class="mt-xl font-label-md text-on-surface-variant hover:text-secondary underline underline-offset-8 decoration-2 decoration-primary-container transition-all active:scale-95" id="share-sluiten-tekstknop" type="button">
+						Sluiten
+					</button>
+				</div>
+			</div>
+		</div>
+
 		<div id="eggs-toast" role="status" aria-live="polite"></div>
 
 		<script>
@@ -373,6 +473,10 @@
 			].map(([name, image]) => ({ name, image: `./images/${image}`, isCustom: false }));
 
 			const snackOpslagSleutel = "rad-van-patat-roulette-snacks";
+			const gedeeldRadParameter = "rad";
+			const gedeeldRadVersie = 1;
+			const maxSnackNaamLengte = 40;
+			const maxSnackAfbeeldingLengte = 512;
 			const kleuren = ["#ffb800", "#e41f13", "#ffdea8", "#ffb4a8"];
 			const randKleuren = ["#7c5800", "#930000", "#7c5800", "#930000"];
 			const easterEggBerichten = [
@@ -388,9 +492,103 @@
 			let easterEggBuffer = "";
 			let eggsToastTimer = null;
 			let eggsKansPercentage = 0.5;
+			let gedeeldeLink = "";
+			let shareQrCode = null;
+
+			function normaliseerSnackAfbeelding(afbeelding) {
+				if (typeof afbeelding !== "string") {
+					return "";
+				}
+
+				const waarde = afbeelding.trim();
+				if (!waarde || waarde.length > maxSnackAfbeeldingLengte) {
+					return "";
+				}
+
+				if (waarde.startsWith("./images/")) {
+					return waarde;
+				}
+
+				try {
+					const url = new URL(waarde);
+					if (url.protocol === "https:" || url.protocol === "http:") {
+						return url.toString();
+					}
+				} catch (error) {
+					return "";
+				}
+
+				return "";
+			}
+
+			function normaliseerSnack(snack) {
+				if (!snack || typeof snack.name !== "string") {
+					return null;
+				}
+
+				const naam = snack.name.trim().replace(/\s+/g, " ").slice(0, maxSnackNaamLengte);
+				if (!naam) {
+					return null;
+				}
+
+				return {
+					name: naam,
+					image: normaliseerSnackAfbeelding(snack.image),
+					isCustom: Boolean(snack.isCustom)
+				};
+			}
+
+			function encodeBase64Url(waarde) {
+				return btoa(unescape(encodeURIComponent(waarde))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+			}
+
+			function decodeBase64Url(waarde) {
+				const basis64 = waarde.replace(/-/g, "+").replace(/_/g, "/");
+				const padding = "=".repeat((4 - (basis64.length % 4 || 4)) % 4);
+				return decodeURIComponent(escape(atob(`${basis64}${padding}`)));
+			}
+
+			function maakDeelToken(snacks) {
+				const payload = {
+					v: gedeeldRadVersie,
+					s: snacks.map((snack) => ({
+						name: snack.name,
+						image: snack.image || "",
+						isCustom: Boolean(snack.isCustom)
+					}))
+				};
+
+				return encodeBase64Url(JSON.stringify(payload));
+			}
+
+			function parseDeelToken(token) {
+				if (!token || typeof token !== "string" || token.length > 12000) {
+					return null;
+				}
+
+				try {
+					const payload = JSON.parse(decodeBase64Url(token));
+					if (!payload || payload.v !== gedeeldRadVersie || !Array.isArray(payload.s)) {
+						return null;
+					}
+
+					const snacks = payload.s
+						.map(normaliseerSnack)
+						.filter(Boolean);
+
+					return snacks.length > 0 ? snacks : null;
+				} catch (error) {
+					return null;
+				}
+			}
+
+			function haalGedeeldeSnacksUitUrl() {
+				const params = new URLSearchParams(window.location.search);
+				return parseDeelToken(params.get(gedeeldRadParameter));
+			}
 
 			try {
-				alleSnacks = JSON.parse(localStorage.getItem(snackOpslagSleutel) || "null");
+				alleSnacks = haalGedeeldeSnacksUitUrl() || JSON.parse(localStorage.getItem(snackOpslagSleutel) || "null");
 			} catch (error) {
 				alleSnacks = null;
 			}
@@ -400,12 +598,12 @@
 			}
 
 			alleSnacks = alleSnacks
-				.filter((snack) => snack && typeof snack.name === "string" && snack.name.trim())
-				.map((snack) => ({
-					name: snack.name.trim(),
-					image: snack.image || "",
-					isCustom: Boolean(snack.isCustom)
-				}));
+				.map(normaliseerSnack)
+				.filter(Boolean);
+
+			if (alleSnacks.length === 0) {
+				alleSnacks = basisSnacks.map((snack) => ({ ...snack }));
+			}
 
 			let theWheel = new Winwheel({
 				canvasId: "canvas",
@@ -444,6 +642,7 @@
 			function persistSnacks() {
 				localStorage.setItem(snackOpslagSleutel, JSON.stringify(alleSnacks));
 				updateTellers();
+				updateShareData();
 			}
 
 			function normaliseerSnackNaam(naam) {
@@ -678,6 +877,83 @@
 				document.getElementById("snack-formulier-overlay").classList.remove("flex");
 			}
 
+			function buildShareUrl() {
+				const url = new URL(window.location.href);
+				url.hash = "";
+				url.searchParams.set(gedeeldRadParameter, maakDeelToken(alleSnacks));
+				return url.toString();
+			}
+
+			function renderShareQrCode(url) {
+				const qrContainer = document.getElementById("share-qrcode");
+				qrContainer.innerHTML = "";
+
+				if (typeof QRCode !== "function") {
+					qrContainer.textContent = "QR-code niet beschikbaar";
+					return;
+				}
+
+				shareQrCode = new QRCode(qrContainer, {
+					text: url,
+					width: 192,
+					height: 192,
+					colorDark: "#7c5800",
+					colorLight: "#ffffff",
+					correctLevel: QRCode.CorrectLevel.M
+				});
+			}
+
+			function updateShareButtons(url) {
+				const encodedUrl = encodeURIComponent(url);
+				const bericht = encodeURIComponent("Draai aan dit Snack-Rad!");
+				document.getElementById("share-facebook-knop").href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+				document.getElementById("share-whatsapp-knop").href = `https://wa.me/?text=${encodeURIComponent(`Draai aan dit Snack-Rad! ${url}`)}`;
+				document.getElementById("share-x-knop").href = `https://x.com/intent/post?text=${bericht}&url=${encodedUrl}`;
+				document.getElementById("share-linkedin-knop").href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+				document.getElementById("share-email-knop").href = `mailto:?subject=${encodeURIComponent("Mijn Snack-Rad")}&body=${encodeURIComponent(`Open dit Snack-Rad: ${url}`)}`;
+			}
+
+			function updateShareData() {
+				gedeeldeLink = buildShareUrl();
+				document.getElementById("share-link-veld").value = gedeeldeLink;
+				renderShareQrCode(gedeeldeLink);
+				updateShareButtons(gedeeldeLink);
+			}
+
+			function openShareOverlay() {
+				updateShareData();
+				const overlay = document.getElementById("share-overlay");
+				overlay.classList.remove("hidden");
+				overlay.classList.add("flex");
+			}
+
+			function closeShareOverlay() {
+				const overlay = document.getElementById("share-overlay");
+				overlay.classList.add("hidden");
+				overlay.classList.remove("flex");
+			}
+
+			function kopieerShareLink() {
+				if (!gedeeldeLink) {
+					updateShareData();
+				}
+
+				if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
+					document.getElementById("share-link-veld").select();
+					toonToast("Selecteer en kopieer de link handmatig");
+					return;
+				}
+
+				navigator.clipboard.writeText(gedeeldeLink)
+					.then(function () {
+						toonToast("Link gekopieerd");
+					})
+					.catch(function () {
+						document.getElementById("share-link-veld").select();
+						toonToast("Selecteer en kopieer de link handmatig");
+					});
+			}
+
 			function showResult(snack) {
 				const afbeelding = document.getElementById("resultaat-afbeelding");
 				const letter = document.getElementById("resultaat-letter");
@@ -809,9 +1085,15 @@
 				updateTellers();
 				updateEggsKansWeergave();
 				updateEggsKansBeschikbaarheid();
+				updateShareData();
 
 				document.getElementById("spin-knop").addEventListener("click", resetAndStart);
 				document.getElementById("spin-knop-mobiel").addEventListener("click", resetAndStart);
+				document.getElementById("share-open-knop").addEventListener("click", openShareOverlay);
+				document.getElementById("share-open-knop-mobiel").addEventListener("click", openShareOverlay);
+				document.getElementById("share-sluiten-knop").addEventListener("click", closeShareOverlay);
+				document.getElementById("share-sluiten-tekstknop").addEventListener("click", closeShareOverlay);
+				document.getElementById("share-kopieer-knop").addEventListener("click", kopieerShareLink);
 				document.getElementById("result-close-knop").addEventListener("click", closeModal);
 				document.getElementById("snack-toevoegen-knop-desktop").addEventListener("click", openSnackFormulier);
 				document.getElementById("snack-toevoegen-knop-mobiel").addEventListener("click", openSnackFormulier);
@@ -819,6 +1101,11 @@
 				document.getElementById("snack-formulier-overlay").addEventListener("click", function (event) {
 					if (event.target === this) {
 						closeSnackFormulier();
+					}
+				});
+				document.getElementById("share-overlay").addEventListener("click", function (event) {
+					if (event.target === this) {
+						closeShareOverlay();
 					}
 				});
 				document.getElementById("eggs-kans-slider").addEventListener("input", function () {
@@ -838,7 +1125,17 @@
 						return;
 					}
 
-					const snack = { name: naam, image: foto, isCustom: true };
+					const snack = normaliseerSnack({ name: naam, image: foto, isCustom: true });
+					if (!snack) {
+						toonToast("Snack is ongeldig");
+						return;
+					}
+
+					if (foto && !snack.image) {
+						toonToast("Gebruik een geldige http(s)-foto-URL");
+						return;
+					}
+
 					alleSnacks.push(snack);
 					persistSnacks();
 					theWheel.addSegment({
@@ -907,6 +1204,7 @@
 					if (event.key === "Escape") {
 						closeModal();
 						closeSnackFormulier();
+						closeShareOverlay();
 					}
 				});
 			});
