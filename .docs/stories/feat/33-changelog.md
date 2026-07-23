@@ -10,7 +10,7 @@
 Dit bestand documenteert waar we zijn gebleven met de implementatie van de changelogpagina en generator.
 
 ## 🔍 Huidige Status
-De frontend heeft nu een markdown-gedreven changelogbron (`CHANGELOG.md`), een generator-script dat daar `src/frontend/changelog.html` van maakt, en een herbruikbaar web component voor changelog-artikelen.
+De frontend heeft nu een markdown-gedreven changelogbron (`CHANGELOG.md`), een generator-script dat daar `src/frontend/changelog.html` van maakt, een roadmappagina die via een array werkt, en een milestones-generator die die array bij releases kan verversen.
 
 ### ⚠️ Bekende Problemen / Waar loop je nu tegenaan?
 - **Geen bestaande git-tag aanwezig:** De repository bevat op dit moment geen git-tags.
@@ -23,6 +23,10 @@ De frontend heeft nu een markdown-gedreven changelogbron (`CHANGELOG.md`), een g
 ### Frontend (HTML / CSS / Vanilla JavaScript)
 - `src/frontend/changelog.html`: Nieuwe changelogpagina, gegenereerd vanuit `CHANGELOG.md`.
 - `src/frontend/components/changelog-entry.js`: Herbruikbaar web component toegevoegd voor release-artikelen.
+- `src/frontend/roadmap.html`: Nieuwe roadmappagina met dezelfde header, footer en branding als de rest van de site.
+- `src/frontend/components/roadmap-board.js`: Herbruikbaar web component toegevoegd dat roadmap-cards uit een array groepeert per fase.
+- `src/frontend/assets/js/roadmap-data.js`: Configureerbare array met titel, categorie, status, omschrijving, icoon en voortgang per card.
+- `src/frontend/assets/js/roadmap-page.js`: Paginascript dat de roadmap-array aan het component koppelt.
 - `src/frontend/components/register-components.js`: Registratie van het changelogcomponent toegevoegd.
 - `src/frontend/assets/css/default.css`: Gedeelde changelogstyling toegevoegd voor hero, tijdlijn, cards en CTA.
 - `src/frontend/README.md`: Documentatie uitgebreid met changelogpagina en generatorscript.
@@ -32,12 +36,15 @@ De frontend heeft nu een markdown-gedreven changelogbron (`CHANGELOG.md`), een g
 
 ### Docker / Environment / Database
 - `scripts/generate-changelog-html.mjs`: Handmatig script toegevoegd dat `src/frontend/changelog.html` uit `CHANGELOG.md` opbouwt.
+- `scripts/generate-roadmap.mjs`: Script toegevoegd dat GitHub milestones omzet naar de roadmap-array voor de frontend.
 - `.agents/skills/changelog/SKILL.md`: Workflow aangepast zodat wijzigingen eerst in `CHANGELOG.md` landen en daarna in de gegenereerde frontendpagina.
+- `.github/workflows/release-changelog.yml`: Release-workflow uitgebreid zodat ook de roadmap-data automatisch uit milestones wordt bijgewerkt.
 
 ---
 
 ## 📝 Activity Log (AI & Human)
 - [2026-07-23] (AI): feat(changelog): markdown-gedreven changelogpagina, generator en skill-workflow toegevoegd
+- [2026-07-23] (AI): feat(roadmap): roadmappagina, configureerbare array en milestone-generator toegevoegd
 
 ---
 

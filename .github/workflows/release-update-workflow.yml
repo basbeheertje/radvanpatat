@@ -1,4 +1,4 @@
-name: Update changelog and deploy Pages
+name: Update release content and deploy Pages
 
 on:
     release:
@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
     generate:
-        name: Generate changelog
+        name: Generate release content
         runs-on: ubuntu-latest
 
         outputs:
@@ -47,6 +47,11 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Roadmap genereren
+              run: npm run generate:roadmap
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
             - name: Gegenereerde bestanden committen
               id: commit
               shell: bash
@@ -56,6 +61,7 @@ jobs:
 
                   git add CHANGELOG.md
                   git add src/frontend/changelog.html
+                  git add src/frontend/assets/js/roadmap-data.js
 
                   if git diff --cached --quiet; then
                     echo "Geen wijzigingen gevonden."
@@ -63,7 +69,7 @@ jobs:
                     exit 0
                   fi
 
-                  git commit -m "docs: update changelog"
+                  git commit -m "docs: update release content"
                   git push origin HEAD:main
 
                   echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"

@@ -68,6 +68,14 @@
 			return;
 		}
 
+		// The transparent SVG hit area sits above the center logo, so center clicks
+		// must be resolved from pointer coordinates here instead of on the image.
+		if (wheel.isPointerOnCenter(event.clientX, event.clientY)) {
+			event.preventDefault();
+			wheel.resetAndStart();
+			return;
+		}
+
 		const segmentIndex = wheel.getSegmentIndexFromPointer(event.clientX, event.clientY);
 		if (!segmentIndex || !state.alleSnacks[segmentIndex - 1]) {
 			return;
@@ -148,6 +156,10 @@
 		const wheelHitArea = document.getElementById("wheel-hit-area");
 		if (wheelHitArea) {
 			wheelHitArea.addEventListener("pointerdown", handleWheelPointerDown);
+			wheelHitArea.addEventListener("pointermove", function (event) {
+				wheel.updateCenterHover(event.clientX, event.clientY);
+			});
+			wheelHitArea.addEventListener("pointerleave", wheel.clearCenterHover);
 		}
 
 		bindOverlayClose("snack-formulier-overlay", ui.closeSnackFormulier);
@@ -161,9 +173,13 @@
 		});
 		window.addEventListener("pointercancel", function () {
 			wheel.stopDrag();
+			wheel.clearCenterHover();
 		});
 		window.addEventListener("scroll", wheel.stopDrag, { passive: true });
-		window.addEventListener("resize", wheel.stopDrag);
+		window.addEventListener("resize", function () {
+			wheel.stopDrag();
+			wheel.clearCenterHover();
+		});
 		document.addEventListener("keydown", handleKeyDown);
 	}
 
