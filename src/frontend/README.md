@@ -8,6 +8,8 @@ Deze map bevat een statische frontend zonder build tooling.
 - `help.html`: help-pagina
 - `changelog.html`: gegenereerde changelogpagina op basis van `../../CHANGELOG.md`
 - `roadmap.html`: roadmappagina die cards uit een configureerbare JavaScript-array rendert
+- `404.html`: statische foutpagina met gedeelde layoutcomponenten
+- `.nojekyll`: zorgt dat GitHub Pages de statische frontendbestanden direct serveert, inclusief `404.html`
 - `components/`: herbruikbare web components voor layout
 - `assets/css/default.css`: gedeelde en rad-specifieke styling
 - `assets/js/`: roulettefunctionaliteit en componentregistratie
