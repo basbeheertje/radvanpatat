@@ -4,3 +4,49 @@ images/logo.png
 /images/logo.png
 ./images/logo.png
 .idea
+
+.next
+node_modules
+.idea/
+.claude/
+*.bak
+.Zone.Identifier
+.php-cs-fixer.cache
+
+.env
+.env.local
+.env.*.local
+
+# Mac DS_Store Files
+.DS_Store
+/.well-known
+.vscode/*
+.maintenance
+package-lock.json
+
+.idea/workspace.xml
+logs/*.txt
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+
+#vagrant folder
+/.vagrant
+
+composer.lock
+
+composer-localkeys.json

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>Edit List - Snack-Rad</title>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#5e4200",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e41f13",
+                        "primary-container": "#ffb800",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#271900",
+                        "surface-tint": "#7c5800",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#c4c5c5",
+                        "surface-container-high": "#eae7e7",
+                        "secondary": "#bc0000",
+                        "inverse-surface": "#313030",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eded",
+                        "on-secondary-fixed-variant": "#930000",
+                        "on-tertiary-container": "#505252",
+                        "tertiary": "#5d5f5f",
+                        "on-primary-container": "#6b4c00",
+                        "primary-fixed-dim": "#ffba20",
+                        "outline": "#837560",
+                        "outline-variant": "#d5c4ab",
+                        "on-secondary-fixed": "#410000",
+                        "on-surface-variant": "#514532",
+                        "surface-container-low": "#f6f3f2",
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#ffdea8",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-primary": "#ffba20",
+                        "background": "#fcf9f8",
+                        "primary": "#7c5800",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdad4",
+                        "on-surface": "#1c1b1b",
+                        "on-background": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "120px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Space Grotesk"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Space Grotesk"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-xl": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236b4c00'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+            background-color: #ffb800;
+            border-color: #ffb800;
+        }
+        .fry-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 0px 0px rgba(255, 184, 0, 0.08);
+        }
+        .fry-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px -8px rgba(255, 184, 0, 0.2);
+        }
+        .sticker-button {
+            box-shadow: 0 4px 0 0 #5e4200;
+        }
+        .sticker-button:active {
+            box-shadow: 0 0px 0 0 #5e4200;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased">
+<!-- TopNavBar -->
+<nav class="w-full h-20 bg-surface border-b-2 border-outline-variant shadow-sm sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-desktop max-w-screen-2xl mx-auto h-full">
+<div class="font-headline-md text-headline-md font-extrabold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+                Snack-Rad
+            </div>
+<div class="hidden md:flex gap-md items-center h-full">
+<a class="text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200" href="#">Wheel</a>
+<a class="text-secondary border-b-2 border-secondary font-bold pb-2 hover:text-primary transition-colors duration-200" href="#">Lists</a>
+<a class="text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden lg:block">
+<input class="w-64 py-2 pl-10 pr-4 bg-surface-container-low border-2 border-primary-container rounded-full focus:ring-2 focus:ring-primary outline-none font-label-md transition-all" placeholder="Wat heb je trek in?" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary">search</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold sticker-button hover:bg-primary hover:text-white transition-all active:scale-95">
+                    Add Snack
+                </button>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Header Section -->
+<header class="mb-xl text-center md:text-left">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-xs">Standaard Snacks</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Selecteer de snacks die in het rad moeten verschijnen voor je volgende bestelling. Maak je keuze uit onze heerlijke selectie.</p>
+</header>
+<!-- Filter & Search Mobile (Visible on mobile, hidden on large) -->
+<div class="lg:hidden mb-md">
+<div class="relative">
+<input class="w-full py-4 pl-12 pr-4 bg-white border-2 border-primary-container rounded-xl shadow-sm outline-none" placeholder="Zoek snacks..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">search</span>
+</div>
+</div>
+<!-- Bento Grid for Snacks -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+<!-- Snack Card: Frikandel -->
+<div class="fry-card bg-white rounded-xl overflow-hidden flex flex-col relative group border border-outline-variant">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A high-resolution, professional food photograph of a classic Dutch Frikandel, perfectly deep-fried to a rich golden-brown, served on a white minimalist plate. The lighting is warm and inviting, highlighting the crispy texture of the snack. The background is a soft, blurred snack bar setting with golden yellow accents, following a modern and clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWrFPo0UIW3BoOcv4xI7ytz9YCV0UUgA97qJat56DA9fhbIjAyn7oajTZXWWdg25r9Nl-X6_FEOtr8uq98MG9DH1SJnHA-8FTlnv7wkLxEpn6SB1msPqUrZSGJbgZ0EfwH_Zo427RDQH8kJ0VFStxcG6dcsDaqjFs0Gb7cGslriotaP4THFaIdZgNI7DF_k06KlEX6LTmINtwGfNRtdm0_dzXZcpau2p22jGwv2R1iwhZL4rkk_cynPQ"/>
+<div class="absolute top-3 right-3 bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-label-md shadow-lg">
+                        €2
+                    </div>
+</div>
+<div class="p-md flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Frikandel</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">De echte klassieker</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Snack Card: Kroket -->
+<div class="fry-card bg-white rounded-xl overflow-hidden flex flex-col relative group border border-outline-variant">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A macro food shot of a Dutch Kroket, showing the breadcrumbed exterior with extreme detail. The crust is crispy and golden, with a hint of steam rising from it. It's placed on a wooden board with a small dollop of mustard on the side. The lighting is bright and cheerful, emphasizing the warm tones of the deep-fried snack, consistent with a premium food app style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBOaPexXuKleNDm2o3iOxH6FblDDagIl3mbPFIm4AO0_bThXOyHsu8cCE1ffnpLN7i1RklETIkspdUO77UxKAMVR7Ea_JaSVkn1y6hJsgVqT17-UIQEtjO7GBR4oIbhtNOGByOm6OEKFqdHU4T3o9vqEVAkERS8EiVKxhV_8G-LqL-WgCKz6WX_IiwjkaxYRpqYHtPzs_MOrSBJ3qYu-xap4xtl9UeNRYY9IleHf46EtBrPQ3uOIm6YA"/>
+<div class="absolute top-3 right-3 bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-label-md shadow-lg">
+                        €2
+                    </div>
+</div>
+<div class="p-md flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Kroket</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Rundvlees vulling</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Snack Card: Kaassoufflé -->
+<div class="fry-card bg-white rounded-xl overflow-hidden flex flex-col relative group border border-outline-variant">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up of a Kaassoufflé being pulled apart to reveal a gooey, melted cheese center. The golden-brown puffy crust is perfectly crispy. The shot is taken in a brightly lit studio with a clean, minimalist aesthetic and warm yellow background elements. Professional food styling highlights the stretchy texture of the cheese and the light airiness of the pastry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbXMN6SxqxDpPq-nJKqttalYg0URL2kWJpiX4lt-vlOpRHg9Pl1i0KQaxJV3NgPkgkNvvK6bXqc-zkvlnfbA8y5GNejWMcyrEn777sdFe_ALnvru4gdwOCN0DSBRM2pkjwMmOP8Ffw2sRRNU09EkF1DwhpnVmSfRmdqu6B2xttvIsj8hvQmUf1LRUJtqkh-_4iKbKGi0kj5Kd7cDwIEsLxM8533cTyPzC06rPUN3GSUGlRpgGSDfYxkA"/>
+<div class="absolute top-3 right-3 bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-label-md shadow-lg">
+                        €2
+                    </div>
+</div>
+<div class="p-md flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Kaassoufflé</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Gesmolten goud</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Snack Card: Bamischijf -->
+<div class="fry-card bg-white rounded-xl overflow-hidden flex flex-col relative group border border-outline-variant">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A professional photography shot of a Bamischijf, a Dutch bami snack, cut in half to show the spiced noodle filling. The exterior is coated in coarse golden-brown breadcrumbs. It is presented on a clean white surface with vibrant red and yellow accents in the background. The lighting is crisp and modern, emphasizing the textures of the crispy shell and soft noodles." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6uppqw5BhgI4vVM1Z_BNUSkIvkXFJ7xSauq1yWQBvJrXqTXcYrJFo2_TILzmqNxxJE_IZO9R7nlcXbE6ujp8R4c-J2JAb5qF4B7fW0DqBFGss6LMP76Jo6S25IicbuVaAtUU23u5lBnDJfQuIQss1QKkLwcIl8WRDo36roU4UfmYqs0Y1Js5o0vyPDvP3H65g6YXla70t5ZnEwM7eW3Gm568GpsAxYbc4-2w_iME-kjkPPcrLhfisgA"/>
+<div class="absolute top-3 right-3 bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-label-md shadow-lg">
+                        €2
+                    </div>
+</div>
+<div class="p-md flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Bamischijf</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pittige bami</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Snack Card: Mexicano -->
+<div class="fry-card bg-white rounded-xl overflow-hidden flex flex-col relative group border border-outline-variant">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="An appetizing food photograph of a Mexicano snack, featuring its iconic ribbed shape and deep-fried texture. The snack looks juicy and spicy, with visible seasoning. It is presented in a modern, pop-art style snack tray with bright red and yellow graphic elements. The background is a clean white marble texture with soft, diffused shadows, creating a premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf_jxArwPHGVKpuurtMFchj3CNy-MPifGjJGbtj6Lw6ahtCuyIqyHgDr_7rPLYaLPbRIE7rv04R7YzjASE2PKSM0vDlI7S_uO-cLUaIdk47PtRInKdfLPGOxygYCcLNwdLhRoH_D63_JqpEnBwe0HoUWWBlBl-BmtzYyI0-3mvd6EGz9wAOgLGGWvsrrJvIAxkR6wddfAAeR7crqPnTNu4i99xkmO6BXDp8VXHHvd2bDyrzzOpdYquDg"/>
+<div class="absolute top-3 right-3 bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-label-md shadow-lg">
+                        €3
+                    </div>
+</div>
+<div class="p-md flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Mexicano</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Lekker pittig</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Snack Card: Pikanto -->
+<div class="fry-card bg-white rounded-xl overflow-hidden flex flex-col relative group border border-outline-variant">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up of a Dutch Pikanto snack, showing its slightly uneven, crispy surface and rich meat texture. The photograph uses a shallow depth of field to keep the focus on the snack's spicy appeal. Vibrant golden lighting suggests a late-night snacks atmosphere while maintaining a clean, high-end commercial aesthetic. Background colors include primary red and deep fryer gold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrK3v89s0YL5tyJpvyh3Ynj8D3UY9GpKVadjps2Q-zxk1_1I_OJ5kdRuM9DoJNMfkfLrsIqmK9ilbhqfTXnsUQ5sYiL32GvDQuZTwlBWZTU1511ayic67C3P3aJKAHdwufliNS_bBwynFrKqbDoc2SZB6j2Yh0oc1LV3KWcjAzQU6s5yMFnMuRC_WjdON-biG_hPKGT-3zlxX4HF_QO8XWvFPXKM9_wpr5f44noL8caJ2B97fVlDUCXw"/>
+<div class="absolute top-3 right-3 bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-label-md shadow-lg">
+                        €3
+                    </div>
+</div>
+<div class="p-md flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Pikanto</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kruidig &amp; vlezig</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Snack Card: Kipkorn -->
+<div class="fry-card bg-white rounded-xl overflow-hidden flex flex-col relative group border border-outline-variant">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A professional studio food photo of a Kipkorn, showcasing its distinct cornflakes crust. The texture is extremely detailed, looking incredibly crunchy and golden. It is placed against a soft gold background that matches the snack's color. The lighting is high-contrast, creating a bold, pop-art look that makes the snack appear snackable and energetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKDmPIGjYpW0hj5aQisy5tGmhP2bQZbe4etxifnyZ_PH7hMgZMevaTRKDxBtyqhu52gYUpHBUvZHuWNU9Q2TC-4RwT80YcK3-rgGEDqTEb6ya-mtL-zRKqwBTSchKV-h2vkjzOy7fV-wvyL28Z992LwoTvBa3JiXYZp591P_h6nzedBDdlmJZsb4EkGtQ2xud_JnUZy6a3FnddcFb_BclQx1jXv7zeM89xc4h6y6NU-OXpBV3dYoWazQ"/>
+<div class="absolute top-3 right-3 bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-label-md shadow-lg">
+                        €2
+                    </div>
+</div>
+<div class="p-md flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Kipkorn</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Heerlijk krokant</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Add Item Placeholder Card -->
+<div class="border-4 border-dashed border-primary-container rounded-xl flex flex-col items-center justify-center p-xl hover:bg-surface-container transition-colors cursor-pointer group h-full min-h-[300px]">
+<div class="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center text-on-primary-container mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">add</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary">Nieuwe snack</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-center mt-2">Voeg je eigen favoriet toe</p>
+</div>
+</div>
+<!-- Sticky Add Section at bottom -->
+<section class="mt-xl bg-white p-lg rounded-2xl border-2 border-primary-container shadow-lg">
+<div class="flex flex-col md:flex-row items-center gap-md">
+<div class="flex-grow w-full">
+<h3 class="font-headline-md text-headline-md mb-2">Staat je snack er niet bij?</h3>
+<div class="flex gap-sm">
+<div class="relative flex-grow">
+<input class="w-full py-4 px-6 bg-surface-container-low border-2 border-outline-variant rounded-xl focus:border-primary-container outline-none font-body-lg" placeholder="Naam van je snack..." type="text"/>
+</div>
+<div class="relative w-32">
+<input class="w-full py-4 px-6 bg-surface-container-low border-2 border-outline-variant rounded-xl focus:border-primary-container outline-none font-body-lg" placeholder="Prijs" type="text"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant">€</span>
+</div>
+</div>
+</div>
+<button class="w-full md:w-auto bg-primary-container text-on-primary-container px-xl py-4 rounded-xl font-bold sticker-button hover:bg-primary hover:text-white transition-all text-xl whitespace-nowrap">
+                    Toevoegen
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-lg bg-surface-container-low border-t border-outline-variant mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-md max-w-screen-2xl mx-auto">
+<div class="font-headline-md text-headline-md text-primary font-extrabold">Snack-Rad</div>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:underline hover:text-primary transition-colors font-label-md" href="#">Support</a>
+<a class="text-on-surface-variant hover:underline hover:text-primary transition-colors font-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:underline hover:text-primary transition-colors font-label-md" href="#">Terms of Service</a>
+</div>
+<div class="text-tertiary font-label-sm">
+                © 2024 Snack-Rad. Stay Gezellig.
+            </div>
+</div>
+</footer>
+<!-- Custom Micro-interactions Script -->
+<script>
+        document.querySelectorAll('.fry-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const checkbox = card.querySelector('input[type="checkbox"]');
+                if (e.target !== checkbox && !e.target.closest('label')) {
+                    checkbox.checked = !checkbox.checked;
+                    // Trigger a little scale animation
+                    card.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                    }, 100);
+                }
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-4', 'ring-primary-container/30');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-4', 'ring-primary-container/30');
+        });
+    </script>
+</body></html>
