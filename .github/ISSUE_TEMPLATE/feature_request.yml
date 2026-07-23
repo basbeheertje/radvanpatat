@@ -1,0 +1,121 @@
+name: Feature request
+description: Stel een nieuwe functie of verbetering voor
+title: "[FEAT] "
+labels: ["enhancement", "to work out"]
+assignees: []
+
+body:
+    - type: textarea
+      id: gewenste-functionaliteit
+      attributes:
+          label: Gewenste functionaliteit
+          description: Beschrijf wat je wilt toevoegen of verbeteren.
+          placeholder: Beschrijf hier de gewenste functionaliteit.
+      validations:
+          required: true
+
+    - type: textarea
+      id: waarom-nodig
+      attributes:
+          label: Waarom is dit nodig?
+          description: Leg uit welk probleem dit oplost of welke waarde dit toevoegt.
+          placeholder: Beschrijf hier waarom deze functie nodig is.
+      validations:
+          required: true
+
+    - type: textarea
+      id: gewenste-oplossing
+      attributes:
+          label: Gewenste oplossing
+          description: Beschrijf hoe je denkt dat dit zou moeten werken.
+          placeholder: Beschrijf hier de gewenste oplossing.
+      validations:
+          required: true
+
+    - type: textarea
+      id: gebruiker-kan-straks
+      attributes:
+          label: Wat dient de gebruiker straks te kunnen?
+          description: Beschrijf concreet wat de gebruiker na oplevering kan doen.
+          placeholder: |
+              De gebruiker kan straks:
+              - ...
+              - ...
+              - ...
+      validations:
+          required: true
+
+    - type: input
+      id: rol
+      attributes:
+          label: Voor welke rol is dit nodig?
+          description: Geef aan voor welke gebruikersrol(len) deze functionaliteit bedoeld is.
+          placeholder: Bijvoorbeeld beheerder, planner, medewerker, klant
+      validations:
+          required: true
+
+    - type: input
+      id: locatie-in-systeem
+      attributes:
+          label: Waar in het systeem wilt u dit hebben?
+          description: Geef aan in welk onderdeel, scherm of menu deze functionaliteit moet komen.
+          placeholder: Bijvoorbeeld dashboard, klantdetailpagina, instellingen, planning
+      validations:
+          required: true
+
+    - type: textarea
+      id: regels
+      attributes:
+          label: Welke regels gelden er?
+          description: Beschrijf de functionele regels, uitzonderingen of voorwaarden.
+          placeholder: |
+              - Alleen gebruikers met rol ... mogen dit doen.
+              - De status mag alleen gewijzigd worden als ...
+              - Bij ... moet automatisch ... gebeuren.
+      validations:
+          required: false
+
+    - type: textarea
+      id: validaties
+      attributes:
+          label: Welke validaties zijn er nodig?
+          description: Geef aan welke validaties er nodig zijn.
+          placeholder: |
+              - Veld ... is verplicht.
+              - Datum mag niet in het verleden liggen.
+              - Waarde moet uniek zijn.
+      validations:
+          required: false
+
+    - type: textarea
+      id: acceptatiecriteria
+      attributes:
+          label: Acceptatiecriteria
+          description: Beschrijf wanneer deze feature als afgerond beschouwd mag worden.
+          placeholder: |
+              - [ ] De gebruiker kan ...
+              - [ ] Het systeem toont ...
+              - [ ] Bij foutieve invoer verschijnt ...
+      validations:
+          required: true
+
+    - type: textarea
+      id: buiten-scope
+      attributes:
+          label: Wat valt er buiten deze scope?
+          description: Geef aan wat er niet in deze scope valt.
+          placeholder: |
+              - ...
+              - ...
+              - ...
+      validations:
+          required: false
+
+    - type: textarea
+      id: extra-informatie
+      attributes:
+          label: Extra informatie
+          description: Voeg eventueel screenshots, voorbeelden of links toe.
+          placeholder: Voeg hier extra context, links, screenshots of voorbeelden toe.
+      validations:
+          required: false

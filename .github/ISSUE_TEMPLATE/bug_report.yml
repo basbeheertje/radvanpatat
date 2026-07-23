@@ -1,0 +1,50 @@
+name: Bug report
+description: Meld een fout of probleem
+title: "[BUG] "
+labels: ["bug"]
+body:
+    - type: textarea
+      id: description
+      attributes:
+          label: Omschrijving
+          description: Beschrijf kort wat er misgaat.
+          placeholder: Wat gaat er fout?
+      validations:
+          required: true
+
+    - type: textarea
+      id: steps
+      attributes:
+          label: Stappen om te reproduceren
+          description: Welke stappen moeten we volgen om het probleem te zien?
+          placeholder: |
+              1. Ga naar ...
+              2. Klik op ...
+              3. Zie foutmelding ...
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected
+      attributes:
+          label: Verwacht gedrag
+          description: Wat had er moeten gebeuren?
+      validations:
+          required: true
+
+    - type: textarea
+      id: actual
+      attributes:
+          label: Huidig gedrag
+          description: Wat gebeurt er nu?
+      validations:
+          required: true
+
+    - type: input
+      id: environment
+      attributes:
+          label: Omgeving
+          description: Browser, apparaat, branch of versie.
+          placeholder: Chrome, macOS, develop branch
+      validations:
+          required: false

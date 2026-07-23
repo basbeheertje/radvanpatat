@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+    - name: Supportvraag
+      url: https://decodekas.nl/support
+      about: Gebruik dit formulier voor supportvragen zonder technische wijziging.
+    - name: Security melding
+      url: mailto:security@decodekas.nl
+      about: Meld kwetsbaarheden niet openbaar via GitHub issues.
