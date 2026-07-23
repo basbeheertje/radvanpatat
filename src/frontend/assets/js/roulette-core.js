@@ -3,19 +3,20 @@
 
 	app.config = {
 		basisSnacks: [
-			["Bitterbal", "bitterbal.jpg"],
-            ["Kaassouffle", "kaassouffle.jpg"],
-            ["Loempidel", "loempidel.jpg"],
-			["Kroket", "kroket.jpg"],
-            ["Nasischijf", "nasischijf.jpg"],
-            ["Kipcorn", "kipcorn.jpg"],
-			["Frikandel", "frikandel.jpg"],
-            ["Bamischijf", "bamischijf.jpg"],
-            ["Kipnuggets", "kipnuggets.jpg"],
-			["Viandel", "viandel.jpg"],
-            ["Satekroket", "satekroket.jpg"],
-            ["Berenklauw", "berenklauw.jpg"],
-            ["Mexicano", "mexicano.jpg"]
+			["Bitterbal", "/snacks/bitterbal.png"],
+            ["Kaassouffle", "/snacks/kaassouffle.png"],
+            ["Loempidel", "/snacks/loempidel.png"],
+			["Kroket", "/snacks/kroket.png"],
+            ["Nasischijf", "/snacks/nasischijf.png"],
+            ["Kipcorn", "/snacks/kipcorn.png"],
+			["Frikandel", "/snacks/frikandel.png"],
+            ["Bamischijf", "/snacks/bamischijf.jpg"],
+            ["Kipnuggets", "/snacks/kipnuggets.jpg"],
+			["Viandel", "/snacks/viandel.jpg"],
+            ["Satekroket", "/snacks/satekroket.jpg"],
+            ["Berenklauw", "/snacks/berenklauw.jpg"],
+            ["Mexicano", "/snacks/mexicano.png"],
+            ["Loempia", "/snacks/loempia.png"]
 		].map(function ([name, image]) {
 			return { name: name, image: `./assets/images/${image}`, isCustom: false };
 		}),
@@ -61,16 +62,15 @@
 	app.state = {
 		alleSnacks: [],
 		wheelSpinning: false,
-		spinned: false,
+		wheelRotation: 0,
+		wheelAnimation: null,
 		actieveDrag: null,
 		easterEggsActief: false,
 		easterEggBuffer: "",
 		eggsToastTimer: null,
 		eggsKansPercentage: 0.5,
 		gedeeldeLink: "",
-		shareQrCode: null,
-		opgeslagenMening: null,
-		theWheel: null
+		opgeslagenMening: null
 	};
 
 	function normaliseerSnackAfbeelding(afbeelding) {

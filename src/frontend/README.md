@@ -4,10 +4,12 @@ Deze map bevat een statische frontend zonder build tooling.
 
 ## Structuur
 
-- `roulette.html`: interactieve Rad van Patat pagina
-- `versie2.html`: help-pagina
+- `index.html`: interactieve Rad van Patat-pagina
+- `help.html`: help-pagina
 - `components/`: herbruikbare web components voor layout
-- `assets/`: css, js, images en sounds
+- `assets/css/default.css`: gedeelde en rad-specifieke styling
+- `assets/js/`: roulettefunctionaliteit en componentregistratie
+- `assets/images/` en `assets/sounds/`: statische media
 
 ## Gebruik
 

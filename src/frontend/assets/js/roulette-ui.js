@@ -71,7 +71,7 @@
 			return;
 		}
 
-		state.shareQrCode = new QRCode(qrContainer, {
+		new QRCode(qrContainer, {
 			text: url,
 			width: 192,
 			height: 192,

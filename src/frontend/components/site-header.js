@@ -1,13 +1,13 @@
 class SiteHeader extends HTMLElement {
 	connectedCallback() {
-		const logoHref = this.getAttribute("logo-href") || "./roulette.html";
-		const radHref = this.getAttribute("rad-href") || "./roulette.html";
+		const logoHref = this.getAttribute("logo-href") || "./index.html";
+		const radHref = this.getAttribute("rad-href") || "./index.html";
 		const helpHref = this.getAttribute("help-href") || "./help.html";
 		const activeNav = this.getAttribute("active-nav") || "";
 		const shareMode = this.getAttribute("share-mode") || "button";
-		const shareHref = this.getAttribute("share-href") || "./roulette.html";
+		const shareHref = this.getAttribute("share-href") || "./index.html";
 		const ctaMode = this.getAttribute("cta-mode") || "button";
-		const ctaHref = this.getAttribute("cta-href") || "./roulette.html";
+		const ctaHref = this.getAttribute("cta-href") || "./index.html";
 		const ctaLabel = this.getAttribute("cta-label") || "Snack toevoegen";
 
 		const radClasses = activeNav === "rad"

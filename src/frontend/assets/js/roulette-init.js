@@ -58,18 +58,18 @@
 
 		state.alleSnacks.push(snack);
 		core.persistSnacks();
-		wheel.addSnackSegment(snack);
+		wheel.addSnackSegment();
 		event.currentTarget.reset();
 		ui.closeSnackFormulier();
 	}
 
-	function handleCanvasPointerDown(event) {
+	function handleWheelPointerDown(event) {
 		if (state.wheelSpinning) {
 			return;
 		}
 
 		const segmentIndex = wheel.getSegmentIndexFromPointer(event.clientX, event.clientY);
-		if (!segmentIndex || !state.theWheel.segments[segmentIndex] || !state.theWheel.segments[segmentIndex].snack) {
+		if (!segmentIndex || !state.alleSnacks[segmentIndex - 1]) {
 			return;
 		}
 
@@ -79,7 +79,7 @@
 	}
 
 	function handleKeyDown(event) {
-		if (event.key === "F5" && state.theWheel) {
+		if (event.key === "F5") {
 			event.preventDefault();
 			wheel.resetAndStart();
 		}
@@ -145,9 +145,9 @@
 			snackFormulier.addEventListener("submit", handleSnackSubmit);
 		}
 
-		const canvas = document.getElementById("canvas");
-		if (canvas) {
-			canvas.addEventListener("pointerdown", handleCanvasPointerDown);
+		const wheelHitArea = document.getElementById("wheel-hit-area");
+		if (wheelHitArea) {
+			wheelHitArea.addEventListener("pointerdown", handleWheelPointerDown);
 		}
 
 		bindOverlayClose("snack-formulier-overlay", ui.closeSnackFormulier);
@@ -163,21 +163,14 @@
 			wheel.stopDrag();
 		});
 		window.addEventListener("scroll", wheel.stopDrag, { passive: true });
-		window.addEventListener("resize", function () {
-			wheel.stopDrag();
-			if (state.theWheel) {
-				state.theWheel.draw();
-			}
-		});
+		window.addEventListener("resize", wheel.stopDrag);
 		document.addEventListener("keydown", handleKeyDown);
 	}
 
 	function init() {
 		core.loadInitialSnacks();
-		if (document.getElementById("canvas")) {
-			wheel.createWheel();
-			core.updateTellers();
-		}
+		wheel.createWheel();
+		core.updateTellers();
 		ui.updateEggsKansWeergave();
 		ui.updateEggsKansBeschikbaarheid();
 		ui.updateShareData();
@@ -186,4 +179,4 @@
 	}
 
 	window.addEventListener("DOMContentLoaded", init);
-})(window);
+}(window));
