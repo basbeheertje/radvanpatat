@@ -57,7 +57,7 @@
 		</script>
 	</head>
 	<body class="changelog-page bg-background text-on-background min-h-screen flex flex-col selection:bg-primary-container">
-		<!-- Generated from CHANGELOG.md by scripts/generate-changelog-html.mjs -->
+		<!-- Generated from GitHub releases by scripts/generate-changelog.mjs -->
 		<site-header
 			active-nav=""
 			cta-href="./index.html"
@@ -74,31 +74,37 @@
 				<div class="changelog-hero__copy">
 					<p class="changelog-hero__eyebrow">Keukenlogboek van het Rad van Patat</p>
 					<h1 class="font-headline-xl text-headline-xl text-primary">Wat is er nieuw?</h1>
-					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">Deze changelog houdt de belangrijkste zichtbare en onderhoudsrelevante wijzigingen van Rad van Patat bij.</p>
+					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">Alle belangrijke wijzigingen per gepubliceerde versie.</p>
 				</div>
 				<div class="changelog-hero__stats" aria-label="Changelog samenvatting">
 					<div class="changelog-stat-card">
 						<span class="material-symbols-outlined text-primary text-[30px]" aria-hidden="true">history</span>
-						<strong>1</strong>
-						<span>release zichtbaar</span>
+						<strong>3</strong>
+						<span>releases zichtbaar</span>
 					</div>
 					<div class="changelog-stat-card">
 						<span class="material-symbols-outlined text-secondary text-[30px]" aria-hidden="true">bolt</span>
-						<strong>4</strong>
+						<strong>27</strong>
 						<span>opgenomen wijzigingen</span>
 					</div>
 					<div class="changelog-stat-card">
 						<span class="material-symbols-outlined text-primary text-[30px]" aria-hidden="true">event</span>
-						<strong>Onuitgebracht</strong>
+						<strong>1.0.3</strong>
 						<span>23 juli 2026</span>
 					</div>
 				</div>
 			</section>
 
 			<section aria-label="Tijdlijn van updates" class="changelog-timeline">
-								<changelog-entry data-date="2026-07-23" data-label="Onuitgebracht" data-title="Versie Onuitgebracht" data-tone="featured">
-					<script class="changelog-entry-data" type="application/json">{"summary":"Deze versie bundelt de eerste publieke changelog van de frontend en de tooling om die voortaan vanuit markdown te onderhouden.","categories":[{"title":"Toegevoegd","items":["Een aparte changelogpagina in `src/frontend` die dezelfde header, footer en brandingcomponenten gebruikt als de rest van de site.","Een herbruikbaar changelog-artikelcomponent waarmee releases consequent en zonder duplicatie worden weergegeven.","Een handmatig script toegevoegd waarmee `src/frontend/changelog.html` vanuit `CHANGELOG.md` wordt gegenereerd."]},{"title":"Gewijzigd","items":["De changelog-skill dwingt nu af dat betekenisvolle wijzigingen in zowel `CHANGELOG.md` als het bijbehorende artikel in `src/frontend/changelog.html` terechtkomen."]}]}</script>
-				</changelog-entry>
+		<changelog-entry data-date="2026-07-23" data-label="1.0.3" data-title="Versie Roadmap" data-tone="featured">
+			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Roadmap;"]}]}</script>
+		</changelog-entry>
+		<changelog-entry data-date="2026-07-23" data-label="1.0.2" data-title="Versie Added changelog page" data-tone="default">
+			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Changelog page"]}]}</script>
+		</changelog-entry>
+		<changelog-entry data-date="2026-07-23" data-label="1.0.0" data-title="Versie Main version" data-tone="default">
+			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: New design for the spinningwheel;","Added: An header with menu items;","Added: An Logo to the header;","Added: An build by floating button;","Added: An build by footer;","Added: An favicon;","Added: An Share your list spinningwheel;","Added: Question about \"Is het friet of patat\";","Added: Toasts;","Fixed: Duplicate snacknames;","Added: Help page;","Added: Custom Bamischijf image;","Added: Custom Berenklauw image;","Added: Custom Bitterbal image;","Added: Custom Frikandel image;","Added: Custom Kaassoufle image;","Added: Custom Kipcorn image;","Added: Custom: Kipnuggets image;","Added: Custom Kroket image;","Added: Custom Loempia image;","Added: Custom Loempidel image;","Added: Custom Mexicano image;","Added: Custom Nasischijf image;","Added: Custom Satekroket image;","Added: Custom Viandel image;"]}]}</script>
+		</changelog-entry>
 			</section>
 
 			<section class="changelog-cta">

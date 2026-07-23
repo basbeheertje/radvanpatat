@@ -1,17 +1,48 @@
 # Changelog
 
-Deze changelog houdt de belangrijkste zichtbare en onderhoudsrelevante wijzigingen van Rad van Patat bij.
+Alle belangrijke wijzigingen per gepubliceerde versie.
 
-## [Onuitgebracht] - 2026-07-23
+## [1.0.3] - 2026-07-23
 
-Deze versie bundelt de eerste publieke changelog van de frontend en de tooling om die voortaan vanuit markdown te onderhouden.
-
-### Toegevoegd
-
-- Een aparte changelogpagina in `src/frontend` die dezelfde header, footer en brandingcomponenten gebruikt als de rest van de site.
-- Een herbruikbaar changelog-artikelcomponent waarmee releases consequent en zonder duplicatie worden weergegeven.
-- Een handmatig script toegevoegd waarmee `src/frontend/changelog.html` vanuit `CHANGELOG.md` wordt gegenereerd.
+Geen wijzigingen beschreven.
 
 ### Gewijzigd
+- Added: Roadmap;
 
-- De changelog-skill dwingt nu af dat betekenisvolle wijzigingen in zowel `CHANGELOG.md` als het bijbehorende artikel in `src/frontend/changelog.html` terechtkomen.
+## [1.0.2] - 2026-07-23
+
+Geen wijzigingen beschreven.
+
+### Gewijzigd
+- Added: Changelog page
+
+## [1.0.0] - 2026-07-23
+
+Geen wijzigingen beschreven.
+
+### Gewijzigd
+- Added: New design for the spinningwheel;
+- Added: An header with menu items;
+- Added: An Logo to the header;
+- Added: An build by floating button;
+- Added: An build by footer;
+- Added: An favicon;
+- Added: An Share your list spinningwheel;
+- Added: Question about "Is het friet of patat";
+- Added: Toasts;
+- Fixed: Duplicate snacknames;
+- Added: Help page;
+- Added: Custom Bamischijf image;
+- Added: Custom Berenklauw image;
+- Added: Custom Bitterbal image;
+- Added: Custom Frikandel image;
+- Added: Custom Kaassoufle image;
+- Added: Custom Kipcorn image;
+- Added: Custom: Kipnuggets image;
+- Added: Custom Kroket image;
+- Added: Custom Loempia image;
+- Added: Custom Loempidel image;
+- Added: Custom Mexicano image;
+- Added: Custom Nasischijf image;
+- Added: Custom Satekroket image;
+- Added: Custom Viandel image;
