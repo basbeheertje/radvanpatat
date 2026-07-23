@@ -74,11 +74,11 @@
 
 	function updateShareButtons(url) {
 		const encodedUrl = encodeURIComponent(url);
-		const bericht = encodeURIComponent("Draai aan dit Snack-Rad!");
+		const bericht = encodeURIComponent("Draai aan dit Rad van Patat!");
 		document.getElementById("share-facebook-knop").href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-		document.getElementById("share-whatsapp-knop").href = `https://wa.me/?text=${encodeURIComponent(`Draai aan dit Snack-Rad! ${url}`)}`;
+		document.getElementById("share-whatsapp-knop").href = `https://wa.me/?text=${encodeURIComponent(`Draai aan dit Rad van Patat! ${url}`)}`;
 		document.getElementById("share-x-knop").href = `https://x.com/intent/post?text=${bericht}&url=${encodedUrl}`;
-		document.getElementById("share-email-knop").href = `mailto:?subject=${encodeURIComponent("Mijn Snack-Rad")}&body=${encodeURIComponent(`Open dit Snack-Rad: ${url}`)}`;
+		document.getElementById("share-email-knop").href = `mailto:?subject=${encodeURIComponent("Mijn Rad van Patat")}&body=${encodeURIComponent(`Open dit Rad van Patat: ${url}`)}`;
 	}
 
 	function updateShareData() {
