@@ -234,6 +234,16 @@
 	}
 
 	function renderCenter(group) {
+		const clipPathId = "wheel-center-favicon-clip";
+		const definitions = getSvgNode("defs");
+		const clipPath = getSvgNode("clipPath", { id: clipPathId });
+		clipPath.appendChild(getSvgNode("circle", {
+			cx: design.center,
+			cy: design.center,
+			r: 80
+		}));
+		definitions.appendChild(clipPath);
+
 		group.append(
 			getSvgNode("circle", {
 				cx: design.center,
@@ -256,44 +266,16 @@
 				fill: "#FFE487",
 				stroke: "#21170F",
 				"stroke-width": 4
-			})
-		);
-
-		[-20, -10, -2, 8, 16, 24].forEach(function (angle, index) {
-			group.append(getSvgNode("rect", {
-				x: design.center - 8,
-				y: design.center - 92,
-				width: 16,
-				height: index % 2 === 0 ? 72 : 82,
-				rx: 6,
-				fill: index % 2 === 0 ? "#FFC928" : "#F28C18",
-				stroke: "#21170F",
-				"stroke-width": 4,
-				transform: `rotate(${angle} ${design.center} ${design.center - 18})`
-			}));
-		});
-
-		group.append(
-			getSvgNode("path", {
-				d: "M 285 296 L 355 296 L 336 396 L 304 396 Z",
-				fill: "#FFFFFF",
-				stroke: "#21170F",
-				"stroke-width": 5,
-				"stroke-linejoin": "round"
 			}),
-			getSvgNode("path", {
-				d: "M 318 296 L 355 296 L 336 396 Z",
-				fill: "#F4E3C6",
-				stroke: "#21170F",
-				"stroke-width": 4,
-				"stroke-linejoin": "round"
-			}),
-			getSvgNode("path", {
-				d: "M 292 305 C 302 289 317 294 324 304 C 337 284 356 294 356 308 C 354 323 336 326 324 317 C 315 328 298 325 292 305 Z",
-				fill: "#FFF6D9",
-				stroke: "#21170F",
-				"stroke-width": 4,
-				"stroke-linejoin": "round"
+			definitions,
+			getSvgNode("image", {
+				x: design.center - 80,
+				y: design.center - 80,
+				width: 160,
+				height: 160,
+				href: "./assets/images/brand/favicon.png",
+				"clip-path": `url(#${clipPathId})`,
+				preserveAspectRatio: "xMidYMid slice"
 			})
 		);
 	}
