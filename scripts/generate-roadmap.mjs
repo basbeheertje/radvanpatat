@@ -134,6 +134,18 @@ function inferProgress(milestone) {
 	return Math.round((milestone.closed_issues / totalIssues) * 100);
 }
 
+/**
+ * Roadmap cards represent planned work with an explicit finish horizon. Milestones
+ * without a GitHub due date stay out of the public roadmap so visitors only see
+ * items that the team has actually scheduled.
+ *
+ * @param {{ due_on?: string | null }} milestone
+ * @returns {boolean}
+ */
+function isRoadmapVisibleMilestone(milestone) {
+	return Boolean(milestone?.due_on);
+}
+
 function inferCategory(milestone, metadata, progress) {
 	const configuredCategory = metadata.category.toLowerCase();
 
@@ -241,7 +253,13 @@ async function main() {
 	}
 
 	const milestones = await fetchMilestones(repository, token);
-	const roadmapItems = sortMilestones(milestones.map(normalizeMilestone));
+	// Filter before normalization so every downstream step can assume the public
+	// roadmap only contains milestones with an explicit end date.
+	const roadmapItems = sortMilestones(
+		milestones
+			.filter(isRoadmapVisibleMilestone)
+			.map(normalizeMilestone),
+	);
 	await fs.writeFile(outputPath, createModule(roadmapItems), "utf8");
 
 	console.log(`${roadmapItems.length} roadmap-items gegenereerd.`);

@@ -34,3 +34,5 @@ Werk de roadmap-data handmatig bij vanuit GitHub milestones met:
 ```bash
 GITHUB_REPOSITORY=owner/repo GITHUB_TOKEN=... node scripts/generate-roadmap.mjs
 ```
+
+Alleen milestones met een GitHub-einddatum (`due date`) worden in de publieke roadmap opgenomen.

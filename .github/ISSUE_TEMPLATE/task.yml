@@ -54,24 +54,3 @@ body:
               Eventuele mock-ups, links naar documentatie of andere relevante informatie.
       validations:
           required: false
-
-    - type: dropdown
-      id: priority
-      attributes:
-          label: Prioriteit
-          options:
-              - Laag
-              - Normaal
-              - Hoog
-              - Kritiek
-          default: 1
-
-    - type: dropdown
-      id: impact
-      attributes:
-          label: Impact
-          options:
-              - Klein
-              - Gemiddeld
-              - Groot
-          default: 1
