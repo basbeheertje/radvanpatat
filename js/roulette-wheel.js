@@ -255,6 +255,10 @@
 	}
 
 	function resetWheel() {
+		if (!state.theWheel) {
+			return;
+		}
+
 		state.theWheel.stopAnimation(false);
 		state.theWheel.rotationAngle = 0;
 		state.theWheel.draw();
@@ -262,7 +266,7 @@
 	}
 
 	function startSpin() {
-		if (state.wheelSpinning) {
+		if (state.wheelSpinning || !state.theWheel) {
 			return;
 		}
 
@@ -275,6 +279,10 @@
 	}
 
 	function resetAndStart() {
+		if (!state.theWheel) {
+			return;
+		}
+
 		if (state.spinned) {
 			resetWheel();
 		}
@@ -282,6 +290,10 @@
 	}
 
 	function addSnackSegment(snack) {
+		if (!state.theWheel) {
+			return;
+		}
+
 		state.theWheel.addSegment({
 			fillStyle: config.kleuren[(state.theWheel.numSegments - 1) % config.kleuren.length],
 			strokeStyle: config.randKleuren[(state.theWheel.numSegments - 1) % config.randKleuren.length],

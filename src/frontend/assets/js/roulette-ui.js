@@ -71,7 +71,7 @@
 			return;
 		}
 
-		state.shareQrCode = new QRCode(qrContainer, {
+		new QRCode(qrContainer, {
 			text: url,
 			width: 192,
 			height: 192,
@@ -199,7 +199,7 @@
 		}
 
 		openOverlay("result-modal");
-		core.playSound("sounds/winnaar.mp3");
+		core.playSound("./assets/sounds/winnaar.mp3");
 	}
 
 	function showEasterEggResult(bericht) {
@@ -219,7 +219,7 @@
 		letter.style.display = "flex";
 
 		openOverlay("result-modal");
-		core.playSound("sounds/winnaar.mp3");
+		core.playSound("./assets/sounds/winnaar.mp3");
 	}
 
 	function closeModal() {
