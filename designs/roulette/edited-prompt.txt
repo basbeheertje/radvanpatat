@@ -1,0 +1,101 @@
+Maak in de repository het bestand:
+
+~/workdir/basbeheertje/radvanpatat/designs/roulette/edited.html
+
+Doel:
+Bouw een volledig werkend, zelfstandig HTML-bestand met een interactief “Rad van Patat”-roulettewiel, geïnspireerd op het ronde rad uit het logo van het Rad van Patat te vinden in ~/workdir/basbeheertje/radvanpatat/images/brand/.
+
+Belangrijke technische eisen:
+
+* Maak uitsluitend één bestand: edited.html.
+* Gebruik alleen HTML, CSS en vanilla JavaScript.
+* Gebruik geen externe frameworks, libraries, CDN’s, afbeeldingen of fonts.
+* Het bestand moet direct geopend kunnen worden in een browser.
+* Alle CSS en JavaScript moeten inline in hetzelfde HTML-bestand staan.
+* Bouw het rad met HTML/CSS/SVG of Canvas, waarbij SVG de voorkeur heeft.
+* Zorg dat het rad responsive is en goed werkt op desktop en mobiel.
+* Houd de code overzichtelijk, semantisch en goed becommentarieerd.
+
+Visueel ontwerp:
+
+* Gebruik een warme snackbarstijl.
+* Achtergrond: zacht crème of gebroken wit.
+* Het rad heeft een dikke donkerbruine of bijna zwarte buitenrand.
+* Gebruik afwisselend gele, oranje, rode en lichtgele segmenten.
+* Plaats rondom het rad kleine ronde lampjes.
+* Bovenaan staat een rode aanwijzer.
+* In het midden staat een gestileerde puntzak friet.
+* Gebruik dikke donkere contouren en een speelse cartoonachtige uitstraling.
+* Voeg subtiele schaduwen toe, maar houd het geheel strak en professioneel.
+* Gebruik als kleuren ongeveer:
+    * Donker: #21170F
+    * Geel: #FFC928
+    * Oranje: #F28C18
+    * Rood: #EF3E2F
+    * Lichtgeel: #FFF0B8
+    * Wit: #FFFFFF
+
+Segmenten:
+Maak 8 segmenten met de volgende uitkomsten:
+
+1. Friet speciaal
+2. Friet oorlog
+3. Frikandel
+4. Kroket
+5. Kaassoufflé
+6. Kipcorn
+7. Mexicano
+8. Bitterballen
+
+Gebruik per segment een eenvoudig zelfgetekend pictogram of een emoji. Gebruik geen externe afbeeldingen.
+
+Functionaliteit:
+
+* Toon een grote knop onder het rad met de tekst: DRAAI HET RAD.
+* Bij klikken draait het rad meerdere volledige rondes.
+* Gebruik een vloeiende animatie met vertraging aan het einde.
+* Kies vooraf willekeurig één geldig segment.
+* Zorg dat het geselecteerde segment exact onder de aanwijzer eindigt.
+* Blokkeer opnieuw klikken zolang het rad draait.
+* Toon na afloop duidelijk de uitslag.
+* Gebruik bijvoorbeeld de tekst:
+    Het Rad heeft gesproken: Friet oorlog
+* Voeg een korte confetti-animatie toe na de uitslag.
+* Voeg een knop toe om opnieuw te draaien.
+* Gebruik prefers-reduced-motion om animaties te beperken voor gebruikers die dat ingesteld hebben.
+
+Interactie en toegankelijkheid:
+
+* De draaiknop moet met toetsenbord bedienbaar zijn.
+* Gebruik duidelijke focus-stijlen.
+* Voeg correcte aria-labels toe.
+* Gebruik een aria-live-gebied voor de uitslag.
+* Zorg voor voldoende kleurcontrast.
+* Voeg een tekstuele fallback toe voor gebruikers die het rad niet goed kunnen zien.
+
+Implementatiedetails:
+
+* Bereken de rotatie zo dat elk segment exact op de bovenste aanwijzer kan eindigen.
+* Houd rekening met de segmenthoek van 45 graden.
+* Bewaar de totale rotatie tussen draaibeurten, zodat de animatie logisch blijft doorlopen.
+* Gebruik bij voorkeur een SVG met gegroepeerde segmenten.
+* Laat de segmentlabels meedraaien met het rad.
+* Zorg dat de tekst in ieder segment leesbaar georiënteerd is.
+* Gebruik CSS custom properties voor de belangrijkste kleuren en maten.
+* Vermijd duplicatie in JavaScript.
+* Voeg bovenin een korte comment toe waarin de structuur en rotatielogica worden uitgelegd.
+
+Controleer na het maken:
+
+* Dat edited.html bestaat op het gevraagde pad.
+* Dat het bestand zonder buildstap geopend kan worden.
+* Dat het rad correct draait en stopt.
+* Dat elke uitkomst daadwerkelijk geselecteerd kan worden.
+* Dat meerdere draaibeurten achter elkaar goed werken.
+* Dat er geen fouten in de browserconsole optreden.
+
+Voer de implementatie direct uit en geef na afloop kort aan:
+
+1. welk bestand is aangemaakt;
+2. hoe de rotatieberekening werkt;
+3. hoe ik het lokaal kan openen.
