@@ -300,11 +300,29 @@
 		</div>
 
 		<div class="is-hidden toast-positive" id="eggs-toast" role="status" aria-live="polite"></div>
+		<div aria-hidden="true" class="easter-command-bar is-hidden" id="easter-egg-command-bar">
+			<form aria-label="Easter egg-console" class="easter-command-bar__form" id="easter-egg-command-form">
+				<span class="material-symbols-outlined easter-command-bar__icon" aria-hidden="true">terminal</span>
+				<label class="sr-only" for="easter-egg-command-input">Easter egg-commando</label>
+				<input
+					aria-label="Easter egg-commando"
+					autocomplete="off"
+					id="easter-egg-command-input"
+					placeholder="Typ een commando..."
+					spellcheck="false"
+					type="text"/>
+				<span class="easter-command-bar__hint" aria-hidden="true">Enter</span>
+				<button aria-label="Commandobalk sluiten" id="easter-egg-command-close" type="button">
+					<span class="material-symbols-outlined" aria-hidden="true">close</span>
+				</button>
+			</form>
+		</div>
 		<div class="bottom-opinion-banner-hidden fixed bottom-0 left-0 z-[205] w-full bg-secondary text-white py-3 px-4 text-center font-label-sm text-label-sm shadow-[0_-8px_24px_rgba(188,0,0,0.22)]" id="patat-banner" role="note"></div>
 
 		<script src="./assets/js/roulette-core.js"></script>
 		<script src="./assets/js/roulette-visit-choice.js"></script>
 		<script src="./assets/js/roulette-ui.js"></script>
+		<script src="./assets/js/roulette-easter-eggs.js"></script>
 		<script src="./assets/js/roulette-wheel.js"></script>
 		<script src="./assets/js/roulette-init.js"></script>
 	</body>

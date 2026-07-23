@@ -418,6 +418,245 @@
 	display: none;
 }
 
+.easter-command-bar {
+	position: fixed;
+	right: 1rem;
+	bottom: max(1rem, env(safe-area-inset-bottom));
+	left: 1rem;
+	z-index: 280;
+	display: flex;
+	justify-content: center;
+	pointer-events: none;
+}
+
+.easter-command-bar.is-hidden {
+	display: none;
+}
+
+.easter-command-bar__form {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 0.75rem;
+	width: min(100%, 42rem);
+	padding: 0.65rem 0.75rem 0.65rem 1rem;
+	border: 3px solid #21170f;
+	border-radius: 1.1rem;
+	background: #ffffff;
+	box-shadow: 0 16px 42px rgba(33, 23, 15, 0.28);
+	pointer-events: auto;
+}
+
+.easter-command-bar__icon {
+	color: #7c5800;
+	font-size: 1.6rem;
+}
+
+.easter-command-bar__form input {
+	width: 100%;
+	min-width: 0;
+	padding: 0.75rem 0;
+	border: 0;
+	background: transparent;
+	color: #21170f;
+	font-family: "Space Grotesk", sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	outline: 0;
+	box-shadow: none;
+}
+
+.easter-command-bar__form input:focus {
+	border: 0;
+	outline: 0;
+	box-shadow: none;
+}
+
+.easter-command-bar__form input::placeholder {
+	color: #766b5e;
+	opacity: 1;
+}
+
+.easter-command-bar__hint {
+	padding: 0.4rem 0.55rem;
+	border: 1px solid #cbbda9;
+	border-bottom-width: 3px;
+	border-radius: 0.45rem;
+	background: #f7f3ed;
+	color: #514532;
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.easter-command-bar__form button {
+	display: grid;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: 0;
+	border-radius: 50%;
+	background: #ffdea8;
+	color: #7c5800;
+	place-items: center;
+	transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.easter-command-bar__form button:hover {
+	background: #ffc928;
+	transform: rotate(8deg);
+}
+
+.easter-command-bar__form button:focus-visible {
+	outline: 3px solid #21170f;
+	outline-offset: 2px;
+}
+
+body.easter-command-open #eggs-toast {
+	bottom: 7.5rem;
+}
+
+body.harlem-shake-active {
+	overflow-x: clip;
+}
+
+body.harlem-shake-intro #rad {
+	animation: harlem-shake-solo 180ms ease-in-out infinite;
+	transform-origin: center;
+}
+
+body.harlem-shake-party site-header {
+	animation: harlem-shake-slide 340ms steps(2, end) infinite;
+	transform-origin: center;
+}
+
+body.harlem-shake-party .roulette-content-column > :nth-child(odd) {
+	animation: harlem-shake-tilt 260ms ease-in-out infinite alternate;
+	transform-origin: center;
+}
+
+body.harlem-shake-party .roulette-content-column > :nth-child(even) {
+	animation: harlem-shake-hop 310ms steps(2, end) infinite;
+	transform-origin: center;
+}
+
+body.harlem-shake-party #rad {
+	animation: harlem-shake-wheel 220ms linear infinite alternate;
+	transform-origin: center;
+}
+
+body.harlem-shake-party .roulette-stat-card:nth-child(odd),
+body.harlem-shake-party #snack-toevoegen-knop-desktop,
+body.harlem-shake-party #share-open-knop-mobiel {
+	animation: harlem-shake-hop 240ms ease-in-out infinite alternate;
+}
+
+body.harlem-shake-party .roulette-stat-card:nth-child(even),
+body.harlem-shake-party #snack-toevoegen-knop-mobiel,
+body.harlem-shake-party #spin-knop-mobiel {
+	animation: harlem-shake-tilt 280ms ease-in-out infinite alternate-reverse;
+}
+
+body.harlem-shake-party site-footer-designed-by,
+body.harlem-shake-party branding-sticker {
+	animation: harlem-shake-slide 380ms ease-in-out infinite alternate-reverse;
+	transform-origin: center;
+}
+
+@keyframes harlem-shake-solo {
+	0%,
+	100% {
+		transform: translateX(-0.35rem) rotate(-1.5deg);
+	}
+	50% {
+		transform: translateX(0.35rem) rotate(1.5deg);
+	}
+}
+
+@keyframes harlem-shake-slide {
+	0% {
+		transform: translate(-0.55rem, -0.15rem) rotate(-1deg);
+	}
+	50% {
+		transform: translate(0.65rem, 0.2rem) rotate(1.5deg);
+	}
+	100% {
+		transform: translate(-0.2rem, 0.45rem) rotate(-0.5deg);
+	}
+}
+
+@keyframes harlem-shake-tilt {
+	from {
+		transform: translate(-0.3rem, 0.15rem) rotate(-3deg) scale(0.98);
+	}
+	to {
+		transform: translate(0.35rem, -0.3rem) rotate(3deg) scale(1.02);
+	}
+}
+
+@keyframes harlem-shake-hop {
+	0%,
+	100% {
+		transform: translateY(0) rotate(-1deg);
+	}
+	50% {
+		transform: translateY(-0.8rem) rotate(2deg);
+	}
+}
+
+@keyframes harlem-shake-wheel {
+	from {
+		transform: translate(-0.4rem, 0.35rem) rotate(-2deg) scale(0.99);
+	}
+	to {
+		transform: translate(0.45rem, -0.35rem) rotate(2.5deg) scale(1.01);
+	}
+}
+
+@keyframes harlem-shake-reduced {
+	from {
+		filter: saturate(1);
+		opacity: 0.88;
+	}
+	to {
+		filter: saturate(1.35);
+		opacity: 1;
+	}
+}
+
+@media (max-width: 520px) {
+	.easter-command-bar {
+		right: 0.75rem;
+		left: 0.75rem;
+	}
+
+	.easter-command-bar__form {
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		gap: 0.5rem;
+		padding-left: 0.75rem;
+	}
+
+	.easter-command-bar__hint {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	body.harlem-shake-intro #rad,
+	body.harlem-shake-party site-header,
+	body.harlem-shake-party .roulette-content-column > *,
+	body.harlem-shake-party #rad,
+	body.harlem-shake-party .roulette-stat-card,
+	body.harlem-shake-party #snack-toevoegen-knop-desktop,
+	body.harlem-shake-party #share-open-knop-mobiel,
+	body.harlem-shake-party #snack-toevoegen-knop-mobiel,
+	body.harlem-shake-party #spin-knop-mobiel,
+	body.harlem-shake-party site-footer-designed-by,
+	body.harlem-shake-party branding-sticker {
+		animation: harlem-shake-reduced 450ms ease-in-out infinite alternate;
+		transform: none;
+	}
+}
+
 .bg-blur-backdrop {
 	backdrop-filter: blur(8px);
 	background-color: rgba(28, 27, 27, 0.4);

@@ -34,6 +34,10 @@ Dit bestand documenteert waar we zijn gebleven met de implementatie van de groep
 - `src/frontend/assets/js/order-page.js`: Herstelt de laatste gevalideerde bestelling voor `order.html`.
 - `src/frontend/assets/js/roulette-visit-choice.js`: Isoleert de referrercontrole en de 24-uursregistratie via cookie met localStorage-fallback.
 - `src/frontend/assets/js/roulette-ui.js` en `roulette-init.js`: Tonen de dagelijkse keuze vóór de bestaande friet/patat-vraag en sturen groepsbezoekers door naar `group.html`.
+- `src/frontend/assets/js/roulette-easter-eggs.js`: Uitbreidbaar commandoregister voor geactiveerde easter eggs; `shake` voert een Harlem Shake in twee fasen uit met een lokaal gesynthetiseerde Web Audio-beat. Beeld en geluid blijven actief tot expliciete opruiming.
+- `src/frontend/assets/js/roulette-init.js`: Opent de easter-eggconsole met `Shift+C`, verwerkt het commandformulier, blokkeert commandotoegang wanneer `eggs` niet actief is en stopt de volledige Harlem Shake met Escape.
+- `src/frontend/index.html` en `assets/css/default.css`: Toegankelijke commandobalk onderin en afzonderlijke dansritmes voor rad, header, content, kaarten en branding.
+- `src/frontend/help.html`: Documenteert de nieuwe easter-eggconsole en het eerste commando.
 - `src/frontend/components/welcome-intro.js`: Zelfstandig openingscomponent met het officiële lokale De Code Kas-woordmerk op de oorspronkelijke vaste hoogte van 120px en de exacte rechts-naar-midden rembeweging uit `designs/welcome/welcome.html`. Pas nadat dit logo stilstaat begint de botsingsanimatie met het transparante Rad van Patat-logo. Bevat daarnaast een reduced-motion-variant en een sitebrede cookie van één uur.
 - `src/frontend/assets/images/brand/logo-de-code-kas.png`: Publiceerbare kopie van het officiële woordmerk uit `images/brand/logo-de-code-kas.png`.
 - `src/frontend/assets/images/brand/rad-van-patat-logo-transparent.png`: Publiceerbare transparante logovariant voor de openingsintro.
@@ -44,6 +48,7 @@ Dit bestand documenteert waar we zijn gebleven met de implementatie van de groep
 - `tests/roulette-wheel.test.mjs`: Regressietest toegevoegd voor browsers die `SVGElement.animate()` aanbieden maar SVG-transform-keyframes weigeren en voor hergebruik zonder `#snack-drag-ghost`.
 - `tests/visit-choice.test.mjs`: Dekt interne en externe referrers, de rollende 24-uursperiode en beide opslagvormen af.
 - `tests/welcome-intro.test.mjs`: Dekt de uurlijkse zichtbaarheid, cookie-attributen en de cookieloze `localhost`-ontwikkelmodus van de openingsintro af.
+- `tests/easter-eggs.test.mjs`: Dekt commandonormalisatie, activatiebeveiliging, `shake`-registratie en volledige effectopruiming af.
 
 ### Backend (Yii Applicatie / PHP)
 - Geen backendwijzigingen; de volledige flow blijft statisch en browser-lokaal.
@@ -66,6 +71,8 @@ Dit bestand documenteert waar we zijn gebleven met de implementatie van de groep
 - [2026-07-23] (AI): fix(frontend): oorspronkelijke invliegrichting, logogrootte en sequentie uit welcome.html hersteld
 - [2026-07-23] (AI): style(frontend): transparant Rad van Patat-logo in de openingsintro toegepast
 - [2026-07-23] (AI): style(frontend): afsluitende De Code Kas-creditregel uit de intro verwijderd
+- [2026-07-23] (AI): feat(easter-eggs): Shift+C-console en Harlem Shake-commando toegevoegd
+- [2026-07-23] (AI): feat(easter-eggs): doorlopende gesynthetiseerde beat en stoppen via Escape toegevoegd
 
 ---
 
