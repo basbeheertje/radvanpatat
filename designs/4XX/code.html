@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>De Code Kas | Error</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Be+Vietnam+Pro:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-container": "#fffbff",
+            "on-secondary-fixed-variant": "#930000",
+            "on-primary-fixed-variant": "#5e4200",
+            "tertiary-fixed": "#e2e2e2",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "on-tertiary-fixed-variant": "#454747",
+            "on-primary-fixed": "#271900",
+            "background": "#fcf9f8",
+            "tertiary": "#5d5f5f",
+            "on-primary": "#ffffff",
+            "inverse-on-surface": "#f3f0ef",
+            "primary-fixed": "#ffdea8",
+            "on-tertiary-container": "#505252",
+            "surface-bright": "#fcf9f8",
+            "secondary-fixed-dim": "#ffb4a8",
+            "outline-variant": "#d5c4ab",
+            "on-secondary": "#ffffff",
+            "surface-container-low": "#f6f3f2",
+            "secondary": "#bc0000",
+            "inverse-primary": "#ffba20",
+            "on-background": "#1c1b1b",
+            "primary-container": "#ffb800",
+            "error": "#ba1a1a",
+            "on-primary-container": "#6b4c00",
+            "secondary-container": "#e41f13",
+            "on-secondary-fixed": "#410000",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-surface": "#1c1b1b",
+            "primary": "#7c5800",
+            "surface-variant": "#e5e2e1",
+            "outline": "#837560",
+            "on-surface-variant": "#514532",
+            "primary-fixed-dim": "#ffba20",
+            "surface-container-lowest": "#ffffff",
+            "inverse-surface": "#313030",
+            "error-container": "#ffdad6",
+            "tertiary-container": "#c4c5c5",
+            "surface-container-highest": "#e5e2e1",
+            "surface": "#fcf9f8",
+            "surface-container": "#f0eded",
+            "on-error": "#ffffff",
+            "surface-tint": "#7c5800",
+            "surface-dim": "#dcd9d9",
+            "secondary-fixed": "#ffdad4",
+            "surface-container-high": "#eae7e7",
+            "on-tertiary-fixed": "#1a1c1c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xs": "4px",
+            "lg": "40px",
+            "gutter": "16px",
+            "margin-mobile": "20px",
+            "sm": "12px",
+            "md": "24px",
+            "base": "8px",
+            "xl": "64px",
+            "margin-desktop": "120px"
+          },
+          "fontFamily": {
+            "body-md": ["Be Vietnam Pro"],
+            "label-sm": ["Space Grotesk"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-lg": ["Be Vietnam Pro"],
+            "label-md": ["Space Grotesk"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-shadow {
+      box-shadow: 0 4px 12px rgba(255, 184, 0, 0.08);
+    }
+    .snack-active {
+      box-shadow: 0 8px 24px rgba(255, 184, 0, 0.15);
+      transform: translateY(-4px);
+    }
+    .sticker-border {
+      border: 2px solid #7c5800;
+    }
+    .ketchup-badge {
+      background-color: #bc0000;
+      color: white;
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 20s linear infinite;
+    }
+    .fry-shake {
+      animation: shake 0.5s ease-in-out infinite alternate;
+    }
+    @keyframes shake {
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
+    }
+  </style>
+</head>
+<body class="bg-background font-body-md text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-inverse-surface shadow-[0_4px_12px_rgba(255,184,0,0.08)] sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-base">
+<span class="font-headline-md text-headline-md font-black text-secondary dark:text-secondary-fixed">De Code Kas</span>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="help_outline">help_outline</button>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="account_circle">account_circle</button>
+</div>
+</div>
+</header>
+<main class="min-h-[calc(100vh-64px)] px-margin-mobile md:px-margin-desktop py-xl">
+<div class="max-w-7xl mx-auto">
+<!-- Error Section: Priority 403 Forbidden -->
+<section class="mb-xl text-center md:text-left" id="error-403">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg items-center">
+<div class="md:col-span-7 space-y-md">
+<div class="inline-flex items-center gap-xs px-md py-xs bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>403 - TOEGANG GEWEIGERD</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-secondary">Geen toegang!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+              Je hebt de geheime saus-recepten nog niet verdiend. Deze keuken is strikt verboden voor honden en niet-snackers. Kom terug als je honger hebt!
+            </p>
+<div class="flex flex-wrap gap-md justify-center md:justify-start pt-md">
+<a class="bg-primary-container text-primary font-bold px-xl py-md rounded-xl sticker-border hover:opacity-90 active:scale-95 transition-all flex items-center gap-base" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+                Ga naar het menu
+              </a>
+<a class="bg-surface-container-lowest text-secondary border-2 border-secondary font-bold px-xl py-md rounded-xl hover:bg-secondary-fixed transition-all flex items-center gap-base" href="#">
+<span class="material-symbols-outlined">home</span>
+                Terug naar Start
+              </a>
+</div>
+</div>
+<div class="md:col-span-5 relative">
+<div class="absolute -top-12 -left-12 w-24 h-24 bg-primary-fixed rounded-full opacity-20 blur-3xl"></div>
+<div class="relative z-10 p-md bg-surface-container-low rounded-[40px] border-4 border-primary/10 shadow-2xl overflow-hidden group">
+<img alt="Rad van Patat Logo" class="w-full h-auto rounded-[32px] group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl4azhpRrWidW7NYezKEYI3AbzxmeuJifhoBaaAA_pRVYgzLqnsP5il4hFP71OWJMQx0NvGZJF9b7QFuzAfrEuoBZ-36nTEo4qkKAfrP7q6KNBq2FxvldTVIo6iJjtnN5ylJj_XgeaiotJubGEJHvGAhz4H9Wi3PToZ4ndPkwfN0w_CxztfQixIzW3U_g7satBFTG-HTk6vUPrUB-V751SVQi_Y1xtI-82F68MilZMHlGmxEoJsbA1T3MmJ6vrnpAFHJU"/>
+<div class="absolute top-md right-md ketchup-badge rounded-full w-20 h-20 flex flex-col items-center justify-center -rotate-12 shadow-lg">
+<span class="font-label-sm text-label-sm leading-tight">ECHTE</span>
+<span class="font-headline-md text-headline-md leading-tight">403</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid for 400 and 401 -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-lg pt-xl border-t-2 border-primary/5">
+<!-- 400 Bad Request -->
+<div class="bg-surface-container-high rounded-[32px] p-md md:p-xl flex flex-col gap-md custom-shadow hover:snack-active transition-all duration-300">
+<div class="w-16 h-16 bg-error-container text-error rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1">shopping_bag</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">400 - Foute Bestelling</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">
+              Oeps! Onze frituur begrijpt je order niet. Het lijkt erop dat je een milkshake bestelde maar een frikandel typt. Probeer het opnieuw!
+            </p>
+</div>
+<div class="mt-auto pt-md flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary bg-primary-fixed/30 px-md py-xs rounded-full">Probeer Bestellen</span>
+<button class="material-symbols-outlined text-secondary font-bold" data-icon="arrow_forward">arrow_forward</button>
+</div>
+</div>
+<!-- 401 Unauthorized -->
+<div class="bg-surface-container-high rounded-[32px] p-md md:p-xl flex flex-col gap-md custom-shadow hover:snack-active transition-all duration-300">
+<div class="w-16 h-16 bg-primary-fixed text-primary rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1">key</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">401 - Geen Keukentoegang</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">
+              Stop daar! Alleen geautoriseerde snack-chefs mogen hier komen. Log in om te bewijzen dat jij die goudgele frietjes waard bent.
+            </p>
+</div>
+<div class="mt-auto pt-md flex items-center justify-between">
+<button class="bg-primary text-on-primary px-lg py-sm rounded-xl font-bold sticker-border hover:opacity-90 transition-all">Log in</button>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Inloggen verplicht</span>
+</div>
+</div>
+</section>
+<!-- Decorative Fry Pattern Section -->
+<section class="mt-xl py-lg bg-surface-container-lowest rounded-[48px] relative overflow-hidden border border-primary/10">
+<div class="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none animate-spin-slow">
+<svg class="fill-primary" viewbox="0 0 100 100">
+<path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"></path>
+</svg>
+</div>
+<div class="relative z-10 px-md text-center flex flex-col items-center gap-md">
+<div class="flex gap-xs fry-shake">
+<div class="w-3 h-12 bg-primary-container rounded-full"></div>
+<div class="w-3 h-16 bg-primary-container rounded-full mt-2"></div>
+<div class="w-3 h-14 bg-primary-container rounded-full -mt-1"></div>
+</div>
+<h3 class="font-headline-md text-headline-md">Nog steeds honger?</h3>
+<p class="max-w-md mx-auto text-on-surface-variant">Laat een foutmelding je avond niet verpesten. Onze frietpan staat altijd aan!</p>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface dark:bg-inverse-surface border-t-2 border-primary/10 shadow-[0_-4px_16px_rgba(255,184,0,0.12)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="toys">toys</span>
+<span class="font-label-sm text-label-sm">Wheel</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm">Favorites</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+    // Micro-interaction for hover effects on error cards
+    const cards = document.querySelectorAll('.custom-shadow');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('snack-active');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('snack-active');
+      });
+    });
+
+    // Handle Active State for Nav (Mock)
+    const navItems = document.querySelectorAll('nav div');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navItems.forEach(i => {
+          i.classList.remove('bg-primary-container', 'text-on-primary-container', 'rounded-full', 'px-5', 'py-1');
+          i.classList.add('text-on-surface-variant');
+        });
+        item.classList.add('bg-primary-container', 'text-on-primary-container', 'rounded-full', 'px-5', 'py-1');
+        item.classList.remove('text-on-surface-variant');
+      });
+    });
+  </script>
+</body></html>

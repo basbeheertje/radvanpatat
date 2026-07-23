@@ -1,0 +1,9 @@
+DirectoryIndex index.html
+
+RewriteEngine On
+
+# Keep the canonical wheel URL explicit so shared links and crawlers always end
+# up on the static entry file instead of relying on Apache directory defaults.
+RewriteRule ^$ index.html [R=302,L]
+
+ErrorDocument 404 /404.html
