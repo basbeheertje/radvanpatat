@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Voorkom een rewrite-loop
+RewriteCond %{REQUEST_URI} !^/frontend/
+
+# Herschrijf alle verzoeken intern naar de frontend-map
+RewriteRule ^(.*)$ frontend/$1 [L]
