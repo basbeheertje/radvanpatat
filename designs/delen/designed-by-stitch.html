@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="light" lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Space+Grotesk:wght@500;600&family=Be+Vietnam+Pro:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-blur-backdrop {
+            backdrop-filter: blur(8px);
+            background-color: rgba(28, 27, 27, 0.4);
+        }
+        .snack-card-shadow {
+            box-shadow: 0 4px 20px -4px rgba(255, 184, 0, 0.15);
+        }
+        @keyframes pop-in {
+            0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .animate-pop-in {
+            animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#5e4200",
+                        "background": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-primary-container": "#6b4c00",
+                        "surface-container-high": "#eae7e7",
+                        "secondary-container": "#e41f13",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-bright": "#fcf9f8",
+                        "surface": "#fcf9f8",
+                        "outline": "#837560",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#bc0000",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed-dim": "#ffba20",
+                        "on-tertiary-container": "#505252",
+                        "on-secondary-fixed": "#410000",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#930000",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary-fixed": "#ffdad4",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed": "#271900",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "primary-container": "#ffb800",
+                        "primary": "#7c5800",
+                        "primary-fixed": "#ffdea8",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#5d5f5f",
+                        "surface-container": "#f0eded",
+                        "on-background": "#1c1b1b",
+                        "inverse-primary": "#ffba20",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#514532",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "tertiary-container": "#c4c5c5",
+                        "outline-variant": "#d5c4ab",
+                        "on-surface": "#1c1b1b",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#7c5800",
+                        "inverse-surface": "#313030"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "lg": "40px",
+                        "xs": "4px",
+                        "margin-desktop": "120px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-md": ["Space Grotesk"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen overflow-hidden">
+<!-- Mock Background Dashboard -->
+<div class="fixed inset-0 z-0 overflow-hidden opacity-50 grayscale pointer-events-none">
+<header class="w-full py-base px-margin-desktop flex justify-between items-center bg-surface">
+<div class="font-headline-lg text-headline-lg font-extrabold text-primary">Snack-Rad</div>
+<div class="flex gap-md">
+<div class="w-32 h-4 bg-surface-container rounded-full"></div>
+<div class="w-32 h-4 bg-surface-container rounded-full"></div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto p-md grid grid-cols-12 gap-gutter">
+<div class="col-span-8 aspect-square bg-surface-container rounded-3xl flex items-center justify-center">
+<div class="w-2/3 h-2/3 rounded-full border-8 border-dashed border-outline-variant"></div>
+</div>
+<div class="col-span-4 flex flex-col gap-md">
+<div class="h-64 bg-surface-container rounded-3xl"></div>
+<div class="h-64 bg-surface-container rounded-3xl"></div>
+</div>
+</main>
+</div>
+<!-- Modal Overlay Backdrop -->
+<div class="fixed inset-0 z-50 bg-blur-backdrop flex items-center justify-center p-margin-mobile">
+<!-- Modal Container -->
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-[32px] overflow-hidden snack-card-shadow border-2 border-primary-container animate-pop-in relative">
+<!-- Close Button -->
+<button aria-label="Sluiten" class="absolute top-md right-md p-sm text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[28px]">close</span>
+</button>
+<!-- Decorative Header Accent -->
+<div class="h-2 w-full bg-gradient-to-r from-primary to-secondary"></div>
+<div class="p-md md:p-xl flex flex-col items-center text-center">
+<!-- Title & Description -->
+<h1 class="font-headline-lg text-headline-lg text-primary mb-sm">Deel je Snack-Rad!</h1>
+<p class="font-body-md text-on-surface-variant max-w-xs mb-md">Nodig je vrienden uit om mee te draaien of deel je favoriete lijst.</p>
+<!-- QR Code Section -->
+<div class="relative p-md mb-md">
+<div class="absolute inset-0 border-4 border-dashed border-primary-container rounded-[40px] rotate-3 opacity-30"></div>
+<div class="absolute inset-0 border-4 border-dashed border-secondary-container rounded-[40px] -rotate-3 opacity-20"></div>
+<div class="relative bg-white p-sm rounded-3xl shadow-md">
+<img class="w-48 h-48 rounded-xl object-contain" data-alt="A stylized, modern QR code centered on a white background with a small golden snack icon in the center. The QR code uses deep primary colors instead of black, with rounded pixels to maintain a friendly, soft tactile aesthetic. Lighting is bright and crisp, highlighting the clean paper-like texture of the white surrounding border." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBONAs7iifMgltdCgXbH9b5iXUdkQXN_ChyvVHETMcfFbiDRrA5QAX2mix_lvgfIzMra8-WMkXS4IJ6AQJn-erLx4KIBZFBbvvWx8t3r52h16UoME7XHQjzzJ_4EIyF_ugkpaMdEdx0OQDhJsBRfWJrwCGN_EikDCI_2LRX1z_XgP56qeKdHu7PrgRo48RSLB5CGQMx0NCy672Y16LiMkIhF-ZuqtbVnbaIm_UEzw9rQVzYA_efYKPnxw"/>
+</div>
+</div>
+<!-- URL Copy Section -->
+<div class="w-full flex flex-col gap-sm mb-md">
+<label class="font-label-md text-on-surface-variant text-left ml-xs">Kopieer de link</label>
+<div class="flex items-center gap-xs p-xs bg-surface-container-low rounded-2xl border-2 border-outline-variant focus-within:border-primary-container transition-all">
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md px-sm text-on-surface" readonly="" type="text" value="snackrad.app/mijn-friet-feest"/>
+<button class="bg-primary text-on-primary px-md py-sm rounded-xl font-label-md flex items-center gap-xs hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap shadow-sm border-b-4 border-primary-container" onclick="copyLink()">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+                            Kopieer Link
+                        </button>
+</div>
+</div>
+<!-- Social Sharing -->
+<div class="w-full flex items-center gap-md py-sm">
+<div class="flex-1 h-px bg-outline-variant"></div>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Deel direct via</span>
+<div class="flex-1 h-px bg-outline-variant"></div>
+</div>
+<div class="flex gap-md mt-sm">
+<!-- WhatsApp -->
+<button class="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md group">
+<span class="material-symbols-outlined text-[24px]">chat</span>
+<span class="sr-only">WhatsApp</span>
+</button>
+<!-- Telegram -->
+<button class="w-14 h-14 rounded-full bg-[#0088cc] text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[24px]">send</span>
+<span class="sr-only">Telegram</span>
+</button>
+<!-- Mail -->
+<button class="w-14 h-14 rounded-full bg-secondary text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[24px]">mail</span>
+<span class="sr-only">Mail</span>
+</button>
+</div>
+<!-- Footer Action -->
+<button class="mt-xl font-label-md text-on-surface-variant hover:text-secondary underline underline-offset-8 decoration-2 decoration-primary-container transition-all active:scale-95">
+                    Sluiten
+                </button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Container -->
+<div class="fixed bottom-md left-1/2 -translate-x-1/2 z-[100] translate-y-20 opacity-0 transition-all duration-500 pointer-events-none" id="toast">
+<div class="bg-inverse-surface text-inverse-on-surface px-xl py-md rounded-full shadow-lg font-label-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+            Link gekopieerd naar klembord!
+        </div>
+</div>
+<script>
+        function copyLink() {
+            const link = "snackrad.app/mijn-friet-feest";
+            navigator.clipboard.writeText(link).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+                
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                }, 2000);
+            });
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                console.log('Close modal logic triggered');
+            }
+        });
+    </script>
+</body></html>

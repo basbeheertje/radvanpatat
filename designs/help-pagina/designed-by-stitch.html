@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Snack-Rad | Help &amp; Support</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500&amp;family=Space+Grotesk:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#313030",
+                        "primary-fixed": "#ffdea8",
+                        "on-primary-container": "#6b4c00",
+                        "surface-dim": "#dcd9d9",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary-fixed-dim": "#ffba20",
+                        "secondary-fixed": "#ffdad4",
+                        "surface-variant": "#e5e2e1",
+                        "on-secondary-container": "#fffbff",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#ffb800",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface": "#fcf9f8",
+                        "surface-tint": "#7c5800",
+                        "on-secondary-fixed-variant": "#930000",
+                        "secondary": "#bc0000",
+                        "on-surface-variant": "#514532",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "on-background": "#1c1b1b",
+                        "inverse-primary": "#ffba20",
+                        "tertiary-container": "#c4c5c5",
+                        "on-tertiary-container": "#505252",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container": "#f0eded",
+                        "on-surface": "#1c1b1b",
+                        "on-primary-fixed-variant": "#5e4200",
+                        "on-error": "#ffffff",
+                        "primary": "#7c5800",
+                        "outline-variant": "#d5c4ab",
+                        "outline": "#837560",
+                        "tertiary": "#5d5f5f",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed": "#271900",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#e41f13",
+                        "on-secondary-fixed": "#410000",
+                        "surface-container-highest": "#e5e2e1",
+                        "inverse-on-surface": "#f3f0ef",
+                        "background": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "120px",
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-md": ["Space Grotesk"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .keyboard-key {
+            box-shadow: 0 4px 0 #837560;
+            transition: all 0.1s ease;
+        }
+        .keyboard-key:active {
+            box-shadow: 0 1px 0 #837560;
+            transform: translateY(3px);
+        }
+        .bento-card {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-8px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-50 shadow-[0_4px_20px_-2px_rgba(255,184,0,0.08)]">
+<nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto h-20">
+<div class="flex items-center gap-sm">
+<img alt="Snack-Rad Logo" class="h-12 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCimCUDLfKHB0WO8pKb5Gf9Hat8i8th94S-xsJ39Tvu9Vdfkpk0ulWR0R6RQ3mRXet8FOTMli9v4FA_I0fHX52tbANv-XwfIblUabwAxjohmziwYyO253lP_RUTSK5tVFCOrn21N2hT-Oqh6wR5-jvC7xFLuz6Q2sKGGaAi3xxsiXNjj_-_iksqzudQ5RfKoQRM4xvFtaJmARKoGqLV3zOI54DS1lKMuPO7wEp0VtQ5gq2yD_T2iRCQMYOBQBU_t1SGpcg"/>
+<span class="font-headline-lg text-headline-lg font-black text-primary">Snack-Rad</span>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Wheel</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Lists</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Settings</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Help</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="hidden sm:flex items-center gap-xs px-md py-sm bg-primary-container text-on-primary-container rounded-full font-label-md hover:bg-primary-container/90 transition-all active:scale-95 border-2 border-primary">
+<span class="material-symbols-outlined text-[20px]">help_center</span>
+                    Support
+                </button>
+<button class="md:hidden p-sm text-primary">
+<span class="material-symbols-outlined text-[32px]">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Hero Section -->
+<section class="mb-xl text-center md:text-left flex flex-col md:flex-row items-center gap-lg">
+<div class="flex-1">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-md">
+                    Hulp nodig? <br/>
+<span class="text-secondary">We staan voor je klaar!</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    Heb je een vraag over het snack-rad, zoek je naar die ene verborgen frikandel-easter egg of heb je hulp nodig bij je instellingen? Geen zorgen, we helpen je zo weer op weg.
+                </p>
+</div>
+<div class="flex-1 relative">
+<div class="absolute -inset-4 bg-primary-container/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+<img class="w-full max-w-md mx-auto drop-shadow-2xl" data-alt="A stylized, high-quality 3D illustration of a friendly Dutch snack bar counter with warm golden lighting and cartoonish snacks like fries and a croquette wearing little headsets, reflecting a modern-tactile aesthetic with deep fryer gold and mayo white accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR8wbHYAnvUDDgFowgK9hhtWyuBItnWtP63XDZwf6FoxhuZCpsrtxy43QA3Ceerv0wpYIjpOz9oTmwr7qWmq-c0ZWk-eL7WpkvGKCILsFTK_EWU2diiGPitYBybE-Zl1T_YblF0ljnLFyB0ZQiDJ3D2svO86PSlgQOxtBIy8vo6-mF0c7JMzxEOTSm8lGGDLglqypUcAguLvF5vfRIM7sf6R8brDBPKPAQq2yMYB87r4qCi0Q2OQzrCw"/>
+</div>
+</section>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Shortcut Section -->
+<div class="md:col-span-7 bg-surface-container-low p-lg rounded-xl border-2 border-outline-variant bento-card shadow-[0_4px_20px_-2px_rgba(255,184,0,0.08)]">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-primary text-[32px]">keyboard</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Keyboard Shortcuts</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="flex items-center justify-between p-md bg-white rounded-lg border border-outline-variant/30">
+<span class="font-body-md text-on-surface-variant">Spin het Rad</span>
+<kbd class="keyboard-key bg-surface-container-high px-md py-xs rounded border border-outline font-label-md text-primary">[Spatie]</kbd>
+</div>
+<div class="flex items-center justify-between p-md bg-white rounded-lg border border-outline-variant/30">
+<span class="font-body-md text-on-surface-variant">Naar Mijn Lijsten</span>
+<kbd class="keyboard-key bg-surface-container-high px-md py-xs rounded border border-outline font-label-md text-primary">[L]</kbd>
+</div>
+<div class="flex items-center justify-between p-md bg-white rounded-lg border border-outline-variant/30">
+<span class="font-body-md text-on-surface-variant">Instellingen openen</span>
+<kbd class="keyboard-key bg-surface-container-high px-md py-xs rounded border border-outline font-label-md text-primary">[I]</kbd>
+</div>
+<div class="flex items-center justify-between p-md bg-white rounded-lg border border-outline-variant/30">
+<span class="font-body-md text-on-surface-variant">Deze help-pagina</span>
+<kbd class="keyboard-key bg-surface-container-high px-md py-xs rounded border border-outline font-label-md text-primary">[?]</kbd>
+</div>
+</div>
+</div>
+<!-- Support / Contact Section -->
+<div class="md:col-span-5 bg-primary-container p-lg rounded-xl border-2 border-primary bento-card flex flex-col justify-between shadow-[0_8px_30px_rgb(255,184,0,0.2)]">
+<div>
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-on-primary-container text-[32px]">contact_support</span>
+<h2 class="font-headline-md text-headline-md text-on-primary-container">Contact</h2>
+</div>
+<p class="font-body-md text-on-primary-container/80 mb-lg">
+                        Problemen of vragen? Neem contact op met het team van <strong class="text-on-primary-container">De Code Kas</strong>. We reageren meestal sneller dan je kroket kan afkoelen!
+                    </p>
+</div>
+<div class="space-y-sm">
+<a class="flex items-center gap-sm p-md bg-white/90 rounded-lg font-label-md text-primary hover:bg-white transition-colors group" href="mailto:support@decodekas.nl">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">mail</span>
+                        support@decodekas.nl
+                    </a>
+<a class="flex items-center gap-sm p-md bg-white/90 rounded-lg font-label-md text-primary hover:bg-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">public</span>
+                        Bezoek De Code Kas
+                    </a>
+</div>
+</div>
+<!-- FAQ Section -->
+<div class="md:col-span-12 bg-surface-container p-lg rounded-xl border-2 border-outline-variant bento-card">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-secondary text-[32px]">quiz</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Veelgestelde Vragen</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-sm">
+<details class="group bg-white rounded-xl border border-outline-variant/40 overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-label-md text-on-surface">Hoe voeg ik eigen snacks toe?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-body-md text-on-surface-variant border-t border-outline-variant/10">
+                                Ga naar het menu "Lijsten" en klik op de "Nieuwe Snack" knop. Hier kun je de naam, een afbeelding en de "crispiness factor" invullen.
+                            </div>
+</details>
+<details class="group bg-white rounded-xl border border-outline-variant/40 overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-label-md text-on-surface">Is het rad echt eerlijk?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-body-md text-on-surface-variant border-t border-outline-variant/10">
+                                Jazeker! Onze algoritmes zijn getest door professionele snack-liefhebbers. Elk segment heeft exact evenveel kans, tenzij je de "Extra Mayo" boost activeert!
+                            </div>
+</details>
+</div>
+<div class="space-y-sm">
+<details class="group bg-white rounded-xl border border-outline-variant/40 overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-label-md text-on-surface">Kan ik mijn resultaten delen?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-body-md text-on-surface-variant border-t border-outline-variant/10">
+                                Absoluut. Na elke draai verschijnt er een deel-icoontje waarmee je je snack-keuze direct op WhatsApp of Slack kunt knallen om je vrienden jaloers te maken.
+                            </div>
+</details>
+<details class="group bg-white rounded-xl border border-outline-variant/40 overflow-hidden transition-all duration-300">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-label-md text-on-surface">Werkt de app offline?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-body-md text-on-surface-variant border-t border-outline-variant/10">
+                                Het rad blijft draaien, zelfs zonder internet! Je opgeslagen lijsten zijn offline beschikbaar, zodat snack-stress nooit meer een rol speelt, waar je ook bent.
+                            </div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<section class="mt-xl p-lg rounded-2xl bg-secondary-container text-on-secondary-container flex flex-col md:flex-row items-center justify-between gap-lg relative overflow-hidden">
+<div class="absolute right-0 top-0 opacity-10 pointer-events-none translate-x-1/4 -translate-y-1/4 scale-150">
+<img alt="" class="w-96" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHNP5DLON-pPwTSBfwDtDESZKgivpRt8uLDGgxjiHrcYJf4ys8As7wvWnUKFfGaio2kS8odMvb2cWrpe251hn57y8zxbup47Y1b6XIZ5y0VM69sw5SoYB8lGwAhTtHoEDUuVzut-YywkzJKKGTiLbnFsw2CWe5Ad_QszOaY4m5A56e27BfpqS4zWeUknF5SXo4Xh5EZAipP5t1kPzWOnul3e-ShZ5v82xfx16nj_i3CQgurRzYUfzlmFkkYWK6I5BZf_4"/>
+</div>
+<div class="z-10 text-center md:text-left">
+<h3 class="font-headline-md text-headline-md mb-xs">Nog steeds vastgelopen?</h3>
+<p class="font-body-md opacity-90">Soms is een persoonlijk antwoord het beste. Stuur ons een berichtje!</p>
+</div>
+<button class="z-10 px-xl py-md bg-white text-secondary rounded-full font-headline-md hover:scale-105 active:scale-95 transition-all shadow-xl">
+                Chat met ons
+            </button>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-lg px-margin-mobile md:px-margin-desktop bg-surface-container-highest border-t-2 border-outline-variant flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<div class="font-headline-md text-headline-md text-secondary">De Code Kas</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">© 2024 De Code Kas. Gezelligheid Guaranteed.</div>
+</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Snack Map</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant font-bold text-secondary" href="#">Join the Community</a>
+</div>
+<div class="flex gap-sm">
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-white text-on-surface hover:text-secondary transition-all active:opacity-80">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-white text-on-surface hover:text-secondary transition-all active:opacity-80">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            const keys = {
+                ' ': 'Spatie',
+                'l': 'L',
+                'i': 'I',
+                '?': '?'
+            };
+            const keyText = keys[e.key.toLowerCase()];
+            if (keyText) {
+                const kbd = Array.from(document.querySelectorAll('kbd')).find(k => k.textContent.includes(keyText));
+                if (kbd) {
+                    kbd.style.backgroundColor = '#ffdea8';
+                    kbd.style.transform = 'translateY(3px)';
+                    kbd.style.boxShadow = '0 1px 0 #837560';
+                    setTimeout(() => {
+                        kbd.style.backgroundColor = '';
+                        kbd.style.transform = '';
+                        kbd.style.boxShadow = '';
+                    }, 150);
+                }
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Documentation"
+  short_description: "Add rationale-focused comments to code changes"
+  default_prompt: "Document changed code with comments explaining intent, constraints, state transitions, and non-obvious behavior."

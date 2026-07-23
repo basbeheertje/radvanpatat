@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be+Vietnam+Pro:wght@400;500&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .snack-card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(255, 184, 0, 0.12);
+        }
+        .snack-card-hover:hover {
+            box-shadow: 0 12px 24px -4px rgba(255, 184, 0, 0.18);
+            transform: translateY(-4px);
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #dcd9d9; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#930000",
+                        "surface-variant": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "primary-container": "#ffb800",
+                        "surface-container-high": "#eae7e7",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#271900",
+                        "surface-bright": "#fcf9f8",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#313030",
+                        "inverse-primary": "#ffba20",
+                        "on-tertiary-container": "#505252",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#bc0000",
+                        "outline": "#837560",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#5e4200",
+                        "on-surface-variant": "#514532",
+                        "tertiary-container": "#c4c5c5",
+                        "primary-fixed-dim": "#ffba20",
+                        "on-primary-container": "#6b4c00",
+                        "surface-container": "#f0eded",
+                        "outline-variant": "#d5c4ab",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#410000",
+                        "on-surface": "#1c1b1b",
+                        "secondary-container": "#e41f13",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "primary": "#7c5800",
+                        "surface-dim": "#dcd9d9",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-tint": "#7c5800",
+                        "secondary-fixed": "#ffdad4",
+                        "primary-fixed": "#ffdea8",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#5d5f5f",
+                        "surface": "#fcf9f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "16px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "120px",
+                        "xl": "64px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-md": ["Space Grotesk"],
+                        "label-sm": ["Space Grotesk"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-inverse-surface w-full sticky top-0 z-40 border-b-2 border-primary dark:border-primary-fixed-dim shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-mobile py-xs max-w-7xl mx-auto h-16">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-3xl" data-icon="fastfood">fastfood</span>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim font-black tracking-tight">Snack-Rad</h1>
+</div>
+<button class="transition-all active:scale-95 duration-200 text-on-surface-variant hover:bg-primary-container p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile pt-md pb-32">
+<!-- Header Section -->
+<section class="mb-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-2">Mijn Lijsten</h2>
+<p class="text-on-surface-variant max-w-md">Kies uit je favoriete snack-combinaties of maak een nieuwe lijst aan voor je volgende bezoek.</p>
+</section>
+<!-- Bento Grid Layout for Lists -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Standard List Card (Pre-filled) -->
+<div class="snack-card-shadow snack-card-hover bg-surface-container-lowest rounded-xl p-md flex flex-col justify-between border-2 border-primary-container transition-all cursor-pointer relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" data-icon="restaurant_menu">restaurant_menu</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-primary-container p-sm rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="bg-secondary text-on-secondary px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-wider">Favoriet</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Standaard Snacks</h3>
+<p class="text-on-surface-variant text-body-md">Alle klassiekers van de lokale snackbar in één lijst.</p>
+</div>
+<div class="flex justify-between items-center mt-lg relative z-10">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md text-on-surface-variant">24 Snacks</span>
+</div>
+<button class="transition-all active:scale-90 duration-200 hover:bg-surface-container-high p-2 rounded-full">
+<span class="material-symbols-outlined text-outline" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- List Card 2 -->
+<div class="snack-card-shadow snack-card-hover bg-surface-container-lowest rounded-xl p-md flex flex-col justify-between transition-all cursor-pointer group">
+<div class="relative">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-surface-container p-sm rounded-lg group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container" data-icon="local_fire_department">local_fire_department</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Pittige Party</h3>
+<p class="text-on-surface-variant text-body-md">Scherpe hapjes en vlammetjes voor de durfals.</p>
+</div>
+<div class="flex justify-between items-center mt-lg">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md text-on-surface-variant">12 Snacks</span>
+</div>
+<button class="transition-all active:scale-90 duration-200 hover:bg-surface-container-high p-2 rounded-full">
+<span class="material-symbols-outlined text-outline" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- List Card 3 -->
+<div class="snack-card-shadow snack-card-hover bg-surface-container-lowest rounded-xl p-md flex flex-col justify-between transition-all cursor-pointer group">
+<div class="relative">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-surface-container p-sm rounded-lg group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container" data-icon="eco">eco</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Vega Vibes</h3>
+<p class="text-on-surface-variant text-body-md">De lekkerste vegetarische en vegan snacks.</p>
+</div>
+<div class="flex justify-between items-center mt-lg">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md text-on-surface-variant">8 Snacks</span>
+</div>
+<button class="transition-all active:scale-90 duration-200 hover:bg-surface-container-high p-2 rounded-full">
+<span class="material-symbols-outlined text-outline" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- List Card 4 -->
+<div class="snack-card-shadow snack-card-hover bg-surface-container-lowest rounded-xl p-md flex flex-col justify-between transition-all cursor-pointer group">
+<div class="relative">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-surface-container p-sm rounded-lg group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container" data-icon="groups">groups</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Vrijdagmiddag Borrel</h3>
+<p class="text-on-surface-variant text-body-md">Grote porties om te delen met het hele team.</p>
+</div>
+<div class="flex justify-between items-center mt-lg">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md text-on-surface-variant">42 Snacks</span>
+</div>
+<button class="transition-all active:scale-90 duration-200 hover:bg-surface-container-high p-2 rounded-full">
+<span class="material-symbols-outlined text-outline" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Empty State / Add Suggestion -->
+<div class="border-2 border-dashed border-outline-variant bg-transparent rounded-xl p-md flex flex-col items-center justify-center text-center transition-all hover:bg-surface-container-low cursor-pointer group">
+<span class="material-symbols-outlined text-outline-variant text-5xl mb-sm group-hover:scale-110 transition-transform" data-icon="post_add">post_add</span>
+<p class="font-label-md text-label-md text-on-surface-variant">Nog meer inspiratie nodig?</p>
+<button class="mt-sm text-primary font-bold hover:underline">Bekijk populaire lijsten</button>
+</div>
+</div>
+</main>
+<!-- FAB: Nieuwe Lijst -->
+<button class="fixed bottom-24 right-6 bg-primary-container text-on-primary-container px-6 py-4 rounded-full shadow-lg flex items-center gap-2 transition-all hover:scale-105 active:scale-95 z-50 border-2 border-primary group">
+<span class="material-symbols-outlined font-bold group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+<span class="font-label-md text-label-md uppercase tracking-wide">Nieuwe Lijst</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container dark:bg-surface-container-low shadow-[0_-4px_12px_rgba(255,184,0,0.08)] rounded-t-xl">
+<!-- Rad -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-tertiary-fixed-variant px-4 py-2 transition-transform active:scale-90 duration-200 hover:text-primary dark:hover:text-primary-fixed-dim" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="refresh">refresh</span>
+<span class="font-label-md text-label-md">Rad</span>
+</a>
+<!-- Lijsten (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-6 py-2 transition-transform active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="list_alt" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<span class="font-label-md text-label-md">Lijsten</span>
+</a>
+<!-- Instellingen -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-tertiary-fixed-variant px-4 py-2 transition-transform active:scale-90 duration-200 hover:text-primary dark:hover:text-primary-fixed-dim" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Instellingen</span>
+</a>
+</nav>
+<!-- Background Decorative Element (Snack themed texture) -->
+<div class="fixed top-1/4 right-0 -z-10 opacity-[0.03] pointer-events-none rotate-12">
+<span class="material-symbols-outlined text-[400px]" data-icon="lunch_dining">lunch_dining</span>
+</div>
+<div class="fixed bottom-1/4 left-0 -z-10 opacity-[0.03] pointer-events-none -rotate-12">
+<span class="material-symbols-outlined text-[400px]" data-icon="icecream">icecream</span>
+</div>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.snack-card-hover').forEach(card => {
+            card.addEventListener('click', () => {
+                // Flash feedback
+                card.classList.add('ring-4', 'ring-primary-container');
+                setTimeout(() => {
+                    card.classList.remove('ring-4', 'ring-primary-container');
+                }, 300);
+            });
+        });
+    </script>
+</body></html>

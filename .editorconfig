@@ -1,0 +1,20 @@
+# EditorConfig: http://EditorConfig.org and install the plugin
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = false
+trim_trailing_whitespace = true
+tab_width = 4
+
+[{*.ctp,*.hphp,*.inc,*.module,*.php,*.php4,*.php5,*.phtml}]
+ij_php_lower_case_boolean_const = true
+ij_php_lower_case_null_const = true
+ij_php_else_if_style = separate
+ij_php_blank_lines_before_return_statement = 1
+ij_php_class_brace_style = end_of_line
+ij_php_method_brace_style = end_of_line
+ij_typescript_space_before_method_parentheses = true

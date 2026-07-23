@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rad van Patat Roulette</title>
+	<style>
+		:root {
+			--color-dark: #21170F;
+			--color-yellow: #FFC928;
+			--color-orange: #F28C18;
+			--color-red: #EF3E2F;
+			--color-light-yellow: #FFF0B8;
+			--color-white: #FFFFFF;
+			--color-cream: #FBF6E8;
+			--color-shadow: rgba(33, 23, 15, 0.18);
+			--wheel-size: min(78vw, 38rem);
+			--transition-duration: 4800ms;
+			--transition-easing: cubic-bezier(0.12, 0.82, 0.16, 1);
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			color-scheme: light;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			font-family: "Trebuchet MS", "Arial Rounded MT Bold", Arial, sans-serif;
+			background:
+				radial-gradient(circle at top, rgba(255, 240, 184, 0.95), rgba(255, 240, 184, 0) 32%),
+				linear-gradient(180deg, #fffdf7 0%, var(--color-cream) 100%);
+			color: var(--color-dark);
+		}
+
+		.page {
+			width: min(100%, 72rem);
+			margin: 0 auto;
+			padding: 1.5rem 1rem 3rem;
+		}
+
+		.hero {
+			text-align: center;
+			margin-bottom: 1.5rem;
+		}
+
+		.kicker {
+			display: inline-block;
+			padding: 0.45rem 0.9rem;
+			border: 3px solid var(--color-dark);
+			border-radius: 999px;
+			background: var(--color-light-yellow);
+			font-size: 0.95rem;
+			font-weight: 700;
+			letter-spacing: 0.03em;
+			box-shadow: 0 0.35rem 0 var(--color-dark);
+		}
+
+		h1 {
+			margin: 1rem 0 0.6rem;
+			font-size: clamp(2rem, 5vw, 3.8rem);
+			line-height: 0.95;
+			letter-spacing: -0.03em;
+			text-transform: uppercase;
+			text-shadow: 0.12rem 0.12rem 0 var(--color-white);
+		}
+
+		.subtitle {
+			margin: 0 auto;
+			max-width: 42rem;
+			font-size: clamp(1rem, 2vw, 1.15rem);
+			line-height: 1.55;
+		}
+
+		.stage {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 1.4rem;
+			align-items: start;
+		}
+
+		.wheel-panel,
+		.info-panel {
+			background: rgba(255, 255, 255, 0.7);
+			border: 4px solid var(--color-dark);
+			border-radius: 2rem;
+			box-shadow: 0 1rem 2rem var(--color-shadow);
+		}
+
+		.wheel-panel {
+			padding: 1rem 1rem 1.4rem;
+		}
+
+		.wheel-wrap {
+			position: relative;
+			display: grid;
+			place-items: center;
+			padding-top: 2.8rem;
+		}
+
+		.pointer {
+			position: absolute;
+			top: 0.1rem;
+			left: 50%;
+			width: 4.9rem;
+			height: 5.8rem;
+			transform: translateX(-50%);
+			filter: drop-shadow(0 0.5rem 0.7rem rgba(33, 23, 15, 0.22));
+			z-index: 3;
+		}
+
+		.pointer svg {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+
+		.wheel-shell {
+			width: var(--wheel-size);
+			height: var(--wheel-size);
+			max-width: 100%;
+			aspect-ratio: 1;
+			position: relative;
+		}
+
+		#wheel-rotor {
+			width: 100%;
+			height: 100%;
+			transform-origin: 50% 50%;
+			transition: transform var(--transition-duration) var(--transition-easing);
+			will-change: transform;
+		}
+
+		.wheel-shell svg {
+			display: block;
+			width: 100%;
+			height: 100%;
+			overflow: visible;
+		}
+
+		.controls {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.9rem;
+			justify-content: center;
+			margin-top: 1.4rem;
+		}
+
+		button {
+			appearance: none;
+			border: 3px solid var(--color-dark);
+			border-radius: 999px;
+			background: var(--color-yellow);
+			color: var(--color-dark);
+			font: inherit;
+			font-weight: 900;
+			letter-spacing: 0.03em;
+			text-transform: uppercase;
+			padding: 0.95rem 1.55rem;
+			cursor: pointer;
+			box-shadow: 0 0.45rem 0 var(--color-dark);
+			transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+		}
+
+		button:hover:not(:disabled) {
+			transform: translateY(-2px);
+			background: #ffd858;
+		}
+
+		button:active:not(:disabled) {
+			transform: translateY(0.25rem);
+			box-shadow: 0 0.15rem 0 var(--color-dark);
+		}
+
+		button:disabled {
+			cursor: not-allowed;
+			opacity: 0.75;
+		}
+
+		button.secondary {
+			background: var(--color-white);
+		}
+
+		button:focus-visible {
+			outline: 4px solid var(--color-red);
+			outline-offset: 4px;
+		}
+
+		.result {
+			margin-top: 1.2rem;
+			padding: 1rem 1.1rem;
+			text-align: center;
+			font-size: clamp(1rem, 2.4vw, 1.25rem);
+			font-weight: 800;
+			background: var(--color-light-yellow);
+			border: 3px solid var(--color-dark);
+			border-radius: 1.25rem;
+			min-height: 4.75rem;
+			display: grid;
+			place-items: center;
+			box-shadow: inset 0 -0.2rem 0 rgba(33, 23, 15, 0.08);
+		}
+
+		.helper {
+			margin: 0.9rem 0 0;
+			text-align: center;
+			font-size: 0.95rem;
+		}
+
+		.info-panel {
+			padding: 1.2rem 1.2rem 1.4rem;
+		}
+
+		.info-panel h2 {
+			margin: 0 0 0.75rem;
+			font-size: 1.35rem;
+			text-transform: uppercase;
+		}
+
+		.info-panel p,
+		.info-panel li {
+			line-height: 1.5;
+		}
+
+		.outcome-list {
+			margin: 0.75rem 0 0;
+			padding-left: 1.2rem;
+		}
+
+		.visually-hidden {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			clip-path: inset(50%);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		.confetti-layer {
+			pointer-events: none;
+			position: absolute;
+			inset: 0;
+			overflow: hidden;
+			border-radius: inherit;
+		}
+
+		.confetti-piece {
+			position: absolute;
+			top: -1rem;
+			width: 0.7rem;
+			height: 1rem;
+			border-radius: 0.2rem;
+			opacity: 0;
+			animation: confetti-fall 1000ms ease-out forwards;
+		}
+
+		@keyframes confetti-fall {
+			0% {
+				transform: translate3d(0, 0, 0) rotate(0deg) scale(0.7);
+				opacity: 1;
+			}
+			100% {
+				transform: translate3d(var(--drift, 0px), var(--drop, 230px), 0) rotate(var(--spin, 240deg)) scale(1);
+				opacity: 0;
+			}
+		}
+
+		@media (min-width: 58rem) {
+			.stage {
+				grid-template-columns: minmax(20rem, 1.25fr) minmax(16rem, 0.8fr);
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			:root {
+				--transition-duration: 90ms;
+				--transition-easing: linear;
+			}
+
+			*,
+			*::before,
+			*::after {
+				scroll-behavior: auto !important;
+			}
+
+			.confetti-piece {
+				animation-duration: 1ms;
+			}
+
+			button {
+				transition: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<!--
+		Structuur:
+		- Het wiel wordt als inline SVG opgebouwd uit 8 segmenten van 45 graden.
+		- De rotor draait als één groep via CSS transform op #wheel-rotor.
+		- Rotatielogica: desiredRotation = huidigeRotatie + extraRondes + deltaNaarDoelsegment.
+		  De delta wordt berekend met de genormaliseerde huidige hoek en de doelhoek per segment,
+		  zodat elk gekozen segment exact onder de bovenste aanwijzer eindigt.
+	-->
+	<div class="page">
+		<header class="hero">
+			<div class="kicker">Warm uit de snackbar</div>
+			<h1>Rad van Patat</h1>
+			<p class="subtitle">
+				Draai aan het rad en laat het lot bepalen welke goudbruine held er op jouw dienblad belandt.
+			</p>
+		</header>
+
+		<main class="stage">
+			<section class="wheel-panel" aria-labelledby="wheel-title">
+				<h2 id="wheel-title" class="visually-hidden">Interactief roulettewiel met snacks</h2>
+				<div class="wheel-wrap">
+					<div class="pointer" aria-hidden="true">
+						<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+							<path d="M50 6 C71 6 86 21 86 40 C86 51 82 60 75 70 L56 112 C54 116 50 118 46 112 L25 70 C18 60 14 51 14 40 C14 21 29 6 50 6 Z" fill="#EF3E2F" stroke="#21170F" stroke-width="6" stroke-linejoin="round"/>
+							<circle cx="50" cy="34" r="14" fill="#FFFFFF" stroke="#21170F" stroke-width="5"/>
+						</svg>
+					</div>
+
+					<div class="wheel-shell">
+						<svg id="wheel-svg" viewBox="0 0 800 800" role="img" aria-labelledby="wheel-svg-title wheel-svg-desc">
+							<title id="wheel-svg-title">Rad van Patat roulettewiel</title>
+							<desc id="wheel-svg-desc">Een roulettewiel met acht snacksegmenten en een rode aanwijzer bovenaan.</desc>
+							<g id="wheel-rotor"></g>
+						</svg>
+						<div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+					</div>
+				</div>
+
+				<div class="controls">
+					<button id="spin-button" type="button" aria-label="Draai het Rad van Patat">Draai het rad</button>
+					<button id="reset-button" class="secondary" type="button" aria-label="Draai opnieuw" hidden>Opnieuw draaien</button>
+				</div>
+
+				<div id="result" class="result" aria-live="polite" aria-atomic="true">
+					Klaar voor de volgende snackheld? Druk op “Draai het rad”.
+				</div>
+				<p class="helper">Tijdens het draaien is de knop tijdelijk geblokkeerd zodat de uitslag eerlijk blijft.</p>
+			</section>
+
+			<aside class="info-panel" aria-labelledby="fallback-title">
+				<h2 id="fallback-title">Tekstuele fallback</h2>
+				<p>
+					Voor gebruikers die het rad niet goed kunnen zien staat hieronder exact welke uitkomsten in het systeem zitten.
+				</p>
+				<ol class="outcome-list" id="fallback-list"></ol>
+				<p><strong>Huidige uitslag:</strong> <span id="fallback-result">Nog niet gedraaid.</span></p>
+			</aside>
+		</main>
+	</div>
+
+	<script>
+		(function () {
+			"use strict";
+
+			const config = {
+				size: 800,
+				center: 400,
+				outerRadius: 330,
+				innerRadius: 110,
+				rimRadius: 362,
+				lampRadius: 22,
+				segmentAngle: 45,
+				spinRoundsMin: 5,
+				spinRoundsMax: 8,
+				colors: ["#FFC928", "#FFF0B8", "#EF3E2F", "#F28C18", "#FFC928", "#FFF0B8", "#EF3E2F", "#F28C18"],
+				outline: "#21170F"
+			};
+
+			const segments = [
+				{ label: "Friet speciaal", icon: "🍟" },
+				{ label: "Friet oorlog", icon: "🍟" },
+				{ label: "Frikandel", icon: "🌭" },
+				{ label: "Kroket", icon: "🟫" },
+				{ label: "Kaassoufflé", icon: "🧀" },
+				{ label: "Kipcorn", icon: "🌽" },
+				{ label: "Mexicano", icon: "🌶️" },
+				{ label: "Bitterballen", icon: "🧆" }
+			];
+
+			const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+			const rotor = document.getElementById("wheel-rotor");
+			const wheelSvg = document.getElementById("wheel-svg");
+			const spinButton = document.getElementById("spin-button");
+			const resetButton = document.getElementById("reset-button");
+			const resultEl = document.getElementById("result");
+			const fallbackList = document.getElementById("fallback-list");
+			const fallbackResult = document.getElementById("fallback-result");
+			const confettiLayer = document.getElementById("confetti-layer");
+
+			let currentRotation = 0;
+			let isSpinning = false;
+			let activeSpinTimer = null;
+
+			function degToRad(deg) {
+				return (deg * Math.PI) / 180;
+			}
+
+			function polarToCartesian(cx, cy, radius, angle) {
+				return {
+					x: cx + radius * Math.cos(degToRad(angle)),
+					y: cy + radius * Math.sin(degToRad(angle))
+				};
+			}
+
+			function describeWedge(cx, cy, outerRadius, innerRadius, startAngle, endAngle) {
+				const outerStart = polarToCartesian(cx, cy, outerRadius, startAngle);
+				const outerEnd = polarToCartesian(cx, cy, outerRadius, endAngle);
+				const innerEnd = polarToCartesian(cx, cy, innerRadius, endAngle);
+				const innerStart = polarToCartesian(cx, cy, innerRadius, startAngle);
+				const largeArcFlag = endAngle - startAngle <= 180 ? 0 : 1;
+
+				return [
+					"M", outerStart.x, outerStart.y,
+					"A", outerRadius, outerRadius, 0, largeArcFlag, 1, outerEnd.x, outerEnd.y,
+					"L", innerEnd.x, innerEnd.y,
+					"A", innerRadius, innerRadius, 0, largeArcFlag, 0, innerStart.x, innerStart.y,
+					"Z"
+				].join(" ");
+			}
+
+			function createSvgElement(tag, attributes) {
+				const node = document.createElementNS("http://www.w3.org/2000/svg", tag);
+				Object.entries(attributes).forEach(([key, value]) => {
+					node.setAttribute(key, String(value));
+				});
+				return node;
+			}
+
+			function createSegment(index, segment) {
+				const centerAngle = -90 + (index * config.segmentAngle);
+				const startAngle = centerAngle - (config.segmentAngle / 2);
+				const endAngle = centerAngle + (config.segmentAngle / 2);
+				const group = createSvgElement("g", {});
+				const path = createSvgElement("path", {
+					d: describeWedge(config.center, config.center, config.outerRadius, config.innerRadius, startAngle, endAngle),
+					fill: config.colors[index % config.colors.length],
+					stroke: config.outline,
+					"stroke-width": 6,
+					"stroke-linejoin": "round"
+				});
+
+				const contentGroup = createSvgElement("g", {
+					transform: `rotate(${centerAngle} ${config.center} ${config.center})`
+				});
+
+				const icon = createSvgElement("text", {
+					x: config.center,
+					y: config.center - 205,
+					"text-anchor": "middle",
+					"dominant-baseline": "middle",
+					"font-size": 42,
+					"aria-hidden": "true"
+				});
+				icon.textContent = segment.icon;
+
+				const labelTop = createSvgElement("text", {
+					x: config.center,
+					y: config.center - 138,
+					"text-anchor": "middle",
+					"font-size": 29,
+					"font-weight": 900,
+					fill: config.outline,
+					stroke: config.outline,
+					"stroke-width": 0.6,
+					"paint-order": "stroke fill"
+				});
+
+				const labelBottom = createSvgElement("text", {
+					x: config.center,
+					y: config.center - 107,
+					"text-anchor": "middle",
+					"font-size": 29,
+					"font-weight": 900,
+					fill: config.outline,
+					stroke: config.outline,
+					"stroke-width": 0.6,
+					"paint-order": "stroke fill"
+				});
+
+				const words = segment.label.split(" ");
+				if (words.length > 1) {
+					labelTop.textContent = words.slice(0, -1).join(" ");
+					labelBottom.textContent = words.slice(-1).join(" ");
+				} else {
+					labelTop.textContent = segment.label;
+					labelBottom.textContent = "";
+				}
+
+				contentGroup.append(icon, labelTop);
+				if (labelBottom.textContent) {
+					contentGroup.append(labelBottom);
+				}
+
+				group.append(path, contentGroup);
+				return group;
+			}
+
+			function createBulbs() {
+				const bulbsGroup = createSvgElement("g", {});
+				for (let i = 0; i < 16; i += 1) {
+					const angle = -90 + (i * 22.5);
+					const point = polarToCartesian(config.center, config.center, config.rimRadius, angle);
+					const glow = createSvgElement("circle", {
+						cx: point.x,
+						cy: point.y,
+						r: config.lampRadius + 8,
+						fill: "rgba(255, 201, 40, 0.18)"
+					});
+					const bulb = createSvgElement("circle", {
+						cx: point.x,
+						cy: point.y,
+						r: config.lampRadius,
+						fill: config.colorWhite || "#FFFFFF",
+						stroke: "#FFC928",
+						"stroke-width": 7
+					});
+					bulbsGroup.append(glow, bulb);
+				}
+				return bulbsGroup;
+			}
+
+			function createCenterFries() {
+				const group = createSvgElement("g", {});
+				const badgeShadow = createSvgElement("circle", {
+					cx: config.center,
+					cy: config.center + 10,
+					r: 110,
+					fill: "rgba(33, 23, 15, 0.18)"
+				});
+				const badgeOuter = createSvgElement("circle", {
+					cx: config.center,
+					cy: config.center,
+					r: 108,
+					fill: config.colorWhite || "#FFFFFF",
+					stroke: config.outline,
+					"stroke-width": 7
+				});
+				const badgeInner = createSvgElement("circle", {
+					cx: config.center,
+					cy: config.center,
+					r: 94,
+					fill: "#FFE78A",
+					stroke: config.outline,
+					"stroke-width": 5
+				});
+
+				group.append(badgeShadow, badgeOuter, badgeInner);
+
+				const friesAngles = [-22, -12, -4, 6, 14, 24];
+				friesAngles.forEach((angle, index) => {
+					const fry = createSvgElement("rect", {
+						x: config.center - 8,
+						y: config.center - 102,
+						width: 16,
+						height: 78 + (index % 2 ? 8 : 0),
+						rx: 6,
+						fill: index % 2 ? "#F28C18" : "#FFC928",
+						stroke: config.outline,
+						"stroke-width": 4,
+						transform: `rotate(${angle} ${config.center} ${config.center - 26})`
+					});
+					group.append(fry);
+				});
+
+				const cone = createSvgElement("path", {
+					d: "M 350 378 L 450 378 L 424 506 L 376 506 Z",
+					fill: config.colorWhite || "#FFFFFF",
+					stroke: config.outline,
+					"stroke-width": 6,
+					"stroke-linejoin": "round"
+				});
+				const coneFold = createSvgElement("path", {
+					d: "M 398 378 L 450 378 L 424 506 Z",
+					fill: "#F7E7C8",
+					stroke: config.outline,
+					"stroke-width": 4,
+					"stroke-linejoin": "round"
+				});
+				const sauce = createSvgElement("path", {
+					d: "M 358 392 C 370 374 388 380 400 390 C 416 366 438 380 440 398 C 438 418 414 420 400 410 C 388 425 364 420 358 392 Z",
+					fill: "#FFF8DC",
+					stroke: config.outline,
+					"stroke-width": 4,
+					"stroke-linejoin": "round"
+				});
+
+				group.append(sauce, cone, coneFold);
+				return group;
+			}
+
+			function buildWheel() {
+				const shadow = createSvgElement("circle", {
+					cx: config.center,
+					cy: config.center + 22,
+					r: 332,
+					fill: "rgba(33, 23, 15, 0.15)"
+				});
+				const outerRing = createSvgElement("circle", {
+					cx: config.center,
+					cy: config.center,
+					r: 380,
+					fill: "#3A291E",
+					stroke: config.outline,
+					"stroke-width": 10
+				});
+				const innerRing = createSvgElement("circle", {
+					cx: config.center,
+					cy: config.center,
+					r: 346,
+					fill: "#5E412F",
+					stroke: "#F4CA65",
+					"stroke-width": 5
+				});
+
+				wheelSvg.insertBefore(shadow, rotor);
+				rotor.append(outerRing, innerRing, createBulbs());
+
+				segments.forEach((segment, index) => {
+					rotor.append(createSegment(index, segment));
+				});
+
+				rotor.append(createCenterFries());
+			}
+
+			function updateFallbackList() {
+				const fragment = document.createDocumentFragment();
+				segments.forEach((segment, index) => {
+					const item = document.createElement("li");
+					item.textContent = `${index + 1}. ${segment.label}`;
+					fragment.appendChild(item);
+				});
+				fallbackList.appendChild(fragment);
+			}
+
+			function normalizeRotation(rotation) {
+				return ((rotation % 360) + 360) % 360;
+			}
+
+			function randomSegmentIndex() {
+				return Math.floor(Math.random() * segments.length);
+			}
+
+			function randomRounds() {
+				const min = config.spinRoundsMin;
+				const max = config.spinRoundsMax;
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+			function targetRotationForIndex(index) {
+				return normalizeRotation(360 - (index * config.segmentAngle));
+			}
+
+			function setButtonsState(spinning) {
+				spinButton.disabled = spinning;
+				spinButton.setAttribute("aria-disabled", String(spinning));
+			}
+
+			function announceResult(text) {
+				resultEl.textContent = text;
+				fallbackResult.textContent = text;
+			}
+
+			function clearConfetti() {
+				confettiLayer.innerHTML = "";
+			}
+
+			function launchConfetti() {
+				clearConfetti();
+				const count = reducedMotion.matches ? 8 : 30;
+				for (let i = 0; i < count; i += 1) {
+					const piece = document.createElement("span");
+					piece.className = "confetti-piece";
+					piece.style.left = `${Math.random() * 100}%`;
+					piece.style.background = config.colors[i % config.colors.length];
+					piece.style.setProperty("--drift", `${(Math.random() - 0.5) * 180}px`);
+					piece.style.setProperty("--drop", `${170 + Math.random() * 180}px`);
+					piece.style.setProperty("--spin", `${120 + Math.random() * 420}deg`);
+					piece.style.animationDelay = `${Math.random() * 120}ms`;
+					confettiLayer.appendChild(piece);
+				}
+			}
+
+			function finishSpin(index) {
+				isSpinning = false;
+				activeSpinTimer = null;
+				setButtonsState(false);
+				resetButton.hidden = false;
+				const resultText = `Het Rad heeft gesproken: ${segments[index].label}`;
+				announceResult(resultText);
+				launchConfetti();
+			}
+
+			function spinWheel() {
+				if (isSpinning) {
+					return;
+				}
+
+				clearConfetti();
+				isSpinning = true;
+				setButtonsState(true);
+				resetButton.hidden = true;
+				announceResult("Het rad draait... houd je trek nog heel even vast.");
+
+				const selectedIndex = randomSegmentIndex();
+				const currentNormalized = normalizeRotation(currentRotation);
+				const targetNormalized = targetRotationForIndex(selectedIndex);
+				const deltaToTarget = normalizeRotation(targetNormalized - currentNormalized);
+				const totalSpin = (randomRounds() * 360) + deltaToTarget;
+				const motionDuration = reducedMotion.matches ? 90 : 4800;
+
+				currentRotation += totalSpin;
+				rotor.style.transitionDuration = `${motionDuration}ms`;
+				rotor.style.transform = `rotate(${currentRotation}deg)`;
+
+				if (activeSpinTimer) {
+					window.clearTimeout(activeSpinTimer);
+				}
+
+				activeSpinTimer = window.setTimeout(function () {
+					finishSpin(selectedIndex);
+				}, motionDuration + 24);
+			}
+
+			function resetWheelState() {
+				if (isSpinning) {
+					return;
+				}
+				clearConfetti();
+				announceResult("Klaar voor de volgende snackheld? Druk op “Draai het rad”.");
+				resetButton.hidden = true;
+			}
+
+			buildWheel();
+			updateFallbackList();
+			spinButton.addEventListener("click", spinWheel);
+			resetButton.addEventListener("click", resetWheelState);
+		}());
+	</script>
+</body>
+</html>

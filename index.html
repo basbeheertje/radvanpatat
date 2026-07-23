@@ -24,6 +24,7 @@
 			#wheel{
 				display: inline-block;
 				float: left;
+				position: relative;
 				text-align: center;
 				align-content: center;
 				width: 100%;
@@ -53,6 +54,24 @@
 			#resultaat-afbeelding {
 				display: inline-block;
 				border-radius: 50%;
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+			}
+			#resultaat-letter {
+				display: none;
+				align-items: center;
+				justify-content: center;
+				width: 150px;
+				height: 150px;
+				border-radius: 50%;
+				background: #00ac4f;
+				border: 5px solid #262261;
+				box-sizing: border-box;
+				color: white;
+				font-family: 'Ostrich Sans', serif;
+				font-size: 90px;
+				font-weight: bold;
 			}
 			#resultaat {
 				display: none;
@@ -79,6 +98,159 @@
 				margin: 0;
 				margin-top: 10px;
 			}
+			#bestel-paneel,
+			#bestellijst {
+				float: left;
+				width: min(820px, calc(100% - 40px));
+				margin: 24px 20px 0;
+				padding: 20px;
+				box-sizing: border-box;
+				border: 4px solid #262261;
+				border-radius: 16px;
+				background: #f6f6f6;
+			}
+			#bestel-paneel h2,
+			#bestellijst h2 {
+				font-family: 'Ostrich Sans',serif;
+				font-size: 28px;
+				margin: 0 0 16px;
+			}
+			.bestel-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+				gap: 14px;
+			}
+			#bestel-paneel label,
+			#bestel-paneel legend,
+			.persoon-rij label {
+				display: block;
+				font-family: Arial, sans-serif;
+				font-size: 14px;
+				font-weight: bold;
+				margin-bottom: 6px;
+			}
+			#bestel-paneel input,
+			#bestel-paneel select {
+				width: 100%;
+				box-sizing: border-box;
+				padding: 9px;
+				border: 2px solid #bbb;
+				border-radius: 6px;
+				font-size: 16px;
+			}
+			#bestel-paneel fieldset {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			.radio-rij {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 14px;
+				margin-top: 4px;
+			}
+			.radio-rij label {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				margin: 0;
+				font-weight: normal;
+			}
+			.radio-rij input {
+				width: auto;
+				margin: 0;
+			}
+			#personen-configuratie {
+				margin-top: 18px;
+				display: grid;
+				gap: 12px;
+			}
+			.persoon-rij {
+				display: grid;
+				grid-template-columns: minmax(0, 2fr) minmax(120px, 1fr);
+				gap: 12px;
+				padding: 12px;
+				border-radius: 10px;
+				background: white;
+			}
+			#bestel-status {
+				margin-top: 14px;
+				font-family: Arial, sans-serif;
+				font-size: 14px;
+				font-weight: bold;
+				color: #262261;
+			}
+			#bestellijst {
+				display: none;
+			}
+			.bestel-persoon {
+				margin-top: 14px;
+				padding: 12px;
+				background: white;
+				border-radius: 10px;
+			}
+			.bestel-persoon h3 {
+				margin: 0 0 8px;
+				font-family: 'Ostrich Sans',serif;
+				font-size: 24px;
+			}
+			.bestel-persoon ul {
+				margin: 0;
+				padding-left: 20px;
+				font-family: Arial, sans-serif;
+			}
+			#snack-toevoegen-knop {
+				position: fixed;
+				right: 22px;
+				bottom: 22px;
+				z-index: 5;
+				width: 58px;
+				height: 58px;
+				border: 4px solid #262261;
+				border-radius: 50%;
+				background: #00ac4f;
+				color: white;
+				font-size: 34px;
+				line-height: 1;
+				cursor: pointer;
+			}
+			#snack-formulier {
+				display: none;
+				position: fixed;
+				right: 22px;
+				bottom: 92px;
+				z-index: 4;
+				width: min(330px, calc(100% - 44px));
+				padding: 22px;
+				box-sizing: border-box;
+				background: white;
+				border: 4px solid #262261;
+				border-radius: 14px;
+				box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
+			}
+			#snack-formulier.open { display: block; }
+			#snack-formulier h2 { margin: 0 0 14px; font-size: 25px; }
+			#snack-formulier label { display: block; margin-top: 10px; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+			#snack-formulier input { width: 100%; box-sizing: border-box; padding: 9px; margin-top: 5px; border: 2px solid #bbb; border-radius: 6px; font-size: 16px; }
+			#snack-formulier button[type="submit"] { margin-top: 16px; padding: 9px 14px; border: 0; border-radius: 6px; background: #00ac4f; color: white; font-weight: bold; cursor: pointer; }
+			#snack-formulier .sluit-knop { float: right; border: 0; background: transparent; color: #262261; font-size: 24px; cursor: pointer; }
+			#snack-verwijderen-knop {
+				display: none;
+				position: fixed;
+				z-index: 6;
+				width: 34px;
+				height: 34px;
+				border: 3px solid #262261;
+				border-radius: 50%;
+				background: #f04b42;
+				color: white;
+				font-size: 22px;
+				font-weight: bold;
+				line-height: 1;
+				cursor: pointer;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+			}
+			@media (max-width: 600px) { #canvas { width: 100%; height: auto; } }
 		</style>
 	</head>
 	<body>
@@ -86,34 +258,68 @@
 			<img src="./images/logo.png"/>
 		</div>
 		<h1>Rad van PATAT</h1>
+		<div id="bestel-paneel">
+			<h2>Maak direct een bestelling</h2>
+			<div class="bestel-grid">
+				<div>
+					<label for="aantal-personen">Met hoeveel mensen ben je?</label>
+					<input id="aantal-personen" type="number" min="1" max="30" value="1">
+				</div>
+				<fieldset>
+					<legend>Hoe wil je aantallen invullen?</legend>
+					<div class="radio-rij">
+						<label for="snacks-algemeen">
+							<input id="snacks-algemeen" type="radio" name="snack-verdeling" value="algemeen" checked>
+							Hetzelfde aantal per persoon
+						</label>
+						<label for="snacks-per-persoon">
+							<input id="snacks-per-persoon" type="radio" name="snack-verdeling" value="persoon">
+							Per persoon instellen
+						</label>
+					</div>
+				</fieldset>
+				<div id="algemene-snacks-wrap">
+					<label for="algemene-snacks">Aantal snacks per persoon</label>
+					<input id="algemene-snacks" type="number" min="1" max="20" value="2">
+				</div>
+			</div>
+			<div id="personen-configuratie"></div>
+			<div id="bestel-status">Vul je bestelling in en klik daarna op "Geef een slinger".</div>
+		</div>
 		<div id="wheel">
 			<canvas id='canvas' width='800' height='425'>
 				Canvas not supported, use another browser.
 			</canvas>
 			<script>
+				const standaardSnacks = [
+					['Bitterbal', 'bitterbal.jpg'], ['Kaassouffle', 'kaassouffle.jpg'], ['Loempidel', 'loempidel.jpg'],
+					['Kroket', 'kroket.jpg'], ['Nasischijf', 'nasischijf.jpg'], ['Kipcorn', 'kipcorn.jpg'],
+					['Frikandel', 'frikandel.jpg'], ['Bamischijf', 'bamischijf.jpg'], ['Kipnuggets', 'kipnuggets.jpg'],
+					['Viandel', 'viandel.jpg'], ['Satekroket', 'satekroket.jpg'], ['Berenklauw', 'berenklauw.jpg'], ['Mexicano', 'mexicano.jpg']
+				].map(([name, image]) => ({ name, image: `./images/${image}` }));
+				const snackOpslagSleutel = 'rad-van-patat-eigen-snacks';
+				let eigenSnacks = [];
+				try { eigenSnacks = JSON.parse(localStorage.getItem(snackOpslagSleutel) || '[]'); } catch (error) { eigenSnacks = []; }
+				if (!Array.isArray(eigenSnacks)) eigenSnacks = [];
+				eigenSnacks = eigenSnacks
+					.filter((snack) => snack && typeof snack.name === 'string' && snack.name.trim())
+					.map((snack) => ({ name: snack.name.trim(), image: snack.image || '', isCustom: true }));
+				const alleSnacks = standaardSnacks.concat(eigenSnacks);
+				const kleuren = ['#eae56f', '#89f26e', '#7de6ef', '#e7706f'];
+				let hoveredVerwijderbareSegmentIndex = null;
+				let lopendeBestelling = null;
+				let wachtOpVolgendeSpin = null;
+
 				let theWheel = new Winwheel({
-                'numSegments'   : 13,   // Specify number of segments.
-                'outerRadius'   : 212,  // Set radius to so wheel fits the background.
-                'innerRadius'   : 120,  // Set inner radius to make wheel hollow.
-                'textFontSize'  : 16,   // Set font size accordingly.
-                'textMargin'    : 0,    // Take out default margin.
-                'segments'      :       // Define segments including colour and text.
-                [
-                   {'fillStyle' : '#eae56f', 'text' : 'Bitterbal'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Kaassouffle'},
-                   {'fillStyle' : '#7de6ef', 'text' : 'Loempidel'},
-                   {'fillStyle' : '#e7706f', 'text' : 'Kroket'},
-                   {'fillStyle' : '#eae56f', 'text' : 'Nasischijf'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Kipcorn'},
-                   {'fillStyle' : '#7de6ef', 'text' : 'Frikandel'},
-                   {'fillStyle' : '#e7706f', 'text' : 'Bamischijf'},
-                   {'fillStyle' : '#eae56f', 'text' : 'Kipnuggets'},
-                   {'fillStyle' : '#89f26e', 'text' : 'Viandel'},
-                   {'fillStyle' : '#7de6ef', 'text' : 'Satekroket'},
-                   {'fillStyle' : '#e7706f', 'text' : 'Berenklauw'},
-                   {'fillStyle' : '#eae56f', 'text' : 'Mexicano'}
-                ],
-                'animation' :           // Define spin to stop animation.
+                'numSegments'   : alleSnacks.length,
+                'outerRadius'   : 212,
+                'innerRadius'   : 120,
+                'textFontSize'  : 16,
+                'textMargin'    : 0,
+				'segments' : alleSnacks.map((snack, index) => ({
+					'fillStyle': kleuren[index % kleuren.length], 'text': snack.name, 'snack': snack
+				})),
+                'animation' :
                 {
                     'type'     : 'spinToStop',
                     'duration' : 5,
@@ -122,22 +328,38 @@
                 }
             });
 				
-				// Vars used by the code in this page to do power controls.
             var wheelPower    = 0;
             var wheelSpinning = false;
 			var spinned = false;
 	 
-				// Called when the animation as finished.
 				function afterSpin(indicatedSegment)
 				{
-					showResult(indicatedSegment.text);
+					const snack = indicatedSegment.snack || { name: indicatedSegment.text, image: `./images/${indicatedSegment.text.toLowerCase()}.jpg` };
+					if (lopendeBestelling) {
+						verwerkBestelSpin(snack);
+						return;
+					}
+					showResult(snack);
 					showElement("wheellink");
 					showElement("resultaat");
+					wheelSpinning = false;
+					updateBestelStatus('Klaar voor een nieuwe slinger.');
 				}
 				
-			function showResult (text) {
-				document.getElementById("resultaat-benaming").innerHTML = text;
-				document.getElementById("resultaat-afbeelding").src = './images/' + text.toLowerCase() + '.jpg';
+			function showResult (snack) {
+				document.getElementById("resultaat-benaming").textContent = snack.name;
+				const afbeelding = document.getElementById("resultaat-afbeelding");
+				const letter = document.getElementById("resultaat-letter");
+				if (snack.image) {
+					afbeelding.src = snack.image;
+					afbeelding.style.display = 'inline-block';
+					letter.style.display = 'none';
+					afbeelding.onerror = () => { afbeelding.style.display = 'none'; letter.textContent = snack.name.charAt(0).toUpperCase(); letter.style.display = 'flex'; };
+				} else {
+					afbeelding.style.display = 'none';
+					letter.textContent = snack.name.charAt(0).toUpperCase();
+					letter.style.display = 'flex';
+				}
 				showElement("resultaat");
 				playSound('sounds/winnaar.mp3');
 			}
@@ -153,41 +375,25 @@
 			function hideElement (identifier) {
 				var x = document.getElementById(identifier);
 				
-				if (x.style.display === "none" || x.style.display === "") {
-					//x.style.display = "inline-block";
-				} else {
+				if (!(x.style.display === "none" || x.style.display === "")) {
 					x.style.display = "none";
 				}
 			}
 				
-				// -------------------------------------------------------
-            // Function for reset button.
-            // -------------------------------------------------------
             function resetWheel()
             {
-                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
-                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
-                theWheel.draw();                // Call draw to render changes to the wheel.
-
-                //document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
-                //document.getElementById('pw2').className = "";
-                //document.getElementById('pw3').className = "";
-
-                wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
+                theWheel.stopAnimation(false);
+                theWheel.rotationAngle = 0;
+                theWheel.draw();
+                wheelSpinning = false;
             }
 			
-			// -------------------------------------------------------
-            // Click handler for spin button.
-            // -------------------------------------------------------
             function startSpin()
             {
-                // Ensure that spinning can't be clicked again while already running.
                 if (wheelSpinning == false)
                 {
 					spinned = true;
 					
-                    // Based on the power level selected adjust the number of spins for the wheel, the more times is has
-                    // to rotate with the duration of the animation the quicker the wheel spins.
                     if (wheelPower === 1)
                     {
                         theWheel.animation.spins = 3;
@@ -201,20 +407,12 @@
                         theWheel.animation.spins = 15;
                     }
 
-                    // Disable the spin button so can't click again while wheel is spinning.
-                    //document.getElementById('spin_button').src       = "spin_off.png";
-                    //document.getElementById('spin_button').className = "";
-
-                    // Begin the spin animation by calling startAnimation on the wheel object.
                     theWheel.startAnimation();
+					verbergVerwijderKnop();
 					
 					hideElement("wheellink");
 					hideElement("resultaat");
-					
-					//resetWheel();
 
-                    // Set to true so that power can't be changed and spin button re-enabled during
-                    // the current animation. The user will have to reset before spinning again.
                     wheelSpinning = true;
                 }
             }
@@ -230,14 +428,259 @@
 				var audio = new Audio(filename);
 				audio.play();
 			}
+
+			function isVerwijderbareSnack(snack) {
+				return Boolean(snack && snack.isCustom);
+			}
+
+			function verbergVerwijderKnop() {
+				hoveredVerwijderbareSegmentIndex = null;
+				document.getElementById('snack-verwijderen-knop').style.display = 'none';
+			}
+
+			function toonVerwijderKnopVoorSegment(segmentIndex) {
+				const segment = theWheel.segments[segmentIndex];
+				const knop = document.getElementById('snack-verwijderen-knop');
+				if (!segment || !isVerwijderbareSnack(segment.snack) || wheelSpinning) {
+					verbergVerwijderKnop();
+					return;
+				}
+
+				const canvas = document.getElementById('canvas');
+				const rect = canvas.getBoundingClientRect();
+				const schaalX = rect.width / canvas.width;
+				const schaalY = rect.height / canvas.height;
+				const middenHoek = ((segment.startAngle + segment.endAngle) / 2) + theWheel.rotationAngle - 90;
+				const hoekInRadialen = middenHoek * (Math.PI / 180);
+				const afstand = theWheel.innerRadius + ((theWheel.outerRadius - theWheel.innerRadius) * 0.72);
+				const x = theWheel.centerX + (Math.cos(hoekInRadialen) * afstand);
+				const y = theWheel.centerY + (Math.sin(hoekInRadialen) * afstand);
+
+				hoveredVerwijderbareSegmentIndex = segmentIndex;
+				knop.style.left = `${rect.left + (x * schaalX) - 17}px`;
+				knop.style.top = `${rect.top + (y * schaalY) - 17}px`;
+				knop.style.display = 'block';
+			}
+
+			function verwijderSnack(segmentIndex) {
+				const segment = theWheel.segments[segmentIndex];
+				if (!segment || !isVerwijderbareSnack(segment.snack) || theWheel.numSegments <= 1) return;
+
+				eigenSnacks = eigenSnacks.filter((snack) => !(snack.name === segment.snack.name && (snack.image || '') === (segment.snack.image || '')));
+				localStorage.setItem(snackOpslagSleutel, JSON.stringify(eigenSnacks));
+				theWheel.deleteSegment(segmentIndex);
+				theWheel.draw();
+				verbergVerwijderKnop();
+			}
+
+			function updateBestelStatus(tekst) {
+				document.getElementById('bestel-status').textContent = tekst;
+			}
+
+			function isPerPersoonVerdeling() {
+				return document.querySelector('input[name="snack-verdeling"]:checked').value === 'persoon';
+			}
+
+			function renderPersonenConfiguratie() {
+				const aantalPersonen = Math.max(1, parseInt(document.getElementById('aantal-personen').value || '1', 10));
+				const configuratie = document.getElementById('personen-configuratie');
+				const isPerPersoon = isPerPersoonVerdeling();
+				document.getElementById('algemene-snacks-wrap').style.display = isPerPersoon ? 'none' : 'block';
+				configuratie.innerHTML = '';
+
+				for (let index = 0; index < aantalPersonen; index++) {
+					const rij = document.createElement('div');
+					rij.className = 'persoon-rij';
+					rij.innerHTML = `
+						<div>
+							<label for="persoon-naam-${index}">Naam persoon ${index + 1} (optioneel)</label>
+							<input id="persoon-naam-${index}" class="persoon-naam" type="text" maxlength="40" placeholder="Persoon ${index + 1}">
+						</div>
+						<div class="persoon-snacks-wrap" style="display:${isPerPersoon ? 'block' : 'none'};">
+							<label for="persoon-snacks-${index}">Snacks</label>
+							<input id="persoon-snacks-${index}" class="persoon-snacks" type="number" min="0" max="20" value="2">
+						</div>
+					`;
+					configuratie.appendChild(rij);
+				}
+			}
+
+			function leesBestelling() {
+				const aantalPersonen = Math.max(1, parseInt(document.getElementById('aantal-personen').value || '1', 10));
+				const isPerPersoon = isPerPersoonVerdeling();
+				const algemeneSnacks = Math.max(1, parseInt(document.getElementById('algemene-snacks').value || '1', 10));
+				const personen = [];
+
+				for (let index = 0; index < aantalPersonen; index++) {
+					const naamInput = document.getElementById(`persoon-naam-${index}`);
+					const snacksInput = document.getElementById(`persoon-snacks-${index}`);
+					const naam = naamInput && naamInput.value.trim() ? naamInput.value.trim() : `Persoon ${index + 1}`;
+					const snacks = isPerPersoon ? Math.max(0, parseInt((snacksInput && snacksInput.value) || '0', 10)) : algemeneSnacks;
+					personen.push({ naam: naam, aantalSnacks: snacks, snacks: [] });
+				}
+
+				const totaalSnacks = personen.reduce((som, persoon) => som + persoon.aantalSnacks, 0);
+				return { personen: personen, totaalSnacks: totaalSnacks };
+			}
+
+			function maakSpinPlanning(bestelling) {
+				const planning = [];
+				bestelling.personen.forEach((persoon, persoonIndex) => {
+					for (let teller = 0; teller < persoon.aantalSnacks; teller++) {
+						planning.push({ persoonIndex: persoonIndex });
+					}
+				});
+				return planning;
+			}
+
+			function renderBestellijst(bestelling) {
+				const lijst = document.getElementById('bestellijst');
+				const inhoud = document.getElementById('bestellijst-inhoud');
+				inhoud.innerHTML = '';
+
+				bestelling.personen.forEach((persoon) => {
+					const blok = document.createElement('div');
+					blok.className = 'bestel-persoon';
+					const items = persoon.snacks.length
+						? `<ul>${persoon.snacks.map((snack) => `<li>${snack}</li>`).join('')}</ul>`
+						: '<p>Geen snacks toegewezen.</p>';
+					blok.innerHTML = `<h3>${persoon.naam}</h3>${items}`;
+					inhoud.appendChild(blok);
+				});
+
+				lijst.style.display = 'block';
+			}
+
+			function startBestelling() {
+				const bestelling = leesBestelling();
+				if (bestelling.totaalSnacks < 1) {
+					updateBestelStatus('De bestelling moet minstens 1 snack bevatten.');
+					return false;
+				}
+
+				lopendeBestelling = bestelling;
+				lopendeBestelling.planning = maakSpinPlanning(bestelling);
+				lopendeBestelling.totaal = lopendeBestelling.planning.length;
+				lopendeBestelling.afgerond = 0;
+				document.getElementById('bestellijst').style.display = 'none';
+				updateBestelStatus(`Bestelling gestart: ${lopendeBestelling.totaal} spins te gaan.`);
+				return true;
+			}
+
+			function verwerkBestelSpin(snack) {
+				const doel = lopendeBestelling.planning[lopendeBestelling.afgerond];
+				lopendeBestelling.personen[doel.persoonIndex].snacks.push(snack.name);
+				lopendeBestelling.afgerond += 1;
+				showResult(snack);
+				showElement("resultaat");
+
+				if (lopendeBestelling.afgerond < lopendeBestelling.totaal) {
+					const resterend = lopendeBestelling.totaal - lopendeBestelling.afgerond;
+					updateBestelStatus(`Nog ${resterend} spin${resterend === 1 ? '' : 's'} te gaan.`);
+					wheelSpinning = false;
+					wachtOpVolgendeSpin = window.setTimeout(function () {
+						if (spinned) {
+							resetWheel();
+						}
+						startSpin();
+					}, 900);
+					return;
+				}
+
+				renderBestellijst(lopendeBestelling);
+				updateBestelStatus(`Bestelling klaar: ${lopendeBestelling.totaal} spins uitgevoerd.`);
+				lopendeBestelling = null;
+				wheelSpinning = false;
+				showElement("wheellink");
+			}
+
+				window.addEventListener('DOMContentLoaded', function () {
+					renderPersonenConfiguratie();
+					document.getElementById('aantal-personen').addEventListener('input', renderPersonenConfiguratie);
+					document.querySelectorAll('input[name="snack-verdeling"]').forEach((input) => input.addEventListener('change', renderPersonenConfiguratie));
+					document.getElementById('snack-formulier').addEventListener('submit', function (event) {
+					event.preventDefault();
+					const naam = document.getElementById('snack-naam').value.trim();
+					const foto = document.getElementById('snack-foto').value.trim();
+					if (!naam) return;
+					const snack = { name: naam, image: foto, isCustom: true };
+					eigenSnacks.push(snack);
+					localStorage.setItem(snackOpslagSleutel, JSON.stringify(eigenSnacks));
+					theWheel.addSegment({ fillStyle: kleuren[(theWheel.numSegments - 1) % kleuren.length], text: naam, snack: snack });
+					theWheel.draw();
+					verbergVerwijderKnop();
+					document.getElementById('snack-formulier').classList.remove('open');
+					this.reset();
+					});
+					document.getElementById('snack-toevoegen-knop').addEventListener('click', () => document.getElementById('snack-formulier').classList.toggle('open'));
+					document.querySelector('.sluit-knop').addEventListener('click', () => document.getElementById('snack-formulier').classList.remove('open'));
+					document.getElementById('canvas').addEventListener('mousemove', function (event) {
+						if (wheelSpinning) {
+							verbergVerwijderKnop();
+							return;
+						}
+						const segmentIndex = theWheel.getSegmentNumberAt(event.clientX, event.clientY);
+						if (!segmentIndex || !theWheel.segments[segmentIndex] || !isVerwijderbareSnack(theWheel.segments[segmentIndex].snack)) {
+							verbergVerwijderKnop();
+							return;
+						}
+						toonVerwijderKnopVoorSegment(segmentIndex);
+					});
+					document.getElementById('canvas').addEventListener('mouseleave', function () {
+						window.setTimeout(function () {
+							if (!document.getElementById('snack-verwijderen-knop').matches(':hover')) {
+								verbergVerwijderKnop();
+							}
+						}, 20);
+					});
+					document.getElementById('snack-verwijderen-knop').addEventListener('mouseleave', verbergVerwijderKnop);
+					document.getElementById('snack-verwijderen-knop').addEventListener('click', function () {
+						if (hoveredVerwijderbareSegmentIndex !== null) {
+							verwijderSnack(hoveredVerwijderbareSegmentIndex);
+						}
+					});
+					window.addEventListener('scroll', verbergVerwijderKnop, { passive: true });
+					window.addEventListener('resize', verbergVerwijderKnop);
+					document.getElementById('wheellink').addEventListener('click', function (event) {
+						event.preventDefault();
+						if (wheelSpinning) {
+							return;
+						}
+						if (wachtOpVolgendeSpin) {
+							window.clearTimeout(wachtOpVolgendeSpin);
+							wachtOpVolgendeSpin = null;
+						}
+						if (startBestelling()) {
+							resetAndStart();
+						}
+					});
+				});
 			</script>
 		</div>
 		<div id="wheellink" style="display:inline-block;">
-			<a href="#" onClick="resetAndStart(); return false;">Geef een slinger</a>
+			<a href="#">Geef een slinger</a>
 		</div>
 		<div id="resultaat">
 			<img id="resultaat-afbeelding" src="./images/bitterbal.jpg"/>
+			<div id="resultaat-letter" aria-hidden="true"></div>
 			<h2 id="resultaat-benaming">Bitterbal</h2>
+		</div>
+		<div id="bestellijst">
+			<h2>Bestellijst</h2>
+			<div id="bestellijst-inhoud"></div>
+		</div>
+		<button id="snack-verwijderen-knop" type="button" aria-label="Snack verwijderen" title="Snack verwijderen">×</button>
+		<button id="snack-toevoegen-knop" type="button" aria-label="Snack toevoegen" title="Snack toevoegen">+</button>
+		<div id="snack-formulier" role="dialog" aria-labelledby="snack-formulier-titel">
+			<button class="sluit-knop" type="button" aria-label="Formulier sluiten">×</button>
+			<h2 id="snack-formulier-titel">Snack toevoegen</h2>
+			<form>
+				<label for="snack-naam">Naam van de snack</label>
+				<input id="snack-naam" name="naam" type="text" required maxlength="40" autocomplete="off">
+				<label for="snack-foto">Foto-URL (optioneel)</label>
+				<input id="snack-foto" name="foto" type="url" placeholder="https://...">
+				<button type="submit">Toevoegen aan het rad</button>
+			</form>
 		</div>
 	</body>
 </html>

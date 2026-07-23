@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Alleen herschrijven als het verzoek niet al naar /src gaat
+RewriteCond %{REQUEST_URI} !^/src/
+
+# Herschrijf intern naar de src-map
+RewriteRule ^(.*)$ src/$1 [L]

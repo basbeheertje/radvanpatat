@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Snack-Rad Changelog | Wat is er nieuw?</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap"
+        rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#ffb800",
+                        "tertiary-container": "#c4c5c5",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#5e4200",
+                        "surface-tint": "#7c5800",
+                        "inverse-surface": "#313030",
+                        "primary-fixed-dim": "#ffba20",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "outline-variant": "#d5c4ab",
+                        "on-tertiary-container": "#505252",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fcf9f8",
+                        "surface-container": "#f0eded",
+                        "on-primary-fixed": "#271900",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f3f0ef",
+                        "secondary": "#bc0000",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#e41f13",
+                        "error": "#ba1a1a",
+                        "tertiary": "#5d5f5f",
+                        "background": "#fcf9f8",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-variant": "#e5e2e1",
+                        "on-secondary-container": "#fffbff",
+                        "on-background": "#1c1b1b",
+                        "outline": "#837560",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-surface-variant": "#514532",
+                        "on-secondary-fixed-variant": "#930000",
+                        "inverse-primary": "#ffba20",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed": "#ffdea8",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#7c5800",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary-fixed": "#410000",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-container": "#6b4c00",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffdad4",
+                        "surface-container-high": "#eae7e7",
+                        "surface-bright": "#fcf9f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "margin-desktop": "120px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-md": ["Space Grotesk"],
+                        "label-sm": ["Space Grotesk"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {
+                            "lineHeight": "40px",
+                            "letterSpacing": "-0.01em",
+                            "fontWeight": "800"
+                        }],
+                        "headline-xl": ["48px", {
+                            "lineHeight": "56px",
+                            "letterSpacing": "-0.02em",
+                            "fontWeight": "800"
+                        }],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+        .timeline-line {
+            background: repeating-linear-gradient(
+                to bottom,
+                #ffb800 0,
+                #ffb800 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 184, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+    <!-- Hero Section -->
+    <section class="mb-xl text-center md:text-left relative">
+        <div class="absolute -top-10 -left-10 w-48 h-48 bg-primary-container/10 blur-3xl rounded-full"></div>
+        <h1 class="font-headline-xl text-headline-xl text-primary mb-sm relative z-10">Wat is er nieuw?</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+            We zijn constant bezig om de ervaring van het Rad van Patat lekkerder, sneller en gezelliger te maken. Bekijk hier de
+            laatste updates van <a href="https://decodekas.nl" title="Ga naar de website van De Code Kas">De Code Kas.</a>
+        </p>
+    </section>
+    <!-- Changelog Timeline -->
+    <div class="relative">
+        <!-- Central Line for Desktop -->
+        <div class="hidden md:block absolute left-base top-0 bottom-0 w-1 timeline-line opacity-30 rounded-full"></div>
+        <!-- Version 1.2 -->
+        <article class="relative pl-0 md:pl-12 mb-xl group">
+            <!-- Timeline Dot -->
+            <div
+                class="hidden md:flex absolute left-0 top-1 w-5 h-5 bg-primary-container rounded-full border-4 border-surface shadow-[0_0_10px_rgba(255,184,0,0.5)] z-10 group-hover:scale-125 transition-transform"></div>
+            <div
+                class="glass-card p-md md:p-lg rounded-xl shadow-[0_4px_20px_-2px_rgba(255,184,0,0.08)] border-l-4 border-primary-container">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-md gap-sm">
+                    <div class="flex items-center gap-base">
+                        <span
+                            class="bg-secondary-container text-on-secondary-container font-label-sm px-sm py-1 rounded-full">Nieuw</span>
+                        <h2 class="font-headline-md text-headline-md text-on-surface">Versie 1.2 — De Grote Saus
+                            Update</h2>
+                    </div>
+                    <time class="font-label-md text-label-md text-on-surface-variant">Vandaag, 2024</time>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <div class="space-y-md">
+                        <div class="flex gap-base">
+                            <span class="material-symbols-outlined text-primary"
+                                  data-icon="restaurant">restaurant</span>
+                            <div>
+                                <h3 class="font-label-md text-label-md text-primary mb-xs">Friet vs Patat Check</h3>
+                                <p class="text-body-md text-on-surface-variant">Eindelijk de ultieme vrede: stel je
+                                    taalgebruik in op basis van je regio. De interface past zich direct aan je voorkeur
+                                    aan.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-base">
+                            <span class="material-symbols-outlined text-primary" data-icon="share">share</span>
+                            <div>
+                                <h3 class="font-label-md text-label-md text-primary mb-xs">Interactief Wiel Delen</h3>
+                                <p class="text-body-md text-on-surface-variant">Nodig je vrienden uit voor een live
+                                    sessie. Iedereen ziet het rad in real-time draaien op hun eigen scherm.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative h-48 rounded-lg overflow-hidden group-hover:shadow-lg transition-shadow">
+                        <img class="w-full h-full object-cover"
+                             data-alt="A macro photography shot of golden, crispy Dutch fries served in a paper cone with a dollop of mayonnaise, high-key lighting, vibrant yellow and deep red color palette, 3D tactile feel, modern pop-art aesthetic."
+                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY18ev06nza3VxBo-fKE0NGVsZzsk48tdpzwE9dGZaa0vGnXs6L53uxDRMm5Jqd8pqY_IkQty110uG_PojmAdLhu6sH5VzkK0un4A_7PtTEIWungFmbleMK-SD0zJ80OVDUGKJpe71XQGBdMalFPwI4nC0ixYVgO7HjP-sYgyeanMAu8tlexem9-UvpPu_gT_-IE-rriQmg1RoLqsYOFKRJUOO6ENqd4RR3vxPd4FgVycyacLvsylSBA"/>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-md">
+                            <span class="text-white font-label-md">Enhanced Branding by De Code Kas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Version 1.1 -->
+        <article class="relative pl-0 md:pl-12 mb-xl group">
+            <div
+                class="hidden md:flex absolute left-0 top-1 w-5 h-5 bg-tertiary-container rounded-full border-4 border-surface z-10"></div>
+            <div class="bg-surface-container-low p-md md:p-lg rounded-xl border border-outline-variant/30">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-md gap-sm">
+                    <div class="flex items-center gap-base">
+                        <span class="bg-primary-fixed text-on-primary-fixed font-label-sm px-sm py-1 rounded-full">Verbetering</span>
+                        <h2 class="font-headline-md text-headline-md text-on-surface">Versie 1.1 — Snelheid &
+                            Support</h2>
+                    </div>
+                    <time class="font-label-md text-label-md text-on-surface-variant">15 Maart, 2024</time>
+                </div>
+                <div class="space-y-md max-w-3xl">
+                    <div class="flex gap-base">
+                        <span class="material-symbols-outlined text-tertiary" data-icon="keyboard">keyboard</span>
+                        <div>
+                            <h3 class="font-label-md text-label-md text-on-surface mb-xs">Keyboard Shortcuts
+                                Integration</h3>
+                            <p class="text-body-md text-on-surface-variant">Druk op spatie om het rad te laten spinnen.
+                                Navigeer door menu's met je pijltjestoetsen voor een vliegensvlugge snackkeuze.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-base">
+                        <span class="material-symbols-outlined text-tertiary" data-icon="help_center">help_center</span>
+                        <div>
+                            <h3 class="font-label-md text-label-md text-on-surface mb-xs">Help Center Launch</h3>
+                            <p class="text-body-md text-on-surface-variant">Vragen over snack-allergieën of hoe de 3D
+                                engine werkt? Ons nieuwe help center staat vol met antwoorden.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Version 1.0 -->
+        <article class="relative pl-0 md:pl-12 mb-xl group">
+            <div
+                class="hidden md:flex absolute left-0 top-1 w-5 h-5 bg-secondary rounded-full border-4 border-surface z-10"></div>
+            <div class="bg-surface-container-low p-md md:p-lg rounded-xl border border-outline-variant/30">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-md gap-sm">
+                    <div class="flex items-center gap-base">
+                        <span class="bg-secondary text-on-secondary font-label-sm px-sm py-1 rounded-full">Launch</span>
+                        <h2 class="font-headline-md text-headline-md text-on-surface">Versie 1.0 — De Genesis</h2>
+                    </div>
+                    <time class="font-label-md text-label-md text-on-surface-variant">1 Januari, 2024</time>
+                </div>
+                <p class="text-body-md text-on-surface-variant mb-md">
+                    Het begin van een nieuw snack-tijdperk. De eerste lancering van ons 3D Snack-Rad, direct uit de
+                    laboratoria van De Code Kas.
+                </p>
+                <div class="flex flex-wrap gap-sm">
+<span class="flex items-center gap-xs bg-surface-container px-sm py-1 rounded font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span> 3D Rendering Engine
+                        </span>
+                    <span
+                        class="flex items-center gap-xs bg-surface-container px-sm py-1 rounded font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span> Mobile Optimization
+                        </span>
+                    <span
+                        class="flex items-center gap-xs bg-surface-container px-sm py-1 rounded font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span> Snack Database v1
+                        </span>
+                </div>
+            </div>
+        </article>
+    </div>
+    <!-- CTA Section -->
+    <section class="mt-xl bg-primary-container rounded-xl p-lg text-center relative overflow-hidden">
+        <!-- Decorative circle -->
+        <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-white/10 rounded-full"></div>
+        <div class="relative z-10">
+            <span class="material-symbols-outlined text-[48px] text-on-primary-container mb-md" data-icon="lightbulb">lightbulb</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-primary-container mb-sm">Iets anders op het menu?</h2>
+            <p class="font-body-lg text-body-lg text-on-primary-container/80 mb-lg max-w-xl mx-auto">
+                Mis je een specifieke snack of heb je een briljant idee voor een nieuwe functie? Laat het ons weten!
+            </p>
+            <a class="inline-flex items-center gap-base bg-on-primary-container text-white px-xl py-md rounded-full font-label-md hover:shadow-xl transition-all active:scale-95"
+               href="#">
+                Suggestie doorgeven
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+            </a>
+        </div>
+    </section>
+</main>
+<script>
+    // Simple scroll reveal for timeline items
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-10');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('article').forEach(el => {
+        el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+        observer.observe(el);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+.material-symbols-outlined {
+	font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.keyboard-key {
+	box-shadow: 0 4px 0 #837560;
+	transition: all 0.1s ease;
+}
+
+.keyboard-key:active {
+	box-shadow: 0 1px 0 #837560;
+	transform: translateY(3px);
+}
+
+.bento-card {
+	transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bento-card:hover {
+	transform: translateY(-8px);
+}
+
+@keyframes snack-float {
+	0% { transform: translateY(0); }
+	50% { transform: translateY(-10px); }
+	100% { transform: translateY(0); }
+}
+
+.animate-snack-float {
+	animation: snack-float 3s ease-in-out infinite;
+}
+
+.snack-float-delayed {
+	animation-delay: 1.5s;
+}
+
+.roulette-page {
+	background:
+		radial-gradient(circle at top, rgba(255, 222, 168, 0.92), rgba(255, 222, 168, 0) 32%),
+		linear-gradient(180deg, #fffdf7 0%, #fcf9f8 100%);
+}
+
+.roulette-hero-badge {
+	box-shadow: 0 6px 0 rgba(94, 66, 0, 0.28);
+}
+
+.roulette-wheel-shell {
+	position: relative;
+	width: min(100%, 37rem);
+	aspect-ratio: 1;
+}
+
+.roulette-wheel-pointer {
+	position: absolute;
+	top: -0.9rem;
+	left: 50%;
+	z-index: 5;
+	width: 4.75rem;
+	height: 5.6rem;
+	transform: translateX(-50%);
+	filter: drop-shadow(0 12px 18px rgba(33, 23, 15, 0.28));
+}
+
+.roulette-wheel-stage {
+	position: relative;
+	display: grid;
+	width: 100%;
+	height: 100%;
+	border-radius: 9999px;
+	place-items: center;
+}
+
+.roulette-wheel-stage::before {
+	position: absolute;
+	inset: 4%;
+	border-radius: 9999px;
+	background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 70%);
+	content: "";
+	pointer-events: none;
+}
+
+#wheel-shell {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 9999px;
+	aspect-ratio: 1;
+}
+
+#wheel-svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+#wheel-rotor {
+	transform-origin: 320px 320px;
+	transition: transform 4800ms cubic-bezier(0.12, 0.82, 0.16, 1);
+	will-change: transform;
+}
+
+#wheel-hit-area {
+	cursor: grab;
+}
+
+.roulette-wheel-bulb,
+.roulette-wheel-bulb-glow {
+	animation-duration: 1250ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: steps(1, end);
+}
+
+.roulette-wheel-bulb {
+	animation-name: roulette-wheel-bulb-blink;
+}
+
+.roulette-wheel-bulb-glow {
+	animation-name: roulette-wheel-bulb-glow;
+}
+
+@keyframes roulette-wheel-bulb-blink {
+	0%,
+	42%,
+	69%,
+	100% {
+		fill: #ffffff;
+		stroke: #ffc928;
+		filter: drop-shadow(0 0 1px rgba(255, 201, 40, 0.3));
+	}
+
+	43%,
+	68% {
+		fill: #ffc928;
+		stroke: #fff0b8;
+		filter: drop-shadow(0 0 10px rgba(255, 201, 40, 0.95));
+	}
+}
+
+@keyframes roulette-wheel-bulb-glow {
+	0%,
+	42%,
+	69%,
+	100% {
+		opacity: 0.2;
+	}
+
+	43%,
+	68% {
+		opacity: 0.95;
+	}
+}
+
+.roulette-drag-ghost {
+	position: fixed;
+	z-index: 120;
+	pointer-events: none;
+	transition: opacity 120ms ease;
+}
+
+.roulette-drag-ghost.hidden {
+	display: none;
+}
+
+.roulette-drag-segment {
+	display: block;
+	width: 100%;
+	height: 100%;
+	filter: drop-shadow(0 16px 24px rgba(33, 23, 15, 0.28));
+}
+
+.roulette-drag-segment image,
+.roulette-drag-segment img {
+	width: 100%;
+	height: 100%;
+}
+
+.roulette-wheel-spotlight {
+	position: absolute;
+	z-index: -1;
+	width: 70%;
+	height: 70%;
+	border-radius: 9999px;
+	background: radial-gradient(circle, rgba(255, 200, 40, 0.22), rgba(255, 200, 40, 0) 68%);
+	filter: blur(42px);
+}
+
+.is-dragging-custom-snack {
+	cursor: grabbing;
+	user-select: none;
+}
+
+.is-dragging-custom-snack #wheel-hit-area {
+	cursor: grabbing;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#wheel-rotor {
+		transition-duration: 120ms;
+	}
+
+	.roulette-wheel-bulb,
+	.roulette-wheel-bulb-glow {
+		animation: none;
+	}
+}
+
+#resultaat-afbeelding,
+#resultaat-letter {
+	width: 112px;
+	height: 112px;
+	border-radius: 9999px;
+	margin: 0 auto 24px;
+}
+
+#resultaat-afbeelding {
+	display: none;
+	object-fit: cover;
+	border: 4px solid #7c5800;
+}
+
+#resultaat-letter {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: #ffb800;
+	border: 4px solid #7c5800;
+	color: #6b4c00;
+	font-family: "Plus Jakarta Sans", sans-serif;
+	font-size: 48px;
+	font-weight: 800;
+}
+
+#eggs-toast {
+	position: fixed;
+	left: 50%;
+	bottom: 32px;
+	z-index: 220;
+	transform: translateX(-50%);
+	padding: 14px 20px;
+	border: 3px solid #7c5800;
+	border-radius: 9999px;
+	background: #ffb800;
+	color: #271900;
+	font-family: "Space Grotesk", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	box-shadow: 0 12px 24px rgba(0, 0, 0, .18);
+}
+
+#eggs-toast.is-hidden {
+	display: none;
+}
+
+#eggs-toast.toast-positive {
+	border-color: #7c5800;
+	background: #ffb800;
+	color: #271900;
+}
+
+#eggs-toast.toast-negative {
+	border-color: #ba1a1a;
+	background: #ffdad6;
+	color: #93000a;
+}
+
+.eggs-kans-verborgen {
+	display: none;
+}
+
+.bg-blur-backdrop {
+	backdrop-filter: blur(8px);
+	background-color: rgba(28, 27, 27, 0.4);
+}
+
+.snack-card-shadow {
+	box-shadow: 0 4px 20px -4px rgba(255, 184, 0, 0.15);
+}
+
+@keyframes pop-in {
+	0% {
+		transform: scale(0.9) translateY(20px);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+}
+
+.animate-pop-in {
+	animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+#share-qrcode canvas,
+#share-qrcode img {
+	width: 192px;
+	height: 192px;
+	border-radius: 16px;
+	display: block;
+}
+
+.bottom-opinion-banner-hidden {
+	display: none;
+}
+
+.header-logo-link {
+	display: inline-flex;
+	align-items: center;
+	transform-origin: center;
+	transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 220ms ease;
+}
+
+.header-logo-link:hover,
+.header-logo-link:focus-visible {
+	transform: scale(1.12) translateZ(0);
+	filter: drop-shadow(0 14px 22px rgba(124, 88, 0, 0.28));
+}
+
+.header-logo-link:active {
+	transform: scale(1.06);
+}
+
+.branding-sticker {
+	transform: rotate(3deg);
+	box-shadow: 8px 8px 0 0 #ffdea8, 16px 16px 32px -8px rgba(124, 88, 0, 0.15);
+	transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.branding-sticker:hover,
+.branding-sticker:focus-visible {
+	transform: rotate(0deg) scale(1.05) translateY(-5px);
+	box-shadow: 4px 4px 0 0 #ffdea8, 24px 24px 48px -12px rgba(124, 88, 0, 0.25);
+}
