@@ -1,9 +1,7 @@
 name: 📋 Taak
 description: Voeg een nieuwe taak of verbetering toe.
 title: "[TASK] "
-labels:
-    - task
-    - "to do"
+labels: ["todo"]
 body:
     - type: markdown
       attributes:
