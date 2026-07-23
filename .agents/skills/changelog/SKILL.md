@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Keep `changelog.html` accurate, readable, and up to date whenever an AI agent changes the project.
+Keep `CHANGELOG.md` and `src/frontend/changelog.html` accurate, readable, and up to date whenever an AI agent changes the project.
 
 This skill applies to all code changes, configuration changes, UI changes, bug fixes, performance improvements, security changes, integrations, migrations, and user-visible behavior changes.
 
-The changelog is part of the deliverable. A task is not complete until the changelog has been reviewed and, when applicable, updated.
+The changelog is part of the deliverable. A task is not complete until the markdown source has been reviewed and, when applicable, updated, and `src/frontend/changelog.html` has been regenerated from it.
 
 ---
 
 ## Mandatory behavior
 
-After completing a task, always determine whether the changes should be recorded in `changelog.html`.
+After completing a task, always determine whether the changes should be recorded in `CHANGELOG.md` and surfaced in `src/frontend/changelog.html`.
 
-Update `changelog.html` when the work includes one or more of the following:
+Update the changelog when the work includes one or more of the following:
 
 - a new feature;
 - a user-visible improvement;
@@ -43,19 +43,23 @@ Do not update the changelog for changes that have no practical value for users o
 
 When in doubt, prefer adding a concise changelog entry rather than omitting a meaningful change.
 
+Treat `CHANGELOG.md` as the source of truth. Never hand-maintain release content in `src/frontend/changelog.html` without also updating `CHANGELOG.md`.
+
 ---
 
 ## Required workflow
 
 For every task, follow this sequence:
 
-1. Inspect the existing structure and styling of `changelog.html`.
+1. Inspect the existing structure and styling of `src/frontend/changelog.html` and the current format of `CHANGELOG.md`.
 2. Determine which completed changes are changelog-worthy.
-3. Reuse the existing HTML structure, CSS classes, headings, and conventions.
-4. Add the new entry in the correct chronological location.
-5. Prevent duplicate entries.
-6. Validate that the resulting HTML remains valid and readable.
-7. Mention the changelog update in the final task summary.
+3. Add the new entry to `CHANGELOG.md` in the correct chronological location.
+4. Use the current git tag as the version section when that tag already exists in `CHANGELOG.md`.
+5. If there is no current git tag or no matching version heading yet, update the existing `[Onuitgebracht]` section instead of inventing a release.
+6. Prevent duplicate entries.
+7. Regenerate `src/frontend/changelog.html` by running `node scripts/generate-changelog-html.mjs`.
+8. Validate that the resulting HTML remains valid and readable.
+9. Mention the changelog update in the final task summary.
 
 Do not replace the entire changelog unless the task explicitly requires a redesign.
 
@@ -87,7 +91,7 @@ Never rely only on the original user request, because the implementation may dif
 
 ## Entry quality rules
 
-Every changelog entry must be:
+Every changelog entry in `CHANGELOG.md` must be:
 
 - concise;
 - specific;
@@ -120,7 +124,7 @@ Avoid vague entries such as:
 
 ## Recommended categories
 
-Use the categories already present in `changelog.html`.
+Use the categories already present in `CHANGELOG.md`.
 
 If the changelog has no established categories, use only the categories that are relevant:
 
@@ -151,7 +155,8 @@ If entries are grouped by date:
 
 If entries are grouped by version:
 
-- add entries only to an existing unreleased section unless a release version was explicitly provided;
+- prefer the section that matches the current git tag when one exists and the task belongs to that released version;
+- otherwise add entries only to an existing unreleased section unless a release version was explicitly provided;
 - do not invent or increment a version number;
 - do not mark a release as published unless the task explicitly includes the release.
 
@@ -163,7 +168,7 @@ Use ISO dates (`YYYY-MM-DD`) only when no existing date format is established.
 
 ## HTML editing rules
 
-When editing `changelog.html`:
+When editing `src/frontend/changelog.html`:
 
 - preserve the current document structure;
 - preserve indentation and formatting conventions;
@@ -173,7 +178,7 @@ When editing `changelog.html`:
 - use list items for individual changes when the existing file uses lists;
 - do not insert Markdown into the HTML file;
 - do not add inline CSS unless the file already uses it and the new entry requires it;
-- do not add JavaScript for a changelog-only update;
+- do not add JavaScript for a changelog-only update unless the task explicitly changes the reusable changelog UI or generation flow;
 - do not rewrite unrelated historical entries;
 - do not alter existing dates, versions, or descriptions unless correcting an obvious error is part of the task.
 
@@ -230,11 +235,17 @@ Good security example:
 
 ## Failure handling
 
-If `changelog.html` does not exist:
+If `CHANGELOG.md` does not exist:
 
-- do not silently create a new changelog unless the repository instructions allow it;
-- report that the expected changelog file is missing;
-- only create it when the task or repository policy explicitly requires automatic creation.
+- do not silently create a new changelog unless the task or repository instructions require it;
+- report that the expected markdown source is missing;
+- create it only when the task explicitly requires a changelog source of truth.
+
+If `src/frontend/changelog.html` does not exist:
+
+- do not silently invent a one-off HTML structure;
+- regenerate it from `CHANGELOG.md` using `node scripts/generate-changelog-html.mjs`;
+- only hand-create the page when the task explicitly requires the initial changelog frontend to be introduced.
 
 If the HTML structure is malformed:
 
@@ -256,7 +267,8 @@ Before finishing a task, verify all of the following:
 
 - [ ] The final implementation was reviewed.
 - [ ] Changelog-worthy changes were identified.
-- [ ] `changelog.html` was updated when required.
+- [ ] `CHANGELOG.md` was updated when required.
+- [ ] `src/frontend/changelog.html` was regenerated when required.
 - [ ] The entry describes only completed work.
 - [ ] The entry matches the language and style of the existing changelog.
 - [ ] No duplicate entry was added.
@@ -272,15 +284,15 @@ In the final response, include one of these statements:
 
 When updated:
 
-> Updated `changelog.html` with the completed changes.
+> Updated `CHANGELOG.md` and regenerated `src/frontend/changelog.html` with the completed changes.
 
 When no update was necessary:
 
-> Reviewed `changelog.html`; no update was needed because the task had no user-visible or maintainers-relevant impact.
+> Reviewed `CHANGELOG.md` and `src/frontend/changelog.html`; no update was needed because the task had no user-visible or maintainers-relevant impact.
 
 When blocked:
 
-> Could not update `changelog.html` because [specific reason].
+> Could not update `CHANGELOG.md` and `src/frontend/changelog.html` because [specific reason].
 
 Never claim the changelog was updated unless the file was actually changed.
 
@@ -293,3 +305,12 @@ Treat changelog maintenance as part of the definition of done.
 Do not wait for the user to request a changelog update separately.
 
 Every completed task must end with an explicit changelog review.
+
+## Repository-specific rule
+
+For this repository, always do the following after a changelog-worthy change:
+
+1. Update `CHANGELOG.md`.
+2. Add the change under the current git tag when that section exists, otherwise under `[Onuitgebracht]`.
+3. Run `node scripts/generate-changelog-html.mjs`.
+4. Verify that `src/frontend/changelog.html` now contains the updated version article.

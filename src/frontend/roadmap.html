@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="light" lang="nl">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" name="viewport"/>
+		<title>Rad van Patat Roadmap | Wat staat er op de planning?</title>
+		<meta content="Bekijk welke functies voor Rad van Patat live zijn, waar nu aan gewerkt wordt en wat later op de planning staat." name="description"/>
+		<meta content="rad van patat roadmap, milestones, planning, snackrad updates, nieuwe functies" name="keywords"/>
+		<meta content="telephone=yes" name="format-detection"/>
+		<meta content="yes" name="mobile-web-app-capable"/>
+		<meta content="index, follow" name="robots"/>
+		<meta content="#7c5800" name="theme-color"/>
+		<meta content="on" http-equiv="cleartype"/>
+		<link href="https://radvanpatat.nl/roadmap.html" rel="canonical"/>
+		<link as="image" href="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" rel="preload"/>
+		<meta content="Rad van Patat Roadmap | Wat staat er op de planning?" property="og:title"/>
+		<meta content="Bekijk welke functies voor Rad van Patat live zijn, waar nu aan gewerkt wordt en wat later op de planning staat." property="og:description"/>
+		<meta content="nl_NL" property="og:locale"/>
+		<meta content="Rad van Patat" property="og:site_name"/>
+		<meta content="https://radvanpatat.nl/roadmap.html" property="og:url"/>
+		<meta content="website" property="og:type"/>
+		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" property="og:image"/>
+		<meta content="Rad van Patat logo" property="og:image:alt"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="radvanpatat.nl" name="twitter:site"/>
+		<meta content="https://radvanpatat.nl/roadmap.html" name="twitter:url"/>
+		<meta content="Rad van Patat Roadmap | Wat staat er op de planning?" name="twitter:title"/>
+		<meta content="Bekijk welke functies voor Rad van Patat live zijn, waar nu aan gewerkt wordt en wat later op de planning staat." name="twitter:description"/>
+		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
+		<link href="./assets/images/brand/apple-touch-icon.png" rel="apple-touch-icon"/>
+		<link href="./assets/images/brand/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="./assets/images/brand/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="./assets/images/brand/favicon.png" rel="icon" type="image/png"/>
+		<link href="./assets/images/brand/favicon.png" rel="shortcut icon" type="image/png"/>
+		<link href="https://fonts.googleapis.com" rel="preconnect"/>
+		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+		<link href="./assets/css/default.css" rel="stylesheet"/>
+		<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+		<script src="./assets/js/tailwind-theme.js"></script>
+		<script type="module" src="./assets/js/app.js"></script>
+		<script type="module" src="./assets/js/roadmap-page.js"></script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "CollectionPage",
+				"name": "Rad van Patat Roadmap",
+				"url": "https://radvanpatat.nl/roadmap.html",
+				"image": "https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png",
+				"description": "Publieke roadmap van Rad van Patat met live features, lopende milestones en toekomstige plannen.",
+				"inLanguage": "nl-NL",
+				"publisher": {
+					"@type": "Organization",
+					"name": "Rad van Patat",
+					"url": "https://radvanpatat.nl"
+				}
+			}
+		</script>
+	</head>
+	<body class="roadmap-page bg-background text-on-background min-h-screen selection:bg-primary-container flex flex-col">
+		<site-header
+			active-nav=""
+			cta-href="./index.html"
+			cta-label="Terug naar het rad"
+			cta-mode="link"
+			help-href="./help.html"
+			logo-href="./index.html"
+			rad-href="./index.html"
+			share-href="./index.html"
+			share-mode="link"></site-header>
+
+		<main class="flex-1 max-w-[1280px] mx-auto w-full px-margin-mobile md:px-margin-desktop py-xl">
+			<section class="roadmap-hero">
+				<div class="roadmap-hero__copy">
+					<p class="roadmap-hero__eyebrow">De toekomst van Rad van Patat</p>
+					<h1 class="font-headline-xl text-headline-xl text-primary">
+						Onze roadmap naar
+						<span class="text-secondary">crispy perfectie</span>
+					</h1>
+					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+						Hier zie je wat er live staat, waar nu aan gewerkt wordt en welke milestones nog op de planning staan. De kaart hieronder wordt gevoed door GitHub milestones zodat de roadmap gelijkloopt met releases.
+					</p>
+				</div>
+				<div class="roadmap-hero__decor" aria-hidden="true">
+					<span class="material-symbols-outlined">fastfood</span>
+				</div>
+			</section>
+
+			<roadmap-board></roadmap-board>
+
+			<section class="roadmap-cta" id="submit">
+				<div class="roadmap-cta__content">
+					<h2 class="font-headline-lg text-headline-lg text-on-secondary-container">Heb jij een lekker idee?</h2>
+					<p class="font-body-lg text-on-secondary-container/90 max-w-2xl">
+						We horen graag welke functies of verbeteringen jij nog op het menu wilt zien. Stuur een bericht naar De Code Kas en we nemen het mee in de volgende sprint.
+					</p>
+				</div>
+				<div class="roadmap-cta__actions">
+					<a class="roadmap-cta__link roadmap-cta__link--light" href="mailto:support@decodekas.nl">Mail je idee</a>
+					<a class="roadmap-cta__link" href="https://wa.me/0172729030" rel="noopener noreferrer" target="_blank">Chat via WhatsApp</a>
+				</div>
+			</section>
+		</main>
+
+		<site-footer-designed-by></site-footer-designed-by>
+
+		<branding-sticker></branding-sticker>
+	</body>
+</html>

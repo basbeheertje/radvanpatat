@@ -98,6 +98,10 @@
 		return document.getElementById("snack-drag-ghost");
 	}
 
+	function getCenterTrigger() {
+		return document.querySelector(".roulette-wheel-center-trigger");
+	}
+
 	function getSegmentElement(segmentIndex) {
 		return document.querySelector(`[data-segment-index="${segmentIndex}"]`);
 	}
@@ -115,6 +119,13 @@
 
 	function getWheelRadiusOnScreen() {
 		return design.outerRadius * getWheelInfo().scale;
+	}
+
+	function isPointerOnCenter(clientX, clientY) {
+		const info = getWheelInfo();
+		const centerRadius = 84 * info.scale;
+
+		return Math.hypot(clientX - info.centerX, clientY - info.centerY) <= centerRadius;
 	}
 
 	function getPointerSegmentIndex(clientX, clientY) {
@@ -186,6 +197,22 @@
 		ghost.innerHTML = "";
 	}
 
+	function updateCenterHover(clientX, clientY) {
+		const centerTrigger = getCenterTrigger();
+		if (!centerTrigger) {
+			return;
+		}
+
+		centerTrigger.classList.toggle("is-hovered", isPointerOnCenter(clientX, clientY));
+	}
+
+	function clearCenterHover() {
+		const centerTrigger = getCenterTrigger();
+		if (centerTrigger) {
+			centerTrigger.classList.remove("is-hovered");
+		}
+	}
+
 	function verbergSegmentInWiel(segmentIndex) {
 		const segment = getSegmentElement(segmentIndex);
 		if (segment) {
@@ -244,7 +271,12 @@
 		}));
 		definitions.appendChild(clipPath);
 
-		group.append(
+		const centerGroup = getSvgNode("g", {
+			class: "roulette-wheel-center-trigger",
+			"aria-hidden": "true"
+		});
+
+		centerGroup.append(
 			getSvgNode("circle", {
 				cx: design.center,
 				cy: design.center + 10,
@@ -278,6 +310,8 @@
 				preserveAspectRatio: "xMidYMid slice"
 			})
 		);
+
+		group.append(centerGroup);
 	}
 
 	function renderSegment(group, snack, index) {
@@ -531,6 +565,9 @@
 	app.wheel = {
 		createWheel: createWheel,
 		getSegmentIndexFromPointer: getSegmentIndexFromPointer,
+		isPointerOnCenter: isPointerOnCenter,
+		updateCenterHover: updateCenterHover,
+		clearCenterHover: clearCenterHover,
 		startDrag: startDrag,
 		updateDrag: updateDrag,
 		eindigDrag: eindigDrag,

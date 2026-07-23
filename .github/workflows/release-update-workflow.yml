@@ -1,0 +1,97 @@
+name: Update release content and deploy Pages
+
+on:
+    release:
+        types:
+            - published
+            - edited
+            - deleted
+
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    pages: write
+    id-token: write
+
+concurrency:
+    group: changelog-and-pages
+    cancel-in-progress: false
+
+jobs:
+    generate:
+        name: Generate release content
+        runs-on: ubuntu-latest
+
+        outputs:
+            commit_sha: ${{ steps.commit.outputs.commit_sha }}
+
+        steps:
+            - name: Repository ophalen
+              uses: actions/checkout@v4
+              with:
+                  ref: main
+                  fetch-depth: 0
+
+            - name: Node.js installeren
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - name: Dependencies installeren
+              run: npm ci
+
+            - name: Changelog genereren
+              run: npm run generate:changelog
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Roadmap genereren
+              run: npm run generate:roadmap
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Gegenereerde bestanden committen
+              id: commit
+              shell: bash
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+                  git add CHANGELOG.md
+                  git add src/frontend/changelog.html
+                  git add src/frontend/assets/js/roadmap-data.js
+
+                  if git diff --cached --quiet; then
+                    echo "Geen wijzigingen gevonden."
+                    echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+                    exit 0
+                  fi
+
+                  git commit -m "docs: update release content"
+                  git push origin HEAD:main
+
+                  echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+            - name: GitHub Pages configureren
+              uses: actions/configure-pages@v5
+
+            - name: Website uploaden
+              uses: actions/upload-pages-artifact@v4
+              with:
+                  path: ./src/frontend
+
+    deploy:
+        name: Deploy GitHub Pages
+        needs: generate
+        runs-on: ubuntu-latest
+
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        steps:
+            - name: Publiceren
+              id: deployment
+              uses: actions/deploy-pages@v4

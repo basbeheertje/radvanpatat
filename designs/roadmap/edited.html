@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Roadmap - Snack-Rad | Gezellig Dining</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Space+Grotesk:wght@300..700&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap"
+        rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#514532",
+                        "on-secondary-fixed-variant": "#930000",
+                        "inverse-primary": "#ffba20",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "outline": "#837560",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-variant": "#e5e2e1",
+                        "on-secondary-container": "#fffbff",
+                        "on-background": "#1c1b1b",
+                        "background": "#fcf9f8",
+                        "tertiary": "#5d5f5f",
+                        "surface-container-high": "#eae7e7",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffdad4",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-container": "#6b4c00",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary-fixed": "#410000",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary": "#7c5800",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed": "#ffdea8",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "outline-variant": "#d5c4ab",
+                        "on-tertiary-container": "#505252",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#313030",
+                        "primary-fixed-dim": "#ffba20",
+                        "on-primary-fixed-variant": "#5e4200",
+                        "surface-tint": "#7c5800",
+                        "tertiary-container": "#c4c5c5",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#ffb800",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#e41f13",
+                        "error-container": "#ffdad6",
+                        "secondary": "#bc0000",
+                        "on-primary-fixed": "#271900",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container": "#f0eded",
+                        "surface": "#fcf9f8",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "120px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-md": ["Space Grotesk"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Space Grotesk"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", {
+                            "lineHeight": "56px",
+                            "letterSpacing": "-0.02em",
+                            "fontWeight": "800"
+                        }],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {
+                            "lineHeight": "40px",
+                            "letterSpacing": "-0.01em",
+                            "fontWeight": "800"
+                        }],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .text-shadow-custom {
+            text-shadow: 2px 2px 0px rgba(124, 88, 0, 0.2);
+        }
+
+        .roadmap-card {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .roadmap-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+    </style>
+</head>
+<body
+    class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+    <!-- Hero Section -->
+    <section
+        class="mb-xl text-center md:text-left relative overflow-hidden bg-primary-container/10 p-lg rounded-xl border-2 border-primary-container">
+        <div class="max-w-2xl relative z-10">
+            <div
+                class="inline-flex items-center gap-xs bg-secondary text-on-secondary px-sm py-1 rounded-full text-label-sm mb-base">
+                <span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                TOEKOMST VAN DE SNACK
+            </div>
+            <h1 class="font-headline-xl text-headline-lg md:text-headline-xl text-primary mb-md leading-tight">Onze
+                Roadmap naar <br/><span class="text-secondary italic">Crispy Perfectie</span></h1>
+            <p class="font-body-lg text-on-surface-variant mb-lg">Bij <span class="font-bold">De Code Kas</span> zijn we
+                dag en nacht bezig met het frituren van nieuwe ideeën. Bekijk wat we nu aan het bakken zijn en wat er
+                nog op het menu staat voor de toekomst.</p>
+            <a class="inline-flex items-center gap-base bg-primary text-on-primary px-lg py-md rounded-xl font-bold border-b-4 border-on-primary-fixed-variant active:border-b-0 active:translate-y-1 transition-all"
+               href="#submit">
+                Stuur jouw snack-idee in
+                <span class="material-symbols-outlined">lightbulb</span>
+            </a>
+        </div>
+        <!-- Decorative Icon -->
+        <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-[320px] text-primary">fastfood</span>
+        </div>
+    </section>
+    <!-- Roadmap Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+        <!-- NOW COLUMN -->
+        <div class="flex flex-col gap-md">
+            <div class="flex items-center gap-sm px-base">
+                <div class="w-4 h-4 rounded-full bg-secondary animate-pulse"></div>
+                <h2 class="font-headline-md text-headline-md text-secondary">NU: Versgebakken</h2>
+            </div>
+            <div
+                class="roadmap-card bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_-4px_rgba(255,184,0,0.12)] border-2 border-primary-container">
+                <div class="flex justify-between items-start mb-sm">
+                    <span class="material-symbols-outlined text-primary text-[32px]">3d_rotation</span>
+                    <span
+                        class="bg-primary-container/20 text-on-primary-container px-2 py-0.5 rounded text-[10px] font-black uppercase">LIVE</span>
+                </div>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">Interactief 3D Wiel</h3>
+                <p class="text-body-md text-on-surface-variant">Draai aan het magische wiel in volle 3D glorie. Geen
+                    keuzestress meer voor de vrijdagmiddagborrel!</p>
+            </div>
+            <div
+                class="roadmap-card bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_-4px_rgba(255,184,0,0.12)] border border-outline-variant">
+                <div class="flex justify-between items-start mb-sm">
+                    <span class="material-symbols-outlined text-primary text-[32px]">group</span>
+                    <span
+                        class="bg-primary-container/20 text-on-primary-container px-2 py-0.5 rounded text-[10px] font-black uppercase">LIVE</span>
+                </div>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">Groep Bestellen</h3>
+                <p class="text-body-md text-on-surface-variant">Nodig je vrienden uit en stel samen de ultieme schaal
+                    bittergarnituur samen zonder gedoe.</p>
+            </div>
+            <div
+                class="roadmap-card bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_20px_-4px_rgba(255,184,0,0.12)] border border-outline-variant">
+                <div class="flex justify-between items-start mb-sm">
+                    <span class="material-symbols-outlined text-primary text-[32px]">smartphone</span>
+                    <span
+                        class="bg-primary-container/20 text-on-primary-container px-2 py-0.5 rounded text-[10px] font-black uppercase">LIVE</span>
+                </div>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">Mobiele App</h3>
+                <p class="text-body-md text-on-surface-variant">Overal snacks uitzoeken met onze razendsnelle app voor
+                    iOS en Android. Keep it crispy on the go.</p>
+            </div>
+        </div>
+        <!-- NEXT COLUMN -->
+        <div class="flex flex-col gap-md">
+            <div class="flex items-center gap-sm px-base">
+                <div class="w-4 h-4 rounded-full bg-primary-container"></div>
+                <h2 class="font-headline-md text-headline-md text-primary">BINNENKORT: In de Pan</h2>
+            </div>
+            <div
+                class="roadmap-card bg-surface-container-low p-md rounded-xl border-2 border-dashed border-primary-fixed-dim">
+                <span class="material-symbols-outlined text-primary text-[32px] mb-sm">compare_arrows</span>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">Snack Prijsvergelijker</h3>
+                <p class="text-body-md text-on-surface-variant">Waar zijn de frikandellen het goedkoopst? Wij zoeken het
+                    voor je uit in alle lokale snackbars.</p>
+                <div class="mt-md h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+                    <div class="h-full bg-primary-container w-3/4"></div>
+                </div>
+                <span class="text-[10px] font-bold text-on-surface-variant mt-xs block">75% VOLTOOID</span>
+            </div>
+            <div class="roadmap-card bg-surface-container-low p-md rounded-xl border border-outline-variant">
+                <span class="material-symbols-outlined text-primary text-[32px] mb-sm">chat</span>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">WhatsApp Integratie</h3>
+                <p class="text-body-md text-on-surface-variant">Stuur je snack-rad resultaat direct door naar je
+                    vriendengroep via een handige link.</p>
+            </div>
+            <div class="roadmap-card bg-surface-container-low p-md rounded-xl border border-outline-variant">
+                <span class="material-symbols-outlined text-primary text-[32px] mb-sm">account_circle</span>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">Gebruikersaccounts</h3>
+                <p class="text-body-md text-on-surface-variant">Sla je favoriete snack-shacks en lijsten op zodat je ze
+                    nooit meer vergeet.</p>
+            </div>
+        </div>
+        <!-- LATER COLUMN -->
+        <div class="flex flex-col gap-md">
+            <div class="flex items-center gap-sm px-base">
+                <div class="w-4 h-4 rounded-full bg-outline-variant"></div>
+                <h2 class="font-headline-md text-headline-md text-on-surface-variant">LATER: Op de Kaart</h2>
+            </div>
+            <div class="roadmap-card bg-surface p-md rounded-xl border border-outline-variant opacity-80">
+                <span class="material-symbols-outlined text-primary text-[32px] mb-sm">psychology</span>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">AI Snack Recommendations</h3>
+                <p class="text-body-md text-on-surface-variant">Onze slimme AI vertelt je precies welke snack bij jouw
+                    huidige mood past. Brak? Kroket!</p>
+            </div>
+            <div class="roadmap-card bg-surface p-md rounded-xl border border-outline-variant opacity-80">
+                <span class="material-symbols-outlined text-primary text-[32px] mb-sm">delivery_dining</span>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">Direct Bestellen</h3>
+                <p class="text-body-md text-on-surface-variant">Integratie met Thuisbezorgd zodat je rad-resultaat
+                    direct in je mandje belandt.</p>
+            </div>
+            <div class="roadmap-card bg-surface p-md rounded-xl border border-outline-variant opacity-80">
+                <span class="material-symbols-outlined text-primary text-[32px] mb-sm">leaderboard</span>
+                <h3 class="font-headline-md text-label-md text-primary mb-xs">Global Snack Leaderboards</h3>
+                <p class="text-body-md text-on-surface-variant">Bekijk wat de populairste snack van Nederland is per
+                    provincie. Wie wint de strijd?</p>
+            </div>
+        </div>
+    </div>
+    <!-- Submit Idea Section -->
+    <section
+        class="bg-secondary-container p-lg rounded-xl flex flex-col md:flex-row gap-lg items-center relative overflow-hidden"
+        id="submit">
+        <div class="flex-1 text-on-secondary-container">
+            <h2 class="font-headline-lg text-headline-lg mb-sm">Heb jij een lekker idee?</h2>
+            <p class="font-body-lg mb-lg opacity-90 text-on-secondary-container">De Code Kas staat altijd open voor
+                nieuwe suggesties. Of het nu een nieuwe snack-feature is of een briljante bug-fix, laat het ons
+                weten!</p>
+            <form class="space-y-md max-w-md">
+                <div>
+                    <label class="block text-label-sm font-bold mb-xs uppercase tracking-wider">Wat is je idee?</label>
+                    <input
+                        class="w-full bg-white/10 border-2 border-white/20 rounded-xl px-md py-base text-white placeholder:text-white/50 focus:outline-none focus:border-white transition-all"
+                        placeholder="Bijv: Een speciale 'Kaassoufflé-modus'..." type="text"/>
+                </div>
+                <button
+                    class="w-full bg-white text-secondary py-md rounded-xl font-bold text-headline-md hover:bg-opacity-90 active:scale-95 transition-all shadow-lg"
+                    type="submit">
+                    Deel met De Code Kas
+                </button>
+            </form>
+        </div>
+        <div class="flex-shrink-0 w-64 h-64 relative">
+            <img class="w-full h-full object-contain"
+                 data-alt="A whimsical, colorful illustration of a stylized lightbulb shaped like a classic Dutch snack cone filled with fries. The lightbulb is glowing with a warm golden light, surrounded by playful sparks and small heart icons. The style is 2D vector art with bold outlines, consistent with a modern-tactile brand aesthetic using Deep Fryer Gold and Ketchup Red accents."
+                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf48mGyPeyHcjFQOj8XmQDe7_XuwVrXPHxXAvhVUOM9X1O1_3ve_Z2v0ctq97uhDl2sSftuKExDj2KYIDliZIBzzVaim3Q8J1gw_TvNaBxvGakYQeFyOmPbV1q-aqLbw6-6OuhSGfcg-oQZW3VVTZs-4Z0l2AadSiQNFg-sutrb_iTI1U_cZdRvFp--qV-NNAFkuUCasjHQZjSqKdMmfMhKt3Y_SFTtqQOEWQcS9eEoi5P_edSlfHJ7A"/>
+        </div>
+    </section>
+</main>
+<script>
+    // Simple interactivity for form submission
+    document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = "Lekker hoor! Ontvangen.";
+        btn.classList.replace('bg-white', 'bg-primary');
+        btn.classList.replace('text-secondary', 'text-white');
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.classList.replace('bg-primary', 'bg-white');
+            btn.classList.replace('text-white', 'text-secondary');
+            e.target.reset();
+        }, 3000);
+    });
+
+    // Add subtle animation to roadmap cards on scroll
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.roadmap-card').forEach(card => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+        observer.observe(card);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+name: 📋 Taak
+description: Voeg een nieuwe taak of verbetering toe.
+title: "[TASK] "
+labels:
+    - task
+    - "to do"
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Beschrijf hieronder zo duidelijk mogelijk wat er gebouwd moet worden.
+              Richt je vooral op **waarom** de wijziging nodig is en **wat** het eindresultaat moet zijn.
+
+    - type: textarea
+      id: problem
+      attributes:
+          label: Waarom is deze wijziging nodig?
+          description: |
+              Beschrijf het probleem of de situatie die deze taak oplost.
+              Waarom is deze wijziging belangrijk?
+          placeholder: |
+              Bijvoorbeeld:
+              Gebruikers kunnen momenteel niet zien wanneer een export gereed is, waardoor zij onnodig blijven verversen.
+      validations:
+          required: true
+
+    - type: textarea
+      id: solution
+      attributes:
+          label: Gewenste oplossing
+          description: Beschrijf wat de applicatie uiteindelijk moet kunnen.
+          placeholder: |
+              Bijvoorbeeld:
+              Na het starten van een export krijgt de gebruiker een melding zodra de export gereed is.
+      validations:
+          required: true
+
+    - type: textarea
+      id: acceptance
+      attributes:
+          label: Acceptatiecriteria
+          description: Wanneer is deze taak succesvol afgerond?
+          placeholder: |
+              - De gebruiker ontvangt een notificatie.
+              - De notificatie verdwijnt automatisch.
+              - Werkt op desktop en mobiel.
+      validations:
+          required: true
+
+    - type: textarea
+      id: notes
+      attributes:
+          label: Aanvullende informatie
+          description: Extra context, screenshots, links of technische aandachtspunten.
+          placeholder: |
+              Eventuele mock-ups, links naar documentatie of andere relevante informatie.
+      validations:
+          required: false
+
+    - type: dropdown
+      id: priority
+      attributes:
+          label: Prioriteit
+          options:
+              - Laag
+              - Normaal
+              - Hoog
+              - Kritiek
+          default: 1
+
+    - type: dropdown
+      id: impact
+      attributes:
+          label: Impact
+          options:
+              - Klein
+              - Gemiddeld
+              - Groot
+          default: 1
