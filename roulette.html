@@ -1,15 +1,64 @@
 <!DOCTYPE html>
 <html class="light" lang="nl">
 	<head>
-		<meta charset="utf-8"/>
-		<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-		<title>Snack-Rad | Geen keuzestress meer!</title>
+		<meta charset="UTF-8"/>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" name="viewport"/>
+		<title>Rad van Patat Roulette | Draai het Rad van Patat en deel je snacklijst</title>
+		<meta content="Kies razendsnel je volgende snack met de Rad van Patat Roulette. Draai aan het rad, maak je eigen snacklijst, deel die via link of QR-code en laat vrienden direct hetzelfde rad openen." name="description"/>
+		<meta content="rad van patat, rad van patat roulette, roulette, friet, patat, snackbar, snack kiezen, snacklijst delen, QR code rad van patat, bitterbal, frikandel, kroket" name="keywords"/>
+		<meta content="telephone=yes" name="format-detection"/>
+		<meta content="yes" name="mobile-web-app-capable"/>
+		<meta content="index, follow" name="robots"/>
+		<meta content="#7c5800" name="theme-color"/>
+		<meta content="on" http-equiv="cleartype"/>
+		<link href="https://radvanpatat.nl/roulette.html" rel="canonical"/>
+		<link as="image" href="https://radvanpatat.nl/images/brand/rad-van-patat-logo.png" rel="preload"/>
+		<meta content="Rad van Patat | Draai het Rad van Patat en deel je snacklijst" property="og:title"/>
+		<meta content="Kies razendsnel je volgende snack met de Rad van Patat Roulette. Draai aan het rad, maak je eigen snacklijst, deel die via link of QR-code en laat vrienden direct hetzelfde rad openen." property="og:description"/>
+		<meta content="nl_NL" property="og:locale"/>
+		<meta content="Rad van Patat" property="og:site_name"/>
+		<meta content="https://radvanpatat.nl/roulette.html" property="og:url"/>
+		<meta content="website" property="og:type"/>
+		<meta content="https://radvanpatat.nl/images/brand/rad-van-patat-logo.png" property="og:image"/>
+		<meta content="Rad van Patat logo" property="og:image:alt"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="radvanpatat.nl" name="twitter:site"/>
+		<meta content="https://radvanpatat.nl/roulette.html" name="twitter:url"/>
+		<meta content="Rad van Patat Roulette | Draai het Rad van Patat en deel je snacklijst" name="twitter:title"/>
+		<meta content="Kies razendsnel je volgende snack met de Rad van Patat Roulette. Draai aan het rad, maak je eigen snacklijst, deel die via link of QR-code en laat vrienden direct hetzelfde rad openen." name="twitter:description"/>
+		<meta content="https://radvanpatat.nl/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
+		<link href="./images/brand/apple-touch-icon.png" rel="apple-touch-icon"/>
+		<link href="./images/brand/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+		<link href="./images/brand/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+		<link href="./images/brand/favicon.png" rel="icon" type="image/png"/>
+		<link href="./images/brand/favicon.png" rel="shortcut icon" type="image/png"/>
 		<script src="./js/Winwheel.js"></script>
 		<script src="./js/TweenMax.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
 		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+		<link href="./css/default.css" rel="stylesheet"/>
 		<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "WebApplication",
+				"name": "Rad van Patat Roulette",
+				"alternateName": "Rad van Patat Roulette",
+				"url": "https://radvanpatat.nl/roulette.html",
+				"image": "https://radvanpatat.nl/images/brand/rad-van-patat-logo.png",
+				"description": "Een deelbaar Rad van Patat-rad waarmee bezoekers snacks kunnen kiezen, hun eigen lijst kunnen maken en exact hetzelfde rad via link of QR-code kunnen openen.",
+				"applicationCategory": "GameApplication",
+				"operatingSystem": "Web",
+				"inLanguage": "nl-NL",
+				"publisher": {
+					"@type": "Organization",
+					"name": "Rad van Patat",
+					"url": "https://radvanpatat.nl"
+				}
+			}
+		</script>
 		<script>
 			tailwind.config = {
 				darkMode: "class",
@@ -105,119 +154,27 @@
 				}
 			};
 		</script>
-		<style>
-			.material-symbols-outlined {
-				font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-			}
-
-			@keyframes snack-float {
-				0% { transform: translateY(0); }
-				50% { transform: translateY(-10px); }
-				100% { transform: translateY(0); }
-			}
-
-			.animate-snack-float {
-				animation: snack-float 3s ease-in-out infinite;
-			}
-
-			#wheel-stage {
-				position: relative;
-				width: 100%;
-				aspect-ratio: 1 / 1;
-			}
-
-			#snack-wheel {
-				position: relative;
-				width: 100%;
-				height: 100%;
-				border-radius: 9999px;
-				overflow: hidden;
-			}
-
-			#canvas {
-				width: 100%;
-				height: 100%;
-				display: block;
-			}
-
-			#snack-drag-canvas {
-				display: none;
-				position: fixed;
-				z-index: 60;
-				pointer-events: none;
-				transform-origin: top left;
-				filter: drop-shadow(0 16px 24px rgba(0, 0, 0, .22));
-			}
-
-			.is-dragging-custom-snack {
-				cursor: grabbing;
-				user-select: none;
-			}
-
-			#resultaat-afbeelding,
-			#resultaat-letter {
-				width: 112px;
-				height: 112px;
-				border-radius: 9999px;
-				margin: 0 auto 24px;
-			}
-
-			#resultaat-afbeelding {
-				display: none;
-				object-fit: cover;
-				border: 4px solid #7c5800;
-			}
-
-			#resultaat-letter {
-				display: none;
-				align-items: center;
-				justify-content: center;
-				background: #ffb800;
-				border: 4px solid #7c5800;
-				color: #6b4c00;
-				font-family: "Plus Jakarta Sans", sans-serif;
-				font-size: 48px;
-				font-weight: 800;
-			}
-
-			#eggs-toast {
-				display: none;
-				position: fixed;
-				left: 50%;
-				bottom: 32px;
-				z-index: 220;
-				transform: translateX(-50%);
-				padding: 14px 20px;
-				border: 3px solid #7c5800;
-				border-radius: 9999px;
-				background: #ffb800;
-				color: #271900;
-				font-family: "Space Grotesk", sans-serif;
-				font-size: 14px;
-				font-weight: 700;
-				box-shadow: 0 12px 24px rgba(0, 0, 0, .18);
-			}
-
-			.eggs-kans-verborgen {
-				display: none;
-			}
-		</style>
 	</head>
-	<body class="bg-background text-on-background min-h-screen selection:bg-primary-container">
-		<header class="bg-surface w-full sticky top-0 border-b-2 border-primary shadow-sm z-[100]">
-			<div class="flex justify-between items-center w-full px-6 md:px-12 py-xs max-w-7xl mx-auto">
-				<div class="flex items-center gap-2">
-					<span class="material-symbols-outlined text-primary text-[32px]">fastfood</span>
-					<span class="font-headline-md text-headline-md text-primary font-black">Snack-Rad</span>
-				</div>
-				<nav class="hidden md:flex items-center gap-8">
-					<a class="font-label-md text-label-md text-primary" href="#rad">Rad</a>
-					<a class="font-label-md text-label-md text-on-surface-variant hover:bg-primary-container px-4 py-2 rounded-full transition-all" href="#toevoegen">Toevoegen</a>
+	<body class="bg-background text-on-background min-h-screen selection:bg-primary-container flex flex-col">
+		<header class="w-full h-20 bg-surface border-b-2 border-outline-variant shadow-sm sticky top-0 z-[100]">
+			<div class="flex justify-between items-center px-6 md:px-12 max-w-screen-2xl mx-auto h-full">
+				<a class="header-logo-link font-headline-md text-headline-md font-extrabold text-primary flex items-center gap-2" href="./roulette.html">
+					<img alt="Rad van Patat Logo" class="h-12 w-auto object-contain" src="./images/brand/rad-van-patat-logo.png"/>
+				</a>
+				<nav class="hidden md:flex gap-md items-center h-full">
+					<a class="text-primary border-b-2 border-primary font-bold pb-2 hover:text-primary transition-colors duration-200" href="#rad">Rad</a>
+					<button class="text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200" id="header-share-knop" type="button">Delen</button>
+					<a class="text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200" href="#eggs-kans-paneel">Help</a>
 				</nav>
+				<div class="flex items-center gap-md">
+					<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold shadow-[0_4px_0_0_#5e4200] hover:bg-primary hover:text-white transition-all active:translate-y-1 active:shadow-none" id="header-snack-toevoegen-knop" type="button">
+						Snack toevoegen
+					</button>
+				</div>
 			</div>
 		</header>
 
-		<main class="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16 grid grid-cols-12 gap-10 md:gap-12 items-center">
+		<main class="flex-1 max-w-7xl mx-auto w-full px-6 md:px-12 py-10 md:py-16 grid grid-cols-12 gap-10 md:gap-12 items-center">
 			<div class="col-span-12 lg:col-span-5 flex flex-col gap-8 order-2 lg:order-1">
 				<div class="space-y-4">
 					<span class="inline-block bg-primary-container text-on-primary-container font-label-md text-label-md px-4 py-1 rounded-full border-2 border-primary">
@@ -237,6 +194,10 @@
 						<span class="relative z-10">Spin het Rad!</span>
 						<span class="material-symbols-outlined relative z-10 text-[32px] group-hover:rotate-180 transition-transform duration-500">refresh</span>
 						<span class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 skew-x-12"></span>
+					</button>
+					<button class="bg-surface text-primary font-label-md text-label-md px-6 py-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/20 transition-colors flex items-center justify-center gap-3" id="share-open-knop" type="button">
+						<span class="material-symbols-outlined text-[22px]">share</span>
+						<span>Deel dit rad</span>
 					</button>
 					<p class="font-label-md text-label-md text-on-surface-variant italic px-2">
 						Eigen snacks kun je uit het rad trekken om ze te verwijderen.
@@ -306,10 +267,52 @@
 			</div>
 		</main>
 
+		<section class="w-full py-xl bg-surface-container border-t border-outline-variant" id="footer-designed-by">
+			<div class="max-w-screen-xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
+				<a class="group flex flex-col items-center gap-md" href="https://decodekas.nl" rel="noopener noreferrer" target="_blank">
+					<div class="w-20 h-20 rounded-2xl overflow-hidden bg-white flex items-center justify-center border-2 border-primary-container shadow-md group-hover:scale-110 transition-transform duration-500">
+						<img alt="De Code Kas Logo" class="w-16 h-16 object-contain" src="https://decodekas.nl/images/logo/400/DeCodeKasLogo_max_400.png"/>
+					</div>
+					<div class="flex flex-col gap-xs">
+						<h2 class="text-headline-md font-extrabold text-primary">Vormgegeven &amp; Gebouwd door De Code Kas</h2>
+						<p class="text-body-lg text-on-surface-variant">Wij bouwen digitale ervaringen die blijven plakken.</p>
+						<span class="mt-md inline-flex items-center gap-2 text-primary font-bold hover:underline">
+							Bezoek onze website
+							<span class="material-symbols-outlined">arrow_forward</span>
+						</span>
+					</div>
+				</a>
+			</div>
+		</section>
+
+		<a class="branding-sticker hidden lg:flex fixed bottom-8 left-6 xl:left-10 z-40 bg-white p-4 rounded-2xl border-2 border-primary-container items-center gap-4 max-w-[280px] group cursor-pointer" href="https://decodekas.nl" rel="noopener noreferrer" target="_blank">
+			<div class="relative">
+                <div
+                    class="w-16 h-16 rounded-xl overflow-hidden bg-surface-container-lowest flex items-center justify-center border-2 border-primary-container group-hover:bg-primary-fixed transition-colors">
+                    <img alt="De Code Kas Logo" class="w-12 h-12 object-contain"
+                         src="https://decodekas.nl/images/logo/400/DeCodeKasLogo_max_400.png"/>
+                </div>
+				<div class="absolute -top-2 -right-2 bg-secondary text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm rotate-12">
+					BOUWER
+				</div>
+			</div>
+			<div class="flex flex-col">
+				<span class="text-[10px] font-bold text-tertiary uppercase tracking-wider">Gemaakt door</span>
+				<span class="font-headline-md text-primary text-lg leading-tight">De Code Kas</span>
+				<div class="flex items-center gap-1 mt-1 text-on-surface-variant group-hover:text-primary transition-colors">
+					<span class="text-[12px] font-medium">Bezoek de website</span>
+					<span class="material-symbols-outlined text-sm">arrow_forward</span>
+				</div>
+			</div>
+		</a>
+
 		<button class="hidden md:flex fixed bottom-6 right-6 z-50 w-16 h-16 bg-primary-container rounded-full shadow-lg border-2 border-primary text-on-primary-container items-center justify-center active:scale-90 transition-transform" id="snack-toevoegen-knop-desktop" type="button">
 			<span class="material-symbols-outlined text-[32px]">add</span>
 		</button>
 		<div class="fixed bottom-6 right-6 md:hidden z-50 flex gap-3">
+			<button class="w-16 h-16 bg-surface rounded-full shadow-lg border-2 border-primary text-primary flex items-center justify-center active:scale-90 transition-transform" id="share-open-knop-mobiel" type="button">
+				<span class="material-symbols-outlined text-[28px]">share</span>
+			</button>
 			<button class="w-16 h-16 bg-primary-container rounded-full shadow-lg border-2 border-primary text-on-primary-container flex items-center justify-center active:scale-90 transition-transform" id="snack-toevoegen-knop-mobiel" type="button">
 				<span class="material-symbols-outlined text-[32px]">add</span>
 			</button>
@@ -362,554 +365,92 @@
 			</div>
 		</div>
 
-		<div id="eggs-toast" role="status" aria-live="polite"></div>
-
-		<script>
-			const basisSnacks = [
-				["Bitterbal", "bitterbal.jpg"], ["Kaassouffle", "kaassouffle.jpg"], ["Loempidel", "loempidel.jpg"],
-				["Kroket", "kroket.jpg"], ["Nasischijf", "nasischijf.jpg"], ["Kipcorn", "kipcorn.jpg"],
-				["Frikandel", "frikandel.jpg"], ["Bamischijf", "bamischijf.jpg"], ["Kipnuggets", "kipnuggets.jpg"],
-				["Viandel", "viandel.jpg"], ["Satekroket", "satekroket.jpg"], ["Berenklauw", "berenklauw.jpg"], ["Mexicano", "mexicano.jpg"]
-			].map(([name, image]) => ({ name, image: `./images/${image}`, isCustom: false }));
-
-			const snackOpslagSleutel = "rad-van-patat-roulette-snacks";
-			const kleuren = ["#ffb800", "#e41f13", "#ffdea8", "#ffb4a8"];
-			const randKleuren = ["#7c5800", "#930000", "#7c5800", "#930000"];
-			const easterEggBerichten = [
-				{ titel: "❌", subtitel: "Vandaag moet je gewoon koken.", tekst: "Geen frituur vandaag." },
-				{ titel: "Je portemonnee zegt:", subtitel: "“Boterham met pindakaas.”", tekst: "Budgetmodus geactiveerd." },
-				{ titel: "Vandaag is het cheat day.", subtitel: "Neem gewoon alles.", tekst: "Alles is de uitslag." }
-			];
-			let alleSnacks = [];
-			let wheelSpinning = false;
-			let spinned = false;
-			let actieveDrag = null;
-			let easterEggsActief = false;
-			let easterEggBuffer = "";
-			let eggsToastTimer = null;
-			let eggsKansPercentage = 0.5;
-
-			try {
-				alleSnacks = JSON.parse(localStorage.getItem(snackOpslagSleutel) || "null");
-			} catch (error) {
-				alleSnacks = null;
-			}
-
-			if (!Array.isArray(alleSnacks) || alleSnacks.length === 0) {
-				alleSnacks = basisSnacks.map((snack) => ({ ...snack }));
-			}
-
-			alleSnacks = alleSnacks
-				.filter((snack) => snack && typeof snack.name === "string" && snack.name.trim())
-				.map((snack) => ({
-					name: snack.name.trim(),
-					image: snack.image || "",
-					isCustom: Boolean(snack.isCustom)
-				}));
-
-			let theWheel = new Winwheel({
-				canvasId: "canvas",
-				numSegments: alleSnacks.length,
-				outerRadius: 304,
-				innerRadius: 110,
-				textFontFamily: "Space Grotesk",
-				textFontSize: 22,
-				textFontWeight: "600",
-				textFillStyle: "#271900",
-				textAlignment: "outer",
-				textMargin: 28,
-				lineWidth: 4,
-				strokeStyle: "#7c5800",
-				segments: alleSnacks.map((snack, index) => ({
-					fillStyle: kleuren[index % kleuren.length],
-					strokeStyle: randKleuren[index % randKleuren.length],
-					text: snack.name,
-					snack: snack
-				})),
-				animation: {
-					type: "spinToStop",
-					duration: 5,
-					spins: 8,
-					callbackFinished: afterSpin
-				}
-			});
-
-			function updateTellers() {
-				const standaardAantal = alleSnacks.filter((snack) => !snack.isCustom).length;
-				const eigenAantal = alleSnacks.filter((snack) => snack.isCustom).length;
-				document.getElementById("standaard-teller").textContent = `${standaardAantal} keuzes`;
-				document.getElementById("eigen-teller").textContent = `${eigenAantal} toegevoegd`;
-			}
-
-			function persistSnacks() {
-				localStorage.setItem(snackOpslagSleutel, JSON.stringify(alleSnacks));
-				updateTellers();
-			}
-
-			function normaliseerSnackNaam(naam) {
-				return naam.trim().replace(/\s+/g, " ").toLowerCase();
-			}
-
-			function bestaatSnackAl(naam) {
-				const genormaliseerdeNaam = normaliseerSnackNaam(naam);
-				return alleSnacks.some((snack) => normaliseerSnackNaam(snack.name) === genormaliseerdeNaam);
-			}
-
-			function playSound(filename) {
-				const audio = new Audio(filename);
-				audio.play();
-			}
-
-			function isVerwijderbareSnack(snack) {
-				return Boolean(snack);
-			}
-
-			function getCanvasInfo() {
-				const canvas = document.getElementById("canvas");
-				const rect = canvas.getBoundingClientRect();
-				return {
-					canvas: canvas,
-					rect: rect,
-					schaalX: rect.width / canvas.width,
-					schaalY: rect.height / canvas.height
-				};
-			}
-
-			function getPointerCanvasLocatie(clientX, clientY) {
-				const info = getCanvasInfo();
-				return {
-					x: (clientX - info.rect.left) / info.schaalX,
-					y: (clientY - info.rect.top) / info.schaalY
-				};
-			}
-
-			function getSegmentIndexFromPointer(clientX, clientY) {
-				const locatie = getPointerCanvasLocatie(clientX, clientY);
-				const deltaX = locatie.x - theWheel.centerX;
-				const deltaY = locatie.y - theWheel.centerY;
-				const afstand = Math.hypot(deltaX, deltaY);
-
-				if (afstand < theWheel.innerRadius || afstand > theWheel.outerRadius) {
-					return null;
-				}
-
-				const pointerHoek = (Math.atan2(deltaY, deltaX) * 180 / Math.PI + 90 + 360) % 360;
-				const rotatie = ((theWheel.rotationAngle % 360) + 360) % 360;
-				const segmentHoek = (pointerHoek - rotatie + 360) % 360;
-
-				for (let index = 1; index <= theWheel.numSegments; index++) {
-					const segment = theWheel.segments[index];
-					if (segment && segmentHoek >= segment.startAngle && segmentHoek < segment.endAngle) {
-						return index;
-					}
-				}
-
-				if (theWheel.numSegments > 0 && segmentHoek === 360) {
-					return theWheel.numSegments;
-				}
-
-				return null;
-			}
-
-			function verbergDragCanvas() {
-				const dragCanvas = document.getElementById("snack-drag-canvas");
-				dragCanvas.style.display = "none";
-			}
-
-			function getAfstandTotWielMidden(clientX, clientY) {
-				const info = getCanvasInfo();
-				const centerX = info.rect.left + (theWheel.centerX * info.schaalX);
-				const centerY = info.rect.top + (theWheel.centerY * info.schaalY);
-				return Math.hypot(clientX - centerX, clientY - centerY);
-			}
-
-			function isBuitenHetWiel(clientX, clientY) {
-				const info = getCanvasInfo();
-				const outerRadius = theWheel.outerRadius * ((info.schaalX + info.schaalY) / 2);
-				return getAfstandTotWielMidden(clientX, clientY) > outerRadius;
-			}
-
-			function tekenSegmentPad(context, segment) {
-				context.beginPath();
-				context.arc(theWheel.centerX, theWheel.centerY, theWheel.outerRadius, theWheel.degToRad(segment.startAngle + theWheel.rotationAngle - 90), theWheel.degToRad(segment.endAngle + theWheel.rotationAngle - 90), false);
-				context.arc(theWheel.centerX, theWheel.centerY, theWheel.innerRadius, theWheel.degToRad(segment.endAngle + theWheel.rotationAngle - 90), theWheel.degToRad(segment.startAngle + theWheel.rotationAngle - 90), true);
-				context.closePath();
-			}
-
-			function renderDragCanvas(segmentIndex) {
-				const info = getCanvasInfo();
-				const segment = theWheel.segments[segmentIndex];
-				const dragCanvas = document.getElementById("snack-drag-canvas");
-				const dragContext = dragCanvas.getContext("2d");
-
-				dragCanvas.width = info.canvas.width;
-				dragCanvas.height = info.canvas.height;
-				dragCanvas.style.width = `${info.rect.width}px`;
-				dragCanvas.style.height = `${info.rect.height}px`;
-				dragContext.clearRect(0, 0, dragCanvas.width, dragCanvas.height);
-				tekenSegmentPad(dragContext, segment);
-				dragContext.save();
-				dragContext.clip();
-				dragContext.drawImage(info.canvas, 0, 0);
-				dragContext.restore();
-			}
-
-			function verbergSegmentInWiel(segmentIndex) {
-				const segment = theWheel.segments[segmentIndex];
-				actieveDrag.origineelSegment = {
-					fillStyle: segment.fillStyle,
-					strokeStyle: segment.strokeStyle,
-					textFillStyle: segment.textFillStyle,
-					textStrokeStyle: segment.textStrokeStyle
-				};
-				segment.fillStyle = "rgba(0,0,0,0)";
-				segment.strokeStyle = "rgba(0,0,0,0)";
-				segment.textFillStyle = "rgba(0,0,0,0)";
-				segment.textStrokeStyle = "rgba(0,0,0,0)";
-				theWheel.draw();
-			}
-
-			function herstelSegmentInWiel() {
-				if (!actieveDrag || !actieveDrag.origineelSegment) {
-					return;
-				}
-
-				const segment = theWheel.segments[actieveDrag.segmentIndex];
-				if (!segment) {
-					return;
-				}
-
-				segment.fillStyle = actieveDrag.origineelSegment.fillStyle;
-				segment.strokeStyle = actieveDrag.origineelSegment.strokeStyle;
-				segment.textFillStyle = actieveDrag.origineelSegment.textFillStyle;
-				segment.textStrokeStyle = actieveDrag.origineelSegment.textStrokeStyle;
-				theWheel.draw();
-			}
-
-			function positioneerDragCanvas(clientX, clientY) {
-				if (!actieveDrag) {
-					return;
-				}
-
-				const dragCanvas = document.getElementById("snack-drag-canvas");
-				const offsetX = clientX - actieveDrag.startClientX;
-				const offsetY = clientY - actieveDrag.startClientY;
-				dragCanvas.style.left = `${actieveDrag.canvasLeft + offsetX}px`;
-				dragCanvas.style.top = `${actieveDrag.canvasTop + offsetY}px`;
-				dragCanvas.style.display = "block";
-			}
-
-			function stopDrag(herstelSegment = true) {
-				if (actieveDrag && herstelSegment) {
-					herstelSegmentInWiel();
-				}
-				document.body.classList.remove("is-dragging-custom-snack");
-				actieveDrag = null;
-				verbergDragCanvas();
-			}
-
-			function startDrag(segmentIndex, clientX, clientY) {
-				const segment = theWheel.segments[segmentIndex];
-				if (!segment || !isVerwijderbareSnack(segment.snack) || wheelSpinning) {
-					return;
-				}
-
-				actieveDrag = {
-					segmentIndex: segmentIndex,
-					startClientX: clientX,
-					startClientY: clientY,
-					canvasLeft: getCanvasInfo().rect.left,
-					canvasTop: getCanvasInfo().rect.top
-				};
-				document.body.classList.add("is-dragging-custom-snack");
-				renderDragCanvas(segmentIndex);
-				verbergSegmentInWiel(segmentIndex);
-				positioneerDragCanvas(clientX, clientY);
-			}
-
-			function updateDrag(clientX, clientY) {
-				if (!actieveDrag) {
-					return;
-				}
-
-				positioneerDragCanvas(clientX, clientY);
-				const dragCanvas = document.getElementById("snack-drag-canvas");
-				if (isBuitenHetWiel(clientX, clientY)) {
-					dragCanvas.style.opacity = "0.82";
-				} else {
-					dragCanvas.style.opacity = "1";
-				}
-			}
-
-			function eindigDrag(clientX, clientY) {
-				if (!actieveDrag) {
-					return;
-				}
-
-				const segmentIndex = actieveDrag.segmentIndex;
-				const buitenWiel = isBuitenHetWiel(clientX, clientY);
-				stopDrag(!buitenWiel);
-
-				if (buitenWiel) {
-					verwijderSnack(segmentIndex);
-				}
-			}
-
-			function verwijderSnack(segmentIndex) {
-				const segment = theWheel.segments[segmentIndex];
-				if (!segment || !isVerwijderbareSnack(segment.snack) || theWheel.numSegments <= 1) {
-					return;
-				}
-
-				alleSnacks = alleSnacks.filter((snack) => !(snack.name === segment.snack.name && (snack.image || "") === (segment.snack.image || "") && Boolean(snack.isCustom) === Boolean(segment.snack.isCustom)));
-				persistSnacks();
-				theWheel.deleteSegment(segmentIndex);
-				theWheel.draw();
-				verbergDragCanvas();
-			}
-
-			function openSnackFormulier() {
-				document.getElementById("snack-formulier-overlay").classList.remove("hidden");
-				document.getElementById("snack-formulier-overlay").classList.add("flex");
-			}
-
-			function closeSnackFormulier() {
-				document.getElementById("snack-formulier-overlay").classList.add("hidden");
-				document.getElementById("snack-formulier-overlay").classList.remove("flex");
-			}
-
-			function showResult(snack) {
-				const afbeelding = document.getElementById("resultaat-afbeelding");
-				const letter = document.getElementById("resultaat-letter");
-				document.getElementById("resultaat-titel").textContent = "Gewonnen!";
-				document.getElementById("resultaat-subtitel").textContent = "Jouw avondeten is bepaald:";
-				document.getElementById("resultaat-benaming").textContent = snack.name;
-
-				if (snack.image) {
-					afbeelding.src = snack.image;
-					afbeelding.style.display = "block";
-					letter.style.display = "none";
-					afbeelding.onerror = () => {
-						afbeelding.style.display = "none";
-						letter.textContent = snack.name.charAt(0).toUpperCase();
-						letter.style.display = "flex";
-					};
-				} else {
-					afbeelding.style.display = "none";
-					letter.textContent = snack.name.charAt(0).toUpperCase();
-					letter.style.display = "flex";
-				}
-
-				const modal = document.getElementById("result-modal");
-				const paneel = modal.querySelector("div");
-				modal.classList.remove("hidden");
-				modal.classList.add("flex");
-				paneel.classList.remove("scale-90");
-				paneel.classList.add("scale-100");
-				playSound("sounds/winnaar.mp3");
-			}
-
-			function showEasterEggResult(bericht) {
-				const afbeelding = document.getElementById("resultaat-afbeelding");
-				const letter = document.getElementById("resultaat-letter");
-				document.getElementById("resultaat-titel").textContent = bericht.titel;
-				document.getElementById("resultaat-subtitel").textContent = bericht.subtitel;
-				document.getElementById("resultaat-benaming").textContent = bericht.tekst;
-				afbeelding.style.display = "none";
-				letter.textContent = "!";
-				letter.style.display = "flex";
-
-				const modal = document.getElementById("result-modal");
-				const paneel = modal.querySelector("div");
-				modal.classList.remove("hidden");
-				modal.classList.add("flex");
-				paneel.classList.remove("scale-90");
-				paneel.classList.add("scale-100");
-				playSound("sounds/winnaar.mp3");
-			}
-
-			function toonEggsToast() {
-				toonToast(easterEggsActief ? "Eggs enabled" : "Eggs disabled");
-			}
-
-			function toonToast(tekst) {
-				const toast = document.getElementById("eggs-toast");
-				toast.textContent = tekst;
-				toast.style.display = "block";
-				if (eggsToastTimer) {
-					window.clearTimeout(eggsToastTimer);
-				}
-				eggsToastTimer = window.setTimeout(function () {
-					toast.style.display = "none";
-					eggsToastTimer = null;
-				}, 2200);
-			}
-
-			function updateEggsKansWeergave() {
-				document.getElementById("eggs-kans-waarde").textContent = `${eggsKansPercentage.toFixed(1)}%`;
-			}
-
-			function updateEggsKansBeschikbaarheid() {
-				const slider = document.getElementById("eggs-kans-slider");
-				const paneel = document.getElementById("eggs-kans-paneel");
-				const hint = document.getElementById("eggs-kans-hint");
-				slider.disabled = !easterEggsActief;
-				paneel.classList.toggle("eggs-kans-verborgen", !easterEggsActief);
-				hint.textContent = easterEggsActief
-					? "Bepaalt hoe vaak een easter egg de normale uitslag vervangt."
-					: "Schakel eerst eggs in om deze kans aan te passen.";
-			}
-
-			function closeModal() {
-				const modal = document.getElementById("result-modal");
-				const paneel = modal.querySelector("div");
-				modal.classList.add("hidden");
-				modal.classList.remove("flex");
-				paneel.classList.remove("scale-100");
-				paneel.classList.add("scale-90");
-			}
-
-			function afterSpin(indicatedSegment) {
-				wheelSpinning = false;
-				if (easterEggsActief && Math.random() < (eggsKansPercentage / 100)) {
-					showEasterEggResult(easterEggBerichten[Math.floor(Math.random() * easterEggBerichten.length)]);
-					return;
-				}
-				showResult(indicatedSegment.snack || { name: indicatedSegment.text, image: `./images/${indicatedSegment.text.toLowerCase()}.jpg` });
-			}
-
-			function resetWheel() {
-				theWheel.stopAnimation(false);
-				theWheel.rotationAngle = 0;
-				theWheel.draw();
-				wheelSpinning = false;
-			}
-
-			function startSpin() {
-				if (wheelSpinning) {
-					return;
-				}
-
-				spinned = true;
-				theWheel.animation.spins = 8;
-				theWheel.startAnimation();
-				stopDrag();
-				closeModal();
-				wheelSpinning = true;
-			}
-
-			function resetAndStart() {
-				if (spinned) {
-					resetWheel();
-				}
-				startSpin();
-			}
-
-			window.addEventListener("DOMContentLoaded", function () {
-				updateTellers();
-				updateEggsKansWeergave();
-				updateEggsKansBeschikbaarheid();
-
-				document.getElementById("spin-knop").addEventListener("click", resetAndStart);
-				document.getElementById("spin-knop-mobiel").addEventListener("click", resetAndStart);
-				document.getElementById("result-close-knop").addEventListener("click", closeModal);
-				document.getElementById("snack-toevoegen-knop-desktop").addEventListener("click", openSnackFormulier);
-				document.getElementById("snack-toevoegen-knop-mobiel").addEventListener("click", openSnackFormulier);
-				document.getElementById("snack-formulier-sluiten").addEventListener("click", closeSnackFormulier);
-				document.getElementById("snack-formulier-overlay").addEventListener("click", function (event) {
-					if (event.target === this) {
-						closeSnackFormulier();
-					}
-				});
-				document.getElementById("eggs-kans-slider").addEventListener("input", function () {
-					eggsKansPercentage = parseFloat(this.value);
-					updateEggsKansWeergave();
-				});
-
-				document.getElementById("snack-formulier").addEventListener("submit", function (event) {
-					event.preventDefault();
-					const naam = document.getElementById("snack-naam").value.trim();
-					const foto = document.getElementById("snack-foto").value.trim();
-					if (!naam) {
-						return;
-					}
-					if (bestaatSnackAl(naam)) {
-						toonToast("Snack bestaat al");
-						return;
-					}
-
-					const snack = { name: naam, image: foto, isCustom: true };
-					alleSnacks.push(snack);
-					persistSnacks();
-					theWheel.addSegment({
-						fillStyle: kleuren[(theWheel.numSegments - 1) % kleuren.length],
-						strokeStyle: randKleuren[(theWheel.numSegments - 1) % randKleuren.length],
-						text: naam,
-						snack: snack
-					});
-					theWheel.draw();
-					verbergDragCanvas();
-					this.reset();
-					closeSnackFormulier();
-				});
-
-				document.getElementById("canvas").addEventListener("pointerdown", function (event) {
-					if (wheelSpinning) {
-						return;
-					}
-
-					const segmentIndex = getSegmentIndexFromPointer(event.clientX, event.clientY);
-					if (!segmentIndex || !theWheel.segments[segmentIndex] || !isVerwijderbareSnack(theWheel.segments[segmentIndex].snack)) {
-						return;
-					}
-
-					event.preventDefault();
-					this.setPointerCapture(event.pointerId);
-					startDrag(segmentIndex, event.clientX, event.clientY);
-				});
-
-				window.addEventListener("pointermove", function (event) {
-					updateDrag(event.clientX, event.clientY);
-				});
-
-				window.addEventListener("pointerup", function (event) {
-					eindigDrag(event.clientX, event.clientY);
-				});
-
-				window.addEventListener("pointercancel", function () {
-					stopDrag();
-				});
-
-				window.addEventListener("scroll", stopDrag, { passive: true });
-				window.addEventListener("resize", function () {
-					stopDrag();
-					theWheel.draw();
-				});
-
-				document.addEventListener("keydown", function (event) {
-					if (event.key === "F5") {
-						event.preventDefault();
-						resetAndStart();
-					}
-					if (event.shiftKey && (event.key === "+" || event.key === "=")) {
-						event.preventDefault();
-						openSnackFormulier();
-					}
-					if (event.key && event.key.length === 1) {
-						easterEggBuffer = `${easterEggBuffer}${event.key.toLowerCase()}`.slice(-4);
-						if (easterEggBuffer === "eggs") {
-							easterEggsActief = !easterEggsActief;
-							updateEggsKansBeschikbaarheid();
-							toonEggsToast();
-							easterEggBuffer = "";
-						}
-					}
-					if (event.key === "Escape") {
-						closeModal();
-						closeSnackFormulier();
-					}
-				});
-			});
-		</script>
+		<div class="fixed inset-0 z-[210] hidden items-center justify-center p-margin-mobile bg-blur-backdrop" id="share-overlay">
+			<div class="bg-surface-container-lowest w-full max-w-lg rounded-[32px] overflow-hidden snack-card-shadow border-2 border-primary-container animate-pop-in relative">
+				<button aria-label="Sluiten" class="absolute top-md right-md p-sm text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-90" id="share-sluiten-knop" type="button">
+					<span class="material-symbols-outlined text-[28px]">close</span>
+				</button>
+				<div class="h-2 w-full bg-gradient-to-r from-primary to-secondary"></div>
+				<div class="p-md md:p-xl flex flex-col items-center text-center">
+					<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">Deel je Rad van Patat!</h2>
+					<p class="font-body-md text-on-surface-variant max-w-xs mb-md">Nodig iemand uit met precies dit rad. De QR-code opent exact dezelfde lijst.</p>
+					<div class="relative p-md mb-md">
+						<div class="absolute inset-0 border-4 border-dashed border-primary-container rounded-[40px] rotate-3 opacity-30"></div>
+						<div class="absolute inset-0 border-4 border-dashed border-secondary-container rounded-[40px] -rotate-3 opacity-20"></div>
+						<div class="relative bg-white p-sm rounded-3xl shadow-md">
+							<div aria-label="QR-code voor het gedeelde rad" class="w-48 h-48 rounded-xl overflow-hidden" id="share-qrcode" role="img"></div>
+						</div>
+					</div>
+					<div class="w-full flex flex-col gap-sm mb-md">
+						<label class="font-label-md text-on-surface-variant text-left ml-xs" for="share-link-veld">Kopieer de link</label>
+						<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-xs p-xs bg-surface-container-low rounded-2xl border-2 border-outline-variant focus-within:border-primary-container transition-all">
+							<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md px-sm text-on-surface" id="share-link-veld" readonly type="text" value=""/>
+							<button class="bg-primary text-on-primary px-md py-sm rounded-xl font-label-md flex items-center justify-center gap-xs hover:bg-primary/90 transition-all active:scale-95 whitespace-nowrap shadow-sm border-b-4 border-primary-container" id="share-kopieer-knop" type="button">
+								<span class="material-symbols-outlined text-[18px]">content_copy</span>
+								<span>Kopieer link</span>
+							</button>
+						</div>
+					</div>
+					<div class="w-full flex items-center gap-md py-sm">
+						<div class="flex-1 h-px bg-outline-variant"></div>
+						<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Deel direct via</span>
+						<div class="flex-1 h-px bg-outline-variant"></div>
+					</div>
+					<div class="grid grid-cols-2 sm:grid-cols-4 gap-md mt-sm w-full">
+						<a class="w-14 h-14 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-facebook-knop" rel="noopener noreferrer" target="_blank">
+							<svg aria-hidden="true" class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+								<path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.4H7.5v3.2h2.8V21h3.2Z"/>
+							</svg>
+							<span class="sr-only">Facebook</span>
+						</a>
+						<a class="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-whatsapp-knop" rel="noopener noreferrer" target="_blank">
+							<svg aria-hidden="true" class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+								<path d="M20 11.9c0 4.4-3.6 8-8 8-1.4 0-2.8-.4-4-1.1L4 20l1.3-3.8A7.9 7.9 0 0 1 4 11.9c0-4.4 3.6-8 8-8s8 3.6 8 8Zm-8-6.7a6.7 6.7 0 0 0-5.7 10.2l.2.3-.8 2.4 2.5-.8.3.2a6.7 6.7 0 1 0 3.5-12.3Zm3.9 8.5c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.5.1l-.4.5c-.1.2-.3.2-.5.1a5.4 5.4 0 0 1-2.7-2.4c-.1-.2 0-.3.1-.4l.3-.4.2-.3V10c0-.1-.5-1.3-.7-1.7-.2-.4-.4-.4-.5-.4h-.4c-.2 0-.4.1-.5.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.6 4 3.5.5.2 1 .4 1.4.5.6.2 1.2.2 1.6.1.5-.1 1.2-.5 1.4-1 .2-.5.2-1 .2-1.1 0-.1-.2-.2-.4-.3Z"/>
+							</svg>
+							<span class="sr-only">WhatsApp</span>
+						</a>
+						<a class="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-x-knop" rel="noopener noreferrer" target="_blank">
+							<svg aria-hidden="true" class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+								<path d="M18.9 3H21l-4.6 5.3L21.8 21h-4.7l-3.7-4.8L9.2 21H7l5-5.8L2.2 3h4.8l3.3 4.4L18.9 3Zm-1.6 16.2h1.3L6.4 4.7H5.1l12.2 14.5Z"/>
+							</svg>
+							<span class="sr-only">X</span>
+						</a>
+						<a class="w-14 h-14 rounded-full bg-secondary text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md mx-auto" href="#" id="share-email-knop">
+							<span class="material-symbols-outlined text-[24px]">mail</span>
+							<span class="sr-only">E-mail</span>
+						</a>
+					</div>
+					<button class="mt-xl font-label-md text-on-surface-variant hover:text-secondary underline underline-offset-8 decoration-2 decoration-primary-container transition-all active:scale-95" id="share-sluiten-tekstknop" type="button">
+						Sluiten
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="fixed inset-0 z-[230] hidden items-center justify-center p-6 bg-black/60 backdrop-blur-sm" id="vraag-overlay">
+			<div class="bg-surface max-w-sm w-full rounded-3xl p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300">
+				<div class="w-20 h-20 bg-primary-container rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-primary">
+					<span class="material-symbols-outlined text-on-primary-container text-[40px]">question_mark</span>
+				</div>
+				<h2 class="font-headline-md text-headline-md mb-4">De belangrijkste vraag van vandaag...</h2>
+				<p class="font-body-md text-body-md text-on-surface-variant mb-8">Is het friet of patat?</p>
+				<div class="flex flex-col gap-3">
+					<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-xl hover:opacity-90 transition-opacity shadow-sm" id="btn-friet" type="button">
+						Friet
+					</button>
+					<button class="w-full bg-secondary-container text-on-secondary-container font-label-md text-label-md py-4 rounded-xl border-2 border-secondary hover:scale-[1.02] transition-transform shadow-sm" id="btn-patat" type="button">
+						Patat
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="is-hidden toast-positive" id="eggs-toast" role="status" aria-live="polite"></div>
+		<div class="bottom-opinion-banner-hidden fixed bottom-0 left-0 z-[205] w-full bg-secondary text-white py-3 px-4 text-center font-label-sm text-label-sm shadow-[0_-8px_24px_rgba(188,0,0,0.22)]" id="patat-banner" role="note"></div>
+
+		<script src="./js/roulette-core.js"></script>
+		<script src="./js/roulette-ui.js"></script>
+		<script src="./js/roulette-wheel.js"></script>
+		<script src="./js/roulette-init.js"></script>
 	</body>
 </html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="light" lang="nl">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500&amp;display=swap"
+        rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet"/>
+    <title>Edit List - Snack-Rad</title>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#5e4200",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e41f13",
+                        "primary-container": "#ffb800",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#271900",
+                        "surface-tint": "#7c5800",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#c4c5c5",
+                        "surface-container-high": "#eae7e7",
+                        "secondary": "#bc0000",
+                        "inverse-surface": "#313030",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eded",
+                        "on-secondary-fixed-variant": "#930000",
+                        "on-tertiary-container": "#505252",
+                        "tertiary": "#5d5f5f",
+                        "on-primary-container": "#6b4c00",
+                        "primary-fixed-dim": "#ffba20",
+                        "outline": "#837560",
+                        "outline-variant": "#d5c4ab",
+                        "on-secondary-fixed": "#410000",
+                        "on-surface-variant": "#514532",
+                        "surface-container-low": "#f6f3f2",
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#ffdea8",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-primary": "#ffba20",
+                        "background": "#fcf9f8",
+                        "primary": "#7c5800",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffdad4",
+                        "on-surface": "#1c1b1b",
+                        "on-background": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "120px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Space Grotesk"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-sm": ["Space Grotesk"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-xl": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {
+                            "lineHeight": "40px",
+                            "letterSpacing": "-0.01em",
+                            "fontWeight": "800"
+                        }],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .custom-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236b4c00'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+            background-color: #ffb800;
+            border-color: #ffb800;
+        }
+
+        .fry-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 0px 0px rgba(255, 184, 0, 0.08);
+        }
+
+        .fry-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px -8px rgba(255, 184, 0, 0.2);
+        }
+
+        .sticker-button {
+            box-shadow: 0 4px 0 0 #5e4200;
+        }
+
+        .sticker-button:active {
+            box-shadow: 0 0px 0 0 #5e4200;
+            transform: translateY(4px);
+        }
+
+        .branding-sticker {
+            transform: rotate(3deg);
+            box-shadow: 8px 8px 0px 0px #ffdea8, 16px 16px 32px -8px rgba(124, 88, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .branding-sticker:hover {
+            transform: rotate(0deg) scale(1.05) translateY(-5px);
+            box-shadow: 4px 4px 0px 0px #ffdea8, 24px 24px 48px -12px rgba(124, 88, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased relative overflow-x-hidden">
+<!-- Floating Branding Sticker -->
+<a class="branding-sticker fixed bottom-12 right-6 md:right-12 z-[60] bg-white p-4 rounded-2xl border-2 border-primary-container flex items-center gap-4 max-w-[280px] group cursor-pointer"
+   href="https://decodekas.nl" target="_blank">
+    <div class="relative">
+        <div
+            class="w-16 h-16 rounded-xl overflow-hidden bg-surface-container-lowest flex items-center justify-center border-2 border-primary-container group-hover:bg-primary-fixed transition-colors">
+            <img alt="De Code Kas Logo" class="w-12 h-12 object-contain"
+                 src="https://decodekas.nl/images/logo/400/DeCodeKasLogo_max_400.png"/>
+        </div>
+        <div
+            class="absolute -top-2 -right-2 bg-secondary text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm transform rotate-12">
+            BOUWER
+        </div>
+    </div>
+    <div class="flex flex-col">
+        <span class="text-[10px] font-bold text-tertiary uppercase tracking-wider">Gemaakt door</span>
+        <span class="font-headline-md text-primary text-lg leading-tight">De Code Kas</span>
+        <div class="flex items-center gap-1 mt-1 text-on-surface-variant group-hover:text-primary transition-colors">
+            <span class="text-[12px] font-medium">Bezoek website</span>
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </div>
+    </div>
+</a>
+<!-- Custom Micro-interactions Script -->
+<script>
+    document.querySelectorAll('.fry-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            const checkbox = card.querySelector('input[type="checkbox"]');
+            if (e.target !== checkbox && !e.target.closest('label')) {
+                checkbox.checked = !checkbox.checked;
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 100);
+            }
+        });
+    });
+
+    const searchInput = document.querySelector('input[placeholder="Wat heb je trek in?"]');
+    if (searchInput) {
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-4', 'ring-primary-container/30');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-4', 'ring-primary-container/30');
+        });
+    }
+</script>
+</body>
+</html>

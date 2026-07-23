@@ -44,3 +44,6 @@ For contributing guidelines see [CONTRIBUTING.md](CONTRIBUTING.md).
 - Do not remove existing validation, authorization, logging, tests, translations, or error handling unless explicitly required and safely replaced.
 - Update documentation when behavior, configuration, commands, public APIs, or developer workflows change.
 - Add or update tests when behavior changes.
+
+## Design
+For design guidelines see [DESIGN.md](DESIGN.md).
