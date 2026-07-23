@@ -35,6 +35,8 @@ class RoadmapBoard extends HTMLElement {
 	constructor() {
 		super();
 		this._items = [];
+		this.handleClick = this.handleClick.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 
 	set items(value) {
@@ -47,6 +49,12 @@ class RoadmapBoard extends HTMLElement {
 	}
 
 	connectedCallback() {
+		if (!this.dataset.listenersBound) {
+			this.addEventListener("click", this.handleClick);
+			this.addEventListener("keydown", this.handleKeyDown);
+			this.dataset.listenersBound = "true";
+		}
+
 		this.render();
 	}
 
@@ -92,7 +100,118 @@ class RoadmapBoard extends HTMLElement {
 		return STATUS_CLASS_MAP[normalizedStatus] || STATUS_CLASS_MAP.gepland;
 	}
 
+	/**
+	 * Roadmap cards stay scannable by showing a short preview in the grid and
+	 * moving the full copy into a modal. The preview stops at the first reached
+	 * limit so it never exceeds 100 characters or 15 words, and it only cuts on
+	 * word boundaries to keep the Dutch copy readable.
+	 *
+	 * @param {string} description
+	 * @returns {{ preview: string, isTruncated: boolean }}
+	 */
+	truncateDescription(description) {
+		const normalizedDescription = description.replace(/\s+/g, " ").trim();
+		const words = normalizedDescription.split(" ").filter(Boolean);
+
+		if (words.length <= 15 && normalizedDescription.length <= 100) {
+			return {
+				preview: normalizedDescription,
+				isTruncated: false,
+			};
+		}
+
+		let previewWords = [];
+		let preview = "";
+
+		for (const word of words) {
+			const candidateWords = [...previewWords, word];
+			const candidatePreview = candidateWords.join(" ");
+
+			if (candidateWords.length > 15 || candidatePreview.length > 100) {
+				break;
+			}
+
+			previewWords = candidateWords;
+			preview = candidatePreview;
+		}
+
+		if (!preview) {
+			preview = words[0] || normalizedDescription;
+		}
+
+		return {
+			preview: `${preview}...`,
+			isTruncated: true,
+		};
+	}
+
+	openDescriptionModal(title, description) {
+		const modal = this.querySelector("[data-roadmap-modal]");
+		const titleNode = this.querySelector("[data-roadmap-modal-title]");
+		const bodyNode = this.querySelector("[data-roadmap-modal-body]");
+
+		if (!modal || !titleNode || !bodyNode) {
+			return;
+		}
+
+		titleNode.textContent = title;
+		bodyNode.textContent = description;
+		modal.classList.remove("hidden");
+		modal.classList.add("flex");
+
+		const closeButton = modal.querySelector("[data-roadmap-modal-close]");
+		if (closeButton instanceof HTMLElement) {
+			closeButton.focus();
+		}
+	}
+
+	closeDescriptionModal() {
+		const modal = this.querySelector("[data-roadmap-modal]");
+		if (!modal) {
+			return;
+		}
+
+		modal.classList.add("hidden");
+		modal.classList.remove("flex");
+	}
+
+	/**
+	 * One delegated listener keeps the component reusable even after re-rendering
+	 * the card list, because the buttons and modal nodes are recreated each time.
+	 *
+	 * @param {MouseEvent} event
+	 */
+	handleClick(event) {
+		const target = event.target;
+		if (!(target instanceof Element)) {
+			return;
+		}
+
+		const descriptionButton = target.closest("[data-roadmap-description-button]");
+		if (descriptionButton instanceof HTMLElement) {
+			this.openDescriptionModal(
+				descriptionButton.dataset.roadmapTitle || "",
+				descriptionButton.dataset.roadmapDescription || "",
+			);
+			return;
+		}
+
+		if (
+			target.closest("[data-roadmap-modal-close]") ||
+			target.matches("[data-roadmap-modal]")
+		) {
+			this.closeDescriptionModal();
+		}
+	}
+
+	handleKeyDown(event) {
+		if (event.key === "Escape") {
+			this.closeDescriptionModal();
+		}
+	}
+
 	renderCard(item) {
+		const descriptionPreview = this.truncateDescription(item.description);
 		const progressMarkup = item.progress === null
 			? ""
 			: `
@@ -110,7 +229,15 @@ class RoadmapBoard extends HTMLElement {
 				</div>
 				<p class="roadmap-card__meta">${this.escapeHtml(item.category)}</p>
 				<h3 class="roadmap-card__title">${this.escapeHtml(item.title)}</h3>
-				<p class="roadmap-card__description">${this.escapeHtml(item.description)}</p>
+				<button
+					class="roadmap-card__description-button"
+					data-roadmap-description-button
+					data-roadmap-title="${this.escapeHtml(item.title)}"
+					data-roadmap-description="${this.escapeHtml(item.description)}"
+					type="button"
+				>
+					<span class="roadmap-card__description">${this.escapeHtml(descriptionPreview.preview)}</span>
+				</button>
 				${progressMarkup}
 			</article>
 		`;
@@ -171,6 +298,22 @@ class RoadmapBoard extends HTMLElement {
 			</div>
 			<div class="roadmap-columns">
 				${ROADMAP_SECTIONS.map((section) => this.renderSection(section)).join("")}
+			</div>
+			<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-6" data-roadmap-modal>
+				<div aria-labelledby="roadmap-modal-title" aria-modal="true" class="bg-surface max-w-md w-full rounded-3xl p-8 border-4 border-primary-container shadow-2xl transform scale-90 transition-transform duration-300" role="dialog">
+					<div class="flex items-start justify-between gap-4 mb-6">
+						<div>
+							<h3 class="font-headline-lg text-headline-lg text-primary" data-roadmap-modal-title id="roadmap-modal-title"></h3>
+						</div>
+						<button aria-label="Sluit roadmapdetails" class="w-12 h-12 rounded-full border-2 border-outline-variant flex items-center justify-center text-on-surface-variant" data-roadmap-modal-close type="button">
+							<span class="material-symbols-outlined" aria-hidden="true">close</span>
+						</button>
+					</div>
+					<p class="roadmap-modal__body font-body-md text-body-md text-on-surface-variant" data-roadmap-modal-body></p>
+					<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-xl hover:opacity-90 transition-opacity mt-6" data-roadmap-modal-close type="button">
+						Sluiten
+					</button>
+				</div>
 			</div>
 		`;
 	}

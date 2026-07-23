@@ -735,9 +735,16 @@ changelog-entry {
 
 .roadmap-section__header {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	gap: 12px;
 	padding-inline: 4px;
+}
+
+.roadmap-section__header > div {
+	display: grid;
+	align-content: start;
+	gap: 4px;
+	min-width: 0;
 }
 
 .roadmap-section__dot {
@@ -772,7 +779,7 @@ changelog-entry {
 }
 
 .roadmap-section__subtitle {
-	margin: 4px 0 0;
+	margin: 0;
 	color: #514532;
 	font-family: "Be Vietnam Pro", sans-serif;
 	font-size: 14px;
@@ -878,7 +885,34 @@ changelog-entry {
 	font-family: "Be Vietnam Pro", sans-serif;
 	font-size: 15px;
 	line-height: 1.65;
-	overflow-wrap: anywhere;
+	word-break: normal;
+	overflow-wrap: normal;
+}
+
+.roadmap-card__description-button {
+	display: block;
+	width: 100%;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+}
+
+.roadmap-card__description-button:hover .roadmap-card__description,
+.roadmap-card__description-button:focus-visible .roadmap-card__description {
+	color: #21170f;
+}
+
+.roadmap-card__description-button:focus-visible {
+	outline: 3px solid rgba(124, 88, 0, 0.24);
+	outline-offset: 8px;
+	border-radius: 12px;
+}
+
+.roadmap-modal__body {
+	margin: 0;
+	line-height: 1.7;
 }
 
 .roadmap-card__progress {
@@ -1245,6 +1279,17 @@ changelog-entry {
 
 	.roadmap-columns {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
+		align-items: start;
+	}
+
+	.roadmap-section__header {
+		min-height: 92px;
+	}
+
+	.roadmap-section__title {
+		min-height: calc(1.2em * 2);
+		display: flex;
+		align-items: flex-end;
 	}
 
 	.roadmap-cta {
@@ -1283,6 +1328,10 @@ changelog-entry {
 	.roadmap-card,
 	.roadmap-cta {
 		padding: 20px;
+	}
+
+	.roadmap-section__header {
+		min-height: 0;
 	}
 
 	.not-found-illustration {
