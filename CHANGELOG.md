@@ -2,6 +2,10 @@
 
 Alle belangrijke wijzigingen per gepubliceerde versie.
 
+## [1.0.5] - 2026-07-24
+
+Added: Group wheel, automatic distribution, and local order list added Added: SVG animation fallback and fault-tolerant browser save Added: Daily choice between group wheel and personal wheel Added: Reusable opening intro for De Code Kas and Rad van Patat Added: Shift+C console and Harlem Shake command Added: Continuous synthesized beat and quit via Escape Added: Analytics
+
 ## [1.0.4] - 2026-07-23
 
 Geen wijzigingen beschreven.
