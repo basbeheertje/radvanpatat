@@ -115,6 +115,9 @@
 	function openShareOverlay() {
 		updateShareData();
 		openOverlay("share-overlay");
+		app.trackAnalyticsEvent("SHARE_MODAL_OPENED", {
+			available_snack_count: state.alleSnacks.length
+		});
 	}
 
 	function closeShareOverlay() {
@@ -248,14 +251,10 @@
 		if (!banner) {
 			return;
 		}
-		if (state.opgeslagenMening !== "patat") {
-			banner.classList.add("bottom-opinion-banner-hidden");
-			banner.textContent = "";
-			return;
-		}
 
-		banner.textContent = core.kiesWillekeurigeTekst(config.antwoordOpties.patat.banners);
-		banner.classList.remove("bottom-opinion-banner-hidden");
+		// The shared component observes this attribute, so a choice on the Rad
+		// updates immediately while other pages keep reading the stored opinion.
+		banner.setAttribute("data-opinion", state.opgeslagenMening || "");
 	}
 
 	function verwerkMening(antwoord) {
@@ -265,6 +264,11 @@
 
 		state.opgeslagenMening = antwoord;
 		slaMeningOp(antwoord);
+		// Separate event names make the regional friet/patat split available in
+		// standard GA4 event reports without an additional custom dimension.
+		app.trackAnalyticsEvent(
+			antwoord === "patat" ? "PATAT_OPINION_SELECTED" : "FRIET_OPINION_SELECTED"
+		);
 		closeOverlay("vraag-overlay");
 
 		if (antwoord === "friet") {
@@ -282,6 +286,84 @@
 
 		if (!state.opgeslagenMening) {
 			openOverlay("vraag-overlay");
+		}
+	}
+
+	function isBezoekKeuzeOpen() {
+		const overlay = document.getElementById("bezoek-keuze-overlay");
+		return Boolean(overlay && !overlay.classList.contains("hidden"));
+	}
+
+	/**
+	 * Opens the visit choice only for eligible external arrivals. The timestamp
+	 * is stored on display so refreshing an unanswered modal cannot bypass the
+	 * once-per-24-hours rule.
+	 *
+	 * @returns {boolean} Whether the visit choice was opened.
+	 */
+	function initialiseerBezoekKeuzeFlow() {
+		if (!app.visitChoice || !app.visitChoice.moetKeuzeTonen()) {
+			return false;
+		}
+
+		app.visitChoice.markeerKeuzeGetoond();
+		openOverlay("bezoek-keuze-overlay");
+		window.requestAnimationFrame(function () {
+			const groepKnop = document.getElementById("bezoek-keuze-groep");
+			if (groepKnop) {
+				groepKnop.focus();
+			}
+		});
+		return true;
+	}
+
+	/**
+	 * Keeps the daily mode question and the one-time friet/patat question
+	 * sequential, preventing two blocking overlays from opening together.
+	 *
+	 * @returns {void}
+	 */
+	function initialiseerEersteBezoekFlows() {
+		if (!initialiseerBezoekKeuzeFlow()) {
+			initialiseerMeningFlow();
+		}
+	}
+
+	/**
+	 * Continues on the current page for a personal spin or redirects to the
+	 * dedicated group flow.
+	 *
+	 * @param {"groep"|"eigen"} keuze
+	 * @returns {void}
+	 */
+	function verwerkBezoekKeuze(keuze) {
+		if (keuze !== "groep" && keuze !== "eigen") {
+			return;
+		}
+
+		// Track before navigation so the group choice is queued while the current
+		// page and its initialized gtag context are still available.
+		app.trackAnalyticsEvent(
+			keuze === "groep" ? "GROUP_MODE_SELECTED" : "PERSONAL_MODE_SELECTED"
+		);
+		closeOverlay("bezoek-keuze-overlay");
+		if (keuze === "groep") {
+			window.location.assign("./group.html");
+			return;
+		}
+
+		initialiseerMeningFlow();
+	}
+
+	/**
+	 * Treats Escape as the non-navigating personal choice, but only while the
+	 * daily mode modal is active.
+	 *
+	 * @returns {void}
+	 */
+	function sluitBezoekKeuzeAlsEigenRad() {
+		if (isBezoekKeuzeOpen()) {
+			verwerkBezoekKeuze("eigen");
 		}
 	}
 
@@ -321,6 +403,9 @@
 		toonEggsToast: toonEggsToast,
 		verwerkMening: verwerkMening,
 		initialiseerMeningFlow: initialiseerMeningFlow,
+		initialiseerEersteBezoekFlows: initialiseerEersteBezoekFlows,
+		verwerkBezoekKeuze: verwerkBezoekKeuze,
+		sluitBezoekKeuzeAlsEigenRad: sluitBezoekKeuzeAlsEigenRad,
 		updateEggsKansWeergave: updateEggsKansWeergave,
 		updateEggsKansBeschikbaarheid: updateEggsKansBeschikbaarheid,
 		closeModal: closeModal

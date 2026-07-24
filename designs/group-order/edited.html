@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Snack-Rad | Groepsbestelling</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Space+Grotesk:wght@500;600&amp;family=Be+Vietnam+Pro:wght@400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#d5c4ab",
+                        "on-secondary-fixed": "#410000",
+                        "background": "#fcf9f8",
+                        "surface-container": "#f0eded",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#505252",
+                        "tertiary": "#5d5f5f",
+                        "surface-bright": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf9f8",
+                        "surface-dim": "#dcd9d9",
+                        "primary": "#7c5800",
+                        "surface-container-high": "#eae7e7",
+                        "on-surface": "#1c1b1b",
+                        "secondary-fixed": "#ffdad4",
+                        "on-surface-variant": "#514532",
+                        "on-background": "#1c1b1b",
+                        "inverse-on-surface": "#f3f0ef",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary-container": "#6b4c00",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-container": "#e41f13",
+                        "on-secondary-fixed-variant": "#930000",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb4a8",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#313030",
+                        "on-primary-fixed": "#271900",
+                        "secondary": "#bc0000",
+                        "primary-fixed-dim": "#ffba20",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#7c5800",
+                        "primary-fixed": "#ffdea8",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-highest": "#e5e2e1",
+                        "tertiary-container": "#c4c5c5",
+                        "error": "#ba1a1a",
+                        "outline": "#837560",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#5e4200",
+                        "inverse-primary": "#ffba20",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-container": "#ffb800",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "margin-desktop": "120px",
+                        "xl": "64px",
+                        "base": "8px",
+                        "margin-mobile": "20px",
+                        "lg": "40px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Space Grotesk"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-md": ["Space Grotesk"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-xl": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {
+                            "lineHeight": "40px",
+                            "letterSpacing": "-0.01em",
+                            "fontWeight": "800"
+                        }],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .chunky-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(124, 88, 0, 0.1);
+        }
+
+        .ketchup-badge {
+            box-shadow: 4px 4px 0px 0px rgba(188, 0, 0, 0.2);
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px #ffdea8;
+        }
+
+        .flying-snack {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .snack-badge {
+            animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .shake-animation {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px) rotate(-1deg);
+            }
+            75% {
+                transform: translateX(5px) rotate(1deg);
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffb800;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<main class="flex-grow max-w-screen-xl mx-auto px-margin-desktop py-lg w-full">
+    <section class="mb-xl text-center md:text-left flex flex-col md:flex-row items-center gap-lg">
+        <div class="flex-1">
+            <h1 class="font-headline-xl text-headline-xl mb-sm text-primary">Groepsbestelling Configureren</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Klaar voor een gezellige snackronde? Stel hier je groep samen en laat het Rad bepalen wie wat krijgt.
+                Eén klik, en iedereen is voorzien!
+            </p>
+        </div>
+        <div class="flex-shrink-0">
+            <div
+                class="w-32 h-32 bg-secondary-container rounded-full flex items-center justify-center ketchup-badge rotate-12">
+                <span class="material-symbols-outlined text-on-secondary-container text-6xl"
+                      style="font-variation-settings: 'FILL' 1;">group</span>
+            </div>
+        </div>
+    </section>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-md items-start">
+        <!-- Step 1: Numbers -->
+        <div
+            class="md:col-span-5 bg-surface-container-low p-md rounded-xl chunky-shadow border-2 border-outline-variant">
+            <div class="flex items-center gap-sm mb-md">
+                <div class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">
+                    1
+                </div>
+                <h2 class="font-headline-md text-headline-md text-primary">Aantallen</h2>
+            </div>
+            <div class="space-y-lg">
+                <div>
+                    <label class="font-label-md block mb-sm text-on-surface-variant">Hoeveel mensen eten mee?</label>
+                    <div class="flex items-center gap-md">
+                        <button
+                            class="w-12 h-12 rounded-lg border-2 border-primary text-primary flex items-center justify-center hover:bg-primary-fixed transition-colors"
+                            onclick="decrement('people-count')">
+                            <span class="material-symbols-outlined">remove</span>
+                        </button>
+                        <input
+                            class="w-24 text-center text-headline-md font-bold border-none bg-transparent focus:ring-0"
+                            id="people-count" readonly="" type="number" value="5"/>
+                        <button
+                            class="w-12 h-12 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm"
+                            onclick="increment('people-count')">
+                            <span class="material-symbols-outlined">add</span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <label class="font-label-md block mb-sm text-on-surface-variant">Hoeveel snacks per persoon?</label>
+                    <div class="flex items-center gap-md">
+                        <button
+                            class="w-12 h-12 rounded-lg border-2 border-primary text-primary flex items-center justify-center hover:bg-primary-fixed transition-colors"
+                            onclick="decrement('snack-count')">
+                            <span class="material-symbols-outlined">remove</span>
+                        </button>
+                        <input
+                            class="w-24 text-center text-headline-md font-bold border-none bg-transparent focus:ring-0"
+                            id="snack-count" readonly="" type="number" value="2"/>
+                        <button
+                            class="w-12 h-12 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm"
+                            onclick="increment('snack-count')">
+                            <span class="material-symbols-outlined">add</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-lg p-sm bg-primary-fixed rounded-lg border-2 border-dashed border-primary/30">
+                <p class="font-label-sm text-center text-on-primary-fixed-variant">
+                    Totaal aantal snacks in het rad: <span class="font-bold" id="total-snacks">10</span>
+                </p>
+            </div>
+        </div>
+        <!-- Step 2: Names -->
+        <div
+            class="md:col-span-7 bg-surface-container-low p-md rounded-xl chunky-shadow border-2 border-outline-variant">
+            <div class="flex justify-between items-center mb-md">
+                <div class="flex items-center gap-sm">
+                    <div
+                        class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">
+                        2
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-primary">Wie eet er mee?</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-sm" id="names-container">
+                <div class="person-card relative" id="person-1">
+                    <input
+                        class="w-full bg-white border-2 border-outline-variant rounded-lg px-md py-3 font-body-md focus:border-primary-container transition-all"
+                        placeholder="Persoon 1" type="text" value="Jan"/>
+                    <div class="snack-inventory absolute right-3 top-3 flex gap-1"></div>
+                </div>
+                <div class="person-card relative" id="person-2">
+                    <input
+                        class="w-full bg-white border-2 border-outline-variant rounded-lg px-md py-3 font-body-md focus:border-primary-container transition-all"
+                        placeholder="Persoon 2" type="text" value="Anke"/>
+                    <div class="snack-inventory absolute right-3 top-3 flex gap-1"></div>
+                </div>
+                <div class="person-card relative" id="person-3">
+                    <input
+                        class="w-full bg-white border-2 border-outline-variant rounded-lg px-md py-3 font-body-md focus:border-primary-container transition-all"
+                        placeholder="Persoon 3" type="text" value="Tom"/>
+                    <div class="snack-inventory absolute right-3 top-3 flex gap-1"></div>
+                </div>
+                <div class="person-card relative" id="person-4">
+                    <input
+                        class="w-full bg-white border-2 border-outline-variant rounded-lg px-md py-3 font-body-md focus:border-primary-container transition-all"
+                        placeholder="Persoon 4" type="text" value="Lisa"/>
+                    <div class="snack-inventory absolute right-3 top-3 flex gap-1"></div>
+                </div>
+                <div class="person-card relative" id="person-5">
+                    <input
+                        class="w-full bg-white border-2 border-outline-variant rounded-lg px-md py-3 font-body-md focus:border-primary-container transition-all"
+                        placeholder="Persoon 5" type="text" value="Piet"/>
+                    <div class="snack-inventory absolute right-3 top-3 flex gap-1"></div>
+                </div>
+                <button
+                    class="w-full bg-surface-container border-2 border-dashed border-primary/40 rounded-lg px-md py-3 flex items-center justify-center gap-sm text-primary font-label-md hover:bg-primary-fixed transition-colors">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    Extra persoon
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Action Section -->
+    <div class="mt-xl flex flex-col items-center gap-md">
+        <button
+            class="group relative px-xl py-lg bg-primary-container text-on-primary-container rounded-full font-headline-md text-headline-md shadow-lg active:scale-95 transition-all hover:bg-[#FFD700] hover:scale-105 chunky-shadow border-4 border-primary"
+            id="start-btn" onclick="startOrderFlow()">
+<span class="flex items-center gap-md">
+                    Start Groepsbestelling
+                    <span
+                        class="material-symbols-outlined text-4xl group-hover:rotate-180 transition-transform duration-500">settings_backup_restore</span>
+</span>
+        </button>
+        <p class="font-body-md text-on-surface-variant italic flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary">info</span>
+            Het rad draait automatisch door tot iedereen is geserveerd.
+        </p>
+    </div>
+    <!-- Completion Modal (Simulation) -->
+    <div class="fixed inset-0 bg-black/60 z-[100] hidden items-center justify-center p-md backdrop-blur-sm"
+         id="completion-overlay">
+        <div
+            class="bg-surface-container-lowest max-w-lg w-full rounded-2xl p-xl shadow-2xl border-4 border-primary text-center">
+            <div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-lg">
+                <span class="material-symbols-outlined text-on-primary text-6xl">check_circle</span>
+            </div>
+            <h2 class="font-headline-xl text-headline-lg text-primary mb-md">Bestelling Klaar!</h2>
+            <p class="font-body-lg text-on-surface-variant mb-xl">
+                Alle snacks zijn eerlijk verdeeld door het Rad. Tijd om te smullen!
+            </p>
+            <div class="space-y-md">
+                <button class="w-full py-4 bg-primary text-on-primary rounded-xl font-headline-md shadow-lg"
+                        onclick="location.reload()">
+                    Bekijk Bestellijst
+                </button>
+                <button class="w-full py-3 text-secondary font-label-md" onclick="location.reload()">
+                    Opnieuw draaien
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- 3D Rad Section -->
+    <div class="mt-xl relative">
+        <div
+            class="w-full h-[500px] bg-surface-container-lowest rounded-xl border-2 border-outline-variant chunky-shadow overflow-hidden">
+            <!-- HIER KOMT HET RAD -->
+        </div>
+        <div class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none text-center"
+             id="winner-overlay">
+            <div class="bg-primary text-on-primary px-lg py-md rounded-full shadow-xl text-headline-lg animate-bounce">
+                <span id="winner-text"></span>!
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    // State management
+    let totalOrders = 10;
+    let snacksAssigned = 0;
+    let isFlowActive = false;
+
+    function increment(id) {
+        if (isFlowActive) return;
+        const input = document.getElementById(id);
+        input.value = parseInt(input.value) + 1;
+        updateTotal();
+    }
+
+    function decrement(id) {
+        if (isFlowActive) return;
+        const input = document.getElementById(id);
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+            updateTotal();
+        }
+    }
+
+    function updateTotal() {
+        const people = parseInt(document.getElementById('people-count').value);
+        const snacks = parseInt(document.getElementById('snack-count').value);
+        totalOrders = people * snacks;
+        document.getElementById('total-snacks').innerText = totalOrders;
+    }
+
+    function startOrderFlow() {
+        if (isFlowActive) return;
+
+        isFlowActive = true;
+        updateTotal(); // Final check
+
+        const startBtn = document.getElementById('start-btn');
+        startBtn.disabled = true;
+        startBtn.classList.add('opacity-50', 'grayscale');
+        startBtn.innerHTML = `<span class="flex items-center gap-md">Draaien... <span class="material-symbols-outlined animate-spin">refresh</span></span>`;
+
+        // Reset inventories
+        document.querySelectorAll('.snack-inventory').forEach(inv => inv.innerHTML = '');
+        snacksAssigned = 0;
+
+        // Dispatch event for the new animation with total count
+        window.dispatchEvent(new CustomEvent('spinRequest', {detail: {count: totalOrders}}));
+    }
+
+    // Three.js Integration (ANIMATION_18)
+    (function () {
+        const container = document.getElementById('threejs-container-ANIMATION_18');
+        const width = container.clientWidth || window.innerWidth;
+        const height = container.clientHeight || window.innerHeight;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        camera.position.z = 6;
+
+        const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const colors = [0xffb800, 0xbc0000, 0x7c5800, 0xfcf9f8, 0xe41f13, 0xffdea8, 0xffb4a8, 0xba1a1a];
+        const snackLabels = ["Frikandel", "Kroket", "Kaassoufflé", "Bamischijf", "Bitterballen", "Loempia", "Frites", "Mexicaner"];
+
+        const wheelGroup = new THREE.Group();
+        scene.add(wheelGroup);
+
+        const segments = 8;
+        const radius = 3;
+        const depth = 0.4;
+
+        for (let i = 0; i < segments; i++) {
+            const thetaStart = (i / segments) * Math.PI * 2;
+            const thetaLength = (1 / segments) * Math.PI * 2;
+
+            const geometry = new THREE.CylinderGeometry(radius, radius, depth, 32, 1, false, thetaStart, thetaLength);
+            const material = new THREE.MeshPhongMaterial({color: colors[i % colors.length], side: THREE.DoubleSide});
+
+            const segment = new THREE.Mesh(geometry, material);
+            segment.rotation.x = Math.PI / 2;
+            wheelGroup.add(segment);
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 256;
+            canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = (i % 2 === 0) ? 'white' : 'black';
+            ctx.font = 'Bold 32px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(snackLabels[i], 128, 40);
+
+            const texture = new THREE.CanvasTexture(canvas);
+            const labelMat = new THREE.MeshBasicMaterial({map: texture, transparent: true});
+            const labelGeom = new THREE.PlaneGeometry(2, 0.5);
+            const label = new THREE.Mesh(labelGeom, labelMat);
+
+            const angle = thetaStart + thetaLength / 2;
+            label.position.x = Math.cos(angle) * (radius * 0.65);
+            label.position.y = Math.sin(angle) * (radius * 0.65);
+            label.position.z = depth / 2 + 0.02;
+            label.rotation.z = angle;
+            wheelGroup.add(label);
+        }
+
+        const rim = new THREE.Mesh(new THREE.TorusGeometry(radius, 0.1, 16, 100), new THREE.MeshPhongMaterial({color: 0x3d2b1f}));
+        wheelGroup.add(rim);
+        const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.6, 32), new THREE.MeshPhongMaterial({color: 0xffffff}));
+        pin.rotation.x = Math.PI / 2;
+        wheelGroup.add(pin);
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+        const light = new THREE.PointLight(0xffffff, 1);
+        light.position.set(5, 5, 5);
+        scene.add(light);
+
+        const pointer = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.5, 4), new THREE.MeshPhongMaterial({color: 0xcc0000}));
+        pointer.position.y = radius + 0.3;
+        pointer.rotation.z = Math.PI;
+        scene.add(pointer);
+
+        let rotationSpeed = 0;
+        let isSpinning = false;
+        let spinQueue = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (isSpinning) {
+                wheelGroup.rotation.z += rotationSpeed;
+                rotationSpeed *= 0.985;
+                if (rotationSpeed < 0.002) {
+                    rotationSpeed = 0;
+                    isSpinning = false;
+
+                    const finalAngle = (wheelGroup.rotation.z % (Math.PI * 2) + (Math.PI * 2)) % (Math.PI * 2);
+                    const adjustedAngle = (Math.PI * 2.5 - finalAngle) % (Math.PI * 2);
+                    const segmentIndex = Math.floor((adjustedAngle / (Math.PI * 2)) * segments);
+
+                    window.dispatchEvent(new CustomEvent('snackWon', {
+                        detail: {
+                            name: snackLabels[segmentIndex],
+                            color: colors[segmentIndex % colors.length]
+                        }
+                    }));
+
+                    if (spinQueue > 0) {
+                        setTimeout(() => {
+                            spinQueue--;
+                            startSpin();
+                        }, 1200); // Wait for the "oops" animation to finish mostly
+                    }
+                }
+            }
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        function startSpin() {
+            if (!isSpinning) {
+                rotationSpeed = 0.5 + Math.random() * 0.4;
+                isSpinning = true;
+            }
+        }
+
+        window.addEventListener('spinRequest', (e) => {
+            const count = e.detail?.count || 1;
+            spinQueue = count - 1;
+            startSpin();
+        });
+
+        window.addEventListener('resize', () => {
+            const w = container.clientWidth || window.innerWidth;
+            const h = container.clientHeight || window.innerHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+    })();
+
+    // Interaction logic
+    window.addEventListener('snackWon', (e) => {
+        const {name, color} = e.detail;
+        const snackColorHex = '#' + color.toString(16).padStart(6, '0');
+
+        // Show overlay temporarily
+        const overlay = document.getElementById('winner-overlay');
+        const text = document.getElementById('winner-text');
+        text.innerText = name;
+        text.parentElement.style.backgroundColor = snackColorHex;
+        overlay.classList.remove('hidden');
+
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+            triggerFlyingSnack(name, snackColorHex);
+        }, 800);
+    });
+
+    function triggerFlyingSnack(name, color) {
+        const numPeople = parseInt(document.getElementById('people-count').value);
+        const targetPersonId = (snacksAssigned % numPeople) + 1;
+        const targetEl = document.getElementById(`person-${targetPersonId}`);
+        const radEl = document.getElementById('threejs-container-ANIMATION_18');
+
+        const snack = document.createElement('div');
+        snack.className = 'flying-snack w-12 h-12 rounded-full flex items-center justify-center text-white font-bold shadow-lg';
+        snack.style.backgroundColor = color;
+        snack.innerHTML = `<span class="material-symbols-outlined text-2xl">lunch_dining</span>`;
+
+        const radRect = radEl.getBoundingClientRect();
+        snack.style.left = `${radRect.left + radRect.width / 2 - 24}px`;
+        snack.style.top = `${radRect.top + radRect.height / 2 - 24}px`;
+        document.body.appendChild(snack);
+
+        // Fly to person
+        setTimeout(() => {
+            const targetRect = targetEl.getBoundingClientRect();
+            snack.style.left = `${targetRect.left + targetRect.width - 60}px`;
+            snack.style.top = `${targetRect.top + 10}px`;
+            snack.style.transform = 'scale(0.5)';
+            snack.style.opacity = '0.5';
+
+            setTimeout(() => {
+                snack.remove();
+                const inventory = targetEl.querySelector('.snack-inventory');
+                const badge = document.createElement('div');
+                badge.className = 'snack-badge w-6 h-6 rounded-full border-2 border-white shadow-sm flex items-center justify-center';
+                badge.style.backgroundColor = color;
+                badge.innerHTML = `<span class="material-symbols-outlined text-[14px]">check</span>`;
+                inventory.appendChild(badge);
+
+                snacksAssigned++;
+                checkCompletion();
+            }, 600);
+        }, 50);
+    }
+
+    function checkCompletion() {
+        if (snacksAssigned >= totalOrders) {
+            setTimeout(() => {
+                document.getElementById('completion-overlay').classList.remove('hidden');
+                document.getElementById('completion-overlay').classList.add('flex');
+
+                // Simple confetti effect
+                for (let i = 0; i < 30; i++) {
+                    const c = document.createElement('div');
+                    c.className = 'confetti';
+                    c.style.left = Math.random() * 100 + 'vw';
+                    c.style.top = '-10px';
+                    c.style.backgroundColor = ['#ffb800', '#bc0000', '#7c5800'][Math.floor(Math.random() * 3)];
+                    document.body.appendChild(c);
+
+                    const anim = c.animate([
+                        {transform: 'translateY(0) rotate(0)', opacity: 1},
+                        {transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0}
+                    ], {duration: 2000 + Math.random() * 2000});
+                    anim.onfinish = () => c.remove();
+                }
+            }, 1000);
+        }
+    }
+</script>
+</body>
+</html>

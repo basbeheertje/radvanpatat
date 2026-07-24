@@ -9,6 +9,9 @@ const repoRoot = path.resolve(__dirname, "..");
 const outputPath = path.join(repoRoot, "src", "frontend", "assets", "js", "roadmap-data.js");
 
 const CATEGORY_ORDER = ["nu", "binnenkort", "later"];
+const MAX_ROADMAP_ITEMS = 9;
+const COMPLETED_VISIBILITY_MONTHS = 3;
+const ROADMAP_EXCLUDE_MARKER = "*** EXCLUDE FROM ROADMAP ***";
 
 const ICON_KEYWORDS = [
 	{ pattern: /(account|profiel|user|login)/i, icon: "account_circle" },
@@ -36,6 +39,25 @@ function normalizeWhitespace(value) {
  */
 function serializeModuleValue(value) {
 	return JSON.stringify(value, null, "\t");
+}
+
+/**
+ * Milestone descriptions may contain private maintainer notes after a hard
+ * marker. Strip that tail before any metadata parsing so those notes never leak
+ * into public card copy or into the category/status/icon metadata contract.
+ *
+ * @param {string} description
+ * @returns {string}
+ */
+function stripRoadmapExcludedContent(description) {
+	const normalizedDescription = String(description || "").replaceAll("\r\n", "\n");
+	const markerIndex = normalizedDescription.indexOf(ROADMAP_EXCLUDE_MARKER);
+
+	if (markerIndex === -1) {
+		return normalizedDescription;
+	}
+
+	return normalizedDescription.slice(0, markerIndex).trimEnd();
 }
 
 async function fetchMilestones(repository, token) {
@@ -82,7 +104,7 @@ async function fetchMilestones(repository, token) {
  * @returns {{ category: string, status: string, icon: string, description: string }}
  */
 function parseDescriptionMetadata(description) {
-	const lines = String(description || "").replaceAll("\r\n", "\n").split("\n");
+	const lines = stripRoadmapExcludedContent(description).split("\n");
 	const metadata = {
 		category: "",
 		status: "",
@@ -134,6 +156,70 @@ function inferProgress(milestone) {
 	return Math.round((milestone.closed_issues / totalIssues) * 100);
 }
 
+/**
+ * Treat both closed milestones and 100% milestones as completed so the public
+ * roadmap reflects actual progress even when maintainers close the milestone a
+ * little later than the last linked issue.
+ *
+ * @param {{ state?: string | null }} milestone
+ * @param {number} progress
+ * @returns {boolean}
+ */
+function isCompletedMilestone(milestone, progress) {
+	return milestone?.state === "closed" || progress === 100;
+}
+
+/**
+ * GitHub only guarantees `closed_at` for formally closed milestones. When a
+ * milestone already hit 100% but is not closed yet, `updated_at` is the best
+ * proxy for "recently completed" so the 3 month retention window still works.
+ *
+ * @param {{ closed_at?: string | null, updated_at?: string | null, due_on?: string | null }} milestone
+ * @returns {Date | null}
+ */
+function getMilestoneCompletionDate(milestone) {
+	const completionValue = milestone?.closed_at || milestone?.updated_at || milestone?.due_on;
+
+	if (!completionValue) {
+		return null;
+	}
+
+	const completionDate = new Date(completionValue);
+	return Number.isNaN(completionDate.getTime()) ? null : completionDate;
+}
+
+/**
+ * Roadmap cards represent planned work with an explicit finish horizon. Milestones
+ * without a GitHub due date stay out of the public roadmap so visitors only see
+ * items that the team has actually scheduled.
+ *
+ * @param {{ due_on?: string | null, state?: string | null, closed_at?: string | null, updated_at?: string | null }} milestone
+ * @returns {boolean}
+ */
+function isRoadmapVisibleMilestone(milestone) {
+	if (!milestone?.due_on) {
+		return false;
+	}
+
+	const progress = inferProgress(milestone);
+	if (!isCompletedMilestone(milestone, progress)) {
+		return true;
+	}
+
+	const completionDate = getMilestoneCompletionDate(milestone);
+	if (!completionDate) {
+		return false;
+	}
+
+	// Completed milestones stay visible for a short period so recent releases are
+	// still discoverable, but they roll off automatically to keep the roadmap
+	// focused on work that is still relevant.
+	const visibleSince = new Date();
+	visibleSince.setMonth(visibleSince.getMonth() - COMPLETED_VISIBILITY_MONTHS);
+
+	return completionDate >= visibleSince;
+}
+
 function inferCategory(milestone, metadata, progress) {
 	const configuredCategory = metadata.category.toLowerCase();
 
@@ -177,10 +263,12 @@ function inferStatus(milestone, metadata, progress, category) {
 function normalizeMilestone(milestone) {
 	const metadata = parseDescriptionMetadata(milestone.description || "");
 	const progress = inferProgress(milestone);
+	const isCompleted = isCompletedMilestone(milestone, progress);
 	const category = inferCategory(milestone, metadata, progress);
 	const status = inferStatus(milestone, metadata, progress, category);
 	const icon = inferIcon(milestone, metadata);
 	const description = metadata.description || "Meer details volgen zodra deze milestone verder is uitgewerkt.";
+	const dueDate = new Date(milestone.due_on || "");
 
 	return {
 		title: normalizeWhitespace(milestone.title),
@@ -189,36 +277,67 @@ function normalizeMilestone(milestone) {
 		description: description,
 		icon: icon,
 		progress: progress,
+		hasStartedWork: progress > 0 && !isCompleted,
+		isCompleted: isCompleted,
 		sortWeight: CATEGORY_ORDER.indexOf(category),
 		dueOn: milestone.due_on || "",
+		dueTimestamp: Number.isNaN(dueDate.getTime()) ? Number.POSITIVE_INFINITY : dueDate.getTime(),
 		number: milestone.number,
 	};
 }
 
 function sortMilestones(items) {
 	return [...items].sort((left, right) => {
-		if (left.sortWeight !== right.sortWeight) {
-			return left.sortWeight - right.sortWeight;
+		// Active work with started issues gets priority over untouched future work
+		// so the limited roadmap highlights momentum before distant ideas.
+		if (left.hasStartedWork !== right.hasStartedWork) {
+			return left.hasStartedWork ? -1 : 1;
+		}
+
+		// Completed milestones remain visible for context, but they sort behind
+		// incomplete milestones so upcoming work keeps the most prominent slots.
+		if (left.isCompleted !== right.isCompleted) {
+			return left.isCompleted ? 1 : -1;
+		}
+
+		// Due date is the main timeline signal. Earlier dates come first for
+		// active and planned work, while completed work shows the most recent
+		// deadline first because older releases are less relevant.
+		if (left.dueTimestamp !== right.dueTimestamp) {
+			if (left.isCompleted && right.isCompleted) {
+				return right.dueTimestamp - left.dueTimestamp;
+			}
+
+			return left.dueTimestamp - right.dueTimestamp;
 		}
 
 		if (left.progress !== right.progress) {
 			return right.progress - left.progress;
 		}
 
-		if (left.dueOn && right.dueOn) {
-			return new Date(left.dueOn) - new Date(right.dueOn);
-		}
-
-		if (left.dueOn || right.dueOn) {
-			return left.dueOn ? -1 : 1;
+		if (left.sortWeight !== right.sortWeight) {
+			return left.sortWeight - right.sortWeight;
 		}
 
 		return left.number - right.number;
 	});
 }
 
+/**
+ * Keep the public roadmap intentionally short so each release exposes the nine
+ * highest-priority milestones instead of flooding visitors with low-signal cards.
+ *
+ * @param {ReturnType<typeof normalizeMilestone>[]} items
+ * @returns {ReturnType<typeof normalizeMilestone>[]}
+ */
+function selectRoadmapItems(items) {
+	return items.slice(0, MAX_ROADMAP_ITEMS);
+}
+
 function createModule(items) {
-	const publicItems = items.map(({ sortWeight, dueOn, number, ...item }) => item);
+	const publicItems = items.map(
+		({ sortWeight, dueOn, dueTimestamp, hasStartedWork, isCompleted, number, ...item }) => item,
+	);
 
 	return `/**
  * Automatically generated from GitHub milestones by scripts/generate-roadmap.mjs.
@@ -241,7 +360,15 @@ async function main() {
 	}
 
 	const milestones = await fetchMilestones(repository, token);
-	const roadmapItems = sortMilestones(milestones.map(normalizeMilestone));
+	// Filter before normalization so every downstream step can assume the public
+	// roadmap only contains milestones with an explicit end date.
+	const roadmapItems = selectRoadmapItems(
+		sortMilestones(
+			milestones
+				.filter(isRoadmapVisibleMilestone)
+				.map(normalizeMilestone),
+		),
+	);
 	await fs.writeFile(outputPath, createModule(roadmapItems), "utf8");
 
 	console.log(`${roadmapItems.length} roadmap-items gegenereerd.`);

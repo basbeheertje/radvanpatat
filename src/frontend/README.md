@@ -5,13 +5,20 @@ Deze map bevat een statische frontend zonder build tooling.
 ## Structuur
 
 - `index.html`: interactieve Rad van Patat-pagina
+- `group.html`: configureert deelnemers en laat het gedeelde rad automatisch een groepsbestelling samenstellen
+- `order.html`: toont de laatst voltooide groepsbestelling uit de localStorage van de huidige browser
 - `help.html`: help-pagina
 - `changelog.html`: gegenereerde changelogpagina op basis van `../../CHANGELOG.md`
 - `roadmap.html`: roadmappagina die cards uit een configureerbare JavaScript-array rendert
 - `404.html`: statische foutpagina met gedeelde layoutcomponenten
 - `.nojekyll`: zorgt dat GitHub Pages de statische frontendbestanden direct serveert, inclusief `404.html`
 - `components/`: herbruikbare web components voor layout
+- `components/site-head.js`: gedeelde parser-synchrone head voor algemene metadata, fonts, styling, componentregistratie en Google Analytics
+- `components/patat-banner.js`: automatisch gemounte sitebrede banner voor de opgeslagen friet-of-patatkeuze
+- `components/roulette-wheel-view.js`: gedeelde wielmarkup voor het gewone rad en het groepsrad
+- `components/order-summary.js`: gedeelde bestellijstweergave voor `group.html` en `order.html`
 - `assets/css/default.css`: gedeelde en rad-specifieke styling
+- `assets/js/analytics.js`: fouttolerante GA4-adapter met stabiele eventnamen en gevalideerde parameters
 - `assets/js/`: roulettefunctionaliteit en componentregistratie
 - `assets/images/` en `assets/sounds/`: statische media
 - `../../scripts/generate-changelog-html.mjs`: bouwt `changelog.html` opnieuw op uit `CHANGELOG.md`
@@ -22,6 +29,48 @@ Deze map bevat een statische frontend zonder build tooling.
 Serveer `src/frontend` direct via Apache of Nginx als document root, of als submap.
 
 Er is geen `npm install` of buildstap nodig.
+
+Iedere top-level HTML-pagina houdt alleen de pagina-eigen SEO-metadata en
+structured data in de eigen `<head>`. Laad daarnaast
+`./components/site-head.js` voor de gedeelde browsermetadata, assets en Google
+Analytics-configuratie (`G-FDRQ5JB0WX`).
+
+## Google Analytics-gebeurtenissen
+
+De gedeelde adapter verstuurt de volgende gebeurtenissen:
+
+| Event | Moment | Parameters |
+| --- | --- | --- |
+| `patat_opinion_selected` | Bezoeker kiest patat | — |
+| `friet_opinion_selected` | Bezoeker kiest friet | — |
+| `easter_eggs_activated` | De `eggs`-modus wordt geactiveerd | — |
+| `group_mode_selected` | Bezoeker kiest het groepsrad | — |
+| `personal_mode_selected` | Bezoeker kiest het persoonlijke rad | — |
+| `roulette_spin_started` | Een persoonlijke of automatische groepsspin start | `spin_mode`, `available_snack_count` |
+| `roulette_spin_completed` | Het rad heeft een snack gekozen | `spin_mode`, `snack_name`, `snack_source` |
+| `share_modal_opened` | De deelmodal opent | `available_snack_count` |
+| `harlem_shake_started` | Het `shake`-commando start | — |
+| `group_order_started` | Een groepsverdeling start | `people_count`, `requested_snack_count`, `available_snack_count` |
+| `snack_removed` | Een snack wordt buiten het rad gesleept | `snack_name`, `snack_source`, `available_snack_count` |
+| `snack_added` | Een geldige eigen snack wordt toegevoegd | `snack_name`, `available_snack_count` |
+
+Registreer `snack_name`, `snack_source` en `spin_mode` als event-scoped
+custom dimensions en de drie telparameters als custom metrics wanneer deze
+waarden in gewone GA4-rapporten en Explorations beschikbaar moeten zijn. Zonder
+die registratie zijn ze wel in Realtime en DebugView te controleren. Zie
+[Google Analytics: event parameters](https://developers.google.com/analytics/devguides/collection/ga4/event-parameters).
+
+De gedeelde componentregistratie mount `#patat-banner` automatisch op iedere
+pagina. De banner blijft verborgen tenzij de bezoeker op het persoonlijke rad
+voor `patat` heeft gekozen; die keuze wordt sitebreed uit localStorage gelezen.
+
+De groepsbestelling gebruikt dezelfde opgeslagen snackselectie als `index.html`. Na de laatste automatische spin wordt uitsluitend de voltooide bestelling lokaal bewaard onder `rad-van-patat-last-group-order`. Deelnemersnamen en bestellingen verlaten de browser niet. Snacknamen worden bij toevoegen, verwijderen en spinresultaten wel als genormaliseerde Analytics-eventparameter verstuurd. Open `order.html` op hetzelfde apparaat en in dezelfde browser om die bestelling opnieuw te bekijken.
+
+De businessregels voor de groepsverdeling en localStorage-validatie kunnen worden gecontroleerd met:
+
+```bash
+npm test
+```
 
 Werk na een wijziging aan `CHANGELOG.md` de frontendpagina handmatig bij met:
 
@@ -34,3 +83,6 @@ Werk de roadmap-data handmatig bij vanuit GitHub milestones met:
 ```bash
 GITHUB_REPOSITORY=owner/repo GITHUB_TOKEN=... node scripts/generate-roadmap.mjs
 ```
+
+Alleen milestones met een GitHub-einddatum (`due date`) worden in de publieke roadmap opgenomen.
+De roadmap toont maximaal 9 milestones tegelijk, geeft voorrang aan milestones met gestarte issues en laat afgeronde milestones maximaal 3 maanden zichtbaar staan.

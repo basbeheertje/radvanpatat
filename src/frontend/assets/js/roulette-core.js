@@ -1,6 +1,18 @@
 (function (window) {
 	const app = window.SnackRad = window.SnackRad || {};
 
+	/**
+	 * Keep callers independent from gtag availability. Tests and privacy tools
+	 * may omit analytics.js, while production delegates semantic event keys to
+	 * the shared GA4 adapter loaded by the base head.
+	 */
+	app.trackAnalyticsEvent = function (eventKey, parameters) {
+		if (!app.analytics || typeof app.analytics.trackEvent !== "function") {
+			return false;
+		}
+		return app.analytics.trackEvent(eventKey, parameters);
+	};
+
 	app.config = {
 		basisSnacks: [
 			["Bitterbal", "/snacks/bitterbal.png"],
@@ -22,6 +34,9 @@
 		}),
 		snackOpslagSleutel: "rad-van-patat-roulette-snacks",
 		meningOpslagSleutel: "rad-van-patat-friet-of-patat",
+		bezoekKeuzeCookieSleutel: "rad-van-patat-bezoekkeuze-getoond",
+		bezoekKeuzeOpslagSleutel: "rad-van-patat-bezoekkeuze-tijdstip",
+		bezoekKeuzeGeldigheidMs: 24 * 60 * 60 * 1000,
 		gedeeldRadParameter: "rad",
 		gedeeldRadVersie: 1,
 		maxSnackNaamLengte: 40,
@@ -41,12 +56,6 @@
 					"Patat? Dappere, maar foute keuze.",
 					"We rekenen 'patat' niet goed, maar vooruit.",
 					"Bijna goed. Het is friet."
-				],
-				banners: [
-					"Deze persoon denkt dat het patat is.... huil huil huil",
-					"Alarm: hier woont iemand die 'patat' zegt.",
-					"Wij weten beter. Deze persoon koos toch voor patat.",
-					"Triest nieuws: deze persoon noemt friet dus patat."
 				]
 			}
 		},

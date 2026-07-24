@@ -2,17 +2,11 @@
 <html class="light" lang="nl">
 	<head>
 		<meta charset="UTF-8"/>
-		<meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" name="viewport"/>
 		<title>Rad van Patat | Draai het rad en kies je snack</title>
 		<meta content="Laat het Rad van Patat bepalen welke snack je kiest. Voeg snacks toe, draai het rad en deel jouw unieke snackrad via een link of QR-code." name="description"/>
 		<meta content="rad van patat, snackrad, roulette, friet, patat, snack kiezen, snacklijst delen" name="keywords"/>
-		<meta content="telephone=yes" name="format-detection"/>
-		<meta content="yes" name="mobile-web-app-capable"/>
 		<meta content="index, follow" name="robots"/>
-		<meta content="#7c5800" name="theme-color"/>
-		<meta content="on" http-equiv="cleartype"/>
 		<link href="https://radvanpatat.nl/" rel="canonical"/>
-		<link as="image" href="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" rel="preload"/>
 		<meta content="Rad van Patat | Draai het rad en kies je snack" property="og:title"/>
 		<meta content="Laat het Rad van Patat bepalen welke snack je kiest. Maak je eigen rad en deel het direct met anderen." property="og:description"/>
 		<meta content="nl_NL" property="og:locale"/>
@@ -27,19 +21,8 @@
 		<meta content="Rad van Patat | Draai het rad en kies je snack" name="twitter:title"/>
 		<meta content="Laat het Rad van Patat bepalen welke snack je kiest. Maak je eigen rad en deel het direct met anderen." name="twitter:description"/>
 		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
-		<link href="./assets/images/brand/apple-touch-icon.png" rel="apple-touch-icon"/>
-		<link href="./assets/images/brand/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-		<link href="./assets/images/brand/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-		<link href="./assets/images/brand/favicon.png" rel="icon" type="image/png"/>
-		<link href="./assets/images/brand/favicon.png" rel="shortcut icon" type="image/png"/>
+		<script src="./components/site-head.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-		<link href="https://fonts.googleapis.com" rel="preconnect"/>
-		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-		<link href="./assets/css/default.css" rel="stylesheet"/>
-		<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-		<script src="./assets/js/tailwind-theme.js"></script>
-		<script type="module" src="./assets/js/app.js"></script>
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
@@ -100,7 +83,7 @@
 					</p>
 				</div>
 
-				<div class="roulette-stats-grid grid grid-cols-2 gap-4 mt-2">
+				<div class="roulette-stats-grid grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
 					<div class="roulette-stat-card p-6 bg-surface-container rounded-xl border-2 border-outline-variant shadow-[0_4px_12px_rgba(255,184,0,0.08)]">
 						<span class="material-symbols-outlined text-secondary text-[32px] mb-2">stars</span>
 						<h3 class="font-label-md text-label-md">Standaard snacks</h3>
@@ -126,40 +109,7 @@
 			</div>
 
 			<div class="col-span-12 lg:col-span-7 flex justify-center items-center relative order-1 lg:order-2" id="rad">
-				<div class="roulette-wheel-spotlight"></div>
-				<div class="roulette-wheel-shell">
-					<div class="roulette-wheel-pointer" aria-hidden="true">
-						<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-							<path d="M50 6 C71 6 86 21 86 40 C86 51 82 60 75 70 L56 112 C54 116 50 118 46 112 L25 70 C18 60 14 51 14 40 C14 21 29 6 50 6 Z" fill="#EF3E2F" stroke="#21170F" stroke-width="6" stroke-linejoin="round"/>
-							<circle cx="50" cy="34" r="14" fill="#FFFFFF" stroke="#21170F" stroke-width="5"/>
-						</svg>
-					</div>
-
-					<div class="roulette-wheel-stage">
-						<div id="wheel-shell">
-							<svg id="wheel-svg" viewBox="0 0 640 640" role="img" aria-labelledby="wheel-svg-title wheel-svg-desc">
-								<title id="wheel-svg-title">Rad van Patat snackrad</title>
-								<desc id="wheel-svg-desc">Een interactief roulettewiel in de stijl van het Rad van Patat-logo.</desc>
-								<g id="wheel-rotor"></g>
-								<circle id="wheel-hit-area" cx="320" cy="320" r="260" fill="transparent"></circle>
-							</svg>
-						</div>
-					</div>
-
-					<div class="absolute -right-4 md:-right-8 top-8 md:top-12 z-10 animate-snack-float bg-white p-2 rounded-xl shadow-lg border-2 border-primary-container w-24 h-24 md:w-28 md:h-28 hidden xl:block">
-						<div class="w-full h-full rounded-lg overflow-hidden relative">
-							<img alt="Frikandel" class="w-full h-full object-cover" src="./assets/images/snacks/frikandel.png"/>
-							<div class="absolute -top-1 -right-1 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-label-sm text-label-sm border-2 border-white shadow-sm">Top</div>
-						</div>
-					</div>
-
-					<div class="snack-float-delayed absolute -left-8 md:-left-12 bottom-12 md:bottom-20 z-10 animate-snack-float bg-white p-2 rounded-xl shadow-lg border-2 border-primary-container w-28 h-28 md:w-32 md:h-32 hidden xl:block">
-						<div class="w-full h-full rounded-lg overflow-hidden relative">
-							<img alt="Kaassoufle" class="w-full h-full object-cover" src="./assets/images/snacks/kaassoufle.png"/>
-							<div class="absolute -top-1 -right-1 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-label-sm text-label-sm border-2 border-white shadow-sm">Nu</div>
-						</div>
-					</div>
-				</div>
+				<roulette-wheel-view show-floating-snacks></roulette-wheel-view>
 			</div>
 		</main>
 
@@ -184,8 +134,8 @@
 			</button>
 		</div>
 
-		<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-6" id="result-modal">
-			<div class="bg-surface max-w-sm w-full rounded-3xl p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300">
+		<div class="viewport-modal-overlay fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-6" id="result-modal">
+			<div class="viewport-modal-panel bg-surface max-w-sm w-full rounded-3xl p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300">
 				<img id="resultaat-afbeelding" src="./assets/images/bitterbal.jpg" alt="Resultaat"/>
 				<div id="resultaat-letter" aria-hidden="true"></div>
 				<h2 class="font-headline-lg text-headline-lg mb-2" id="resultaat-titel">Gewonnen!</h2>
@@ -199,8 +149,8 @@
 			</div>
 		</div>
 
-		<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[190] hidden items-center justify-center p-6" id="snack-formulier-overlay">
-			<div class="bg-surface max-w-md w-full rounded-3xl p-8 border-4 border-primary-container shadow-2xl">
+		<div class="viewport-modal-overlay fixed inset-0 bg-black/60 backdrop-blur-sm z-[190] hidden items-center justify-center p-6" id="snack-formulier-overlay">
+			<div class="viewport-modal-panel bg-surface max-w-md w-full rounded-3xl p-8 border-4 border-primary-container shadow-2xl">
 				<div class="flex items-start justify-between gap-4 mb-6">
 					<div>
 						<h2 class="font-headline-lg text-headline-lg">Snack toevoegen</h2>
@@ -226,8 +176,8 @@
 			</div>
 		</div>
 
-		<div class="fixed inset-0 z-[210] hidden items-center justify-center p-margin-mobile bg-blur-backdrop" id="share-overlay">
-			<div class="bg-surface-container-lowest w-full max-w-lg rounded-[32px] overflow-hidden snack-card-shadow border-2 border-primary-container animate-pop-in relative">
+		<div class="viewport-modal-overlay fixed inset-0 z-[210] hidden items-center justify-center p-margin-mobile bg-blur-backdrop" id="share-overlay">
+			<div class="viewport-modal-panel bg-surface-container-lowest w-full max-w-lg rounded-[32px] overflow-x-hidden snack-card-shadow border-2 border-primary-container animate-pop-in relative">
 				<button aria-label="Sluiten" class="absolute top-md right-md p-sm text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-90" id="share-sluiten-knop" type="button">
 					<span class="material-symbols-outlined text-[28px]">close</span>
 				</button>
@@ -288,8 +238,8 @@
 			</div>
 		</div>
 
-		<div class="fixed inset-0 z-[230] hidden items-center justify-center p-6 bg-black/60 backdrop-blur-sm" id="vraag-overlay">
-			<div class="bg-surface max-w-sm w-full rounded-3xl p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300">
+		<div class="viewport-modal-overlay fixed inset-0 z-[230] hidden items-center justify-center p-6 bg-black/60 backdrop-blur-sm" id="vraag-overlay">
+			<div class="viewport-modal-panel bg-surface max-w-sm w-full rounded-3xl p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300">
 				<div class="w-20 h-20 bg-primary-container rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-primary">
 					<span class="material-symbols-outlined text-on-primary-container text-[40px]">question_mark</span>
 				</div>
@@ -306,11 +256,54 @@
 			</div>
 		</div>
 
-		<div class="is-hidden toast-positive" id="eggs-toast" role="status" aria-live="polite"></div>
-		<div class="bottom-opinion-banner-hidden fixed bottom-0 left-0 z-[205] w-full bg-secondary text-white py-3 px-4 text-center font-label-sm text-label-sm shadow-[0_-8px_24px_rgba(188,0,0,0.22)]" id="patat-banner" role="note"></div>
+		<div class="viewport-modal-overlay fixed inset-0 z-[240] hidden items-center justify-center p-6 bg-black/60 backdrop-blur-sm" id="bezoek-keuze-overlay">
+			<div aria-describedby="bezoek-keuze-beschrijving" aria-labelledby="bezoek-keuze-titel" aria-modal="true" class="viewport-modal-panel bg-surface max-w-lg w-full rounded-3xl p-6 md:p-8 border-4 border-primary-container text-center shadow-2xl transform scale-90 transition-transform duration-300" role="dialog">
+				<div class="w-20 h-20 bg-primary-container rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-primary">
+					<span class="material-symbols-outlined text-on-primary-container text-[40px]" aria-hidden="true">restaurant_menu</span>
+				</div>
+				<h2 class="font-headline-lg text-headline-lg mb-3" id="bezoek-keuze-titel">Voor wie draait het Rad vandaag?</h2>
+				<p class="font-body-md text-body-md text-on-surface-variant mb-7" id="bezoek-keuze-beschrijving">Maak een complete groepsbestelling of laat het Rad één snack voor jezelf kiezen.</p>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<button class="group-mode-choice group-mode-choice--group" id="bezoek-keuze-groep" type="button">
+						<span class="material-symbols-outlined" aria-hidden="true">groups</span>
+						<span>
+							<strong>Voor een groep</strong>
+							<small>Verdeel snacks voor iedereen</small>
+						</span>
+					</button>
+					<button class="group-mode-choice group-mode-choice--single" id="bezoek-keuze-eigen" type="button">
+						<span class="material-symbols-outlined" aria-hidden="true">person</span>
+						<span>
+							<strong>Voor mezelf</strong>
+							<small>Laat het Rad één keuze maken</small>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
 
+		<div class="is-hidden toast-positive" id="eggs-toast" role="status" aria-live="polite"></div>
+		<div aria-hidden="true" class="easter-command-bar is-hidden" id="easter-egg-command-bar">
+			<form aria-label="Easter egg-console" class="easter-command-bar__form" id="easter-egg-command-form">
+				<span class="material-symbols-outlined easter-command-bar__icon" aria-hidden="true">terminal</span>
+				<label class="sr-only" for="easter-egg-command-input">Easter egg-commando</label>
+				<input
+					aria-label="Easter egg-commando"
+					autocomplete="off"
+					id="easter-egg-command-input"
+					placeholder="Typ een commando..."
+					spellcheck="false"
+					type="text"/>
+				<span class="easter-command-bar__hint" aria-hidden="true">Enter</span>
+				<button aria-label="Commandobalk sluiten" id="easter-egg-command-close" type="button">
+					<span class="material-symbols-outlined" aria-hidden="true">close</span>
+				</button>
+			</form>
+		</div>
 		<script src="./assets/js/roulette-core.js"></script>
+		<script src="./assets/js/roulette-visit-choice.js"></script>
 		<script src="./assets/js/roulette-ui.js"></script>
+		<script src="./assets/js/roulette-easter-eggs.js"></script>
 		<script src="./assets/js/roulette-wheel.js"></script>
 		<script src="./assets/js/roulette-init.js"></script>
 	</body>

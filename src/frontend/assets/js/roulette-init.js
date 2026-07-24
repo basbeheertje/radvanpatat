@@ -4,6 +4,7 @@
 	const ui = app.ui;
 	const wheel = app.wheel;
 	const state = app.state;
+	const easterEggs = app.easterEggs;
 
 	function bindOverlayClose(overlayId, onClose) {
 		const overlay = document.getElementById(overlayId);
@@ -59,6 +60,12 @@
 		state.alleSnacks.push(snack);
 		core.persistSnacks();
 		wheel.addSnackSegment();
+		// The normalized name is the exact label added to the wheel; image URLs
+		// and raw form values deliberately remain outside analytics.
+		app.trackAnalyticsEvent("SNACK_ADDED", {
+			snack_name: snack.name,
+			available_snack_count: state.alleSnacks.length
+		});
 		event.currentTarget.reset();
 		ui.closeSnackFormulier();
 	}
@@ -87,6 +94,12 @@
 	}
 
 	function handleKeyDown(event) {
+		const target = event.target;
+		const isEditableTarget = target && typeof target.matches === "function" && (
+			target.matches("input, textarea, select") ||
+			target.isContentEditable
+		);
+
 		if (event.key === "F5") {
 			event.preventDefault();
 			wheel.resetAndStart();
@@ -97,17 +110,40 @@
 			ui.openSnackFormulier();
 		}
 
-		if (event.key && event.key.length === 1) {
+		if (event.shiftKey && event.key.toLowerCase() === "c") {
+			if (state.easterEggsActief) {
+				event.preventDefault();
+				easterEggs.openCommandBar();
+			}
+			return;
+		}
+
+		// Commands typed into forms must not accidentally toggle the global
+		// easter-egg state while the visitor is entering normal page data.
+		if (!isEditableTarget && event.key && event.key.length === 1) {
 			state.easterEggBuffer = `${state.easterEggBuffer}${event.key.toLowerCase()}`.slice(-4);
 			if (state.easterEggBuffer === "eggs") {
 				state.easterEggsActief = !state.easterEggsActief;
+				if (state.easterEggsActief) {
+					app.trackAnalyticsEvent("EASTER_EGGS_ACTIVATED");
+				}
 				ui.updateEggsKansBeschikbaarheid();
 				ui.toonEggsToast();
+				if (!state.easterEggsActief) {
+					easterEggs.deactivate();
+				}
 				state.easterEggBuffer = "";
 			}
 		}
 
 		if (event.key === "Escape") {
+			if (easterEggs.isHarlemShakeActive()) {
+				event.preventDefault();
+				easterEggs.stopHarlemShake();
+				ui.toonToast("Harlem Shake gestopt", "positive");
+			}
+			easterEggs.closeCommandBar();
+			ui.sluitBezoekKeuzeAlsEigenRad();
 			ui.closeModal();
 			ui.closeSnackFormulier();
 			ui.closeShareOverlay();
@@ -139,6 +175,12 @@
 		bindClick("btn-patat", function () {
 			ui.verwerkMening("patat");
 		});
+		bindClick("bezoek-keuze-groep", function () {
+			ui.verwerkBezoekKeuze("groep");
+		});
+		bindClick("bezoek-keuze-eigen", function () {
+			ui.verwerkBezoekKeuze("eigen");
+		});
 
 		const eggsKansSlider = document.getElementById("eggs-kans-slider");
 		if (eggsKansSlider) {
@@ -152,6 +194,23 @@
 		if (snackFormulier) {
 			snackFormulier.addEventListener("submit", handleSnackSubmit);
 		}
+
+		const easterEggCommandForm = document.getElementById("easter-egg-command-form");
+		if (easterEggCommandForm) {
+			easterEggCommandForm.addEventListener("submit", function (event) {
+				event.preventDefault();
+				const commandInput = document.getElementById("easter-egg-command-input");
+				if (!commandInput) {
+					return;
+				}
+
+				if (!easterEggs.voerCommandoUit(commandInput.value)) {
+					commandInput.focus();
+					commandInput.select();
+				}
+			});
+		}
+		bindClick("easter-egg-command-close", easterEggs.closeCommandBar);
 
 		const wheelHitArea = document.getElementById("wheel-hit-area");
 		if (wheelHitArea) {
@@ -190,7 +249,7 @@
 		ui.updateEggsKansWeergave();
 		ui.updateEggsKansBeschikbaarheid();
 		ui.updateShareData();
-		ui.initialiseerMeningFlow();
+		ui.initialiseerEersteBezoekFlows();
 		bindEvents();
 	}
 
