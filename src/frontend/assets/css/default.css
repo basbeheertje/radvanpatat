@@ -784,7 +784,25 @@ body.harlem-shake-party branding-sticker {
 	display: block;
 }
 
-.bottom-opinion-banner-hidden {
+.patat-banner {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 205;
+	display: block;
+	width: 100%;
+	padding: 0.75rem 1rem;
+	background: #bc0000;
+	box-shadow: 0 -8px 24px rgba(188, 0, 0, 0.22);
+	color: #ffffff;
+	font-family: "Space Grotesk", sans-serif;
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1rem;
+	text-align: center;
+}
+
+.patat-banner.bottom-opinion-banner-hidden {
 	display: none;
 }
 

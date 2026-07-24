@@ -44,12 +44,6 @@
 					"Patat? Dappere, maar foute keuze.",
 					"We rekenen 'patat' niet goed, maar vooruit.",
 					"Bijna goed. Het is friet."
-				],
-				banners: [
-					"Deze persoon denkt dat het patat is.... huil huil huil",
-					"Alarm: hier woont iemand die 'patat' zegt.",
-					"Wij weten beter. Deze persoon koos toch voor patat.",
-					"Triest nieuws: deze persoon noemt friet dus patat."
 				]
 			}
 		},

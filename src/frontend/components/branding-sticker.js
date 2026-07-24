@@ -11,7 +11,7 @@ class BrandingSticker extends HTMLElement {
 					</div>
 				</div>
 				<div class="flex flex-col">
-					<span class="text-[10px] font-bold text-tertiary uppercase tracking-wider">Gemaakt door</span>
+					<span class="text-[10px] font-bold text-tertiary uppercase tracking-wider">Maatwerk software</span>
 					<span class="font-headline-md text-primary text-lg leading-tight">De Code Kas</span>
 					<div class="flex items-center gap-1 mt-1 text-on-surface-variant group-hover:text-primary transition-colors">
 						<span class="text-[12px] font-medium">Bezoek de website</span>

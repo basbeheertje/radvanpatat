@@ -177,17 +177,11 @@ function renderPage(changelog) {
 <html class="light" lang="nl">
 	<head>
 		<meta charset="UTF-8"/>
-		<meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" name="viewport"/>
 		<title>Rad van Patat Changelog | Bekijk alle updates</title>
 		<meta content="Bekijk welke verbeteringen, nieuwe functies en fixes er aan Rad van Patat zijn toegevoegd." name="description"/>
 		<meta content="rad van patat changelog, updates, releases, nieuwe functies, fixes, verbeteringen" name="keywords"/>
-		<meta content="telephone=yes" name="format-detection"/>
-		<meta content="yes" name="mobile-web-app-capable"/>
 		<meta content="index, follow" name="robots"/>
-		<meta content="#7c5800" name="theme-color"/>
-		<meta content="on" http-equiv="cleartype"/>
 		<link href="https://radvanpatat.nl/changelog.html" rel="canonical"/>
-		<link as="image" href="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" rel="preload"/>
 		<meta content="Rad van Patat Changelog | Bekijk alle updates" property="og:title"/>
 		<meta content="Bekijk welke verbeteringen, nieuwe functies en fixes er aan Rad van Patat zijn toegevoegd." property="og:description"/>
 		<meta content="nl_NL" property="og:locale"/>
@@ -202,18 +196,7 @@ function renderPage(changelog) {
 		<meta content="Rad van Patat Changelog | Bekijk alle updates" name="twitter:title"/>
 		<meta content="Bekijk welke verbeteringen, nieuwe functies en fixes er aan Rad van Patat zijn toegevoegd." name="twitter:description"/>
 		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
-		<link href="./assets/images/brand/apple-touch-icon.png" rel="apple-touch-icon"/>
-		<link href="./assets/images/brand/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-		<link href="./assets/images/brand/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-		<link href="./assets/images/brand/favicon.png" rel="icon" type="image/png"/>
-		<link href="./assets/images/brand/favicon.png" rel="shortcut icon" type="image/png"/>
-		<link href="https://fonts.googleapis.com" rel="preconnect"/>
-		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-		<link href="./assets/css/default.css" rel="stylesheet"/>
-		<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-		<script src="./assets/js/tailwind-theme.js"></script>
-		<script type="module" src="./assets/js/app.js"></script>
+		<script src="./components/site-head.js"></script>
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",

@@ -1,3 +1,8 @@
+---
+name: changelog
+description: Maintain CHANGELOG.md and regenerate src/frontend/changelog.html after project changes. Use after code, configuration, UI, bug fix, security, performance, integration, migration, or other user-visible or maintainer-relevant changes to determine whether a changelog entry is required and keep both changelog formats synchronized.
+---
+
 # Changelog Maintenance Skill
 
 ## Purpose

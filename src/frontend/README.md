@@ -13,6 +13,8 @@ Deze map bevat een statische frontend zonder build tooling.
 - `404.html`: statische foutpagina met gedeelde layoutcomponenten
 - `.nojekyll`: zorgt dat GitHub Pages de statische frontendbestanden direct serveert, inclusief `404.html`
 - `components/`: herbruikbare web components voor layout
+- `components/site-head.js`: gedeelde parser-synchrone head voor algemene metadata, fonts, styling, componentregistratie en Google Analytics
+- `components/patat-banner.js`: automatisch gemounte sitebrede banner voor de opgeslagen friet-of-patatkeuze
 - `components/roulette-wheel-view.js`: gedeelde wielmarkup voor het gewone rad en het groepsrad
 - `components/order-summary.js`: gedeelde bestellijstweergave voor `group.html` en `order.html`
 - `assets/css/default.css`: gedeelde en rad-specifieke styling
@@ -26,6 +28,15 @@ Deze map bevat een statische frontend zonder build tooling.
 Serveer `src/frontend` direct via Apache of Nginx als document root, of als submap.
 
 Er is geen `npm install` of buildstap nodig.
+
+Iedere top-level HTML-pagina houdt alleen de pagina-eigen SEO-metadata en
+structured data in de eigen `<head>`. Laad daarnaast
+`./components/site-head.js` voor de gedeelde browsermetadata, assets en Google
+Analytics-configuratie (`G-FDRQ5JB0WX`).
+
+De gedeelde componentregistratie mount `#patat-banner` automatisch op iedere
+pagina. De banner blijft verborgen tenzij de bezoeker op het persoonlijke rad
+voor `patat` heeft gekozen; die keuze wordt sitebreed uit localStorage gelezen.
 
 De groepsbestelling gebruikt dezelfde opgeslagen snackselectie als `index.html`. Na de laatste automatische spin wordt uitsluitend de voltooide bestelling lokaal bewaard onder `rad-van-patat-last-group-order`. Namen en bestellingen verlaten de browser niet. Open `order.html` op hetzelfde apparaat en in dezelfde browser om die bestelling opnieuw te bekijken.
 

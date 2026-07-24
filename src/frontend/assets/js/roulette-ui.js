@@ -248,14 +248,10 @@
 		if (!banner) {
 			return;
 		}
-		if (state.opgeslagenMening !== "patat") {
-			banner.classList.add("bottom-opinion-banner-hidden");
-			banner.textContent = "";
-			return;
-		}
 
-		banner.textContent = core.kiesWillekeurigeTekst(config.antwoordOpties.patat.banners);
-		banner.classList.remove("bottom-opinion-banner-hidden");
+		// The shared component observes this attribute, so a choice on the Rad
+		// updates immediately while other pages keep reading the stored opinion.
+		banner.setAttribute("data-opinion", state.opgeslagenMening || "");
 	}
 
 	function verwerkMening(antwoord) {
