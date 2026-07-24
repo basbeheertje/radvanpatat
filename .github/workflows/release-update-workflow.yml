@@ -10,6 +10,7 @@ on:
     workflow_dispatch:
 
 permissions:
+    actions: write
     contents: write
 
 concurrency:
@@ -33,9 +34,8 @@ jobs:
               with:
                   node-version: 22
 
-            # This workflow runs from a release tag context. Pushing generated
-            # files back to main lets the dedicated pages.yml workflow deploy
-            # from the protected main branch instead of from the tag ref.
+            # This workflow runs from a release tag context. Generated files are
+            # committed to main so Pages always deploys the protected branch.
             - name: Changelog genereren
               run: npm run generate:changelog
               env:
@@ -47,6 +47,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Gegenereerde bestanden committen
+              id: release_content
               shell: bash
               run: |
                   git config user.name "github-actions[bot]"
@@ -58,8 +59,18 @@ jobs:
 
                   if git diff --cached --quiet; then
                     echo "Geen wijzigingen gevonden."
+                    echo "changed=false" >> "$GITHUB_OUTPUT"
                     exit 0
                   fi
 
                   git commit -m "docs: update release content"
                   git push origin HEAD:main
+                  echo "changed=true" >> "$GITHUB_OUTPUT"
+
+            # Pushes authenticated with GITHUB_TOKEN cannot trigger another
+            # workflow, so Pages must be dispatched after main is updated.
+            - name: GitHub Pages deployment starten
+              if: steps.release_content.outputs.changed == 'true'
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: gh workflow run pages.yml --ref main --repo "$GITHUB_REPOSITORY"

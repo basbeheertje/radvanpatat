@@ -9,6 +9,11 @@ Geen wijzigingen beschreven.
 ### Gewijzigd
 - Fixed: Roulette rad on mobile devices;
 - Fixed: Hide some buttons on mobile devices;
+## [Onuitgebracht]
+
+### Opgelost
+- De GitHub Pages-deployment wordt nu automatisch gestart nadat release-inhoud naar `main` is bijgewerkt.
+- De changelog-skill bevat weer geldige YAML-frontmatter en kan daardoor door Codex worden geladen.
 
 ## [1.0.5] - 2026-07-24
 
