@@ -1,0 +1,5 @@
+# Indexing exclusions are declared on the relevant HTML pages with noindex.
+User-agent: *
+Allow: /
+
+Sitemap: https://radvanpatat.nl/sitemap.xml
