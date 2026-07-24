@@ -2,6 +2,12 @@
 
 Alle belangrijke wijzigingen per gepubliceerde versie.
 
+## [Onuitgebracht]
+
+### Opgelost
+- De GitHub Pages-deployment wordt nu automatisch gestart nadat release-inhoud naar `main` is bijgewerkt.
+- De changelog-skill bevat weer geldige YAML-frontmatter en kan daardoor door Codex worden geladen.
+
 ## [1.0.5] - 2026-07-24
 
 Geen wijzigingen beschreven.
