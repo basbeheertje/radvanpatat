@@ -277,6 +277,7 @@
 	function startHarlemShake() {
 		stopHarlemShake();
 		closeCommandBar();
+		app.trackAnalyticsEvent("HARLEM_SHAKE_STARTED");
 		document.body.classList.add("harlem-shake-active", "harlem-shake-intro");
 		startShakeAudio();
 		if (app.ui && typeof app.ui.toonToast === "function") {

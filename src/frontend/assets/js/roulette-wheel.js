@@ -494,6 +494,13 @@
 		});
 		core.persistSnacks();
 		createWheel();
+		// Track only after the wheel accepted the removal. The source distinction
+		// reveals whether defaults or visitor-added snacks are being discarded.
+		app.trackAnalyticsEvent("SNACK_REMOVED", {
+			snack_name: snack.name,
+			snack_source: snack.isCustom ? "custom" : "default",
+			available_snack_count: state.alleSnacks.length
+		});
 	}
 
 	function eindigDrag(clientX, clientY) {
@@ -524,12 +531,25 @@
 	}
 
 	/**
+	 * Only explicitly identified user flows produce spin analytics. Internal
+	 * renderer calls without a mode remain silent and cannot create duplicates.
+	 *
+	 * @param {object} opties
+	 * @returns {"personal" | "group" | null}
+	 */
+	function getAnalyticsSpinMode(opties) {
+		return opties && (opties.analyticsMode === "personal" || opties.analyticsMode === "group")
+			? opties.analyticsMode
+			: null;
+	}
+
+	/**
 	 * Animates the shared wheel to an exact segment and resolves only after the
 	 * pointer is visually settled. Group orders use the same renderer without
 	 * opening the single-spin result modal after every automatic round.
 	 *
 	 * @param {number} doelIndex One-based segment index.
-	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function}} opties
+	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function, analyticsMode?: "personal"|"group"}} opties
 	 * @returns {Promise<{snack: object, index: number}>}
 	 */
 	function animeerNaarSegment(doelIndex, opties) {
@@ -608,6 +628,14 @@
 				state.wheelSpinning = false;
 				state.wheelAnimation = null;
 
+				const analyticsMode = getAnalyticsSpinMode(instellingen);
+				if (analyticsMode && snack) {
+					app.trackAnalyticsEvent("ROULETTE_SPIN_COMPLETED", {
+						spin_mode: analyticsMode,
+						snack_name: snack.name,
+						snack_source: snack.isCustom ? "custom" : "default"
+					});
+				}
 				if (instellingen.showResult !== false) {
 					toonUitslag(snack);
 				}
@@ -625,7 +653,7 @@
 	 * rotor against concurrent animations.
 	 *
 	 * @param {number} doelIndex One-based segment index.
-	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function}} opties
+	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function, analyticsMode?: "personal"|"group"}} opties
 	 * @returns {Promise<{snack: object, index: number}|null>}
 	 */
 	function spinToSegment(doelIndex, opties) {
@@ -638,6 +666,13 @@
 
 		state.wheelSpinning = true;
 		stopDrag();
+		const analyticsMode = getAnalyticsSpinMode(opties);
+		if (analyticsMode) {
+			app.trackAnalyticsEvent("ROULETTE_SPIN_STARTED", {
+				spin_mode: analyticsMode,
+				available_snack_count: state.alleSnacks.length
+			});
+		}
 		if (!opties || opties.showResult !== false) {
 			ui.closeModal();
 		}
@@ -648,7 +683,7 @@
 	 * Selects a fresh segment for every invocation. Callers may suppress the
 	 * normal result modal while still receiving the selected snack.
 	 *
-	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function}} opties
+	 * @param {{duration?: number, showResult?: boolean, onComplete?: Function, analyticsMode?: "personal"|"group"}} opties
 	 * @returns {Promise<{snack: object, index: number}|null>}
 	 */
 	function spinRandom(opties) {
@@ -661,7 +696,10 @@
 	}
 
 	function resetAndStart() {
-		return spinRandom({ showResult: true });
+		return spinRandom({
+			showResult: true,
+			analyticsMode: "personal"
+		});
 	}
 
 	function addSnackSegment() {

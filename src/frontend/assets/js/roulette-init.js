@@ -60,6 +60,12 @@
 		state.alleSnacks.push(snack);
 		core.persistSnacks();
 		wheel.addSnackSegment();
+		// The normalized name is the exact label added to the wheel; image URLs
+		// and raw form values deliberately remain outside analytics.
+		app.trackAnalyticsEvent("SNACK_ADDED", {
+			snack_name: snack.name,
+			available_snack_count: state.alleSnacks.length
+		});
 		event.currentTarget.reset();
 		ui.closeSnackFormulier();
 	}
@@ -118,6 +124,9 @@
 			state.easterEggBuffer = `${state.easterEggBuffer}${event.key.toLowerCase()}`.slice(-4);
 			if (state.easterEggBuffer === "eggs") {
 				state.easterEggsActief = !state.easterEggsActief;
+				if (state.easterEggsActief) {
+					app.trackAnalyticsEvent("EASTER_EGGS_ACTIVATED");
+				}
 				ui.updateEggsKansBeschikbaarheid();
 				ui.toonEggsToast();
 				if (!state.easterEggsActief) {

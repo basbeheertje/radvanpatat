@@ -44,11 +44,15 @@ function createEasterEggContext(active = false) {
 	};
 	const state = { easterEggsActief: active };
 	const toastMessages = [];
+	const analyticsEvents = [];
 	let nextTimerId = 0;
 	const timeoutCallbacks = [];
 	const window = {
 		SnackRad: {
 			state,
+			trackAnalyticsEvent(eventKey) {
+				analyticsEvents.push(eventKey);
+			},
 			ui: {
 				toonToast(message, variant) {
 					toastMessages.push({ message, variant });
@@ -87,6 +91,7 @@ function createEasterEggContext(active = false) {
 		body,
 		commandBar,
 		state,
+		analyticsEvents,
 		toastMessages,
 		runTimeouts() {
 			timeoutCallbacks.splice(0).forEach(function (callback) {
@@ -113,9 +118,10 @@ test("the console and commands remain blocked until eggs are enabled", () => {
 });
 
 test("shake starts the solo phase when eggs are enabled", () => {
-	const { api, body, runTimeouts, toastMessages } = createEasterEggContext(true);
+	const { api, analyticsEvents, body, runTimeouts, toastMessages } = createEasterEggContext(true);
 
 	assert.equal(api.voerCommandoUit(" SHAKE "), true);
+	assert.deepEqual(analyticsEvents, ["HARLEM_SHAKE_STARTED"]);
 	assert.equal(body.classList.contains("harlem-shake-active"), true);
 	assert.equal(body.classList.contains("harlem-shake-intro"), true);
 	assert.deepEqual(toastMessages, [{

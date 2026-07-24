@@ -115,6 +115,9 @@
 	function openShareOverlay() {
 		updateShareData();
 		openOverlay("share-overlay");
+		app.trackAnalyticsEvent("SHARE_MODAL_OPENED", {
+			available_snack_count: state.alleSnacks.length
+		});
 	}
 
 	function closeShareOverlay() {
@@ -261,6 +264,11 @@
 
 		state.opgeslagenMening = antwoord;
 		slaMeningOp(antwoord);
+		// Separate event names make the regional friet/patat split available in
+		// standard GA4 event reports without an additional custom dimension.
+		app.trackAnalyticsEvent(
+			antwoord === "patat" ? "PATAT_OPINION_SELECTED" : "FRIET_OPINION_SELECTED"
+		);
 		closeOverlay("vraag-overlay");
 
 		if (antwoord === "friet") {
@@ -333,6 +341,11 @@
 			return;
 		}
 
+		// Track before navigation so the group choice is queued while the current
+		// page and its initialized gtag context are still available.
+		app.trackAnalyticsEvent(
+			keuze === "groep" ? "GROUP_MODE_SELECTED" : "PERSONAL_MODE_SELECTED"
+		);
 		closeOverlay("bezoek-keuze-overlay");
 		if (keuze === "groep") {
 			window.location.assign("./group.html");

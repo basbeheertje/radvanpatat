@@ -33,6 +33,7 @@ test("the shared head contains site assets and Google Analytics", async () => {
 
 	assert.match(markup, /name="viewport"/);
 	assert.match(markup, /assets\/css\/default\.css/);
+	assert.match(markup, /assets\/js\/analytics\.js/);
 	assert.match(markup, /assets\/js\/tailwind-theme\.js/);
 	assert.match(markup, /assets\/js\/app\.js/);
 	assert.match(markup, /googletagmanager\.com\/gtag\/js\?id=G-FDRQ5JB0WX/);

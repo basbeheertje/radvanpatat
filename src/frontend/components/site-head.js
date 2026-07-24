@@ -28,6 +28,7 @@ document.write(`
 
 		gtag('config', 'G-FDRQ5JB0WX');
 	<\/script>
+	<script src="./assets/js/analytics.js"><\/script>
 	<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"><\/script>
 	<script src="./assets/js/tailwind-theme.js"><\/script>
 	<script type="module" src="./assets/js/app.js"><\/script>

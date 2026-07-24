@@ -331,7 +331,8 @@ async function runAutomaticOrder(runId) {
 
 		const result = await window.SnackRad.wheel.spinRandom({
 			duration: 2300,
-			showResult: false
+			showResult: false,
+			analyticsMode: "group"
 		});
 		if (!result || runId !== state.runId) {
 			throw new Error("De automatische draaironde kon niet worden voltooid.");
@@ -370,6 +371,14 @@ function startOrder() {
 	state.activePersonId = null;
 	state.runId += 1;
 	const currentRunId = state.runId;
+	const progress = getOrderProgress(state.people);
+	// Aggregate configuration is sufficient for funnel analysis; optional
+	// participant names never cross the local browser boundary.
+	window.SnackRad.trackAnalyticsEvent("GROUP_ORDER_STARTED", {
+		people_count: state.people.length,
+		requested_snack_count: progress.requested,
+		available_snack_count: window.SnackRad.state.alleSnacks.length
+	});
 	setLocked(true);
 	elements.spinStatus.textContent = "Het Rad maakt zich klaar voor de eerste deelnemer...";
 	elements.spinButton.querySelector("span:first-child").textContent = "Bezig met verdelen...";

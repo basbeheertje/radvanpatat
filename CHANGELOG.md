@@ -7,6 +7,7 @@ Alle belangrijke wijzigingen per gepubliceerde versie.
 ### Toegevoegd
 - Alle pagina's gebruiken nu één gedeelde basis-head met consistente assets en Google Analytics-bezoekersmeting.
 - De patat-banner blijft nu zichtbaar op iedere pagina voor bezoekers die eerder voor patat kozen.
+- Keuzes, spins, snackresultaten, groepsaantallen, deelacties en easter eggs worden nu als afzonderlijke Google Analytics-gebeurtenissen gemeten.
 
 ## [1.0.4] - 2026-07-23
 

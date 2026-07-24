@@ -1,6 +1,18 @@
 (function (window) {
 	const app = window.SnackRad = window.SnackRad || {};
 
+	/**
+	 * Keep callers independent from gtag availability. Tests and privacy tools
+	 * may omit analytics.js, while production delegates semantic event keys to
+	 * the shared GA4 adapter loaded by the base head.
+	 */
+	app.trackAnalyticsEvent = function (eventKey, parameters) {
+		if (!app.analytics || typeof app.analytics.trackEvent !== "function") {
+			return false;
+		}
+		return app.analytics.trackEvent(eventKey, parameters);
+	};
+
 	app.config = {
 		basisSnacks: [
 			["Bitterbal", "/snacks/bitterbal.png"],
