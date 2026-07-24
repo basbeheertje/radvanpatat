@@ -2,6 +2,14 @@
 
 Alle belangrijke wijzigingen per gepubliceerde versie.
 
+## [1.0.6] - 2026-07-24
+
+Geen wijzigingen beschreven.
+
+### Gewijzigd
+- Fixed: Roulette rad on mobile devices;
+- Fixed: Hide some buttons on mobile devices;
+
 ## [1.0.5] - 2026-07-24
 
 Geen wijzigingen beschreven.
