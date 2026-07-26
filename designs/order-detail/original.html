@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="light" lang="nl">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Rad van Patat | Bestelling bewerken</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500&amp;display=swap"
+        rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#d5c4ab",
+                        "background": "#fcf9f8",
+                        "surface-container": "#f0eded",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "on-surface": "#1c1b1b",
+                        "on-surface-variant": "#514532",
+                        "on-background": "#1c1b1b",
+                        "primary": "#7c5800",
+                        "primary-container": "#ffb800",
+                        "on-primary-container": "#6b4c00",
+                        "primary-fixed": "#ffdea8",
+                        "secondary": "#bc0000",
+                        "secondary-container": "#e41f13",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-fixed": "#ffdad4",
+                        "tertiary": "#5d5f5f",
+                        "tertiary-fixed": "#e2e2e2",
+                        "error": "#ba1a1a"
+                    },
+                    spacing: {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "120px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "xl": "64px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-md": ["Space Grotesk"],
+                        "label-sm": ["Space Grotesk"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .group-card {
+            border: 2px solid #d5c4ab;
+            border-radius: 28px;
+            background: #ffffff;
+            box-shadow: 0 16px 36px rgba(124, 88, 0, 0.08);
+        }
+
+        .person-card {
+            border: 2px solid #d5c4ab;
+            border-radius: 24px;
+            background: #f6f3f2;
+            box-shadow: 0 10px 25px -8px rgba(255, 184, 0, 0.16);
+        }
+
+        .snack-card {
+            border: 2px solid #d5c4ab;
+            border-radius: 20px;
+            background: #ffffff;
+            transition: all 180ms ease;
+        }
+
+        .snack-card:hover {
+            border-color: #ffb800;
+            transform: translateY(-2px);
+        }
+
+        .sticker-btn {
+            box-shadow: 0 4px 0 0 #5e4200;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .sticker-btn:active {
+            box-shadow: 0 0 0 0 #5e4200;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased">
+<main class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop py-lg space-y-lg">
+    <section class="grid gap-md rounded-[32px] border-2 border-primary-container/40 bg-gradient-to-br from-primary-container/10 to-[#ffdea8]/20 p-md md:p-lg">
+        <div class="flex items-start justify-between gap-md">
+            <div class="space-y-sm">
+                <span class="inline-flex rounded-full bg-secondary-container px-md py-xs font-label-sm uppercase tracking-wider text-on-secondary-container">Losse bestelling</span>
+                <h1 class="font-headline-xl text-headline-xl text-primary">Bestelling bewerken</h1>
+                <p class="max-w-3xl font-body-lg text-body-lg text-on-surface-variant">Geef de bestelling een herkenbare titel, vul het aantal personen in en beheer per persoon alle snacks in dezelfde flow als het groepsrad.</p>
+            </div>
+            <div class="hidden h-20 w-20 rounded-full bg-primary-container/70 md:grid place-items-center">
+                <span class="material-symbols-outlined text-[40px] text-primary">shopping_cart</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="grid grid-cols-1 gap-lg xl:grid-cols-12">
+        <section class="group-card p-md md:p-lg xl:col-span-7">
+            <header class="mb-md flex items-start gap-sm">
+                <span class="grid h-10 w-10 place-items-center rounded-full bg-primary-container font-headline-md text-primary">1</span>
+                <div class="space-y-xs">
+                    <h2 class="font-headline-md text-headline-md text-primary">Bestelgegevens</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Alles blijft lokaal in deze browser opgeslagen.</p>
+                </div>
+            </header>
+
+            <div class="space-y-md">
+                <div class="space-y-xs">
+                    <label class="font-label-md text-label-md text-on-surface" for="order-title">Titel</label>
+                    <input class="w-full rounded-2xl border-2 border-outline-variant bg-white px-4 py-3" id="order-title" type="text" value="Vrijdagmiddag bestelling"/>
+                </div>
+
+                <div class="space-y-xs">
+                    <label class="font-label-md text-label-md text-on-surface" for="order-description">Omschrijving</label>
+                    <textarea class="min-h-[140px] w-full rounded-2xl border-2 border-outline-variant bg-white px-4 py-3" id="order-description">Lunch voor het kantoor. Iedereen kiest hieronder zijn eigen snacks.</textarea>
+                </div>
+
+                <div class="space-y-xs">
+                    <label class="font-label-md text-label-md text-on-surface" for="order-people-count">Aantal personen</label>
+                    <input class="max-w-[160px] rounded-2xl border-2 border-outline-variant bg-white px-4 py-3" id="order-people-count" type="number" value="3"/>
+                </div>
+            </div>
+        </section>
+
+        <aside class="group-card p-md md:p-lg xl:col-span-5">
+            <header class="mb-md flex items-start gap-sm">
+                <span class="grid h-10 w-10 place-items-center rounded-full bg-primary-container font-headline-md text-primary">2</span>
+                <div class="space-y-xs">
+                    <h2 class="font-headline-md text-headline-md text-primary">Acties</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Sla de bestelling op, open de bestellijst of ga terug naar het overzicht.</p>
+                </div>
+            </header>
+
+            <div class="flex flex-col gap-sm">
+                <button class="sticker-btn inline-flex items-center justify-center rounded-full bg-primary-container px-6 py-3 font-label-md text-on-primary-container">Bestelling opslaan</button>
+                <button class="inline-flex items-center justify-center rounded-full border-2 border-outline-variant bg-white px-6 py-3 font-label-md text-on-surface">Bestellijst bekijken</button>
+                <button class="inline-flex items-center justify-center rounded-full border-2 border-outline-variant bg-white px-6 py-3 font-label-md text-on-surface">Terug naar bestellingen</button>
+            </div>
+        </aside>
+    </div>
+
+    <section class="group-card p-md md:p-lg">
+        <header class="mb-md flex items-start gap-sm">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-primary-container font-headline-md text-primary">3</span>
+            <div class="space-y-xs">
+                <h2 class="font-headline-md text-headline-md text-primary">Personen en snacks</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Bij drie personen zie je hier drie personenblokken, elk met een eigen naam en snacklijst.</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 gap-md">
+            <article class="group-card p-md">
+                <header class="mb-md flex items-start gap-sm">
+                    <span class="grid h-10 w-10 place-items-center rounded-full bg-primary-container font-headline-md text-primary">1</span>
+                    <div class="space-y-xs">
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Persoon 1</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Geef een naam op en voeg daaronder alle snacks voor deze persoon toe.</p>
+                    </div>
+                </header>
+
+                <div class="space-y-md">
+                    <div class="space-y-xs">
+                        <label class="font-label-md text-label-md text-on-surface" for="person-1-name">Naam</label>
+                        <input class="w-full rounded-2xl border-2 border-outline-variant bg-white px-4 py-3" id="person-1-name" type="text" value="Bas"/>
+                    </div>
+
+                    <div class="space-y-sm">
+                        <div class="flex flex-wrap items-center justify-between gap-sm">
+                            <h4 class="font-label-md text-label-md text-primary">Snacks</h4>
+                            <button class="inline-flex items-center justify-center rounded-full border-2 border-outline-variant bg-white px-5 py-3 font-label-md text-on-surface">Snack toevoegen</button>
+                        </div>
+
+                        <div class="grid gap-sm">
+                            <div class="snack-card p-sm">
+                                <div class="grid gap-sm md:grid-cols-[1fr_auto] md:items-end">
+                                    <div class="space-y-xs">
+                                        <label class="font-label-md text-label-md text-on-surface" for="person-1-snack-1">Snack 1</label>
+                                        <input class="w-full rounded-xl border-2 border-outline-variant bg-white px-4 py-3" id="person-1-snack-1" type="text" value="2x Friet speciaal"/>
+                                    </div>
+                                    <button class="inline-flex items-center justify-center rounded-xl border-2 border-outline-variant bg-white px-4 py-3 font-label-md text-on-surface">Verwijder</button>
+                                </div>
+                            </div>
+
+                            <div class="snack-card p-sm">
+                                <div class="grid gap-sm md:grid-cols-[1fr_auto] md:items-end">
+                                    <div class="space-y-xs">
+                                        <label class="font-label-md text-label-md text-on-surface" for="person-1-snack-2">Snack 2</label>
+                                        <input class="w-full rounded-xl border-2 border-outline-variant bg-white px-4 py-3" id="person-1-snack-2" type="text" value="1x Kroket"/>
+                                    </div>
+                                    <button class="inline-flex items-center justify-center rounded-xl border-2 border-outline-variant bg-white px-4 py-3 font-label-md text-on-surface">Verwijder</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="group-card p-md">
+                <header class="mb-md flex items-start gap-sm">
+                    <span class="grid h-10 w-10 place-items-center rounded-full bg-primary-container font-headline-md text-primary">2</span>
+                    <div class="space-y-xs">
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Persoon 2</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Elke persoon heeft een losse naam en eigen snackregels.</p>
+                    </div>
+                </header>
+
+                <div class="space-y-md">
+                    <div class="space-y-xs">
+                        <label class="font-label-md text-label-md text-on-surface" for="person-2-name">Naam</label>
+                        <input class="w-full rounded-2xl border-2 border-outline-variant bg-white px-4 py-3" id="person-2-name" type="text" value="Sanne"/>
+                    </div>
+
+                    <div class="space-y-sm">
+                        <div class="flex flex-wrap items-center justify-between gap-sm">
+                            <h4 class="font-label-md text-label-md text-primary">Snacks</h4>
+                            <button class="inline-flex items-center justify-center rounded-full border-2 border-outline-variant bg-white px-5 py-3 font-label-md text-on-surface">Snack toevoegen</button>
+                        </div>
+
+                        <div class="snack-card p-sm">
+                            <div class="grid gap-sm md:grid-cols-[1fr_auto] md:items-end">
+                                <div class="space-y-xs">
+                                    <label class="font-label-md text-label-md text-on-surface" for="person-2-snack-1">Snack 1</label>
+                                    <input class="w-full rounded-xl border-2 border-outline-variant bg-white px-4 py-3" id="person-2-snack-1" type="text" value="1x Kaassoufflé"/>
+                                </div>
+                                <button class="inline-flex items-center justify-center rounded-xl border-2 border-outline-variant bg-white px-4 py-3 font-label-md text-on-surface">Verwijder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="group-card p-md">
+                <header class="mb-md flex items-start gap-sm">
+                    <span class="grid h-10 w-10 place-items-center rounded-full bg-primary-container font-headline-md text-primary">3</span>
+                    <div class="space-y-xs">
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Persoon 3</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Lege toestanden blijven ook binnen dezelfde kaartstructuur zichtbaar.</p>
+                    </div>
+                </header>
+
+                <div class="space-y-md">
+                    <div class="space-y-xs">
+                        <label class="font-label-md text-label-md text-on-surface" for="person-3-name">Naam</label>
+                        <input class="w-full rounded-2xl border-2 border-outline-variant bg-white px-4 py-3" id="person-3-name" type="text" value="Kim"/>
+                    </div>
+
+                    <div class="rounded-[24px] border-2 border-dashed border-outline-variant bg-surface-container-low p-lg text-center">
+                        <span class="material-symbols-outlined mb-sm text-[36px] text-primary">fastfood</span>
+                        <h4 class="font-headline-md text-headline-md text-on-surface">Nog geen snacks voor Kim</h4>
+                        <p class="mx-auto mt-xs max-w-xl font-body-md text-body-md text-on-surface-variant">Voeg de eerste snackregel voor deze persoon toe om de bestelling compleet te maken.</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>

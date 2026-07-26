@@ -2,32 +2,32 @@
 <html class="light" lang="nl">
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Bestellingen | Rad van Patat</title>
-		<meta content="Maak direct een losse bestelling aan, zonder eerst het rad of groepsrad te gebruiken." name="description"/>
+		<title>Bestellijst | Rad van Patat</title>
+		<meta content="Bekijk de losse bestellijst per persoon met totaaloverzicht." name="description"/>
 		<meta content="noindex, follow" name="robots"/>
-		<link href="https://radvanpatat.nl/order.html" rel="canonical"/>
-		<meta content="Bestellingen | Rad van Patat" property="og:title"/>
-		<meta content="Start direct een losse bestelling en vul daarna zelf de details en items in." property="og:description"/>
+		<link href="https://radvanpatat.nl/order-summary.html" rel="canonical"/>
+		<meta content="Bestellijst | Rad van Patat" property="og:title"/>
+		<meta content="Bekijk per losse bestelling wie welke snacks krijgt en wat het totaal is." property="og:description"/>
 		<meta content="nl_NL" property="og:locale"/>
 		<meta content="Rad van Patat" property="og:site_name"/>
-		<meta content="https://radvanpatat.nl/order.html" property="og:url"/>
+		<meta content="https://radvanpatat.nl/order-summary.html" property="og:url"/>
 		<meta content="website" property="og:type"/>
 		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" property="og:image"/>
 		<meta content="Het logo van Rad van Patat" property="og:image:alt"/>
 		<meta content="summary_large_image" name="twitter:card"/>
 		<meta content="radvanpatat.nl" name="twitter:site"/>
-		<meta content="https://radvanpatat.nl/order.html" name="twitter:url"/>
-		<meta content="Bestellingen | Rad van Patat" name="twitter:title"/>
-		<meta content="Maak direct een losse bestelling aan in deze browser." name="twitter:description"/>
+		<meta content="https://radvanpatat.nl/order-summary.html" name="twitter:url"/>
+		<meta content="Bestellijst | Rad van Patat" name="twitter:title"/>
+		<meta content="Bekijk lokaal een losse bestellijst met totaaloverzicht." name="twitter:description"/>
 		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
 		<script src="./components/site-head.js"></script>
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
 				"@type": "WebPage",
-				"name": "Bestellingen | Rad van Patat",
-				"url": "https://radvanpatat.nl/order.html",
-				"description": "Een lokale bestelstartpagina voor losse bestellingen zonder rouletteflow.",
+				"name": "Bestellijst | Rad van Patat",
+				"url": "https://radvanpatat.nl/order-summary.html",
+				"description": "Een lokale overzichtspagina voor losse bestellingen met personen en totaallijst.",
 				"inLanguage": "nl-NL",
 				"isPartOf": {
 					"@type": "WebSite",
@@ -49,12 +49,14 @@
 			share-mode="hidden"></site-header>
 
 		<main class="order-page-content flex-1">
-			<div id="direct-order-app"></div>
+			<div class="mx-auto w-full max-w-screen-xl px-margin-mobile py-lg md:px-12 xl:px-margin-desktop">
+				<order-summary id="direct-order-summary"></order-summary>
+			</div>
 		</main>
 
 		<site-footer-designed-by></site-footer-designed-by>
 		<branding-sticker></branding-sticker>
 
-		<script type="module" src="./assets/js/order-page.js"></script>
+		<script type="module" src="./assets/js/order-summary-page.js"></script>
 	</body>
 </html>

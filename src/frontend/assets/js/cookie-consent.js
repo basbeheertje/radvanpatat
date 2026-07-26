@@ -75,6 +75,13 @@
 				provider: "Rad van Patat",
 				duration: "untilReplaced",
 				purpose: "groupOrder"
+			}),
+			Object.freeze({
+				name: "rad-van-patat-orders",
+				type: "localStorage",
+				provider: "Rad van Patat",
+				duration: "untilRemoved",
+				purpose: "directOrders"
 			})
 		]),
 		analytics: Object.freeze([
@@ -139,6 +146,7 @@
 				activeWheel: "Onthoudt welk opgeslagen rad nu actief is op dit apparaat.",
 				opinion: "Bewaart je keuze tussen friet en patat.",
 				groupOrder: "Bewaart de laatste voltooide groepsbestelling op dit apparaat.",
+				directOrders: "Bewaart losse bestellingen die je handmatig op dit apparaat aanmaakt en bewerkt.",
 				analyticsUser: "Onderscheidt bezoekers voor geaggregeerde gebruiksstatistieken.",
 				analyticsSession: "Bewaart de sessiestatus voor geaggregeerde gebruiksstatistieken."
 			}
@@ -186,6 +194,7 @@
 				activeWheel: "Remembers which saved wheel is currently active on this device.",
 				opinion: "Stores your choice between friet and patat.",
 				groupOrder: "Stores the latest completed group order on this device.",
+				directOrders: "Stores direct orders that you create and edit manually on this device.",
 				analyticsUser: "Distinguishes visitors for aggregated usage statistics.",
 				analyticsSession: "Persists session state for aggregated usage statistics."
 			}
@@ -233,6 +242,7 @@
 				activeWheel: "Recuerda qué rueda guardada está activa actualmente en este dispositivo.",
 				opinion: "Guarda tu elección entre friet y patat.",
 				groupOrder: "Guarda el último pedido de grupo completado en este dispositivo.",
+				directOrders: "Guarda los pedidos directos que creas y editas manualmente en este dispositivo.",
 				analyticsUser: "Distingue visitantes para estadísticas de uso agregadas.",
 				analyticsSession: "Conserva el estado de la sesión para estadísticas de uso agregadas."
 			}
@@ -280,6 +290,7 @@
 				activeWheel: "Zapamiętuje, które zapisane koło jest obecnie aktywne na tym urządzeniu.",
 				opinion: "Przechowuje wybór między friet a patat.",
 				groupOrder: "Przechowuje ostatnie ukończone zamówienie grupowe na tym urządzeniu.",
+				directOrders: "Przechowuje zamówienia bezpośrednie tworzone i edytowane ręcznie na tym urządzeniu.",
 				analyticsUser: "Rozróżnia odwiedzających na potrzeby zbiorczych statystyk użycia.",
 				analyticsSession: "Utrzymuje stan sesji na potrzeby zbiorczych statystyk użycia."
 			}
@@ -327,6 +338,7 @@
 				activeWheel: "Merkt sich, welches gespeicherte Rad auf diesem Gerät aktuell aktiv ist.",
 				opinion: "Speichert deine Auswahl zwischen friet und patat.",
 				groupOrder: "Speichert die letzte abgeschlossene Gruppenbestellung auf diesem Gerät.",
+				directOrders: "Speichert direkte Bestellungen, die du auf diesem Gerät manuell anlegst und bearbeitest.",
 				analyticsUser: "Unterscheidet Besucher für zusammengefasste Nutzungsstatistiken.",
 				analyticsSession: "Speichert den Sitzungsstatus für zusammengefasste Nutzungsstatistiken."
 			}

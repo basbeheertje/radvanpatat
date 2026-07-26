@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html class="light" lang="nl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Groepsbestelling maken | Rad van Patat</title>
+    <meta content="Maak samen een snackbestelling. Geef deelnemers en aantallen op en laat het Rad van Patat automatisch en willekeurig alle snacks verdelen." name="description"/>
+    <meta content="groepsbestelling snacks, snackrad groep, snacks verdelen, Rad van Patat, snackbar bestellijst" name="keywords"/>
+    <meta content="index, follow" name="robots"/>
+    <link href="https://radvanpatat.nl/group.html" rel="canonical"/>
+    <meta content="Groepsbestelling maken | Rad van Patat" property="og:title"/>
+    <meta content="Laat het Rad van Patat voor iedereen in je groep de snacks bepalen en maak direct een complete bestellijst." property="og:description"/>
+    <meta content="nl_NL" property="og:locale"/>
+    <meta content="Rad van Patat" property="og:site_name"/>
+    <meta content="https://radvanpatat.nl/group.html" property="og:url"/>
+    <meta content="website" property="og:type"/>
+    <meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" property="og:image"/>
+    <meta content="Het logo van Rad van Patat" property="og:image:alt"/>
+    <meta content="summary_large_image" name="twitter:card"/>
+    <meta content="radvanpatat.nl" name="twitter:site"/>
+    <meta content="https://radvanpatat.nl/group.html" name="twitter:url"/>
+    <meta content="Groepsbestelling maken | Rad van Patat" name="twitter:title"/>
+    <meta content="Verdeel snacks eerlijk en willekeurig over je hele groep met één automatisch draaiend rad." name="twitter:description"/>
+    <meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
+    <script src="./components/site-head.js"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Rad van Patat Groepsbestelling",
+            "url": "https://radvanpatat.nl/group.html",
+            "description": "Een groepsrad dat automatisch snacks verdeelt en een gezamenlijke bestellijst maakt.",
+            "applicationCategory": "LifestyleApplication",
+            "operatingSystem": "Web",
+            "inLanguage": "nl-NL",
+            "isPartOf": {
+                "@type": "WebSite",
+                "name": "Rad van Patat",
+                "url": "https://radvanpatat.nl/"
+            }
+        }
+    </script>
+</head>
+<body class="group-order-page bg-background text-on-background min-h-screen selection:bg-primary-container flex flex-col">
+
+<main class="group-order-main flex-1">
+    <div class="group-order-view" id="group-order-view">
+        <section class="group-order-hero" aria-labelledby="group-order-title">
+            <div>
+                <span class="group-order-eyebrow">Samen snacken</span>
+                <h1 id="group-order-title">Groepsbestelling configureren</h1>
+                <p>Klaar voor een gezellige snackronde? Stel je groep samen en laat het Rad rustig doordraaien tot iedereen voorzien is.</p>
+            </div>
+            <div class="group-order-hero__badge" aria-hidden="true">
+                <span class="material-symbols-outlined">group</span>
+            </div>
+        </section>
+
+        <section class="group-order-config" aria-label="Groepsbestelling instellen">
+            <article class="group-order-card">
+                <header class="group-order-card__header">
+                    <span class="group-order-step">1</span>
+                    <h2>Aantallen</h2>
+                </header>
+                <div class="group-order-counters">
+                    <div class="group-order-counter">
+                        <label for="people-count">Hoeveel mensen eten mee?</label>
+                        <div class="group-order-stepper">
+                            <button aria-label="Eén persoon minder" data-counter-change="-1" data-counter-target="people-count" type="button">
+                                <span class="material-symbols-outlined" aria-hidden="true">remove</span>
+                            </button>
+                            <input id="people-count" inputmode="numeric" max="20" min="1" type="number" value="5"/>
+                            <button aria-label="Eén persoon meer" data-counter-change="1" data-counter-target="people-count" type="button">
+                                <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group-order-counter">
+                        <label for="snack-count">Hoeveel snacks per persoon?</label>
+                        <div class="group-order-stepper">
+                            <button aria-label="Eén snack minder per persoon" data-counter-change="-1" data-counter-target="snack-count" type="button">
+                                <span class="material-symbols-outlined" aria-hidden="true">remove</span>
+                            </button>
+                            <input id="snack-count" inputmode="numeric" max="20" min="1" type="number" value="2"/>
+                            <button aria-label="Eén snack meer per persoon" data-counter-change="1" data-counter-target="snack-count" type="button">
+                                <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <p class="group-order-total">Totaal te verdelen: <strong id="total-snacks">10 snacks</strong></p>
+            </article>
+
+            <article class="group-order-card">
+                <header class="group-order-card__header">
+                    <span class="group-order-step">2</span>
+                    <div>
+                        <h2>Wie eet er mee?</h2>
+                        <p>Namen zijn optioneel. Beweeg over een deelnemer om het eigen aantal aan te passen.</p>
+                    </div>
+                </header>
+                <div class="group-order-people" id="names-container"></div>
+                <button class="group-order-add-person" id="add-person-button" type="button">
+                    <span class="material-symbols-outlined" aria-hidden="true">add_circle</span>
+                    Extra persoon
+                </button>
+            </article>
+        </section>
+
+        <section class="group-order-wheel-section" aria-labelledby="group-wheel-title">
+            <div class="group-order-wheel-copy">
+                <span class="group-order-eyebrow">Stap 3</span>
+                <h2 id="group-wheel-title">Laat het Rad de bestelling bepalen</h2>
+                <p id="group-spin-status" role="status" aria-live="polite">Alles staat klaar. Druk op de knop wanneer jullie er klaar voor zijn.</p>
+                <div class="group-order-progress" aria-hidden="true">
+                    <span id="group-progress-bar"></span>
+                </div>
+                <p class="group-order-progress-label" id="group-progress-label">0 van 10 snacks verdeeld</p>
+                <button class="group-order-spin-button" id="group-spin-button" type="button">
+                    <span>Spin het rad</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+                </button>
+                <p class="group-order-hint">
+                    <span class="material-symbols-outlined" aria-hidden="true">info</span>
+                    Het rad kiest per ronde willekeurig iemand die nog een snack nodig heeft.
+                </p>
+            </div>
+            <div class="group-order-wheel" id="rad">
+                <roulette-wheel-view></roulette-wheel-view>
+            </div>
+        </section>
+        <div class="group-order-message" id="group-order-message" role="alert" hidden></div>
+    </div>
+
+    <section class="order-page-content" id="group-order-results" hidden aria-label="Voltooide bestellijst">
+        <order-summary id="group-order-summary" restart-label="Opnieuw met deze groep"></order-summary>
+    </section>
+</main>
+
+
+<script src="./assets/js/roulette-core.js"></script>
+<script src="./assets/js/roulette-ui.js"></script>
+<script src="./assets/js/roulette-wheel.js"></script>
+<script type="module" src="./assets/js/group-order-page.js"></script>
+</body>
+</html>

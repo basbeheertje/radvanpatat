@@ -2345,6 +2345,20 @@ roulette-wheel-view .roulette-wheel-spotlight {
 	white-space: nowrap;
 }
 
+.direct-order-snack-remove {
+	opacity: 0;
+	pointer-events: none;
+	transform: translateX(0.35rem);
+	transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.group-person-card:hover .direct-order-snack-remove,
+.group-person-card:focus-within .direct-order-snack-remove {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateX(0);
+}
+
 .group-order-add-person {
 	display: flex;
 	align-items: center;

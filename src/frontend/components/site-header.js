@@ -29,6 +29,7 @@ class SiteHeader extends HTMLElement {
 			radHref: this.getAttribute("rad-href") || "./index.html",
 			wheelsHref: this.getAttribute("wheels-href") || "./wheels.html",
 			groupHref: this.getAttribute("group-href") || "./group.html",
+			orderHref: this.getAttribute("order-href") || "./order.html",
 			helpHref: this.getAttribute("help-href") || "./help.html",
 			activeNav: this.getAttribute("active-nav") || "",
 			shareMode: this.getAttribute("share-mode") || "button",
@@ -115,6 +116,7 @@ class SiteHeader extends HTMLElement {
 			radHref,
 			wheelsHref,
 			groupHref,
+			orderHref,
 			helpHref,
 			activeNav,
 			shareMode,
@@ -133,12 +135,16 @@ class SiteHeader extends HTMLElement {
 		const groupClasses = activeNav === "group"
 			? "text-primary border-b-2 border-primary font-bold pb-2"
 			: "text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200";
+		const orderClasses = activeNav === "order"
+			? "text-primary border-b-2 border-primary font-bold pb-2 inline-flex items-center gap-2"
+			: "text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200 inline-flex items-center gap-2";
 		const wheelsClasses = activeNav === "wheels"
 			? "text-primary border-b-2 border-primary font-bold pb-2"
 			: "text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200";
 		const mobileMenuStateLabel = this.mobileMenuOpen ? "Sluit menu" : "Open menu";
 		const radCurrent = activeNav === "rad" ? ' aria-current="page"' : "";
 		const groupCurrent = activeNav === "group" ? ' aria-current="page"' : "";
+		const orderCurrent = activeNav === "order" ? ' aria-current="page"' : "";
 		const wheelsCurrent = activeNav === "wheels" ? ' aria-current="page"' : "";
 		const helpCurrent = activeNav === "help" ? ' aria-current="page"' : "";
 
@@ -175,7 +181,8 @@ class SiteHeader extends HTMLElement {
 					<nav class="hidden lg:flex gap-md items-center h-full">
 						<a class="${radClasses}" href="${radHref}"${radCurrent}>Rad</a>
 						<a class="${wheelsClasses}" href="${wheelsHref}"${wheelsCurrent}>Mijn rads</a>
-						<a class="${groupClasses}" href="${groupHref}"${groupCurrent}>Groepsrad</a>
+						<a class="${groupClasses}" href="${groupHref}"${groupCurrent}>Groep</a>
+						<a aria-label="Bestelling" class="${orderClasses}" href="${orderHref}"${orderCurrent}><span class="material-symbols-outlined text-[18px]" aria-hidden="true">shopping_cart</span></a>
 						${desktopShareMarkup}
 						<a class="${helpClasses}" href="${helpHref}"${helpCurrent}>Help</a>
 					</nav>
@@ -198,7 +205,8 @@ class SiteHeader extends HTMLElement {
 					<nav class="site-header__mobile-nav" aria-label="Mobiele navigatie">
 						<a class="site-header__mobile-link ${activeNav === "rad" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${radHref}"${radCurrent}>Rad</a>
 						<a class="site-header__mobile-link ${activeNav === "wheels" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${wheelsHref}"${wheelsCurrent}>Mijn rads</a>
-						<a class="site-header__mobile-link ${activeNav === "group" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${groupHref}"${groupCurrent}>Groepsrad</a>
+						<a class="site-header__mobile-link ${activeNav === "group" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${groupHref}"${groupCurrent}>Groep</a>
+						<a class="site-header__mobile-link ${activeNav === "order" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${orderHref}"${orderCurrent}>Bestelling</a>
 						${mobileShareMarkup}
 						<a class="site-header__mobile-link ${activeNav === "help" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${helpHref}"${helpCurrent}>Help</a>
 						${mobileCtaMarkup}

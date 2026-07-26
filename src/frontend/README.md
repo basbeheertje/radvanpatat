@@ -8,7 +8,9 @@ Deze map bevat een statische frontend zonder build tooling.
 - `group.html`: configureert deelnemers en laat het gedeelde rad automatisch een groepsbestelling samenstellen
 - `wheels.html`: overzichtspagina met alle opgeslagen rads in de huidige browser
 - `wheel.html`: detail- en bewerkpagina voor één opgeslagen rad
-- `order.html`: toont de laatst voltooide groepsbestelling uit de localStorage van de huidige browser
+- `order.html`: start- en overzichtspagina voor losse bestellingen in de huidige browser
+- `order-detail.html`: detailpagina voor één losse bestelling
+- `order-summary.html`: bestellijstweergave voor één losse bestelling
 - `help.html`: help-pagina
 - `changelog.html`: gegenereerde changelogpagina op basis van `../../CHANGELOG.md`
 - `roadmap.html`: roadmappagina die cards uit een configureerbare JavaScript-array rendert
@@ -18,13 +20,17 @@ Deze map bevat een statische frontend zonder build tooling.
 - `components/site-head.js`: gedeelde parser-synchrone head voor algemene metadata, fonts, styling, consentbeheer en componentregistratie
 - `components/patat-banner.js`: automatisch gemounte sitebrede banner voor de opgeslagen friet-of-patatkeuze
 - `components/roulette-wheel-view.js`: gedeelde wielmarkup voor het gewone rad en het groepsrad
-- `components/order-summary.js`: gedeelde bestellijstweergave voor `group.html` en `order.html`
+- `components/order-summary.js`: gedeelde bestellijstweergave voor `group.html`, `order-summary.html` en herbruikbare orderoverzichten
 - `assets/css/default.css`: gedeelde en rad-specifieke styling
 - `assets/js/cookie-consent.js`: centrale opslaginventaris, meertalige consentconfiguratie en opt-in-loader voor Google Analytics
 - `assets/js/analytics.js`: fouttolerante GA4-adapter met stabiele eventnamen en gevalideerde parameters
 - `assets/js/roulette-core.js`: gedeelde rad-store, actieve-radlogica, snacknormalisatie en share-tokenlogica
 - `assets/js/wheel-list-page.js`: rendert het overzicht van opgeslagen rads, sorteren en activeren
 - `assets/js/wheel-detail-page.js`: rendert de detailpagina voor naambeheer, itemselectie en eigen items
+- `assets/js/direct-order-store.js`: lokale opslag, validatie, migratie en ID-beheer voor losse bestellingen
+- `assets/js/order-page.js`: maakt nieuwe losse bestellingen aan en toont bestaande lokale orders
+- `assets/js/order-detail-page.js`: bewerkt titel, omschrijving, aantal personen en snacks per persoon van één lokale order met autosave en live totaaloverzicht
+- `assets/js/order-summary-page.js`: toont één losse bestelling als bestellijst met verdeling per persoon en totaallijst
 - `assets/vendor/cookieconsent/`: self-hosted CookieConsent 3.1.0-distributie en MIT-licentie
 - `assets/js/`: roulettefunctionaliteit en componentregistratie
 - `assets/images/` en `assets/sounds/`: statische media
@@ -130,7 +136,36 @@ Radnamen zijn verplicht en case-insensitief uniek binnen dezelfde browser.
 Bezoekers kunnen op de detailpagina standaarditems aan- of uitzetten en extra
 eigen items toevoegen.
 
-De groepsbestelling gebruikt dezelfde actieve snackselectie als `index.html`. Na de laatste automatische spin wordt uitsluitend de voltooide bestelling lokaal bewaard onder `rad-van-patat-last-group-order`. Deelnemersnamen en bestellingen verlaten de browser niet. Snacknamen worden bij toevoegen, verwijderen en spinresultaten wel als genormaliseerde Analytics-eventparameter verstuurd. Open `order.html` op hetzelfde apparaat en in dezelfde browser om die bestelling opnieuw te bekijken.
+De groepsbestelling gebruikt dezelfde actieve snackselectie als `index.html`. Na de laatste automatische spin wordt uitsluitend de voltooide bestelling lokaal bewaard onder `rad-van-patat-last-group-order`. Deelnemersnamen en bestellingen verlaten de browser niet. Snacknamen worden bij toevoegen, verwijderen en spinresultaten wel als genormaliseerde Analytics-eventparameter verstuurd.
+
+## Losse bestellingen
+
+Naast het groepsrad ondersteunt de frontend ook losse bestellingen zonder
+rouletteflow. Via `order.html` maakt de bezoeker een nieuwe bestelling aan; de
+pagina genereert direct een lokaal order-ID en stuurt daarna door naar
+`order-detail.html?id=...`.
+
+De detailpagina gebruikt `assets/js/direct-order-store.js` en bewaart orders
+onder `rad-van-patat-orders` in localStorage. Elke order bevat:
+
+- een lokale order-ID;
+- een titel;
+- een omschrijving;
+- een aantal personen;
+- een personenlijst met een eigen naam per persoon;
+- een lijst snacks per persoon.
+
+Via `order-summary.html?id=...` kan een losse bestelling daarna ook als
+bestellijst worden bekeken, met dezelfde verdeling per persoon en
+totaalweergave als bij het afgeronde groepsrad.
+
+De detailpagina slaat wijzigingen automatisch op. Snacknamen worden bij het
+opslaan genormaliseerd naar één ucfirst-vorm en hoeveelheden worden apart
+bewaard, zodat `frikandel`, `Frikandel` en `FRIKANDEL` in het totaaloverzicht
+als dezelfde snack worden samengenomen.
+
+Deze losse bestellingen worden uitsluitend lokaal in de huidige browser
+bewaard. Er is geen server-side opslag of synchronisatie tussen apparaten.
 
 Analytics-events met snacknamen worden pas na expliciete Analytics-toestemming
 verstuurd. Zonder toestemming blijven deze gegevens uitsluitend onderdeel van
