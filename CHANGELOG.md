@@ -2,6 +2,16 @@
 
 Alle belangrijke wijzigingen per gepubliceerde versie.
 
+## [1.0.7] - 2026-07-26
+
+Geen wijzigingen beschreven.
+
+### Gewijzigd
+- Added: Cookie consent;
+- Added: Custom ordering list;
+- Added: Saving multiple rads;
+- Added: My Rad;
+
 ## [1.0.6] - 2026-07-24
 
 Geen wijzigingen beschreven.
@@ -43,12 +53,6 @@ Geen wijzigingen beschreven.
 - Added: Shift+C console and Harlem Shake command
 - Added: Continuous synthesized beat and quit via Escape
 - Added: Analytics
-## [Onuitgebracht]
-
-### Toegevoegd
-- Alle pagina's gebruiken nu één gedeelde basis-head met consistente assets en Google Analytics-bezoekersmeting.
-- De patat-banner blijft nu zichtbaar op iedere pagina voor bezoekers die eerder voor patat kozen.
-- Keuzes, spins, snackresultaten, groepsaantallen, deelacties en easter eggs worden nu als afzonderlijke Google Analytics-gebeurtenissen gemeten.
 
 ## [1.0.4] - 2026-07-23
 
