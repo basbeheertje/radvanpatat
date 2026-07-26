@@ -190,4 +190,4 @@ GITHUB_REPOSITORY=owner/repo GITHUB_TOKEN=... node scripts/generate-roadmap.mjs
 ```
 
 Alleen milestones met een GitHub-einddatum (`due date`) worden in de publieke roadmap opgenomen.
-De roadmap toont maximaal 9 milestones tegelijk, geeft voorrang aan milestones met gestarte issues en laat afgeronde milestones maximaal 3 maanden zichtbaar staan.
+De roadmap toont maximaal 9 niet-afgeronde milestones tegelijk, gesorteerd op prioriteit en due date. Afgeronde milestones blijven daarnaast zichtbaar en tellen niet mee in die limiet. In de `Nu`-kolom toont de UI standaard de 3 nieuwste afgeronde milestones en kan de bezoeker oudere afgeronde milestones handmatig uitklappen.

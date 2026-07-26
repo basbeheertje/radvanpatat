@@ -29,6 +29,7 @@ Geen wijzigingen beschreven.
 - Losse bestellingen ondersteunen nu net als het groepsrad een personenoverzicht met een eigen naam en snacks per persoon.
 - Iedere losse bestelling heeft nu ook een aparte bestellijstpagina met dezelfde verdeling-per-persoon en totaallijst als het groepsrad.
 - Losse bestellingen slaan nu automatisch op, tonen op de detailpagina direct een totaaloverzicht op basis van hoeveelheden en gebruiken compacte snackregels met naam plus aantal.
+- De roadmap houdt afgeronde milestones nu altijd zichtbaar buiten de open-work limiet van 9, toont in de live-kolom standaard de 3 nieuwste afgeronde milestones en kan oudere afgeronde milestones uitklappen.
 
 ### Beveiliging
 - Google Analytics wordt uitsluitend op `radvanpatat.nl` en pas na expliciete toestemming geladen; lokale en preview-omgevingen initialiseren Analytics niet, en bij intrekken worden verdere metingen geblokkeerd en bekende Analytics-cookies verwijderd.

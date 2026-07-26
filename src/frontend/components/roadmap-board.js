@@ -35,12 +35,17 @@ class RoadmapBoard extends HTMLElement {
 	constructor() {
 		super();
 		this._items = [];
+		// Completed milestones can outnumber the active roadmap cap because they
+		// no longer consume the nine open-work slots. Collapse them by default so
+		// the "Nu" column still stays scannable on first render.
+		this.showAllCompleted = false;
 		this.handleClick = this.handleClick.bind(this);
 		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 
 	set items(value) {
 		this._items = Array.isArray(value) ? value.map((item) => this.normalizeItem(item)) : [];
+		this.showAllCompleted = false;
 		this.render();
 	}
 
@@ -63,7 +68,7 @@ class RoadmapBoard extends HTMLElement {
 	 * rendering contract so the component can stay dumb and predictable.
 	 *
 	 * @param {Record<string, unknown>} item
-	 * @returns {{ title: string, category: string, status: string, description: string, icon: string, progress: number | null }}
+	 * @returns {{ title: string, category: string, status: string, description: string, icon: string, progress: number | null, isCompleted: boolean }}
 	 */
 	normalizeItem(item) {
 		const title = typeof item?.title === "string" ? item.title.trim() : "";
@@ -83,6 +88,7 @@ class RoadmapBoard extends HTMLElement {
 			description: description || "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 			icon: icon || "fastfood",
 			progress: progress,
+			isCompleted: progress === 100 || status.trim().toLowerCase() === "live" || status.trim().toLowerCase() === "afgerond",
 		};
 	}
 
@@ -196,6 +202,12 @@ class RoadmapBoard extends HTMLElement {
 			return;
 		}
 
+		if (target.closest("[data-roadmap-toggle-completed]")) {
+			this.showAllCompleted = !this.showAllCompleted;
+			this.render();
+			return;
+		}
+
 		if (
 			target.closest("[data-roadmap-modal-close]") ||
 			target.matches("[data-roadmap-modal]")
@@ -245,13 +257,41 @@ class RoadmapBoard extends HTMLElement {
 
 	renderSection(section) {
 		const items = this.items.filter((item) => item.category === section.key);
-		const content = items.length > 0
-			? items.map((item) => this.renderCard(item)).join("")
-			: `
+		let content = "";
+
+		if (section.key === "nu") {
+			const activeNowItems = items.filter((item) => !item.isCompleted);
+			const completedItems = items.filter((item) => item.isCompleted);
+			const visibleCompletedItems = this.showAllCompleted ? completedItems : completedItems.slice(0, 3);
+			const completedToggleMarkup = completedItems.length > 3
+				? `
+					<button
+						class="roadmap-section__toggle"
+						data-roadmap-toggle-completed
+						type="button"
+					>
+						<span class="material-symbols-outlined" aria-hidden="true">${this.showAllCompleted ? "expand_less" : "expand_more"}</span>
+						<span>${this.showAllCompleted ? "Toon minder afgeronde milestones" : `Toon alle ${completedItems.length} afgeronde milestones`}</span>
+					</button>
+				`
+				: "";
+
+			content = [
+				...activeNowItems.map((item) => this.renderCard(item)),
+				completedToggleMarkup,
+				...visibleCompletedItems.map((item) => this.renderCard(item)),
+			].filter(Boolean).join("");
+		} else {
+			content = items.map((item) => this.renderCard(item)).join("");
+		}
+
+		if (!content) {
+			content = `
 				<div class="roadmap-section__empty">
 					<p>Nog geen roadmap-items in deze fase.</p>
 				</div>
 			`;
+		}
 
 		return `
 			<section class="roadmap-section" aria-labelledby="roadmap-section-${section.key}">

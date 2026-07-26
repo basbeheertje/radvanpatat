@@ -1423,6 +1423,30 @@ changelog-entry {
 	min-width: 0;
 }
 
+.roadmap-section__toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	width: 100%;
+	padding: 0.95rem 1rem;
+	border: 2px dashed rgba(124, 88, 0, 0.38);
+	border-radius: 1rem;
+	background: rgba(255, 222, 168, 0.28);
+	color: #7c5800;
+	font-family: "Space Grotesk", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	transition: background-color 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+
+.roadmap-section__toggle:hover,
+.roadmap-section__toggle:focus-visible {
+	border-color: #7c5800;
+	background: rgba(255, 222, 168, 0.5);
+	transform: translateY(-1px);
+}
+
 .roadmap-section__empty {
 	padding: 20px;
 	border: 1px dashed rgba(131, 117, 96, 0.32);

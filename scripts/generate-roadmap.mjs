@@ -9,8 +9,7 @@ const repoRoot = path.resolve(__dirname, "..");
 const outputPath = path.join(repoRoot, "src", "frontend", "assets", "js", "roadmap-data.js");
 
 const CATEGORY_ORDER = ["nu", "binnenkort", "later"];
-const MAX_ROADMAP_ITEMS = 9;
-const COMPLETED_VISIBILITY_MONTHS = 3;
+const MAX_INCOMPLETE_ROADMAP_ITEMS = 9;
 const ROADMAP_EXCLUDE_MARKER = "*** EXCLUDE FROM ROADMAP ***";
 
 const ICON_KEYWORDS = [
@@ -147,7 +146,7 @@ function inferIcon(milestone, metadata) {
 	return match ? match.icon : "fastfood";
 }
 
-function inferProgress(milestone) {
+export function inferProgress(milestone) {
 	const totalIssues = milestone.open_issues + milestone.closed_issues;
 	if (totalIssues === 0) {
 		return milestone.state === "closed" ? 100 : 0;
@@ -165,19 +164,19 @@ function inferProgress(milestone) {
  * @param {number} progress
  * @returns {boolean}
  */
-function isCompletedMilestone(milestone, progress) {
+export function isCompletedMilestone(milestone, progress) {
 	return milestone?.state === "closed" || progress === 100;
 }
 
 /**
  * GitHub only guarantees `closed_at` for formally closed milestones. When a
  * milestone already hit 100% but is not closed yet, `updated_at` is the best
- * proxy for "recently completed" so the 3 month retention window still works.
+ * proxy for ordering completed roadmap cards beside formally closed releases.
  *
  * @param {{ closed_at?: string | null, updated_at?: string | null, due_on?: string | null }} milestone
  * @returns {Date | null}
  */
-function getMilestoneCompletionDate(milestone) {
+export function getMilestoneCompletionDate(milestone) {
 	const completionValue = milestone?.closed_at || milestone?.updated_at || milestone?.due_on;
 
 	if (!completionValue) {
@@ -196,31 +195,18 @@ function getMilestoneCompletionDate(milestone) {
  * @param {{ due_on?: string | null, state?: string | null, closed_at?: string | null, updated_at?: string | null }} milestone
  * @returns {boolean}
  */
-function isRoadmapVisibleMilestone(milestone) {
+export function isRoadmapVisibleMilestone(milestone) {
 	if (!milestone?.due_on) {
 		return false;
 	}
 
-	const progress = inferProgress(milestone);
-	if (!isCompletedMilestone(milestone, progress)) {
-		return true;
-	}
-
-	const completionDate = getMilestoneCompletionDate(milestone);
-	if (!completionDate) {
-		return false;
-	}
-
-	// Completed milestones stay visible for a short period so recent releases are
-	// still discoverable, but they roll off automatically to keep the roadmap
-	// focused on work that is still relevant.
-	const visibleSince = new Date();
-	visibleSince.setMonth(visibleSince.getMonth() - COMPLETED_VISIBILITY_MONTHS);
-
-	return completionDate >= visibleSince;
+	// Every scheduled completed milestone stays visible because the roadmap now
+	// exposes a collapsible completed history that should not silently drop
+	// older releases from the public planning view.
+	return true;
 }
 
-function inferCategory(milestone, metadata, progress) {
+export function inferCategory(milestone, metadata, progress) {
 	const configuredCategory = metadata.category.toLowerCase();
 
 	if (CATEGORY_ORDER.includes(configuredCategory)) {
@@ -244,7 +230,7 @@ function inferCategory(milestone, metadata, progress) {
 	return progress >= 35 ? "binnenkort" : "later";
 }
 
-function inferStatus(milestone, metadata, progress, category) {
+export function inferStatus(milestone, metadata, progress, category) {
 	if (metadata.status) {
 		return metadata.status;
 	}
@@ -260,7 +246,7 @@ function inferStatus(milestone, metadata, progress, category) {
 	return "Gepland";
 }
 
-function normalizeMilestone(milestone) {
+export function normalizeMilestone(milestone) {
 	const metadata = parseDescriptionMetadata(milestone.description || "");
 	const progress = inferProgress(milestone);
 	const isCompleted = isCompletedMilestone(milestone, progress);
@@ -269,6 +255,7 @@ function normalizeMilestone(milestone) {
 	const icon = inferIcon(milestone, metadata);
 	const description = metadata.description || "Meer details volgen zodra deze milestone verder is uitgewerkt.";
 	const dueDate = new Date(milestone.due_on || "");
+	const completionDate = getMilestoneCompletionDate(milestone);
 
 	return {
 		title: normalizeWhitespace(milestone.title),
@@ -282,11 +269,12 @@ function normalizeMilestone(milestone) {
 		sortWeight: CATEGORY_ORDER.indexOf(category),
 		dueOn: milestone.due_on || "",
 		dueTimestamp: Number.isNaN(dueDate.getTime()) ? Number.POSITIVE_INFINITY : dueDate.getTime(),
+		completionTimestamp: completionDate ? completionDate.getTime() : Number.NEGATIVE_INFINITY,
 		number: milestone.number,
 	};
 }
 
-function sortMilestones(items) {
+export function sortMilestones(items) {
 	return [...items].sort((left, right) => {
 		// Active work with started issues gets priority over untouched future work
 		// so the limited roadmap highlights momentum before distant ideas.
@@ -324,19 +312,30 @@ function sortMilestones(items) {
 }
 
 /**
- * Keep the public roadmap intentionally short so each release exposes the nine
- * highest-priority milestones instead of flooding visitors with low-signal cards.
+ * Keep incomplete work intentionally short so each release exposes the nine
+ * highest-priority open milestones, while completed milestones stay visible in
+ * a dedicated collapsible history and therefore do not consume those slots.
  *
  * @param {ReturnType<typeof normalizeMilestone>[]} items
  * @returns {ReturnType<typeof normalizeMilestone>[]}
  */
-function selectRoadmapItems(items) {
-	return items.slice(0, MAX_ROADMAP_ITEMS);
+export function selectRoadmapItems(items) {
+	const incompleteItems = items
+		.filter((item) => !item.isCompleted)
+		.slice(0, MAX_INCOMPLETE_ROADMAP_ITEMS);
+	const completedItems = items
+		.filter((item) => item.isCompleted)
+		.sort((left, right) =>
+			right.dueTimestamp - left.dueTimestamp ||
+			right.completionTimestamp - left.completionTimestamp ||
+			right.number - left.number);
+
+	return [...incompleteItems, ...completedItems];
 }
 
 function createModule(items) {
 	const publicItems = items.map(
-		({ sortWeight, dueOn, dueTimestamp, hasStartedWork, isCompleted, number, ...item }) => item,
+		({ sortWeight, dueOn, dueTimestamp, completionTimestamp, hasStartedWork, number, ...item }) => item,
 	);
 
 	return `/**
@@ -374,7 +373,9 @@ async function main() {
 	console.log(`${roadmapItems.length} roadmap-items gegenereerd.`);
 }
 
-main().catch((error) => {
-	console.error(error instanceof Error ? error.message : error);
-	process.exit(1);
-});
+if (process.argv[1] === __filename) {
+	main().catch((error) => {
+		console.error(error instanceof Error ? error.message : error);
+		process.exit(1);
+	});
+}
