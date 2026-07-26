@@ -4,20 +4,12 @@
  */
 export const roadmapItems = [
 	{
-		"title": "Een roulette pagina",
-		"category": "binnenkort",
-		"status": "In ontwikkeling",
-		"description": "Er zal een nieuwe webapplicatie gemaakt worden waarbij design, speelse elementen, lokale opslag en snelle werking worden geïmplementeerd. Een eenvoudige spinning wheel, het Rad van Patat zal het licht zien.",
-		"icon": "smartphone",
-		"progress": 82
-	},
-	{
 		"title": "Bestelmodus",
 		"category": "binnenkort",
 		"status": "In ontwikkeling",
 		"description": "Het idee is om bezoekers vooraf te laten kiezen wat zij willen gaan doen op de site. Willen ze een snack, willen ze een volledige bestelling gaan samenstellen, gaan ze voor een groep kiezen of willen ze verrast worden. Bij een volledige bestelling zal de bezoeker mee worden genomen in een rit door het rad waarbij de bezoeker een FRIET soort zal kiezen, een saus zal kiezen, snack kan laten kiezen, eventueel een tweede snack, of een derde snack, of een vierde snack wie weet.... Het eindresultaat wordt dan op een frituurheerlijke schotel gepresenteerd. Dit is de ultieme snackroulette.",
 		"icon": "delivery_dining",
-		"progress": 0
+		"progress": 80
 	},
 	{
 		"title": "Voorkeuren en uitsluitingen onthouden",
@@ -28,115 +20,59 @@ export const roadmapItems = [
 		"progress": 0
 	},
 	{
-		"title": "Maakt het je eigen",
-		"category": "later",
-		"status": "Gepland",
-		"description": "Gebruikers zullen meer vrijheid krijgen om de tool zich eigen te maken en alles naar hun eigen hand te zetten",
-		"icon": "fastfood",
-		"progress": 0
-	},
-	{
-		"title": "Resultaten",
-		"category": "later",
-		"status": "Gepland",
-		"description": "",
-		"icon": "chat",
-		"progress": 0
-	},
-	{
-		"title": "Groepsmodus",
-		"category": "later",
-		"status": "Gepland",
-		"description": "Maak samen met vrienden, familie of collega’s de keuze. Nodig anderen uit via een link of QR-code, stem op favoriete snacks en laat het Rad van Patat op basis van alle voorkeuren een gezamenlijke winnaar kiezen. Inclusief realtime stemmen, groepsfavorieten en ondersteuning voor gezamenlijke bestellingen.",
-		"icon": "chat",
-		"progress": 0
-	},
-	{
 		"title": "Snackbattle",
 		"category": "later",
 		"status": "Gepland",
-        "description": "",
-        "icon": "share",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "fastfood",
 		"progress": 0
 	},
 	{
 		"title": "De friet of patat vraag",
 		"category": "later",
 		"status": "Gepland",
-        "description": "",
-        "icon": "track_changes",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "fastfood",
 		"progress": 0
 	},
 	{
 		"title": "Verschillende kant-en-klare snackraden",
 		"category": "later",
 		"status": "Gepland",
-        "description": "",
-        "icon": "psychology",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "motion_play",
 		"progress": 0
 	},
 	{
 		"title": "Snackbarintegratie",
 		"category": "later",
 		"status": "Gepland",
-        "description": "",
-        "icon": "share",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "fastfood",
 		"progress": 0
 	},
 	{
 		"title": "Embeddable widget",
 		"category": "later",
 		"status": "Gepland",
-        "description": "",
-        "icon": "share",
-		"progress": 0
-	},
-	{
-		"title": "Kennisbank",
-		"category": "later",
-		"status": "Gepland",
-        "description": "",
-        "icon": "account_circle",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "fastfood",
 		"progress": 0
 	},
 	{
 		"title": "Slimme combinaties",
 		"category": "later",
 		"status": "Gepland",
-        "description": "",
-        "icon": "smartphone",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "psychology",
 		"progress": 0
 	},
 	{
 		"title": "Notificaties",
 		"category": "later",
 		"status": "Gepland",
-        "description": "",
-        "icon": "psychology",
-		"progress": 0
-	},
-	{
-		"title": "Design enhancements",
-		"category": "later",
-		"status": "Gepland",
-        "description": "",
-        "icon": "track_changes",
-		"progress": 0
-	},
-	{
-		"title": "Techniek",
-		"category": "later",
-		"status": "Gepland",
-		"description": "",
-        "icon": "chat",
-		"progress": 0
-	},
-	{
-		"title": "Direct ordering",
-		"category": "later",
-		"status": "Gepland",
-		"description": "Maak van jouw snackkeuze direct een bestelling. Kies je favoriete snackbar, draai aan het Rad van Patat en bestel de gekozen snacks eenvoudig via de bestaande bestelomgeving van de snackbar. Zo wordt kiezen én bestellen sneller, leuker en gemakkelijker.",
-		"icon": "account_circle",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "fastfood",
 		"progress": 0
 	}
 ];
