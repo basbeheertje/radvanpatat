@@ -9,7 +9,8 @@ export const roadmapItems = [
 		"status": "In ontwikkeling",
 		"description": "Het idee is om bezoekers vooraf te laten kiezen wat zij willen gaan doen op de site. Willen ze een snack, willen ze een volledige bestelling gaan samenstellen, gaan ze voor een groep kiezen of willen ze verrast worden. Bij een volledige bestelling zal de bezoeker mee worden genomen in een rit door het rad waarbij de bezoeker een FRIET soort zal kiezen, een saus zal kiezen, snack kan laten kiezen, eventueel een tweede snack, of een derde snack, of een vierde snack wie weet.... Het eindresultaat wordt dan op een frituurheerlijke schotel gepresenteerd. Dit is de ultieme snackroulette.",
 		"icon": "delivery_dining",
-		"progress": 80
+		"progress": 80,
+		"isCompleted": false
 	},
 	{
 		"title": "Voorkeuren en uitsluitingen onthouden",
@@ -17,7 +18,8 @@ export const roadmapItems = [
 		"status": "In ontwikkeling",
 		"description": "Om gebruikers een volledige experience te geven zal er een voorkeursscherm komen warin de voorkeuren kunnen worden aangegeven. Hierdoor kan men aangeven wat zijn favorieten snacks zijn, welke snacks de gebruiker niet lust, of de gebruiker vegetarisch is, of de gebruiker veganistisch is, of de gebruiker wel of geen pittig eten wil. Deze instellingen zullen in de browser lokaal worden opgeslagen waardoor er geen data opgeslagen hoeft te worden op een server of dergelijken. Verder zullen instellingen als locatie en favoriete of vaste snackbar opgeslagen kunnen worden.",
 		"icon": "fastfood",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
 	},
 	{
 		"title": "Snackbattle",
@@ -25,7 +27,8 @@ export const roadmapItems = [
 		"status": "Gepland",
 		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 		"icon": "fastfood",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
 	},
 	{
 		"title": "De friet of patat vraag",
@@ -33,7 +36,8 @@ export const roadmapItems = [
 		"status": "Gepland",
 		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 		"icon": "fastfood",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
 	},
 	{
 		"title": "Verschillende kant-en-klare snackraden",
@@ -41,7 +45,8 @@ export const roadmapItems = [
 		"status": "Gepland",
 		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 		"icon": "motion_play",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
 	},
 	{
 		"title": "Snackbarintegratie",
@@ -49,7 +54,8 @@ export const roadmapItems = [
 		"status": "Gepland",
 		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 		"icon": "fastfood",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
 	},
 	{
 		"title": "Embeddable widget",
@@ -57,7 +63,8 @@ export const roadmapItems = [
 		"status": "Gepland",
 		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 		"icon": "fastfood",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
 	},
 	{
 		"title": "Slimme combinaties",
@@ -65,7 +72,8 @@ export const roadmapItems = [
 		"status": "Gepland",
 		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 		"icon": "psychology",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
 	},
 	{
 		"title": "Notificaties",
@@ -73,6 +81,52 @@ export const roadmapItems = [
 		"status": "Gepland",
 		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
 		"icon": "fastfood",
-		"progress": 0
+		"progress": 0,
+		"isCompleted": false
+	},
+	{
+		"title": "Kennisbank",
+		"category": "nu",
+		"status": "Live",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "fastfood",
+		"progress": 100,
+		"isCompleted": true
+	},
+	{
+		"title": "Groepsmodus",
+		"category": "nu",
+		"status": "Live",
+		"description": "Maak samen met vrienden, familie of collega’s de keuze. Nodig anderen uit via een link of QR-code, stem op favoriete snacks en laat het Rad van Patat op basis van alle voorkeuren een gezamenlijke winnaar kiezen. Inclusief realtime stemmen, groepsfavorieten en ondersteuning voor gezamenlijke bestellingen.",
+		"icon": "share",
+		"progress": 100,
+		"isCompleted": true
+	},
+	{
+		"title": "Resultaten",
+		"category": "nu",
+		"status": "Live",
+		"description": "Meer details volgen zodra deze milestone verder is uitgewerkt.",
+		"icon": "fastfood",
+		"progress": 100,
+		"isCompleted": true
+	},
+	{
+		"title": "Maakt het je eigen",
+		"category": "nu",
+		"status": "Live",
+		"description": "Gebruikers zullen meer vrijheid krijgen om de tool zich eigen te maken en alles naar hun eigen hand te zetten",
+		"icon": "fastfood",
+		"progress": 100,
+		"isCompleted": true
+	},
+	{
+		"title": "Een roulette pagina",
+		"category": "nu",
+		"status": "Live",
+		"description": "Er zal een nieuwe webapplicatie gemaakt worden waarbij design, speelse elementen, lokale opslag en snelle werking worden geïmplementeerd. Een eenvoudige spinning wheel, het Rad van Patat zal het licht zien.",
+		"icon": "smartphone",
+		"progress": 100,
+		"isCompleted": true
 	}
 ];

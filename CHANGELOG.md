@@ -11,6 +11,7 @@ Geen wijzigingen beschreven.
 - Added: Custom ordering list;
 - Added: Saving multiple rads;
 - Added: My Rad;
+- Added: Show all finished milestones on roadmap;
 
 ## [1.0.6] - 2026-07-24
 
@@ -19,28 +20,6 @@ Geen wijzigingen beschreven.
 ### Gewijzigd
 - Fixed: Roulette rad on mobile devices;
 - Fixed: Hide some buttons on mobile devices;
-## [Onuitgebracht]
-
-### Toegevoegd
-- Bezoekers kunnen noodzakelijke en analytische opslag bekijken en Analytics apart accepteren of weigeren in een toegankelijke cookiemelding met vijf talen.
-- Cookievoorkeuren kunnen onderaan iedere pagina opnieuw worden geopend en ingetrokken.
-- Bezoekers kunnen nu meerdere rads lokaal opslaan, een overzicht en detailpagina openen, een rad als huidig rad instellen en per rad items toevoegen of verwijderen.
-- Bezoekers kunnen nu ook zonder rouletteflow een losse bestelling starten via het winkelmandje in het menu en die daarna lokaal verder invullen op een orderdetailpagina.
-- Losse bestellingen ondersteunen nu net als het groepsrad een personenoverzicht met een eigen naam en snacks per persoon.
-- Iedere losse bestelling heeft nu ook een aparte bestellijstpagina met dezelfde verdeling-per-persoon en totaallijst als het groepsrad.
-- Losse bestellingen slaan nu automatisch op, tonen op de detailpagina direct een totaaloverzicht op basis van hoeveelheden en gebruiken compacte snackregels met naam plus aantal.
-- De roadmap houdt afgeronde milestones nu altijd zichtbaar buiten de open-work limiet van 9, toont in de live-kolom standaard de 3 nieuwste afgeronde milestones en kan oudere afgeronde milestones uitklappen.
-
-### Beveiliging
-- Google Analytics wordt uitsluitend op `radvanpatat.nl` en pas na expliciete toestemming geladen; lokale en preview-omgevingen initialiseren Analytics niet, en bij intrekken worden verdere metingen geblokkeerd en bekende Analytics-cookies verwijderd.
-
-### Opgelost
-- De menulink ‘Rad’ opent weer de volledige roulettepagina in plaats van alleen naar een anker op de huidige pagina te springen.
-- Op de rad-detailpagina kunnen eigen items nu echt uit de lijst worden verwijderd en reageren de actieknoppen zichtbaar op hover.
-- De gedeelde head laadt externe scripts niet langer via de verouderde parser-write-aanpak, waardoor browserwaarschuwingen verdwijnen en Tailwind/CDN-assets toekomstbestendig blijven laden.
-- De cookiemelding initialiseert nu pas nadat de document-body beschikbaar is, zodat de consentmodal niet meer crasht tijdens het parsen van de head.
-- De GitHub Pages-deployment wordt nu automatisch gestart nadat release-inhoud naar `main` is bijgewerkt.
-- De changelog-skill bevat weer geldige YAML-frontmatter en kan daardoor door Codex worden geladen.
 
 ## [1.0.5] - 2026-07-24
 
