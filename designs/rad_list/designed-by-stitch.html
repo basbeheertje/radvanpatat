@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be+Vietnam+Pro:wght@400;500&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-fryer-gold { background-color: #ffb800; }
+        .text-bitterbal-brown { color: #271900; }
+        .border-ketchup-red { border-color: #bc0000; }
+        .bg-ketchup-red { background-color: #bc0000; }
+        
+        .crispy-shadow {
+            box-shadow: 0 4px 12px rgba(255, 184, 0, 0.12);
+        }
+        .crispy-shadow:hover {
+            box-shadow: 0 12px 24px rgba(255, 184, 0, 0.2);
+            transform: translateY(-4px);
+        }
+        .glass-effect {
+            background: rgba(252, 249, 248, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .wheel-spin-preview {
+            animation: slow-rotate 10s linear infinite;
+        }
+        @keyframes slow-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#7c5800",
+                        "primary-container": "#ffb800",
+                        "on-primary-container": "#6b4c00",
+                        "secondary": "#bc0000",
+                        "secondary-container": "#e41f13",
+                        "surface": "#fcf9f8",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-surface": "#1c1b1b",
+                        "on-surface-variant": "#514532",
+                        "outline": "#837560",
+                        "outline-variant": "#d5c4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "120px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Space Grotesk"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen pb-24 md:pb-0 md:pl-64">
+<!-- Top AppBar (JSON Content) -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim shadow-[0_4px_12px_rgba(255,184,0,0.08)] flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full z-50">
+<div class="flex items-center gap-3">
+<img alt="Snack-Rad Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyiMohpE2H5nHQJq322dgy1hGMvGj478zCQNjb5zlhAXV0bnOZXoIEM3XtXg9kZFEAKKpXiYiC6WejEDfPmVuQOC4xwURS37UZ56_KnKFBrR8eOeaAJ31z-nCmecv7EK8eWe8fG-qWg65fpkLOJiyVoSErFajXWvbXoxKWW4S8n5VL3mKCifD15PFQMwpiIA1jiI3swbjORywXguctrLzek2uYUbracJYySPspOxJ5QMWBbYoPpQpLHes9zdgFJPfT4aYnFCGsNRUz"/>
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-primary-fixed-dim">Snack-Rad</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex bg-surface-container-low border-2 border-primary-container rounded-full px-4 py-2 items-center gap-2">
+<span class="material-symbols-outlined text-primary">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Vind je frikandel..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-container-highest rounded-full transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-container-highest rounded-full transition-all">history</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a cheerful person in a casual setting, wearing a bright yellow hoodie, smiling at the camera. The lighting is warm and golden, reflecting a modern 'Gezellig' Dutch lifestyle aesthetic. High resolution photography with a soft focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqCClKwzEgmjL-NAVcqx32_8XQsyeXyn4IMtWqGEpD2zR7hodclysUGDCrZd7mWsj4qJI1dmMRCNWCSdLHzhYc3HR6QS5ehBn8i5-GOBCI-016-YRjKo6RQRlWC2XvXBtm0IgddFJqQgrgSINMDuQ6sCj5KJHmipjlnxZb08GwTh0aI6ksdnvfp8UlmNhAVop6am14aW1Ni-metRYE1t8_nHItpDsakG522v7XIrhx_wIQIoBkPPtpokOmukORTusE-Hb4J7bjzhp9"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Shell) -->
+<nav class="h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col h-full py-6 px-4 bg-surface-container-low dark:bg-inverse-surface border-r-2 border-primary/10 shadow-lg z-40">
+<div class="mb-10 px-4">
+<img alt="Logo" class="h-12 w-12 mb-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyiMohpE2H5nHQJq322dgy1hGMvGj478zCQNjb5zlhAXV0bnOZXoIEM3XtXg9kZFEAKKpXiYiC6WejEDfPmVuQOC4xwURS37UZ56_KnKFBrR8eOeaAJ31z-nCmecv7EK8eWe8fG-qWg65fpkLOJiyVoSErFajXWvbXoxKWW4S8n5VL3mKCifD15PFQMwpiIA1jiI3swbjORywXguctrLzek2uYUbracJYySPspOxJ5QMWBbYoPpQpLHes9zdgFJPfT4aYnFCGsNRUz"/>
+<h1 class="font-headline-md text-headline-md font-extrabold text-primary">Snack-Rad</h1>
+<p class="text-xs text-on-surface-variant">Gezellig Choice Maker</p>
+</div>
+<div class="space-y-2 flex-grow">
+<a class="bg-primary-container text-on-primary-container rounded-xl font-bold flex items-center gap-3 px-4 py-3 hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">refresh</span>
+<span>Mijn Wheels</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span>Templates</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span>Favorites</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-3 hover:bg-surface-container-highest rounded-xl transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Community</span>
+</a>
+</div>
+<button class="mt-4 mb-8 mx-2 bg-primary-container text-primary font-bold py-4 rounded-xl shadow-[0_4px_0_0_#7c5800] border-2 border-primary active:translate-y-1 active:shadow-none transition-all">
+            Create New Wheel
+        </button>
+<div class="pt-6 border-t border-outline-variant space-y-2">
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-2 hover:bg-surface-container-highest rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="text-on-surface-variant flex items-center gap-3 px-4 py-2 hover:bg-surface-container-highest rounded-xl" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="px-margin-mobile md:px-margin-desktop py-8 md:py-12 max-w-7xl mx-auto">
+<!-- Header Section with Create Button -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary mb-2">Mijn Rads</h2>
+<p class="text-on-surface-variant text-body-lg">Al je favoriete snack-selecties op één plek.</p>
+</div>
+<button class="group flex items-center justify-center gap-3 bg-primary-container text-on-primary-container font-extrabold text-lg px-8 py-5 rounded-2xl shadow-[0_6px_0_0_#7c5800] border-2 border-primary hover:translate-y-1 hover:shadow-[0_2px_0_0_#7c5800] active:translate-y-1.5 active:shadow-none transition-all">
+<span class="material-symbols-outlined text-3xl">add_circle</span>
+                Nieuw Rad Aanmaken
+            </button>
+</div>
+<!-- Filters -->
+<div class="flex items-center gap-4 mb-8 overflow-x-auto pb-2 no-scrollbar">
+<span class="font-label-md text-on-surface-variant shrink-0">Sorteren op:</span>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-sm transition-colors">Recent gemaakt</button>
+<button class="bg-surface-container-highest text-on-surface-variant px-6 py-2 rounded-full font-label-md text-sm hover:bg-outline-variant transition-colors">Meest gebruikt</button>
+<button class="bg-surface-container-highest text-on-surface-variant px-6 py-2 rounded-full font-label-md text-sm hover:bg-outline-variant transition-colors">Alfabetisch</button>
+</div>
+<!-- Bento Grid of Saved Wheels -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Wheel Card 1 -->
+<div class="group relative bg-surface-container-low rounded-xl p-6 border-2 border-transparent hover:border-primary-container crispy-shadow transition-all duration-300">
+<div class="absolute top-4 right-4 bg-secondary text-white font-label-sm px-3 py-1 rounded-full text-xs">
+                    Populair
+                </div>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center relative overflow-hidden">
+<div class="wheel-spin-preview w-full h-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-primary-container" style="font-variation-settings: 'FILL' 1;">refresh</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary leading-tight">Vrijdagmiddag Borrel</h3>
+<p class="text-on-surface-variant font-label-sm">12 snacks • 24x gedraaid</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg bg-primary-container text-on-primary-container hover:brightness-95 transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+<span class="text-[10px] font-bold">DRAAIEN</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg border-2 border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">edit</span>
+<span class="text-[10px] font-bold">BEWERK</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg border-2 border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">share</span>
+<span class="text-[10px] font-bold">DEEL</span>
+</button>
+</div>
+</div>
+<!-- Wheel Card 2 -->
+<div class="group relative bg-surface-container-low rounded-xl p-6 border-2 border-transparent hover:border-primary-container crispy-shadow transition-all duration-300">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<div class="wheel-spin-preview w-full h-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-white" style="font-variation-settings: 'FILL' 1;">nutrition</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary leading-tight">Gezonde Snacks</h3>
+<p class="text-on-surface-variant font-label-sm">8 opties • 5x gedraaid</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg bg-primary-container text-on-primary-container hover:brightness-95 transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+<span class="text-[10px] font-bold">DRAAIEN</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg border-2 border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">edit</span>
+<span class="text-[10px] font-bold">BEWERK</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg border-2 border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">share</span>
+<span class="text-[10px] font-bold">DEEL</span>
+</button>
+</div>
+</div>
+<!-- Wheel Card 3 -->
+<div class="group relative bg-surface-container-low rounded-xl p-6 border-2 border-transparent hover:border-primary-container crispy-shadow transition-all duration-300">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-full bg-outline-variant flex items-center justify-center overflow-hidden">
+<div class="wheel-spin-preview w-full h-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">movie</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary leading-tight">Movie Night</h3>
+<p class="text-on-surface-variant font-label-sm">15 items • Gisteren</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg bg-primary-container text-on-primary-container hover:brightness-95 transition-all">
+<span class="material-symbols-outlined">play_arrow</span>
+<span class="text-[10px] font-bold">DRAAIEN</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg border-2 border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">edit</span>
+<span class="text-[10px] font-bold">BEWERK</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-lg border-2 border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">share</span>
+<span class="text-[10px] font-bold">DEEL</span>
+</button>
+</div>
+</div>
+<!-- Wheel Card 4 (Empty State Placeholder) -->
+<div class="group border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center gap-3 hover:bg-surface-container-low hover:border-primary transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">add</span>
+</div>
+<p class="font-label-md text-on-surface-variant">Maak een nieuw rad</p>
+</div>
+</div>
+<!-- Footer Branding -->
+<div class="mt-20 py-12 border-t border-outline-variant flex flex-col items-center text-center">
+<div class="flex items-center gap-2 mb-2 opacity-60">
+<span class="font-label-sm">Made with 🍟 by</span>
+<span class="font-label-md font-bold text-primary">De Code Kas</span>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-label-sm">© 2024 Snack-Rad • All Rights Reserved</p>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Shell) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe pt-2 bg-surface dark:bg-surface-container-highest shadow-[0_-4px_20px_rgba(124,88,0,0.12)] md:hidden rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-2 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rebase_edit</span>
+<span class="font-label-sm text-[10px]">Wheels</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-sm text-[10px]">Social</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-[10px]">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for clicking the cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('button')) {
+                    // Simulation of selection or opening
+                    this.classList.toggle('border-primary');
+                }
+            });
+        });
+    </script>
+</body></html>

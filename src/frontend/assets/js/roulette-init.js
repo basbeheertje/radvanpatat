@@ -110,6 +110,12 @@
 			ui.openSnackFormulier();
 		}
 
+		if (event.shiftKey && event.key.toLowerCase() === "l") {
+			event.preventDefault();
+			window.location.assign("./wheels.html");
+			return;
+		}
+
 		if (event.shiftKey && event.key.toLowerCase() === "c") {
 			if (state.easterEggsActief) {
 				event.preventDefault();
@@ -242,7 +248,18 @@
 		document.addEventListener("keydown", handleKeyDown);
 	}
 
-	function init() {
+	/**
+	 * The shared head now injects the component registry via a module script.
+	 * Waiting for the wheel custom element prevents the classic renderer from
+	 * querying `#wheel-rotor` before the light-DOM SVG has been stamped out.
+	 *
+	 * @returns {Promise<void>}
+	 */
+	async function init() {
+		if (window.customElements && typeof window.customElements.whenDefined === "function") {
+			await window.customElements.whenDefined("roulette-wheel-view");
+		}
+
 		core.loadInitialSnacks();
 		wheel.createWheel();
 		core.updateTellers();
@@ -253,5 +270,7 @@
 		bindEvents();
 	}
 
-	window.addEventListener("DOMContentLoaded", init);
+	window.addEventListener("DOMContentLoaded", function () {
+		init();
+	});
 }(window));

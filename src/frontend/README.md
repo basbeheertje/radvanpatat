@@ -6,6 +6,8 @@ Deze map bevat een statische frontend zonder build tooling.
 
 - `index.html`: interactieve Rad van Patat-pagina
 - `group.html`: configureert deelnemers en laat het gedeelde rad automatisch een groepsbestelling samenstellen
+- `wheels.html`: overzichtspagina met alle opgeslagen rads in de huidige browser
+- `wheel.html`: detail- en bewerkpagina voor één opgeslagen rad
 - `order.html`: toont de laatst voltooide groepsbestelling uit de localStorage van de huidige browser
 - `help.html`: help-pagina
 - `changelog.html`: gegenereerde changelogpagina op basis van `../../CHANGELOG.md`
@@ -20,6 +22,9 @@ Deze map bevat een statische frontend zonder build tooling.
 - `assets/css/default.css`: gedeelde en rad-specifieke styling
 - `assets/js/cookie-consent.js`: centrale opslaginventaris, meertalige consentconfiguratie en opt-in-loader voor Google Analytics
 - `assets/js/analytics.js`: fouttolerante GA4-adapter met stabiele eventnamen en gevalideerde parameters
+- `assets/js/roulette-core.js`: gedeelde rad-store, actieve-radlogica, snacknormalisatie en share-tokenlogica
+- `assets/js/wheel-list-page.js`: rendert het overzicht van opgeslagen rads, sorteren en activeren
+- `assets/js/wheel-detail-page.js`: rendert de detailpagina voor naambeheer, itemselectie en eigen items
 - `assets/vendor/cookieconsent/`: self-hosted CookieConsent 3.1.0-distributie en MIT-licentie
 - `assets/js/`: roulettefunctionaliteit en componentregistratie
 - `assets/images/` en `assets/sounds/`: statische media
@@ -111,7 +116,21 @@ De gedeelde componentregistratie mount `#patat-banner` automatisch op iedere
 pagina. De banner blijft verborgen tenzij de bezoeker op het persoonlijke rad
 voor `patat` heeft gekozen; die keuze wordt sitebreed uit localStorage gelezen.
 
-De groepsbestelling gebruikt dezelfde opgeslagen snackselectie als `index.html`. Na de laatste automatische spin wordt uitsluitend de voltooide bestelling lokaal bewaard onder `rad-van-patat-last-group-order`. Deelnemersnamen en bestellingen verlaten de browser niet. Snacknamen worden bij toevoegen, verwijderen en spinresultaten wel als genormaliseerde Analytics-eventparameter verstuurd. Open `order.html` op hetzelfde apparaat en in dezelfde browser om die bestelling opnieuw te bekijken.
+## Opgeslagen rads
+
+De frontend beheert meerdere opgeslagen rads volledig lokaal in de browser:
+
+- `rad-van-patat-roulette-rads`: bevat alle opgeslagen rads inclusief naam, items en gebruiksmetadata;
+- `rad-van-patat-actief-rad`: onthoudt welk rad op dit moment actief is;
+- `rad-van-patat-roulette-snacks`: wordt alleen nog gelezen als legacy migratiebron voor oudere browsersessies zonder de nieuwe rad-collectie.
+
+`index.html` en `group.html` gebruiken altijd het actieve rad. `wheels.html`
+toont het overzicht van alle rads en `wheel.html?id=...` laat één rad bewerken.
+Radnamen zijn verplicht en case-insensitief uniek binnen dezelfde browser.
+Bezoekers kunnen op de detailpagina standaarditems aan- of uitzetten en extra
+eigen items toevoegen.
+
+De groepsbestelling gebruikt dezelfde actieve snackselectie als `index.html`. Na de laatste automatische spin wordt uitsluitend de voltooide bestelling lokaal bewaard onder `rad-van-patat-last-group-order`. Deelnemersnamen en bestellingen verlaten de browser niet. Snacknamen worden bij toevoegen, verwijderen en spinresultaten wel als genormaliseerde Analytics-eventparameter verstuurd. Open `order.html` op hetzelfde apparaat en in dezelfde browser om die bestelling opnieuw te bekijken.
 
 Analytics-events met snacknamen worden pas na expliciete Analytics-toestemming
 verstuurd. Zonder toestemming blijven deze gegevens uitsluitend onderdeel van

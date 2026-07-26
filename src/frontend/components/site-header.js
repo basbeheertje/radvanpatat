@@ -27,6 +27,7 @@ class SiteHeader extends HTMLElement {
 		return {
 			logoHref: this.getAttribute("logo-href") || "./index.html",
 			radHref: this.getAttribute("rad-href") || "./index.html",
+			wheelsHref: this.getAttribute("wheels-href") || "./wheels.html",
 			groupHref: this.getAttribute("group-href") || "./group.html",
 			helpHref: this.getAttribute("help-href") || "./help.html",
 			activeNav: this.getAttribute("active-nav") || "",
@@ -112,6 +113,7 @@ class SiteHeader extends HTMLElement {
 		const {
 			logoHref,
 			radHref,
+			wheelsHref,
 			groupHref,
 			helpHref,
 			activeNav,
@@ -131,9 +133,13 @@ class SiteHeader extends HTMLElement {
 		const groupClasses = activeNav === "group"
 			? "text-primary border-b-2 border-primary font-bold pb-2"
 			: "text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200";
+		const wheelsClasses = activeNav === "wheels"
+			? "text-primary border-b-2 border-primary font-bold pb-2"
+			: "text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors duration-200";
 		const mobileMenuStateLabel = this.mobileMenuOpen ? "Sluit menu" : "Open menu";
 		const radCurrent = activeNav === "rad" ? ' aria-current="page"' : "";
 		const groupCurrent = activeNav === "group" ? ' aria-current="page"' : "";
+		const wheelsCurrent = activeNav === "wheels" ? ' aria-current="page"' : "";
 		const helpCurrent = activeNav === "help" ? ' aria-current="page"' : "";
 
 		const desktopShareMarkup = shareMode === "hidden"
@@ -168,6 +174,7 @@ class SiteHeader extends HTMLElement {
 					</a>
 					<nav class="hidden lg:flex gap-md items-center h-full">
 						<a class="${radClasses}" href="${radHref}"${radCurrent}>Rad</a>
+						<a class="${wheelsClasses}" href="${wheelsHref}"${wheelsCurrent}>Mijn rads</a>
 						<a class="${groupClasses}" href="${groupHref}"${groupCurrent}>Groepsrad</a>
 						${desktopShareMarkup}
 						<a class="${helpClasses}" href="${helpHref}"${helpCurrent}>Help</a>
@@ -190,6 +197,7 @@ class SiteHeader extends HTMLElement {
 					</div>
 					<nav class="site-header__mobile-nav" aria-label="Mobiele navigatie">
 						<a class="site-header__mobile-link ${activeNav === "rad" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${radHref}"${radCurrent}>Rad</a>
+						<a class="site-header__mobile-link ${activeNav === "wheels" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${wheelsHref}"${wheelsCurrent}>Mijn rads</a>
 						<a class="site-header__mobile-link ${activeNav === "group" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${groupHref}"${groupCurrent}>Groepsrad</a>
 						${mobileShareMarkup}
 						<a class="site-header__mobile-link ${activeNav === "help" ? "site-header__mobile-link--active" : ""}" data-site-header-mobile-link href="${helpHref}"${helpCurrent}>Help</a>

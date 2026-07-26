@@ -50,7 +50,7 @@
 			cta-mode="button"
 			help-href="./help.html"
 			logo-href="./index.html"
-			rad-href="#rad"
+			rad-href="./index.html"
 			share-mode="button"></site-header>
 
 		<main class="roulette-main flex-1 max-w-7xl mx-auto w-full px-6 md:px-12 py-10 md:py-16 grid grid-cols-12 gap-10 md:gap-12 items-center">
@@ -60,6 +60,15 @@
 						<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
 						Hot & vers uit het vet
 					</span>
+					<div class="inline-flex flex-wrap items-center gap-3 rounded-full border-2 border-outline-variant bg-surface px-4 py-2 text-on-surface-variant">
+						<span class="material-symbols-outlined text-primary text-[18px]">save</span>
+						<span class="font-label-md text-label-md">Huidig rad:</span>
+						<strong class="font-label-md text-label-md text-primary" id="huidig-rad-naam">Standaard snacks</strong>
+						<a class="inline-flex items-center gap-1 rounded-full bg-primary-container px-3 py-1 text-on-primary-container" href="./wheels.html">
+							<span class="material-symbols-outlined text-[16px]">lists</span>
+							Mijn rads
+						</a>
+					</div>
 					<h1 class="font-headline-xl text-[38px] leading-tight md:text-headline-xl text-on-background">
 						Geen keuzestress meer!
 					</h1>
@@ -78,6 +87,10 @@
 						<span class="material-symbols-outlined text-[22px]">share</span>
 						<span>Deel dit rad</span>
 					</button>
+					<a class="roulette-secondary-cta bg-surface-container-low text-on-surface font-label-md text-label-md px-6 py-4 rounded-xl border-2 border-outline-variant hover:border-primary hover:bg-primary-container/10 transition-colors flex items-center justify-center gap-3 w-full" href="./wheels.html">
+						<span class="material-symbols-outlined text-[22px]">folder_managed</span>
+						<span>Beheer mijn rads</span>
+					</a>
 					<p class="font-label-md text-label-md text-on-surface-variant italic px-2">
 						Trek een segment buiten het wiel om die snack te verwijderen.
 					</p>

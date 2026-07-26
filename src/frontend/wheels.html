@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html class="light" lang="nl">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Mijn rads | Rad van Patat</title>
+		<meta content="Bekijk al je opgeslagen rads, kies een actief rad en open later precies dezelfde snackselectie opnieuw." name="description"/>
+		<meta content="mijn rads, snackrad beheren, opgeslagen rad, Rad van Patat, snacklijst bewaren" name="keywords"/>
+		<meta content="index, follow" name="robots"/>
+		<link href="https://radvanpatat.nl/wheels.html" rel="canonical"/>
+		<meta content="Mijn rads | Rad van Patat" property="og:title"/>
+		<meta content="Beheer meerdere opgeslagen rads en kies welk rad nu actief moet zijn." property="og:description"/>
+		<meta content="nl_NL" property="og:locale"/>
+		<meta content="Rad van Patat" property="og:site_name"/>
+		<meta content="https://radvanpatat.nl/wheels.html" property="og:url"/>
+		<meta content="website" property="og:type"/>
+		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" property="og:image"/>
+		<meta content="Rad van Patat logo" property="og:image:alt"/>
+		<meta content="summary_large_image" name="twitter:card"/>
+		<meta content="radvanpatat.nl" name="twitter:site"/>
+		<meta content="https://radvanpatat.nl/wheels.html" name="twitter:url"/>
+		<meta content="Mijn rads | Rad van Patat" name="twitter:title"/>
+		<meta content="Bekijk, hergebruik en beheer je opgeslagen rads op één overzichtspagina." name="twitter:description"/>
+		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
+		<script src="./components/site-head.js"></script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "CollectionPage",
+				"name": "Mijn rads",
+				"url": "https://radvanpatat.nl/wheels.html",
+				"description": "Een overzichtspagina met opgeslagen rads voor Rad van Patat.",
+				"inLanguage": "nl-NL",
+				"isPartOf": {
+					"@type": "WebSite",
+					"name": "Rad van Patat",
+					"url": "https://radvanpatat.nl/"
+				}
+			}
+		</script>
+	</head>
+	<body class="bg-background text-on-background min-h-screen selection:bg-primary-container flex flex-col">
+		<site-header
+			active-nav="wheels"
+			cta-mode="hidden"
+			help-href="./help.html"
+			logo-href="./index.html"
+			rad-href="./index.html"
+			share-mode="hidden"
+			wheels-href="./wheels.html"></site-header>
+
+		<main class="flex-1 max-w-[1280px] mx-auto w-full px-margin-mobile md:px-margin-desktop py-xl">
+			<div id="wheel-list-app"></div>
+		</main>
+
+		<site-footer-designed-by></site-footer-designed-by>
+		<branding-sticker></branding-sticker>
+
+		<script src="./assets/js/roulette-core.js"></script>
+		<script type="module" src="./assets/js/wheel-list-page.js"></script>
+	</body>
+</html>

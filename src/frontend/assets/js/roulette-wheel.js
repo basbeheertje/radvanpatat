@@ -630,6 +630,9 @@
 
 				const analyticsMode = getAnalyticsSpinMode(instellingen);
 				if (analyticsMode && snack) {
+					if (analyticsMode === "personal" && app.core && typeof app.core.noteActiefRadGebruik === "function") {
+						app.core.noteActiefRadGebruik();
+					}
 					app.trackAnalyticsEvent("ROULETTE_SPIN_COMPLETED", {
 						spin_mode: analyticsMode,
 						snack_name: snack.name,
