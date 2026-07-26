@@ -16,6 +16,10 @@ class SiteFooterDesignedBy extends HTMLElement {
 							</span>
 						</div>
 					</a>
+					<button class="cookie-settings-link" data-cookie-settings type="button">
+						<span class="material-symbols-outlined" aria-hidden="true">cookie</span>
+						<span data-cookie-settings-label>Cookievoorkeuren</span>
+					</button>
 				</div>
 			</section>
 		`;

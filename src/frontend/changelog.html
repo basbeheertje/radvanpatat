@@ -2,17 +2,11 @@
 <html class="light" lang="nl">
 	<head>
 		<meta charset="UTF-8"/>
-		<meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" name="viewport"/>
 		<title>Rad van Patat Changelog | Bekijk alle updates</title>
 		<meta content="Bekijk welke verbeteringen, nieuwe functies en fixes er aan Rad van Patat zijn toegevoegd." name="description"/>
 		<meta content="rad van patat changelog, updates, releases, nieuwe functies, fixes, verbeteringen" name="keywords"/>
-		<meta content="telephone=yes" name="format-detection"/>
-		<meta content="yes" name="mobile-web-app-capable"/>
 		<meta content="index, follow" name="robots"/>
-		<meta content="#7c5800" name="theme-color"/>
-		<meta content="on" http-equiv="cleartype"/>
 		<link href="https://radvanpatat.nl/changelog.html" rel="canonical"/>
-		<link as="image" href="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" rel="preload"/>
 		<meta content="Rad van Patat Changelog | Bekijk alle updates" property="og:title"/>
 		<meta content="Bekijk welke verbeteringen, nieuwe functies en fixes er aan Rad van Patat zijn toegevoegd." property="og:description"/>
 		<meta content="nl_NL" property="og:locale"/>
@@ -27,18 +21,7 @@
 		<meta content="Rad van Patat Changelog | Bekijk alle updates" name="twitter:title"/>
 		<meta content="Bekijk welke verbeteringen, nieuwe functies en fixes er aan Rad van Patat zijn toegevoegd." name="twitter:description"/>
 		<meta content="https://radvanpatat.nl/assets/images/brand/rad-van-patat-logo.png" name="twitter:image"/>
-		<link href="./assets/images/brand/apple-touch-icon.png" rel="apple-touch-icon"/>
-		<link href="./assets/images/brand/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-		<link href="./assets/images/brand/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-		<link href="./assets/images/brand/favicon.png" rel="icon" type="image/png"/>
-		<link href="./assets/images/brand/favicon.png" rel="shortcut icon" type="image/png"/>
-		<link href="https://fonts.googleapis.com" rel="preconnect"/>
-		<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-		<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-		<link href="./assets/css/default.css" rel="stylesheet"/>
-		<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-		<script src="./assets/js/tailwind-theme.js"></script>
-		<script type="module" src="./assets/js/app.js"></script>
+		<script src="./components/site-head.js"></script>
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
@@ -57,7 +40,7 @@
 		</script>
 	</head>
 	<body class="changelog-page bg-background text-on-background min-h-screen flex flex-col selection:bg-primary-container">
-		<!-- Generated from GitHub releases by scripts/generate-changelog.mjs -->
+		<!-- Generated from CHANGELOG.md by scripts/generate-changelog-html.mjs -->
 		<site-header
 			active-nav=""
 			cta-href="./index.html"
@@ -79,12 +62,12 @@
 				<div class="changelog-hero__stats" aria-label="Changelog samenvatting">
 					<div class="changelog-stat-card">
 						<span class="material-symbols-outlined text-primary text-[30px]" aria-hidden="true">history</span>
-						<strong>6</strong>
+						<strong>8</strong>
 						<span>releases zichtbaar</span>
 					</div>
 					<div class="changelog-stat-card">
 						<span class="material-symbols-outlined text-secondary text-[30px]" aria-hidden="true">bolt</span>
-						<strong>37</strong>
+						<strong>47</strong>
 						<span>opgenomen wijzigingen</span>
 					</div>
 					<div class="changelog-stat-card">
@@ -96,24 +79,30 @@
 			</section>
 
 			<section aria-label="Tijdlijn van updates" class="changelog-timeline">
-		<changelog-entry data-date="2026-07-24" data-label="1.0.6" data-title="Versie Mobile user interface" data-tone="featured">
-			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Fixed: Roulette rad on mobile devices;","Fixed: Hide some buttons on mobile devices;"]}]}</script>
-		</changelog-entry>
-		<changelog-entry data-date="2026-07-24" data-label="1.0.5" data-title="Versie Group Roulette" data-tone="default">
-			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Group wheel, automatic distribution, and local order list added","Added: SVG animation fallback and fault-tolerant browser save","Added: Daily choice between group wheel and personal wheel","Added: Reusable opening intro for De Code Kas and Rad van Patat","Added: Shift+C console and Harlem Shake command","Added: Continuous synthesized beat and quit via Escape","Added: Analytics"]}]}</script>
-		</changelog-entry>
-		<changelog-entry data-date="2026-07-23" data-label="1.0.4" data-title="Versie 404 page" data-tone="default">
-			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: 404 page"]}]}</script>
-		</changelog-entry>
-		<changelog-entry data-date="2026-07-23" data-label="1.0.3" data-title="Versie Roadmap" data-tone="default">
-			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Roadmap;"]}]}</script>
-		</changelog-entry>
-		<changelog-entry data-date="2026-07-23" data-label="1.0.2" data-title="Versie Added changelog page" data-tone="default">
-			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Changelog page"]}]}</script>
-		</changelog-entry>
-		<changelog-entry data-date="2026-07-23" data-label="1.0.0" data-title="Versie Main version" data-tone="default">
-			<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: New design for the spinningwheel;","Added: An header with menu items;","Added: An Logo to the header;","Added: An build by floating button;","Added: An build by footer;","Added: An favicon;","Added: An Share your list spinningwheel;","Added: Question about \"Is het friet of patat\";","Added: Toasts;","Fixed: Duplicate snacknames;","Added: Help page;","Added: Custom Bamischijf image;","Added: Custom Berenklauw image;","Added: Custom Bitterbal image;","Added: Custom Frikandel image;","Added: Custom Kaassoufle image;","Added: Custom Kipcorn image;","Added: Custom: Kipnuggets image;","Added: Custom Kroket image;","Added: Custom Loempia image;","Added: Custom Loempidel image;","Added: Custom Mexicano image;","Added: Custom Nasischijf image;","Added: Custom Satekroket image;","Added: Custom Viandel image;"]}]}</script>
-		</changelog-entry>
+								<changelog-entry data-date="2026-07-24" data-label="1.0.6" data-title="Versie 1.0.6" data-tone="featured">
+					<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Fixed: Roulette rad on mobile devices;","Fixed: Hide some buttons on mobile devices;"]}]}</script>
+				</changelog-entry>
+				<changelog-entry data-date="" data-label="Onuitgebracht" data-title="Versie Onuitgebracht" data-tone="default">
+					<script class="changelog-entry-data" type="application/json">{"summary":"","categories":[{"title":"Toegevoegd","items":["Bezoekers kunnen noodzakelijke en analytische opslag bekijken en Analytics apart accepteren of weigeren in een toegankelijke cookiemelding met vijf talen.","Cookievoorkeuren kunnen onderaan iedere pagina opnieuw worden geopend en ingetrokken."]},{"title":"Beveiliging","items":["Google Analytics wordt uitsluitend op `radvanpatat.nl` en pas na expliciete toestemming geladen; lokale en preview-omgevingen initialiseren Analytics niet, en bij intrekken worden verdere metingen geblokkeerd en bekende Analytics-cookies verwijderd."]},{"title":"Opgelost","items":["De gedeelde head laadt externe scripts niet langer via de verouderde parser-write-aanpak, waardoor browserwaarschuwingen verdwijnen en Tailwind/CDN-assets toekomstbestendig blijven laden.","De cookiemelding initialiseert nu pas nadat de document-body beschikbaar is, zodat de consentmodal niet meer crasht tijdens het parsen van de head.","De GitHub Pages-deployment wordt nu automatisch gestart nadat release-inhoud naar `main` is bijgewerkt.","De changelog-skill bevat weer geldige YAML-frontmatter en kan daardoor door Codex worden geladen."]}]}</script>
+				</changelog-entry>
+				<changelog-entry data-date="2026-07-24" data-label="1.0.5" data-title="Versie 1.0.5" data-tone="default">
+					<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Group wheel, automatic distribution, and local order list added","Added: SVG animation fallback and fault-tolerant browser save","Added: Daily choice between group wheel and personal wheel","Added: Reusable opening intro for De Code Kas and Rad van Patat","Added: Shift+C console and Harlem Shake command","Added: Continuous synthesized beat and quit via Escape","Added: Analytics"]}]}</script>
+				</changelog-entry>
+				<changelog-entry data-date="" data-label="Onuitgebracht" data-title="Versie Onuitgebracht" data-tone="default">
+					<script class="changelog-entry-data" type="application/json">{"summary":"","categories":[{"title":"Toegevoegd","items":["Alle pagina's gebruiken nu één gedeelde basis-head met consistente assets en Google Analytics-bezoekersmeting.","De patat-banner blijft nu zichtbaar op iedere pagina voor bezoekers die eerder voor patat kozen.","Keuzes, spins, snackresultaten, groepsaantallen, deelacties en easter eggs worden nu als afzonderlijke Google Analytics-gebeurtenissen gemeten."]}]}</script>
+				</changelog-entry>
+				<changelog-entry data-date="2026-07-23" data-label="1.0.4" data-title="Versie 1.0.4" data-tone="default">
+					<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: 404 page"]}]}</script>
+				</changelog-entry>
+				<changelog-entry data-date="2026-07-23" data-label="1.0.3" data-title="Versie 1.0.3" data-tone="default">
+					<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Roadmap;"]}]}</script>
+				</changelog-entry>
+				<changelog-entry data-date="2026-07-23" data-label="1.0.2" data-title="Versie 1.0.2" data-tone="default">
+					<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: Changelog page"]}]}</script>
+				</changelog-entry>
+				<changelog-entry data-date="2026-07-23" data-label="1.0.0" data-title="Versie 1.0.0" data-tone="default">
+					<script class="changelog-entry-data" type="application/json">{"summary":"Geen wijzigingen beschreven.","categories":[{"title":"Gewijzigd","items":["Added: New design for the spinningwheel;","Added: An header with menu items;","Added: An Logo to the header;","Added: An build by floating button;","Added: An build by footer;","Added: An favicon;","Added: An Share your list spinningwheel;","Added: Question about \"Is het friet of patat\";","Added: Toasts;","Fixed: Duplicate snacknames;","Added: Help page;","Added: Custom Bamischijf image;","Added: Custom Berenklauw image;","Added: Custom Bitterbal image;","Added: Custom Frikandel image;","Added: Custom Kaassoufle image;","Added: Custom Kipcorn image;","Added: Custom: Kipnuggets image;","Added: Custom Kroket image;","Added: Custom Loempia image;","Added: Custom Loempidel image;","Added: Custom Mexicano image;","Added: Custom Nasischijf image;","Added: Custom Satekroket image;","Added: Custom Viandel image;"]}]}</script>
+				</changelog-entry>
 			</section>
 
 			<section class="changelog-cta">

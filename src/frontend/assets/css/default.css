@@ -2,6 +2,76 @@
 	font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
+:root {
+	--cc-font-family: "Be Vietnam Pro", sans-serif;
+	--cc-modal-border-radius: 1.5rem;
+	--cc-btn-border-radius: 0.75rem;
+	--cc-bg: #ffffff;
+	--cc-primary-color: #1c1b1b;
+	--cc-secondary-color: #514532;
+	--cc-btn-primary-bg: #7c5800;
+	--cc-btn-primary-color: #ffffff;
+	--cc-btn-primary-border-color: #7c5800;
+	--cc-btn-primary-hover-bg: #5e4200;
+	--cc-btn-primary-hover-color: #ffffff;
+	--cc-btn-primary-hover-border-color: #5e4200;
+	--cc-btn-secondary-bg: #f6f3f2;
+	--cc-btn-secondary-color: #1c1b1b;
+	--cc-btn-secondary-border-color: #837560;
+	--cc-btn-secondary-hover-bg: #ffdea8;
+	--cc-btn-secondary-hover-color: #271900;
+	--cc-btn-secondary-hover-border-color: #7c5800;
+	--cc-separator-border-color: #d5c4ab;
+	--cc-toggle-on-bg: #7c5800;
+	--cc-toggle-off-bg: #837560;
+	--cc-toggle-readonly-bg: #d5c4ab;
+	--cc-cookie-category-block-bg: #f6f3f2;
+	--cc-cookie-category-block-border: #d5c4ab;
+	--cc-cookie-category-block-hover-bg: #ffdea8;
+	--cc-cookie-category-block-hover-border: #7c5800;
+	--cc-footer-bg: #f6f3f2;
+	--cc-footer-border-color: #d5c4ab;
+}
+
+#cc-main .cm,
+#cc-main .pm {
+	border: 2px solid #d5c4ab;
+	box-shadow: 0 12px 0 rgba(124, 88, 0, 0.22);
+}
+
+#cc-main .cm__title,
+#cc-main .pm__title,
+#cc-main .pm__section-title {
+	font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+#cc-main .cm__btn,
+#cc-main .pm__btn {
+	border-width: 2px;
+	font-family: "Space Grotesk", sans-serif;
+}
+
+.cookie-settings-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 2rem;
+	padding: 0.75rem 1rem;
+	border: 2px solid #7c5800;
+	border-radius: 9999px;
+	background: #ffffff;
+	color: #7c5800;
+	font-family: "Space Grotesk", sans-serif;
+	font-weight: 700;
+	transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.cookie-settings-link:hover {
+	background: #ffdea8;
+	color: #271900;
+	transform: translateY(-2px);
+}
+
 .keyboard-key {
 	box-shadow: 0 4px 0 #837560;
 	transition: all 0.1s ease;

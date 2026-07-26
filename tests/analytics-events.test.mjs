@@ -5,9 +5,16 @@ import vm from "node:vm";
 
 const analyticsSource = await readFile("src/frontend/assets/js/analytics.js", "utf8");
 
-function createAnalyticsContext(withGtag = true) {
+function createAnalyticsContext(withGtag = true, withConsent = true) {
 	const calls = [];
-	const window = { SnackRad: {} };
+	const window = {
+		SnackRad: {},
+		CookieConsent: {
+			acceptedCategory(category) {
+				return withConsent && category === "analytics";
+			}
+		}
+	};
 	if (withGtag) {
 		window.gtag = function (...args) {
 			calls.push(args);
@@ -68,6 +75,13 @@ test("blocked analytics never interrupts application behavior", () => {
 
 	assert.equal(analytics.trackEvent("SNACK_ADDED", { snack_name: "Kroket" }), false);
 	assert.equal(analytics.trackEvent("UNKNOWN_EVENT"), false);
+	assert.deepEqual(calls, []);
+});
+
+test("analytics events remain blocked until explicit consent exists", () => {
+	const { analytics, calls } = createAnalyticsContext(true, false);
+
+	assert.equal(analytics.trackEvent("SNACK_ADDED", { snack_name: "Kroket" }), false);
 	assert.deepEqual(calls, []);
 });
 

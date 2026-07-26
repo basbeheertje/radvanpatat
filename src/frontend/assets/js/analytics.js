@@ -68,7 +68,12 @@
 		const isValidEventName = typeof eventName === "string" &&
 			/^[a-z][a-z0-9_]*$/.test(eventName) &&
 			eventName.length <= MAX_EVENT_NAME_LENGTH;
-		if (!isValidEventName || typeof window.gtag !== "function") {
+		// A present gtag queue is not proof of consent: the consent bootstrap
+		// creates it locally before Google is allowed to receive any data.
+		const hasAnalyticsConsent = window.CookieConsent &&
+			typeof window.CookieConsent.acceptedCategory === "function" &&
+			window.CookieConsent.acceptedCategory("analytics");
+		if (!isValidEventName || !hasAnalyticsConsent || typeof window.gtag !== "function") {
 			return false;
 		}
 

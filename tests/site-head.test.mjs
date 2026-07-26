@@ -8,36 +8,70 @@ const frontendPath = path.resolve("src/frontend");
 const siteHeadPath = path.join(frontendPath, "components", "site-head.js");
 
 /**
- * Capture the trusted markup written by the head loader without requiring a
- * browser DOM, so the shared runtime contract stays covered by `npm test`.
+ * Capture the shared head loader output without a browser DOM so the runtime
+ * contract stays covered even though assets are now inserted through DOM APIs.
  *
- * @returns {Promise<string>}
+ * @returns {Promise<{markup: string, scripts: object[]}>}
  */
 async function renderSharedHeadMarkup() {
 	const source = await readFile(siteHeadPath, "utf8");
 	let markup = "";
+	const scripts = [];
+	const head = {
+		insertBefore(node) {
+			scripts.push(node);
+		}
+	};
 
 	vm.runInNewContext(source, {
 		document: {
-			write(value) {
-				markup += value;
+			currentScript: {
+				parentNode: head,
+				insertAdjacentHTML(position, value) {
+					assert.equal(position, "beforebegin");
+					markup += value;
+				}
 			},
-		},
+			head: head,
+			createElement(tagName) {
+				return { tagName };
+			}
+		}
 	});
 
-	return markup;
+	return { markup, scripts };
 }
 
-test("the shared head contains site assets and Google Analytics", async () => {
-	const markup = await renderSharedHeadMarkup();
+test("the shared head contains the self-hosted consent manager before analytics", async () => {
+	const { markup, scripts } = await renderSharedHeadMarkup();
 
+	assert.doesNotMatch(await readFile(siteHeadPath, "utf8"), /document\.write/);
 	assert.match(markup, /name="viewport"/);
+	assert.match(markup, /assets\/vendor\/cookieconsent\/cookieconsent\.css/);
 	assert.match(markup, /assets\/css\/default\.css/);
-	assert.match(markup, /assets\/js\/analytics\.js/);
-	assert.match(markup, /assets\/js\/tailwind-theme\.js/);
-	assert.match(markup, /assets\/js\/app\.js/);
-	assert.match(markup, /googletagmanager\.com\/gtag\/js\?id=G-FDRQ5JB0WX/);
-	assert.match(markup, /gtag\('config', 'G-FDRQ5JB0WX'\)/);
+	assert.equal(
+		scripts.map((script) => script.src).join("|"),
+		[
+			"./assets/vendor/cookieconsent/cookieconsent.umd.js",
+			"./assets/js/cookie-consent.js",
+			"./assets/js/analytics.js",
+			"https://cdn.tailwindcss.com?plugins=forms,container-queries",
+			"./assets/js/tailwind-theme.js",
+			"./assets/js/app.js"
+		].join("|")
+	);
+	assert.equal(scripts[0].async, false);
+	assert.equal(scripts[1].async, false);
+	assert.equal(scripts[2].async, false);
+	assert.equal(scripts[3].async, false);
+	assert.equal(scripts[4].async, false);
+	assert.equal(scripts[5].type, "module");
+	assert.doesNotMatch(markup, /googletagmanager\.com/, "Google Analytics must not load before consent");
+	assert.ok(
+		scripts.findIndex((script) => script.src.includes("cookie-consent.js")) <
+			scripts.findIndex((script) => script.src.includes("analytics.js")),
+		"consent must initialize before the analytics adapter"
+	);
 });
 
 test("every top-level frontend page uses the shared head once", async () => {

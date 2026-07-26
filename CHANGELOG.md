@@ -11,7 +11,16 @@ Geen wijzigingen beschreven.
 - Fixed: Hide some buttons on mobile devices;
 ## [Onuitgebracht]
 
+### Toegevoegd
+- Bezoekers kunnen noodzakelijke en analytische opslag bekijken en Analytics apart accepteren of weigeren in een toegankelijke cookiemelding met vijf talen.
+- Cookievoorkeuren kunnen onderaan iedere pagina opnieuw worden geopend en ingetrokken.
+
+### Beveiliging
+- Google Analytics wordt uitsluitend op `radvanpatat.nl` en pas na expliciete toestemming geladen; lokale en preview-omgevingen initialiseren Analytics niet, en bij intrekken worden verdere metingen geblokkeerd en bekende Analytics-cookies verwijderd.
+
 ### Opgelost
+- De gedeelde head laadt externe scripts niet langer via de verouderde parser-write-aanpak, waardoor browserwaarschuwingen verdwijnen en Tailwind/CDN-assets toekomstbestendig blijven laden.
+- De cookiemelding initialiseert nu pas nadat de document-body beschikbaar is, zodat de consentmodal niet meer crasht tijdens het parsen van de head.
 - De GitHub Pages-deployment wordt nu automatisch gestart nadat release-inhoud naar `main` is bijgewerkt.
 - De changelog-skill bevat weer geldige YAML-frontmatter en kan daardoor door Codex worden geladen.
 
