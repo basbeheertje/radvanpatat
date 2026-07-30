@@ -11,23 +11,37 @@ permissions:
 
 jobs:
     label-issue:
-        name: Add in production label
+        name: Ensure labels and add in production label
         runs-on: ubuntu-latest
 
         steps:
-            - name: Ensure label exists
+            - name: Ensure labels exist
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   REPOSITORY: ${{ github.repository }}
               shell: bash
               run: |
-                  gh label create "in production" \
-                    --repo "$REPOSITORY" \
-                    --description "Deze wijziging staat in productie" \
-                    --color "1F883D" \
-                    --force
+                  labels=(
+                    "to work out|Nog uit te werken|D4C5F9"
+                    "in review|Klaar voor review|FBCA04"
+                    "ready for production|Klaar om naar productie te gaan|0E8A16"
+                    "in development|Wordt momenteel ontwikkeld|1D76DB"
+                    "in production|Deze wijziging staat in productie|1F883D"
+                  )
 
-            - name: Add label to issue
+                  for label in "${labels[@]}"; do
+                    IFS='|' read -r name description color <<< "$label"
+
+                    if ! gh label list --repo "$REPOSITORY" --search "$name" --json name --jq '.[] | select(.name == "'"$name"'") | .name' | grep -Fxq "$name"; then
+                      gh label create "$name" \
+                        --repo "$REPOSITORY" \
+                        --description "$description" \
+                        --color "$color"
+                    fi
+                  done
+
+            - name: Add in production label when issue is ready for production
+              if: contains(github.event.issue.labels.*.name, 'ready for production')
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   ISSUE_URL: ${{ github.event.issue.html_url }}

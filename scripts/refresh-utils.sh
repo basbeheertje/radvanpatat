@@ -76,6 +76,14 @@ copy_file \
   "${project_dir}/CONTRIBUTING.md"
 
 copy_file \
+  "${utils_dir}/templates/github/.github/workflows/label-closed-issue.yml" \
+  "${project_dir}/.github/workflows/label-closed-issue.yml"
+
+copy_file \
+  "${utils_dir}/templates/github/.github/workflows/remove-ready-for-production-on-production-label.yml" \
+  "${project_dir}/.github/workflows/remove-ready-for-production-on-production-label.yml"
+
+copy_file \
   "${utils_dir}/templates/github/SECURITY.md" \
   "${project_dir}/SECURITY.md"
 

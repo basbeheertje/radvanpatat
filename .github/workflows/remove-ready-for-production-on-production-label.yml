@@ -1,0 +1,23 @@
+name: Remove ready for production label
+
+on:
+  issues:
+    types:
+      - labeled
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  remove-ready-for-production:
+    name: Remove ready for production when in production is added
+    if: github.event.label.name == 'in production' && contains(github.event.issue.labels.*.name, 'ready for production')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Remove ready for production label
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+        run: gh issue edit "$ISSUE_URL" --remove-label "ready for production"
