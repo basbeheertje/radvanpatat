@@ -27,7 +27,7 @@ jobs:
             - name: GitHub Pages configureren
               uses: actions/configure-pages@v5
             - name: HTML-website uploaden
-              uses: actions/upload-pages-artifact@v4
+              uses: actions/upload-pages-artifact@v5
               with:
                   path: ./src/frontend
             - name: Publiceren
