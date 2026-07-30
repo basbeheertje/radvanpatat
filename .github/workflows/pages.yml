@@ -25,7 +25,7 @@ jobs:
             - name: Repository ophalen
               uses: actions/checkout@v4
             - name: GitHub Pages configureren
-              uses: actions/configure-pages@v5
+              uses: actions/configure-pages@v6
             - name: HTML-website uploaden
               uses: actions/upload-pages-artifact@v4
               with:
