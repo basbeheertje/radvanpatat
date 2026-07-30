@@ -23,7 +23,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Repository ophalen
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
             - name: GitHub Pages configureren
               uses: actions/configure-pages@v5
             - name: HTML-website uploaden
