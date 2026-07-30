@@ -20,6 +20,13 @@ Pull requests should be small enough to review effectively.
 - Externe input moet altijd worden gevalideerd en gesanitized voordat deze wordt gebruikt, opgeslagen, gerenderd of doorgestuurd naar andere systemen.
 
 ## Coding conventions
+### Language
+All code must be written in English. This includes newly added function names,
+variable names, type names, class names, file-local helpers, comments, and other
+developer-facing identifiers.
+
+All functions that are added must have English names.
+
 ### Comments
 Some comments are categorized with a prefix – a tag, codetag or token.
 
